@@ -95,8 +95,7 @@
         "ReviewMixin": false
     },
     "ReviewTabbedTabs": {
-        "impl": false,
-        "self": false
+        "impl": false
     },
     "ReviewTask": {
         "impl": false,

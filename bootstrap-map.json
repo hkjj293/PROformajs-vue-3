@@ -1,0 +1,51 @@
+{
+    "b-navbar": {
+        "replacement": "navbar",
+        "tag": "<nav>",
+        "attributes-to-classes": {
+            "fixed": "fixed-{top|bottom}",
+            "print": "d-print",
+            "sticky": "sticky-top",
+            "toggleable": "navbar-expand[{-sm|-md|-lg|-xl|-xxl}]",
+            "type": "navbar-<type>",
+            "variant": "bg-<variant>"
+        },
+        "including-components": {
+            "b-navbar-brand": {
+                "replacement": "navbar-brand",
+                "tag": "<any>",
+                "attributes-to-classes": {}
+            },
+            "b-navbar-toggle": {
+                "replacement": "navbar-toggle",
+                "tag": "<button>",
+                "attributes-to-classes": {
+                    "disabled": "disabled"
+                },
+                "attributes": {
+                    "target": "<id>"
+                }
+            },
+            "b-navbar-nav": {
+                "replacement": "navbar-nav",
+                "tag": "<any>",
+                "attributes-to-classes": {
+                    "fill": "nav-fill",
+                    "justified": "nav-justified",
+                    "small": "small",
+                    "align": "justify-content-{start|end}"
+                }
+            }
+        }
+    },
+    "b-collapse": {
+        "replacement": "collapse",
+        "tag": "<any>",
+        "attributes-to-classes": {
+            "": ""
+        },
+        "including-classess": {
+            "": ""
+        }
+    }
+}
