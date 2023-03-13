@@ -1,7 +1,23 @@
 {
-  "name": "proformajs-vue-3",
-  "version": "0.0.0",
-  "private": true,
+  "name": "@openclinical/proformajs-vue-3",
+  "version": "0.0.1",
+  "author": "Matt South <matt.south@openclinical.net>",
+  "contributors": [
+    "Chris Hui <k.n.c.hui@bham.ac.uk"
+  ],
+  "description": "A library of Vuejs 3 Single File Components (SFC) to support creating webapps for PROformajs",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/proformajs-vue.umd.cjs",
+  "module": "./dist/proformajs-vue.js",
+  "exports": {
+    ".": {
+      "import": "./dist/proformajs-vue.js",
+      "require": "./dist/proformajs-vue.umd.cjs"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -13,6 +29,10 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@openclinical/proformajs": "^0.8.2",
+    "bootstrap": "^5.2.3",
     "vue": "^3.2.47"
   },
   "devDependencies": {
@@ -29,5 +49,19 @@
     "start-server-and-test": "^2.0.0",
     "vite": "^4.1.4",
     "vitest": "^0.29.1"
+  },
+  "peerDependencies": {
+    "bootstrap": "^5.2.3"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/openclinical/proformajs-vue.git"
+  },
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://gitlab.com/openclinical/proformajs-vue/issues"
   }
 }
