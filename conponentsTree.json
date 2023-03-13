@@ -1,0 +1,121 @@
+{
+    "ComposeReview": {
+        "impl": false,
+        "ReviewMobile": false,
+        "ReviewCustom": false,
+        "ReviewTabbed": false,
+        "ReviewCompact": false,
+        "Review": false
+    },
+    "MapIconAction": {
+        "impl": false
+    },
+    "MapIconDecision": {
+        "impl": false
+    },
+    "MapIconEnquiry": {
+        "impl": false
+    },
+    "MapIconTask": {
+        "impl": false
+    },
+    "MapIconPlan": {
+        "impl": false
+    },
+    "MapTaskBar": {
+        "impl": false
+    },
+    "MapTaskHandle": {
+        "impl": false
+    },
+    "Review": {
+        "impl": false,
+        "ReviewMixin": false
+    },
+    "ReviewCompact": {
+        "impl": false,
+        "ReviewMixin": false
+    },
+    "ReviewCustom": {
+        "impl": false,
+        "ReviewFixed": false
+    },
+    "ReviewData": {
+        "impl": false,
+        "ReviewSource": false,
+        "ReviewExpression": false
+    },
+    "ReviewDataBadges": {
+        "impl": false,
+        "ReviewSource": false,
+        "ReviewExpression": false
+    },
+    "ReviewExpression": {
+        "impl": false
+    },
+    "ReviewFixed": {
+        "impl": false,
+        "ReviewMixin": false
+    },
+    "ReviewHistoryAccordian": {
+        "impl": false
+    },
+    "ReviewMap": {
+        "impl": false,
+        "TemporalConstraintMixin": false,
+        "ReviewMapTask": false,
+        "MapBreadcrumb": false,
+        "MapArrow": false
+    },
+    "ReviewMapTask": {
+        "impl": false,
+        "MapIconTask": false,
+        "MapIconDecision": false,
+        "MapIconPlan": false,
+        "MapIconEnquiry": false,
+        "MapIconAction": false
+    },
+    "ReviewMarkdown": {
+        "impl": false
+    },
+    "ReviewMobile": {
+        "impl": false,
+        "ReviewMixin": false
+    },
+    "ReviewSettingPopover": {
+        "impl": false
+    },
+    "ReviewSource": {
+        "impl": false,
+        "ReviewMarkdown": false
+    },
+    "ReviewTabbed": {
+        "impl": false,
+        "ReviewTabbedTabs": false,
+        "ReviewMixin": false
+    },
+    "ReviewTabbedTabs": {
+        "impl": false,
+        "self": false
+    },
+    "ReviewTask": {
+        "impl": false,
+        "ReviewMarkdown": false,
+        "ReviewExpression": false,
+        "ReviewSource": false
+    },
+    "ReviewMixin": {
+        "from": "review.js",
+        "impl": false,
+        "ReviewMap": false,
+        "ReviewTask": false,
+        "ReviewData": false,
+        "ReviewHistory": false,
+        "ReviewSettings": false,
+        "ReviewMarkdown": false
+    },
+    "TemporalConstraintMixin": {
+        "from": "compose.js",
+        "impl": "false"
+    }
+}
