@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "Matt South <matt.south@openclinical.net>",
   "contributors": [
-    "Chris Hui <k.n.c.hui@bham.ac.uk"
+    "Chris Hui <k.n.c.hui@bham.ac.uk>"
   ],
   "description": "A library of Vuejs 3 Single File Components (SFC) to support creating webapps for PROformajs",
   "type": "module",

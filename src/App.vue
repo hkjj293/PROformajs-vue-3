@@ -70,7 +70,7 @@ export default {
 <template>
   <div id="app">
     <main role="main">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
           <div class="navbar-brand">PRO<em>formajs</em></div>
           <button type="button" aria-label="Toggle navigation" class="navbar-toggler collapsed" aria-expanded="false"
@@ -97,8 +97,8 @@ export default {
       <!-- @select-task="updateSelectedTask" /> -->
       <!-- </b-tab> -->
       <!-- <b-tab title="Review" :disabled="!protocol || !protocol.isValid()"> -->
-      <!-- <pc-review :protocol="protocol" :debug="true" :initialData="startData" -->
-      <!-- :template="protocol && protocol.meta && protocol.meta.enact && protocol.meta.enact.template ? protocol.meta.enact.template : 'compact'" /> -->
+      <pc-review :protocol="protocol" :debug="true" :initialData="startData"
+        :template="protocol && protocol.meta && protocol.meta.enact && protocol.meta.enact.template ? protocol.meta.enact.template : 'compact'" />
       <!-- </b-tab> -->
       <!-- </b-tabs> -->
       <!-- </div> -->
