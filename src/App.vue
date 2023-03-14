@@ -1,5 +1,4 @@
 <script>
-import Vue from 'vue';
 import { Protocol } from '@openclinical/proformajs';
 
 const template = {
@@ -17,7 +16,7 @@ const template = {
   }
 };
 
-export default Vue.extend({
+export default {
   name: 'ServeDev',
   data: function () {
     return {
@@ -65,40 +64,44 @@ export default Vue.extend({
       this.selectedtask = evt.value;
     },
   },
-});
+};
 </script>
 
 <template>
   <div id="app">
     <main role="main">
-      <b-navbar toggleable="lg" variant="primary" type="dark" fixed>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         <div class="container-fluid">
-          <b-navbar-brand>PRO<em>formajs</em></b-navbar-brand>
-          <b-navbar-toggle target="nav_collapse" />
-          <b-collapse is-nav id="nav_collapse">
-            <b-navbar-nav class="ml-auto">
-              <b-nav-item-dropdown text="Reset" right>
-                <b-dropdown-item @click="resetProtocol">Plan</b-dropdown-item>
-                <b-dropdown-item @click="resetProtocol('Decision')">Decision</b-dropdown-item>
-                <b-dropdown-item @click="resetProtocol('Action')">Action</b-dropdown-item>
-                <b-dropdown-item @click="resetProtocol('Enquiry')">Enquiry</b-dropdown-item>
-              </b-nav-item-dropdown>
-            </b-navbar-nav>
-          </b-collapse>
+          <div class="navbar-brand">PRO<em>formajs</em></div>
+          <button type="button" aria-label="Toggle navigation" class="navbar-toggler collapsed" aria-expanded="false"
+            aria-controls="nav_collapse" style="overflow-anchor: none;"><span class="navbar-toggler-icon"></span></button>
+          <div id="nav_collapse" class="navbar-collapse collapse" style="display: none;">
+            <ul class="navbar-nav ml-auto">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Reset
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-right">
+                <li role="presentation" @click="resetProtocol">Plan</li>
+                <li role="presentation" @click="resetProtocol('Decision')">Decision</li>
+                <li role="presentation" @click="resetProtocol('Action')">Action</li>
+                <li role="presentation" @click="resetProtocol('Enquiry')">Enquiry</li>
+              </ul>
+            </ul>
+          </div>
         </div>
-      </b-navbar>
-      <div class="container-fluid">
-        <b-tabs content-class="mt-3" class="mt-3">
-          <!-- <b-tab title="Compose" active> -->
-          <!-- <p-compose :protocol="protocol" :selectedtask="selectedtask" @change-protocol="updateProtocol" -->
-          <!-- @select-task="updateSelectedTask" /> -->
-          <!-- </b-tab> -->
-          <b-tab title="Review" :disabled="!protocol || !protocol.isValid()">
-            <pc-review :protocol="protocol" :debug="true" :initialData="startData"
-              :template="protocol && protocol.meta && protocol.meta.enact && protocol.meta.enact.template ? protocol.meta.enact.template : 'compact'" />
-          </b-tab>
-        </b-tabs>
-      </div>
+      </nav>
+      <!-- <div class="container-fluid"> -->
+      <!-- <b-tabs content-class="mt-3" class="mt-3"> -->
+      <!-- <b-tab title="Compose" active> -->
+      <!-- <p-compose :protocol="protocol" :selectedtask="selectedtask" @change-protocol="updateProtocol" -->
+      <!-- @select-task="updateSelectedTask" /> -->
+      <!-- </b-tab> -->
+      <!-- <b-tab title="Review" :disabled="!protocol || !protocol.isValid()"> -->
+      <!-- <pc-review :protocol="protocol" :debug="true" :initialData="startData" -->
+      <!-- :template="protocol && protocol.meta && protocol.meta.enact && protocol.meta.enact.template ? protocol.meta.enact.template : 'compact'" /> -->
+      <!-- </b-tab> -->
+      <!-- </b-tabs> -->
+      <!-- </div> -->
     </main>
   </div>
 </template>

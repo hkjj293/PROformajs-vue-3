@@ -47,5 +47,9 @@
         "including-classess": {
             "": ""
         }
+    },
+    "B-tabs": {
+        "replacement": "tabs",
+        "tag": "<any>"
     }
 }

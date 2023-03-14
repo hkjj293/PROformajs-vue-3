@@ -19,7 +19,7 @@
     }
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 3173",
     "build": "vite build",
     "preview": "vite preview",
     "test:unit": "vitest",
