@@ -4,6 +4,6 @@ export const task_colors = {
   decision: { todo: '#FA58F4', done: '#F5A9F2' },
   task: { todo: '#FEED2E', done: '#F5F6CE' },
   action: { todo: '#3BD2FF', done: '#C4F1FF' }
-};
+}
 
-export const discarded_color = '#DDD';
+export const discarded_color = '#DDD'

@@ -7,7 +7,7 @@ export const IconMixin = {
   },
   computed: {
     transform() {
-      return this.scale!==1 ? "scale(" + this.scale + ", " + this.scale + ")" : "";
+      return this.scale !== 1 ? 'scale(' + this.scale + ', ' + this.scale + ')' : ''
     }
   }
 }
