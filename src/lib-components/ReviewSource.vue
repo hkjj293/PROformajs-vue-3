@@ -42,13 +42,13 @@ Just about works.  Current coverage shown below.
         <template v-if="!showDescriptionInline && source.description">
           <!-- <b-button variant="link" size="sm" class="pb-1 pt-0 pr-0" :id="'source' + source.path"> -->
           <button type="button" class="btn btn-link btn-sm pb-1 pt-0 pr-0" data-bs-toggle="tooltip"
-            :title="source.description" data-bs-placement="top">
+            data-bs-title="Default" data-bs-placement="top" data-bs-html=true :id="'source' + source.path">
             <font-awesome-icon icon="info-circle" />
           </button>
           <!-- <b-popover :target="'source' + source.path" triggers="hover" placement="top"> -->
-          <!-- <div> -->
-          <!-- <pr-markdown :text="source.description" @send-trigger="$emit('send-trigger', $event)" class="markdown" /> -->
-          <!-- </div>  -->
+          <div class="tooltip b-tooltip" :id="'target:source' + source.path" hidden>
+            <pr-markdown :text="source.description" @send-trigger="$emit('send-trigger', $event)" class="markdown" />
+          </div>
           <!-- </b-popover> -->
         </template>
 
@@ -194,10 +194,11 @@ export default {
   },
   mounted: function () {
     nextTick(() => {
-      document.querySelectorAll('[data-bs-toggle="tooltip"]')
-        .forEach(tooltip => {
-          new bootstrap.Tooltip(tooltip)
-        })
+      const tooltipEle = document.getElementById('source' + this.source.path);
+      //const tooltipParent = tooltipEle.parentElement;
+      const tooltipContent = document.getElementById('target:source' + this.source.path);
+      const tooltip = new bootstrap.Tooltip(tooltipEle);
+      tooltip.setContent({ '.tooltip-inner': tooltipContent.innerHTML });
     })
   },
   computed: {
