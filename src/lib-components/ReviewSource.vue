@@ -41,13 +41,14 @@ Just about works.  Current coverage shown below.
         <!-- If showDescriptionInline && source.description-->
         <template v-if="!showDescriptionInline && source.description">
           <!-- <b-button variant="link" size="sm" class="pb-1 pt-0 pr-0" :id="'source' + source.path"> -->
-          <button type="button" class="btn btn-link btn-sm pb-1 pt-0 pr-0" :id="'source' + source.path">
+          <button type="button" class="btn btn-link btn-sm pb-1 pt-0 pr-0" data-bs-toggle="tooltip"
+            :title="source.description" data-bs-placement="top">
             <font-awesome-icon icon="info-circle" />
           </button>
           <!-- <b-popover :target="'source' + source.path" triggers="hover" placement="top"> -->
-          <div data-bs-toggle="popover" :data-bs-target="'source' + source.path">
-            <pr-markdown :text="source.description" @send-trigger="$emit('send-trigger', $event)" class="markdown" />
-          </div>
+          <!-- <div> -->
+          <!-- <pr-markdown :text="source.description" @send-trigger="$emit('send-trigger', $event)" class="markdown" /> -->
+          <!-- </div>  -->
           <!-- </b-popover> -->
         </template>
 
@@ -159,6 +160,7 @@ Just about works.  Current coverage shown below.
 
 <script>
 import moment from 'moment'
+import { nextTick } from 'vue'
 
 export default {
   props: {
@@ -189,6 +191,14 @@ export default {
       feedback: '',
       localValue: null
     }
+  },
+  mounted: function () {
+    nextTick(() => {
+      document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        .forEach(tooltip => {
+          new bootstrap.Tooltip(tooltip)
+        })
+    })
   },
   computed: {
     inlineDescription() {
