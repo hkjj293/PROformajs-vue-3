@@ -34,7 +34,7 @@ Just about works.  Current coverage shown below.
 <template>
   <div>
     <!-- <b-form-group :disabled="disabled" :state="isValid" :invalid-feedback="feedback"> -->
-    <form>
+    <fieldset :disabled="disabled">
       <label :for="source.name + suffix" class="d-block form-label">
         <span v-if="!hideCaption || !source.description">{{ source.caption || source.name }}</span>
 
@@ -81,8 +81,10 @@ Just about works.  Current coverage shown below.
         </div>
         <div v-else v-for="(item, idx) in source.range || [true, false]" :key="idx" class="form-check">
           <input class="form-check-input" type="radio" :id="rangeId(item)" :value="rangeValue(item).toString()"
-            :checked="value != null && value == rangeValue(item)" @change="handleRadioChange">
-          <label class="form-check-label" :for="rangeId(item)">{{ booleanSourceRangeText(item) }}</label>
+            :checked="value != null && value == rangeValue(item)" @change="handleRadioChange" />
+          <label class="form-check-label" :for="rangeId(item)">{{
+            booleanSourceRangeText(item)
+          }}</label>
         </div>
       </template>
       <!-- Else -->
@@ -123,7 +125,9 @@ Just about works.  Current coverage shown below.
         <div class="list-group" v-if="source.multiValued && !source.range && value">
           <div class="list-group-item" v-for="(item, index) in value" :key="index">
             {{ item }}
-            <button class="btn btn-outline-warning btn-sm float-right" @click="removeArrayItem(index)">&times;</button>
+            <button class="btn btn-outline-warning btn-sm float-right" @click="removeArrayItem(index)">
+              &times;
+            </button>
           </div>
         </div>
         <div class="input-group" v-if="source.multiValued && !source.range">
@@ -143,14 +147,18 @@ Just about works.  Current coverage shown below.
           </div>
         </template>
       </template>
-    </form>
+      <!-- Show validation message ondemand -->
+      <div :class="'invalid-feedback' + (isValid ? '' : ' d-block')" :tabindex="isValid ? 0 : -1">
+        {{ feedback }}
+      </div>
+    </fieldset>
     <!-- </b-form-group> -->
     <slot></slot>
   </div>
 </template>
 
 <script>
-import moment from 'moment';
+import moment from 'moment'
 
 export default {
   props: {
@@ -184,13 +192,13 @@ export default {
   },
   computed: {
     inlineDescription() {
-      return this.showDescriptionInline ? this.source.description : '';
+      return this.showDescriptionInline ? this.source.description : ''
     },
     placeholder() {
-      return this.source.class == 'Date' ? 'dd/mm/yyyy' : '';
+      return this.source.class == 'Date' ? 'dd/mm/yyyy' : ''
     },
     useDatalist() {
-      return this.source.meta && this.source.meta.ui && this.source.meta.ui.useDatalist;
+      return this.source.meta && this.source.meta.ui && this.source.meta.ui.useDatalist
     }
   },
   methods: {
@@ -201,121 +209,123 @@ export default {
     },
     handleMultiEnter(evt) {
       if (evt.target.value != null) {
-        let value = this.getValue(evt.target.value);
-        let arr = this.value || [];
-        arr.push(value);
-        this.$emit("update-source", { action: 'set', source: this.source.name, value: arr });
-        evt.target.value = '';
+        let value = this.getValue(evt.target.value)
+        let arr = this.value || []
+        arr.push(value)
+        this.$emit('update-source', { action: 'set', source: this.source.name, value: arr })
+        evt.target.value = ''
       }
     },
     clearInput(evt) {
-      evt.target.value = this.value ? this.value : '';
+      evt.target.value = this.value ? this.value : ''
     },
     resetInput(evt) {
-      evt.target.value = '';
+      evt.target.value = ''
     },
     handleRadioChange(evt) {
-      this.updateValue(evt.target.value);
+      this.updateValue(evt.target.value)
     },
     handleCheckboxChange(evt) {
-      let value = this.getValue(evt.target.value);
-      let arr = this.value || [];
+      let value = this.getValue(evt.target.value)
+      let arr = this.value || []
       if (evt.target.checked) {
-        arr.push(value);
+        arr.push(value)
       } else {
-        let idx = arr.indexOf(value);
+        let idx = arr.indexOf(value)
         if (arr != -1) {
-          arr.splice(arr.indexOf(value), 1);
+          arr.splice(arr.indexOf(value), 1)
         }
       }
-      this.$emit("update-source", { action: 'set', source: this.source.name, value: arr });
+      this.$emit('update-source', { action: 'set', source: this.source.name, value: arr })
     },
     updateValue(text) {
-      let val = this.getValue(text);
+      let val = this.getValue(text)
       if (val != null && val != this.value) {
-        this.$emit("update-source", { action: 'set', source: this.source.name, value: val });
+        this.$emit('update-source', { action: 'set', source: this.source.name, value: val })
       }
-      return false;
+      return false
     },
     removeArrayItem(index) {
-      this.value.splice(index, 1);
-      this.$emit("update-source", { action: 'set', source: this.source.name, value: this.value });
+      this.value.splice(index, 1)
+      this.$emit('update-source', { action: 'set', source: this.source.name, value: this.value })
     },
     getValue(text) {
-      let val;
+      let val
       switch (this.source.class) {
-        case "Integer":
-          val = parseInt(text);
+        case 'Integer':
+          val = parseInt(text)
           if (!isNaN(val) && isFinite(val)) {
-            this.isValid = true;
-            return val;
+            this.isValid = true
+            return val
           } else {
-            this.isValid = false;
-            this.feedback = "Must be a whole number";
+            this.isValid = false
+            this.feedback = 'Must be a whole number'
             return null
           }
-        case "Float":
-          val = parseFloat(text);
+        case 'Float':
+          val = parseFloat(text)
           if (!isNaN(val) && isFinite(val)) {
-            this.isValid = true;
-            return val;
+            this.isValid = true
+            return val
           } else {
-            this.isValid = false;
-            this.feedback = "Must be a number";
+            this.isValid = false
+            this.feedback = 'Must be a number'
             return null
           }
-        case "Date":
-          val = new moment(text, 'DD/MM/YYYY');
+        case 'Date':
+          val = new moment(text, 'DD/MM/YYYY')
           if (val.isValid()) {
-            this.isValid = true;
-            return val;
+            this.isValid = true
+            return val
           } else {
-            this.isValid = false;
-            this.feedback = "A date must be of the form dd/mm/yyyy";
+            this.isValid = false
+            this.feedback = 'A date must be of the form dd/mm/yyyy'
             return null
           }
-        case "Boolean":
-          return text == "true";
-        case "Text":
+        case 'Boolean':
+          return text == 'true'
+        case 'Text':
           if (this.source.range) {
             if (this.source.range.indexOf(text) > -1) {
-              this.isValid = true;
-              return text;
+              this.isValid = true
+              return text
             } else {
-              this.isValid = false;
-              this.feedback = "Not recognised from available choices";
+              this.isValid = false
+              this.feedback = 'Not recognised from available choices'
               return null
             }
           } else {
-            this.isValid = true;
-            return text;
+            this.isValid = true
+            return text
           }
         default:
-          return text;
+          return text
       }
     },
     inputValue(val) {
       switch (this.source.class) {
-        case "Date":
-          return val ? moment(val).format('DD/MM/YYYY') : '';
+        case 'Date':
+          return val ? moment(val).format('DD/MM/YYYY') : ''
         default:
-          return val;
+          return val
       }
     },
     rangeValue(item) {
-      return Object.keys(item).includes('value') ? item.value : item;
+      return Object.keys(item).includes('value') ? item.value : item
     },
     rangeText(item) {
-      return Object.keys(item).includes('caption') ? item.caption : item;
+      return Object.keys(item).includes('caption') ? item.caption : item
     },
     booleanSourceRangeText(item) {
-      return Object.keys(item).includes('caption') ? item.caption : (item ? "True" : "False");
+      return Object.keys(item).includes('caption') ? item.caption : item ? 'True' : 'False'
     },
     rangeId(item) {
-      return this.source.name + (Object.keys(item).includes('value') ? item.value : item) + this.suffix;
+      return (
+        this.source.name + (Object.keys(item).includes('value') ? item.value : item) + this.suffix
+      )
     },
     unsetSource() {
-      this.$emit('erase-source', { action: 'unset', source: this.source.name });
+      this.$emit('erase-source', { action: 'unset', source: this.source.name })
     }
   }
 }
