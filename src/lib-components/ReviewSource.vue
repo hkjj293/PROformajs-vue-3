@@ -57,7 +57,7 @@ Just about works.  Current coverage shown below.
           class="text-primary align-top pl-2" />
 
         <!-- v-show="value != null && !hideEraser" -->
-        <button class="btn btn-link btn-sm float-right py-0" v-show="value != null && !hideEraser"
+        <button class="btn btn-link btn-sm float-end py-0" v-show="value != null && !hideEraser"
           @click.stop="unsetSource">
           <font-awesome-icon icon="eraser" />
         </button>
@@ -126,7 +126,7 @@ Just about works.  Current coverage shown below.
         <div class="list-group" v-if="source.multiValued && !source.range && value">
           <div class="list-group-item" v-for="(item, index) in value" :key="index">
             {{ item }}
-            <button class="btn btn-outline-warning btn-sm float-right" @click="removeArrayItem(index)">
+            <button class="btn btn-outline-warning btn-sm float-end" @click="removeArrayItem(index)">
               &times;
             </button>
           </div>
