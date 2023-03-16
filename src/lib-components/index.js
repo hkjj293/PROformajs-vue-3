@@ -5,11 +5,10 @@
 // import ComposeCode from './ComposeCode.vue'
 //import ComposeReview from './ComposeReview.vue'
 // import ComposeMap from './ComposeMap.vue'
-// import ReviewMarkdown from './ReviewMarkdown.vue'
-
-// === Debug only ===
-import ReviewSource from './ReviewSource.vue'
 import ReviewMarkdown from './ReviewMarkdown.vue'
+
+// === Debug ===
+import ReviewSource from './ReviewSource.vue'
 
 export {
   //     Compose,
@@ -17,10 +16,9 @@ export {
   //     ComposeTask,
   //     ComposeTree,
   //     ComposeCode,
-  //ComposeReview,
-  //     ReviewMarkdown
-
-  // === Debug only ===
-  ReviewSource,
+  //    ComposeReview,
   ReviewMarkdown
+
+  // === Debug ===
+  , ReviewSource
 }
