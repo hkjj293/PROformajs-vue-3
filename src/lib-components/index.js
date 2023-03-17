@@ -9,6 +9,7 @@ import ReviewMarkdown from './ReviewMarkdown.vue'
 
 // === Debug ===
 import ReviewSource from './ReviewSource.vue'
+import PopoverButton from '../tool-components/PopoverButton.vue'
 
 export {
   //     Compose,
@@ -18,6 +19,9 @@ export {
   //     ComposeCode,
   //    ComposeReview,
   ReviewMarkdown
+
+  // === Tools ===
+  , PopoverButton
 
   // === Debug ===
   , ReviewSource

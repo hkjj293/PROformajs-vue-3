@@ -40,14 +40,18 @@ Just about works.  Current coverage shown below.
 
         <!-- If showDescriptionInline && source.description-->
         <template v-if="!showDescriptionInline && source.description">
-          <!-- <b-button variant="link" size="sm" class="pb-1 pt-0 pr-0" :id="'source' + source.path"> -->
-          <button type="button" class="btn btn-link btn-sm pb-1 pt-0 pr-0" data-bs-toggle="tooltip"
-            data-bs-title="Default" data-bs-placement="top" data-bs-html=true :id="'source' + source.path">
+          <PopoverButton :msg="message" :targetId="'target:source' + source.path">
             <font-awesome-icon icon="info-circle" />
-          </button>
+          </PopoverButton>
+          <!-- <b-button variant="link" size="sm" class="pb-1 pt-0 pr-0" :id="'source' + source.path"> -->
+          <!-- <button type="button" class="btn btn-link btn-sm pb-1 pt-0 pr-0" data-bs-toggle="popover" -->
+          <!-- data-bs-content="Default" data-bs-placement="top" data-bs-trigger="hover" data-bs-boundary='window' -->
+          <!-- data-bs-html=true :id="'source' + source.path"> -->
+          <!-- <font-awesome-icon icon="info-circle" /> -->
+          <!-- </button> -->
           <!-- <b-popover :target="'source' + source.path" triggers="hover" placement="top"> -->
-          <div class="tooltip b-tooltip" :id="'target:source' + source.path" hidden>
-            <pr-markdown :text="source.description" @send-trigger="$emit('send-trigger', $event)" class="markdown" />
+          <div :id="'target:source' + source.path">
+            <pr-markdown :text="source.description" @send-trigger="$emit('send-trigger', $event)" class='markdown' />
           </div>
           <!-- </b-popover> -->
         </template>
@@ -160,7 +164,7 @@ Just about works.  Current coverage shown below.
 
 <script>
 import moment from 'moment'
-import { nextTick } from 'vue'
+import { nextTick } from 'vue';
 
 export default {
   props: {
@@ -188,29 +192,16 @@ export default {
   data: function () {
     return {
       isValid: true,
-      feedback: '',
-      localValue: null
-    }
+      feedback: "",
+      localValue: null,
+      message: "Default"
+    };
   },
-  mounted: function () {
+  mounted() {
     nextTick(() => {
-      const tooltipEle = document.getElementById('source' + this.source.path);
-      //const tooltipParent = tooltipEle.parentElement;
-      const tooltipContent = document.getElementById('target:source' + this.source.path);
-      const tooltip = new bootstrap.Tooltip(tooltipEle);
-      tooltip.setContent({ '.tooltip-inner': tooltipContent.innerHTML });
+      this.message = document.getElementById('target:source' + this.source.path).innerHTML
+      console.log("---Message---: " + this.message)
     })
-  },
-  computed: {
-    inlineDescription() {
-      return this.showDescriptionInline ? this.source.description : ''
-    },
-    placeholder() {
-      return this.source.class == 'Date' ? 'dd/mm/yyyy' : ''
-    },
-    useDatalist() {
-      return this.source.meta && this.source.meta.ui && this.source.meta.ui.useDatalist
-    }
   },
   methods: {
     handleBlur(evt) {
@@ -220,130 +211,139 @@ export default {
     },
     handleMultiEnter(evt) {
       if (evt.target.value != null) {
-        let value = this.getValue(evt.target.value)
-        let arr = this.value || []
-        arr.push(value)
-        this.$emit('update-source', { action: 'set', source: this.source.name, value: arr })
-        evt.target.value = ''
+        let value = this.getValue(evt.target.value);
+        let arr = this.value || [];
+        arr.push(value);
+        this.$emit("update-source", { action: "set", source: this.source.name, value: arr });
+        evt.target.value = "";
       }
     },
     clearInput(evt) {
-      evt.target.value = this.value ? this.value : ''
+      evt.target.value = this.value ? this.value : "";
     },
     resetInput(evt) {
-      evt.target.value = ''
+      evt.target.value = "";
     },
     handleRadioChange(evt) {
-      this.updateValue(evt.target.value)
+      this.updateValue(evt.target.value);
     },
     handleCheckboxChange(evt) {
-      let value = this.getValue(evt.target.value)
-      let arr = this.value || []
+      let value = this.getValue(evt.target.value);
+      let arr = this.value || [];
       if (evt.target.checked) {
-        arr.push(value)
-      } else {
-        let idx = arr.indexOf(value)
+        arr.push(value);
+      }
+      else {
+        let idx = arr.indexOf(value);
         if (arr != -1) {
-          arr.splice(arr.indexOf(value), 1)
+          arr.splice(arr.indexOf(value), 1);
         }
       }
-      this.$emit('update-source', { action: 'set', source: this.source.name, value: arr })
+      this.$emit("update-source", { action: "set", source: this.source.name, value: arr });
     },
     updateValue(text) {
-      let val = this.getValue(text)
+      let val = this.getValue(text);
       if (val != null && val != this.value) {
-        this.$emit('update-source', { action: 'set', source: this.source.name, value: val })
+        this.$emit("update-source", { action: "set", source: this.source.name, value: val });
       }
-      return false
+      return false;
     },
     removeArrayItem(index) {
-      this.value.splice(index, 1)
-      this.$emit('update-source', { action: 'set', source: this.source.name, value: this.value })
+      this.value.splice(index, 1);
+      this.$emit("update-source", { action: "set", source: this.source.name, value: this.value });
     },
     getValue(text) {
-      let val
+      let val;
       switch (this.source.class) {
-        case 'Integer':
-          val = parseInt(text)
+        case "Integer":
+          val = parseInt(text);
           if (!isNaN(val) && isFinite(val)) {
-            this.isValid = true
-            return val
-          } else {
-            this.isValid = false
-            this.feedback = 'Must be a whole number'
-            return null
+            this.isValid = true;
+            return val;
           }
-        case 'Float':
-          val = parseFloat(text)
+          else {
+            this.isValid = false;
+            this.feedback = "Must be a whole number";
+            return null;
+          }
+        case "Float":
+          val = parseFloat(text);
           if (!isNaN(val) && isFinite(val)) {
-            this.isValid = true
-            return val
-          } else {
-            this.isValid = false
-            this.feedback = 'Must be a number'
-            return null
+            this.isValid = true;
+            return val;
           }
-        case 'Date':
-          val = new moment(text, 'DD/MM/YYYY')
+          else {
+            this.isValid = false;
+            this.feedback = "Must be a number";
+            return null;
+          }
+        case "Date":
+          val = new moment(text, "DD/MM/YYYY");
           if (val.isValid()) {
-            this.isValid = true
-            return val
-          } else {
-            this.isValid = false
-            this.feedback = 'A date must be of the form dd/mm/yyyy'
-            return null
+            this.isValid = true;
+            return val;
           }
-        case 'Boolean':
-          return text == 'true'
-        case 'Text':
+          else {
+            this.isValid = false;
+            this.feedback = "A date must be of the form dd/mm/yyyy";
+            return null;
+          }
+        case "Boolean":
+          return text == "true";
+        case "Text":
           if (this.source.range) {
             if (this.source.range.indexOf(text) > -1) {
-              this.isValid = true
-              return text
-            } else {
-              this.isValid = false
-              this.feedback = 'Not recognised from available choices'
-              return null
+              this.isValid = true;
+              return text;
             }
-          } else {
-            this.isValid = true
-            return text
+            else {
+              this.isValid = false;
+              this.feedback = "Not recognised from available choices";
+              return null;
+            }
+          }
+          else {
+            this.isValid = true;
+            return text;
           }
         default:
-          return text
+          return text;
       }
     },
     inputValue(val) {
       switch (this.source.class) {
-        case 'Date':
-          return val ? moment(val).format('DD/MM/YYYY') : ''
+        case "Date":
+          return val ? moment(val).format("DD/MM/YYYY") : "";
         default:
-          return val
+          return val;
       }
     },
     rangeValue(item) {
-      return Object.keys(item).includes('value') ? item.value : item
+      return Object.keys(item).includes("value") ? item.value : item;
     },
     rangeText(item) {
-      return Object.keys(item).includes('caption') ? item.caption : item
+      return Object.keys(item).includes("caption") ? item.caption : item;
     },
     booleanSourceRangeText(item) {
-      return Object.keys(item).includes('caption') ? item.caption : item ? 'True' : 'False'
+      return Object.keys(item).includes("caption") ? item.caption : item ? "True" : "False";
     },
     rangeId(item) {
-      return (
-        this.source.name + (Object.keys(item).includes('value') ? item.value : item) + this.suffix
-      )
+      return (this.source.name + (Object.keys(item).includes("value") ? item.value : item) + this.suffix);
     },
     unsetSource() {
-      this.$emit('erase-source', { action: 'unset', source: this.source.name })
+      this.$emit("erase-source", { action: "unset", source: this.source.name });
     }
   }
 }
 </script>
 
-<style scoped>
+<style>
 .markdown :last-child {
   margin-bottom: 0;
+}
+
+.popover-body {
+  --bs-popover-body-padding-x: 0.5rem;
+  --bs-popover-body-padding-y: 0.5rem;
 }
 </style>

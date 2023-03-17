@@ -2,7 +2,7 @@
 import { Protocol } from '@openclinical/proformajs'
 import ReviewSource from './lib-components/ReviewSource.vue'
 
-const testPRSource = {
+const testPRSource1 = {
   source: {
     class: 'Integer',
     caption: 'Age',
@@ -15,6 +15,30 @@ const testPRSource = {
     requestCondition: "!is_known('Age')",
     path: 'EDACS7:Registration:Age',
     design: 'EDACS7:Registration:Age',
+    requested: false
+  },
+  disabled: false,
+  value: 0,
+  suffix: '',
+  showDescriptionInline: false,
+  hideEraser: false,
+  useButtons: false,
+  hideCaption: false
+}
+
+const testPRSource2 = {
+  source: {
+    class: 'Integer',
+    caption: 'Age',
+    description: '<b>Description of Age</b>',
+    name: 'Age',
+    defaultValue: 71,
+    multiValued: false,
+    value: 71,
+    type: 'Age',
+    requestCondition: "!is_known('Age')",
+    path: 'EDACS7:Registration:Age2',
+    design: 'EDACS7:Registration:Age2',
     requested: false
   },
   disabled: false,
@@ -51,7 +75,8 @@ export default {
       initialData: {},
 
       // === Debug ===
-      testPRSource: testPRSource
+      testPRSource1: testPRSource1,
+      testPRSource2: testPRSource2,
     }
   },
   created: function () {
@@ -139,7 +164,8 @@ export default {
 
 
         <!-- === Debug === -->
-        <ReviewSource v-bind="testPRSource" />
+        <ReviewSource v-bind="testPRSource1" />
+        <ReviewSource v-bind="testPRSource2" />
         <!-- </b-tab> -->
         <!-- </b-tabs> -->
       </div>
