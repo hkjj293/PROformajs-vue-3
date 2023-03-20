@@ -53,7 +53,7 @@ interactable.
     </div>
     <template v-if="task.candidates">
       <div v-for="candidate in sortedCands" :key="candidate.path" class="candidate">
-        <div class="row no-gutters">
+        <div class="row g-0">
           <div style="width: 56px">
             <div class="float-end">
               <!-- recommended / rejected icon -->
@@ -97,7 +97,7 @@ interactable.
             </div>
           </div>
         </div>
-        <div v-for="(argument, index) in candidate.arguments" :key="index" :data-key="index" class="row no-gutters">
+        <div v-for="(argument, index) in candidate.arguments" :key="index" :data-key="index" class="row g-0">
           <div v-if="argument.active" style="width: 90px">
             <div class="float-end pr-2">
               <span v-if="Math.abs(argument.support) > 1 && Math.abs(argument.support) < Infinity"
