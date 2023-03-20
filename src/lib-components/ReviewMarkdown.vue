@@ -14,7 +14,6 @@ in particular circumstances.
 import { marked } from 'marked'
 import createDOMPurify from 'dompurify'
 
-
 const purify = createDOMPurify()
 purify.addHook('afterSanitizeAttributes', function (node) {
   // post process trigger links to fire the send-trigger event
