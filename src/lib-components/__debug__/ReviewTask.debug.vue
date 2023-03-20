@@ -36,6 +36,8 @@ const testPRProps1 = {
     options: reviewOptions
 }
 
+const task = "plan:enquiryB"
+
 const template = {
     "class": "Plan",
     "meta": {
@@ -47,6 +49,13 @@ const template = {
     "caption": "Plan",
     "name": "plan",
     "autonomous": true,
+    "dataDefinitions": [
+        {
+            "class": "Integer",
+            "caption": " B",
+            "name": "B"
+        }
+    ],
     "tasks": [
         {
             "class": "Decision",
@@ -92,7 +101,13 @@ const template = {
                 }
             },
             "caption": "Enquiry B",
-            "name": "enquiryB"
+            "name": "enquiryB",
+            "sources": [
+                {
+                    "class": "Source",
+                    "type": "B"
+                }
+            ]
         },
         {
             "class": "Action",
@@ -103,7 +118,8 @@ const template = {
                 }
             },
             "caption": "Action C",
-            "name": "actionC"
+            "name": "actionC",
+            "preCondition": "index()==2"
         },
         {
             "class": "Plan",
@@ -141,7 +157,7 @@ export default {
         })
         let json = JSON.stringify(local)
         this.testPRProps1.enactment = Enactment.inflate(json)
-        this.testPRProps1.task = this.testPRProps1.enactment.getComponent('plan:decisionA')
+        this.testPRProps1.task = this.testPRProps1.enactment.getComponent(task)
     },
     methods: {
         updateEnactment(evt) {
@@ -169,7 +185,7 @@ export default {
                     break
             }
             this.testPRProps1.enactment = enactment
-            this.testPRProps1.task = this.testPRProps1.enactment.getComponent('plan:decisionA')
+            this.testPRProps1.task = this.testPRProps1.enactment.getComponent(task)
             // Debug post complete states
             console.log(JSON.stringify(enactment._state))
             console.log(enactment)
@@ -179,7 +195,7 @@ export default {
             enactment.sendTrigger(trigger)
             this.$emit('change-enactment', { value: enactment, action: 'trigger', trigger: trigger })
             this.testPRProps1.enactment = enactment
-            this.testPRProps1.task = this.testPRProps1.enactment.getComponent('plan:decisionA')
+            this.testPRProps1.task = this.testPRProps1.enactment.getComponent(task)
         }
     },
     components: { ReviewTask }
