@@ -33,13 +33,21 @@ const template = {
     "caption": "Plan",
     "name": "plan",
     "autonomous": true,
+    "dataDefinitions": [
+        {
+            "class": "Integer",
+            "caption": "A",
+            "name": "a",
+            "valueCondition": "2"
+        }
+    ],
     "tasks": [
         {
             "class": "Action",
             "meta": {
                 "pos": {
-                    "x": 182.07721059715573,
-                    "y": 103.57851102405635
+                    "x": 135.54356301541733,
+                    "y": 181.13459032695374
                 }
             },
             "caption": "Action A",
