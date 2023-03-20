@@ -40,7 +40,7 @@ Just about works.  Current coverage shown below.
 
         <!-- If showDescriptionInline && source.description-->
         <template v-if="!showDescriptionInline && source.description">
-          <PopoverButton :msg="message" :targetId="'target:source' + source.path">
+          <PopoverButton :msg="message">
             <font-awesome-icon icon="info-circle" />
           </PopoverButton>
           <!-- <b-button variant="link" size="sm" class="pb-1 pt-0 pr-0" :id="'source' + source.path"> -->
@@ -50,7 +50,7 @@ Just about works.  Current coverage shown below.
           <!-- <font-awesome-icon icon="info-circle" /> -->
           <!-- </button> -->
           <!-- <b-popover :target="'source' + source.path" triggers="hover" placement="top"> -->
-          <div :id="'target:source' + source.path">
+          <div :id="'target:source' + source.path" hidden>
             <pr-markdown :text="source.description" @send-trigger="$emit('send-trigger', $event)" class='markdown' />
           </div>
           <!-- </b-popover> -->
