@@ -18,23 +18,34 @@ import { Enactment, Protocol } from '@openclinical/proformajs'
 const testPRProps1 = {
     id: "",
     enactment: null,
-    path: "",
+    path: "plan:actionA",
     description: ""
 }
 
 const template = {
-    class: 'Plan',
-    name: 'plan',
-    caption: 'Plan',
-    dataDefinitions: [],
-    tasks: [],
-    autonomous: true,
-    meta: {
-        svg: {
-            width: 800,
-            height: 400
+    "class": "Plan",
+    "meta": {
+        "svg": {
+            "width": 800,
+            "height": 400
         }
-    }
+    },
+    "caption": "Plan",
+    "name": "plan",
+    "autonomous": true,
+    "tasks": [
+        {
+            "class": "Action",
+            "meta": {
+                "pos": {
+                    "x": 182.07721059715573,
+                    "y": 103.57851102405635
+                }
+            },
+            "caption": "Action A",
+            "name": "actionA"
+        }
+    ]
 }
 
 export default {
