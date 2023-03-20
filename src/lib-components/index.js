@@ -7,9 +7,12 @@
 // import ComposeMap from './ComposeMap.vue'
 import ReviewMarkdown from './ReviewMarkdown.vue'
 
-// === Debug ===
-import ReviewSource from './ReviewSource.vue'
+// === Tools ===
 import PopoverButton from '../tool-components/PopoverButton.vue'
+
+// === Debug ===
+import debug from './__debug__/debug.vue'
+import * as debugComponents from './__debug__/debug'
 
 export {
   //     Compose,
@@ -24,5 +27,6 @@ export {
   , PopoverButton
 
   // === Debug ===
-  , ReviewSource
+  , debug
+  , debugComponents
 }
