@@ -8,17 +8,16 @@ export default {
             type: String,
             required: true
         },
-        targetId: {
-            type: String,
-            required: false
-        }
+    },
+    data() {
+        return { popover: null };
     },
     mounted() {
-        new Popover(this.$el)
+        this.popover = new Popover(this.$el)
     },
     watch: {
         msg: function (newMsg, oldMsg) {
-            (new Popover(this.$el)).setContent({ '.popover-body': '<div>Hello world</div>' })
+            this.popover.setContent({ '.popover-body': newMsg })
         }
     }
 }
@@ -30,3 +29,11 @@ export default {
         <slot />
     </button>
 </template>
+
+
+<style>
+p {
+    margin: 0px;
+    padding: 0px;
+}
+</style>
