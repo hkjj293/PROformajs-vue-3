@@ -33,7 +33,6 @@ Just about works.  Current coverage shown below.
 
 <template>
   <div>
-    <!-- <b-form-group :disabled="disabled" :state="isValid" :invalid-feedback="feedback"> -->
     <fieldset :disabled="disabled">
       <label :for="source.name + suffix" class="d-block form-label">
         <span v-if="!hideCaption || !source.description">{{ source.caption || source.name }}</span>
@@ -43,17 +42,9 @@ Just about works.  Current coverage shown below.
           <PopoverButton :msg="message">
             <font-awesome-icon icon="info-circle" />
           </PopoverButton>
-          <!-- <b-button variant="link" size="sm" class="pb-1 pt-0 pr-0" :id="'source' + source.path"> -->
-          <!-- <button type="button" class="btn btn-link btn-sm pb-1 pt-0 pr-0" data-bs-toggle="popover" -->
-          <!-- data-bs-content="Default" data-bs-placement="top" data-bs-trigger="hover" data-bs-boundary='window' -->
-          <!-- data-bs-html=true :id="'source' + source.path"> -->
-          <!-- <font-awesome-icon icon="info-circle" /> -->
-          <!-- </button> -->
-          <!-- <b-popover :target="'source' + source.path" triggers="hover" placement="top"> -->
           <div :id="'target:source' + source.path" hidden>
             <pr-markdown :text="source.description" @send-trigger="$emit('send-trigger', $event)" class='markdown' />
           </div>
-          <!-- </b-popover> -->
         </template>
 
         <!-- If source.requested && (!hideCaption || !source.description) -->
@@ -157,7 +148,6 @@ Just about works.  Current coverage shown below.
         {{ feedback }}
       </div>
     </fieldset>
-    <!-- </b-form-group> -->
     <slot></slot>
   </div>
 </template>
