@@ -16,7 +16,7 @@ an expression that consists of the name of a data def without a value will be un
 
 <template>
   <div>
-    <div class="form-group">
+    <div>
       <label for="expressions">Debug expressions</label>
       <input type="text" class="form-control" :id="id + 'expression'" :aria-describedby="id + 'expressionHelp'"
         placeholder="Enter test expression" @change="testExpression" />
