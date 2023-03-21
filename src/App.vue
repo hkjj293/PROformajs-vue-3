@@ -86,6 +86,13 @@ export default {
       if (e.selected) {
         this.selectedtask = e.selected
       }
+      try {
+        let selected = this.protocol.getComponent(this.selectedtask);
+      } catch (e) {
+        // drop back to root path in case of error, assumed caused by name changes
+        this.selectedtask = this.protocol.name;
+      }
+
     },
     resetProtocol(clazz) {
       if (clazz && ['Action', 'Decision', 'Enquiry'].indexOf(clazz) > -1) {
