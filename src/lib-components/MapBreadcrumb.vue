@@ -26,16 +26,31 @@ but I cant work out how to position these correctly.  See also ComposeMapTask.
 <template>
   <g id="breadcrumb">
     <text :x="offset + 10" y="20">
-      <tspan v-for="crumb in crumbs()" class="clickable" @click="changePath" :data-path="crumb.path" :key="crumb.path">
-        {{ crumb.caption }} : </tspan>
+      <tspan
+        v-for="crumb in crumbs()"
+        class="clickable"
+        @click="changePath"
+        :data-path="crumb.path"
+        :key="crumb.path"
+      >
+        {{ crumb.caption }} :
+      </tspan>
       <tspan @click="selectTask" class="clickable" v-bind:class="{ selected: selected }">
         {{ plan.name }}
       </tspan>
       <tspan v-if="hasError" fill="#E74C3C">[!]</tspan>
       <tspan v-if="hasWarning" fill="#3498DB">(?)</tspan>
       <line :x1="offset" :y1="height" :x2="width" :y2="height" stroke="gray"></line>
-      <tspan v-show="!review && plan.dataDefinitions.length > 0" style="font-size: 10pt" fill="gray">
-        {{ plan.dataDefinitions.length }} data definition<template v-if="plan.dataDefinitions.length > 1">s</template></tspan>
+      <tspan
+        v-show="!review && plan.dataDefinitions.length > 0"
+        style="font-size: 10pt"
+        fill="gray"
+      >
+        {{ plan.dataDefinitions.length }} data definition<template
+          v-if="plan.dataDefinitions.length > 1"
+          >s</template
+        ></tspan
+      >
     </text>
     <line :x1="offset" :y1="height" :x2="width" :y2="height" stroke="gray"></line>
   </g>
@@ -54,27 +69,27 @@ export default {
   },
   computed: {
     hasError() {
-      return this.issues ? this.issues.filter((issue) => issue.type == 'Error').length > 0 : false;
+      return this.issues ? this.issues.filter((issue) => issue.type == 'Error').length > 0 : false
     },
     hasWarning() {
-      return this.issues ? this.issues.filter((issue) => issue.type == 'Warning').length > 0 : false;
+      return this.issues ? this.issues.filter((issue) => issue.type == 'Warning').length > 0 : false
     }
   },
   methods: {
     crumbs() {
-      let result = [];
-      let localplan = this.plan;
+      let result = []
+      let localplan = this.plan
       while (localplan._parent) {
-        localplan = localplan._parent;
-        result.unshift({ caption: localplan.name, path: localplan.path() });
+        localplan = localplan._parent
+        result.unshift({ caption: localplan.name, path: localplan.path() })
       }
-      return result;
+      return result
     },
     changePath(evt) {
-      this.$emit('select-task', { value: evt.target.dataset.path });
+      this.$emit('select-task', { value: evt.target.dataset.path })
     },
     selectTask(evt) {
-      this.$emit('select-task', { value: this.plan.path() });
+      this.$emit('select-task', { value: this.plan.path() })
     }
   }
 }
@@ -91,4 +106,5 @@ export default {
 
 g {
   font-size: 16pt;
-}</style>
+}
+</style>
