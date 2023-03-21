@@ -6,6 +6,7 @@
     <div>
         <debug title="ReviewTask">
             <ReviewTask v-bind="testPRProps1" @update-enactment="updateEnactment" @send-trigger="sendTrigger" />
+            <ReviewTask v-bind="testPRProps2" @update-enactment="updateEnactment" @send-trigger="sendTrigger" />
         </debug>
     </div>
 </template>
@@ -32,11 +33,17 @@ const reviewOptions = {
 
 const testPRProps1 = {
     task: "",
+    taskName: "plan:enquiryB",
     enactment: null,
     options: reviewOptions
 }
 
-const task = "plan:enquiryB"
+const testPRProps2 = {
+    task: "",
+    taskName: "plan:decisionA",
+    enactment: null,
+    options: reviewOptions
+}
 
 const template = {
     "class": "Plan",
@@ -141,6 +148,7 @@ export default {
     data: function () {
         return {
             testPRProps1: testPRProps1,
+            testPRProps2: testPRProps2,
             protocol: new Protocol.Plan(template),
             enactmentOptions: {
                 Enquiry: {
@@ -157,7 +165,9 @@ export default {
         })
         let json = JSON.stringify(local)
         this.testPRProps1.enactment = Enactment.inflate(json)
-        this.testPRProps1.task = this.testPRProps1.enactment.getComponent(task)
+        this.testPRProps1.task = this.testPRProps1.enactment.getComponent(this.testPRProps1.taskName)
+        this.testPRProps2.enactment = this.testPRProps1.enactment
+        this.testPRProps2.task = this.testPRProps2.enactment.getComponent(this.testPRProps2.taskName)
     },
     methods: {
         updateEnactment(evt) {
@@ -185,7 +195,9 @@ export default {
                     break
             }
             this.testPRProps1.enactment = enactment
-            this.testPRProps1.task = this.testPRProps1.enactment.getComponent(task)
+            this.testPRProps1.task = this.testPRProps1.enactment.getComponent(this.testPRProps1.taskName)
+            this.testPRProps2.enactment = this.testPRProps1.enactment
+            this.testPRProps2.task = this.testPRProps2.enactment.getComponent(this.testPRProps2.taskName)
             // Debug post complete states
             console.log(JSON.stringify(enactment._state))
             console.log(enactment)
@@ -195,7 +207,9 @@ export default {
             enactment.sendTrigger(trigger)
             this.$emit('change-enactment', { value: enactment, action: 'trigger', trigger: trigger })
             this.testPRProps1.enactment = enactment
-            this.testPRProps1.task = this.testPRProps1.enactment.getComponent(task)
+            this.testPRProps1.task = this.testPRProps1.enactment.getComponent(this.testPRProps1.taskName)
+            this.testPRProps2.enactment = this.testPRProps1.enactment
+            this.testPRProps2.task = this.testPRProps2.enactment.getComponent(this.testPRProps2.taskName)
         }
     },
     components: { ReviewTask }
