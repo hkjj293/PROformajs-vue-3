@@ -76,7 +76,7 @@ export default {
         };
     },
 
-    created: function () {
+    mounted: function () {
         let local = new Enactment({
             start: true,
             protocol: this.protocol,
