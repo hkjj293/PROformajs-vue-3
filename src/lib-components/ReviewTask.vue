@@ -84,7 +84,7 @@ interactable.
             <pr-markdown v-if="showCandidateDescriptionInline && candidate.description" :text="candidate.description"
               class="mb-1 markdown" />
             <PopoverButton v-if="!showCandidateDescriptionInline && candidate.description" :msg="candidate.description"
-              class="btn btn-link pb-1 pt-0 pe-0">
+              class="pb-1 pt-0 pe-0">
               <font-awesome-icon icon="info-circle" />
             </PopoverButton>
             <div v-if="options.Decision.showExpressions" class="text-muted font-italic">
