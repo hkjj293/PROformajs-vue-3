@@ -17,6 +17,41 @@ const template = {
   }
 }
 
+function checkTaskMeta(plan) {
+  if (plan.tasks) {
+    for (const [idx, task] of plan.tasks.entries()) {
+      if (!task.meta || !task.meta.pos) {
+        if (!task.meta) {
+          task.meta = {};
+        }
+        task.meta.pos = {
+          x: 80 + idx * 80,
+          y: 80
+        }
+      }
+      if (task.tasks) {
+        checkTaskMeta(task);
+      }
+    }
+  }
+}
+
+function checkMeta(protocol) {
+  if (!protocol.meta || !protocol.meta.svg) {
+    if (!protocol.meta) {
+      protocol.meta = {};
+    }
+    protocol.meta.svg = {
+      width: 800,
+      height: 400
+    }
+  }
+  if (protocol.tasks) {
+    checkTaskMeta(protocol);
+  }
+}
+
+
 export default {
   name: 'ServeDev',
   data: function () {
@@ -46,6 +81,7 @@ export default {
   },
   methods: {
     updateProtocol(e) {
+      checkMeta(e.value);
       this.protocol = e.value
       if (e.selected) {
         this.selectedtask = e.selected
