@@ -83,18 +83,10 @@ interactable.
             </label>
             <pr-markdown v-if="showCandidateDescriptionInline && candidate.description" :text="candidate.description"
               class="mb-1 markdown" />
-            <template v-if="!showCandidateDescriptionInline && candidate.description">
-              <PopoverButton :msg="candidate.description" class="btn btn-link pb-1 pt-0 pe-0">
-                <font-awesome-icon icon="info-circle" />
-              </PopoverButton>
-              <!-- <button class="btn btn-link btn-sm pb-1 pt-0 pr-0" variant="link" size="sm" -->
-              <!-- :id="'candidate' + candidate.path"> -->
-              <!-- <font-awesome-icon icon="info-circle" /> -->
-              <!-- </button> -->
-              <!-- <b-popover :target="'candidate' + candidate.path" triggers="hover" placement="top"> -->
-              <!-- <pr-markdown :text="candidate.description" class="markdown" /> -->
-              <!-- </b-popover> -->
-            </template>
+            <PopoverButton v-if="!showCandidateDescriptionInline && candidate.description" :msg="candidate.description"
+              class="btn btn-link pb-1 pt-0 pe-0">
+              <font-awesome-icon icon="info-circle" />
+            </PopoverButton>
             <div v-if="options.Decision.showExpressions" class="text-muted font-italic">
               {{ candidate.recommendCondition }}
             </div>
