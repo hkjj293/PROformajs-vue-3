@@ -29,7 +29,9 @@ interactable.
           <pr-source suffix="task" :key="task.sources[0].type" :source="task.sources[0]"
             :disabled="task.state != 'in_progress'" :value="enactment.get(task.path, task.sources[0].type)"
             @erase-source="updateSource" @update-source="updateSource" :hideEraser="hideEraser"
-            :showDescriptionInline="showDescriptionInline" :useButtons="useButtons" :hideCaption="hideSourcesCaptions" />
+            :showDescriptionInline="showDescriptionInline" :useButtons="useButtons" :hideCaption="hideSourcesCaptions">
+            <hr />
+          </pr-source>
         </div>
         <template v-else>
           <div class="col-md-6">
