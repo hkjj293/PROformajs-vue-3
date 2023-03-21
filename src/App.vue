@@ -112,12 +112,10 @@ export default {
         <!-- !!!! needed for review part. Commented on debug only -->
         <!-- <pc-review :protocol="protocol" :debug="true" :initialData="startData" -->
         <!-- :template="protocol && protocol.meta && protocol.meta.enact && protocol.meta.enact.template ? protocol.meta.enact.template : 'compact'" /> -->
-
-
-        <!-- === Debug === -->
-        <DebugApp></DebugApp>
         <!-- </b-tab> -->
         <!-- </b-tabs> -->
+        <!-- === Debug === -->
+        <DebugApp></DebugApp>
       </div>
     </main>
   </div>
