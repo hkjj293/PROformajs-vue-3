@@ -40,13 +40,13 @@ const testPRSource1 = {
 
 const testPRSource2 = {
     source: {
-        class: 'Integer',
+        class: 'Text',
         caption: 'Age',
         description: '<b>Description of Age</b>',
         name: 'Age',
-        defaultValue: 71,
+        defaultValue: "71",
         multiValued: false,
-        value: 71,
+        value: "71",
         type: 'Age',
         requestCondition: "!is_known('Age')",
         path: 'EDACS7:Registration:Age2',
