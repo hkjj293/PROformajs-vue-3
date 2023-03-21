@@ -17,7 +17,7 @@ interactable.
   <div v-if="task">
     <h3>
       <span v-if="!hideTaskCaption || !task.description">{{ task.caption || task.name }}</span>
-      <span class="badge badge-warning ml-2" v-show="task.state != 'in_progress'">{{
+      <span class="badge badge-warning ms-2" v-show="task.state != 'in_progress'">{{
         task.state
       }}</span>
     </h3>
@@ -52,27 +52,28 @@ interactable.
       </div>
     </div>
     <template v-if="task.candidates">
+      <hr />
       <div v-for="candidate in sortedCands" :key="candidate.path" class="candidate">
         <div class="row g-0">
           <div style="width: 56px">
             <div class="float-end">
               <!-- recommended / rejected icon -->
-              <span class="text-primary mr-2" :disabled="task.state != 'in_progress'">
+              <span class="text-primary me-2" :disabled="task.state != 'in_progress'">
                 <font-awesome-icon icon="check" v-if="candidate.recommended" />
                 <font-awesome-icon icon="times" v-if="candidate.support == '--'" />
               </span>
               <!-- checkbox, candidate caption and net_support -->
               <input v-if="singleChoiceDecision" type="radio" :name="task.name" :value="candidate.name"
                 :id="candidate.name" :checked="candidate.confirmed" @change="handleConfirmedChange"
-                :disabled="task.state != 'in_progress'" class="mt-1 mr-2" />
+                :disabled="task.state != 'in_progress'" class="mt-1 me-2" />
               <input v-else type="checkbox" :name="candidate.name" :id="candidate.name" :checked="candidate.confirmed"
-                @change="handleConfirmedChange" :disabled="task.state != 'in_progress'" class="mt-1 mr-2" />
+                @change="handleConfirmedChange" :disabled="task.state != 'in_progress'" class="mt-1 me-2" />
             </div>
           </div>
           <div class="col">
             <label :for="candidate.name" :disabled="task.state != 'in_progress'" class="mb-1">
               <span class="review-candidate">{{ candidate.caption || candidate.name }}</span>
-              <span class="badge rounded-pill bg-secondary ml-1 align-middle" v-show="
+              <span class="badge rounded-pill bg-secondary ms-1 align-middle" v-show="
                 candidate.support != 0 &&
                 candidate.support != Infinity &&
                 candidate.support != -Infinity
@@ -81,7 +82,7 @@ interactable.
             <pr-markdown v-if="showCandidateDescriptionInline && candidate.description" :text="candidate.description"
               class="mb-1 markdown" />
             <template v-if="!showCandidateDescriptionInline && candidate.description">
-              <PopoverButton :msg="candidate.description" class="btn btn-link pb-1 pt-0 pr-0">
+              <PopoverButton :msg="candidate.description" class="btn btn-link pb-1 pt-0 pe-0">
                 <font-awesome-icon icon="info-circle" />
               </PopoverButton>
               <!-- <button class="btn btn-link btn-sm pb-1 pt-0 pr-0" variant="link" size="sm" -->
@@ -99,9 +100,9 @@ interactable.
         </div>
         <div v-for="(argument, index) in candidate.arguments" :key="index" :data-key="index" class="row g-0">
           <div v-if="argument.active" style="width: 90px">
-            <div class="float-end pr-2">
+            <div class="float-end pe-2">
               <span v-if="Math.abs(argument.support) > 1 && Math.abs(argument.support) < Infinity"
-                class="text-muted meta mr-1">{{ Math.abs(argument.support) }}</span>
+                class="text-muted meta me-1">{{ Math.abs(argument.support) }}</span>
               <font-awesome-icon v-if="argument.support == Infinity" icon="plus-circle" class="text-success" />
               <font-awesome-icon v-if="argument.support > 0 || argument.support == '++'" icon="plus-circle"
                 class="text-success" />
@@ -111,9 +112,9 @@ interactable.
             </div>
           </div>
           <div v-if="!argument.active && options.Decision.showInactiveArguments" style="width: 90px" class="text-muted">
-            <div class="float-end pr-2">
+            <div class="float-end pe-2">
               <span v-if="Math.abs(argument.support) > 1 && Math.abs(argument.support) < Infinity"
-                class="text-muted meta mr-1">{{ Math.abs(argument.support) }}</span>
+                class="text-muted meta me-1">{{ Math.abs(argument.support) }}</span>
               <font-awesome-icon v-if="argument.support == '++'" icon="plus-circle" />
               <font-awesome-icon v-if="argument.support > 0 || argument.support == '++'" icon="plus-circle" />
               <font-awesome-icon v-if="argument.support < 0 || argument.support == '--'" icon="minus-circle" />
