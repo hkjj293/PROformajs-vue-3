@@ -1,10 +1,8 @@
 <template>
-    <div>
+    <div class="debug">
         <h2 @click="Trigger"><b>{{ title }}</b></h2>
         <span :hidden="trigger">
             <slot />
-            <br />
-            <hr style="border-width: 3px;" />
             <br />
         </span>
     </div>
@@ -39,5 +37,13 @@ h2 {
 
 div {
     cursor: pointer;
+}
+
+.debug {
+    border-width: 1px;
+    border-color: gray;
+    border-style: solid;
+    padding: 15px;
+    margin: 15px;
 }
 </style>
