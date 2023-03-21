@@ -49,7 +49,7 @@ Just about works.  Current coverage shown below.
 
         <!-- If source.requested && (!hideCaption || !source.description) -->
         <font-awesome-icon v-if="source.requested && (!hideCaption || !source.description)" icon="asterisk"
-          class="text-primary align-top pl-2" />
+          class="text-primary align-top ps-2" />
 
         <!-- v-show="value != null && !hideEraser" -->
         <button class="btn btn-link btn-sm float-end py-0" v-show="value != null && !hideEraser"
