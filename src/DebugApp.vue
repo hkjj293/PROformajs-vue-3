@@ -21,9 +21,11 @@ import MapIconTaskDebug from './lib-components/__debug__/MapIconTask.debug.vue';
     <ReviewMapTaskDebug />
     <MapBreadcrumbDebug />
     <MapArrowDebug />
+    <ReviewMapDebug />
 </template>
 
 <script>
+import ReviewMapDebug from './lib-components/__debug__/ReviewMap.debug.vue'
 import MapIconPlanDebug from './lib-components/__debug__/MapIconPlan.debug.vue';
 import MapIconDecisionDebug from './lib-components/__debug__/MapIconDecision.debug.vue';
 import MapIconTaskDebug from './lib-components/__debug__/MapIconTask.debug.vue';
@@ -49,7 +51,8 @@ export default {
         MapIconActionDebug,
         ReviewMapTaskDebug,
         MapBreadcrumbDebug,
-        MapArrowDebug
+        MapArrowDebug,
+        ReviewMapDebug
     }
 }
 </script>
