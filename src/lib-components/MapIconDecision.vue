@@ -11,14 +11,28 @@ Draws a PROformajs Protocol.Decision svg "icon"
 </docs>
 
 <template>
-  <circle :cx="x+20" :cy="y" :r="20-stroke_width/2" :fill="fill" :stroke="stroke" :stroke-width="stroke_width">
-    <animate v-if="animate" attributeName="fill" dur="1s" begin="0s" repeatCount="indefinite" :values="stroke + ';#FFF;' + stroke"/>
+  <circle
+    :cx="x + 20"
+    :cy="y"
+    :r="20 - stroke_width / 2"
+    :fill="fill"
+    :stroke="stroke"
+    :stroke-width="stroke_width"
+  >
+    <animate
+      v-if="animate"
+      attributeName="fill"
+      dur="1s"
+      begin="0s"
+      repeatCount="indefinite"
+      :values="stroke + ';#FFF;' + stroke"
+    />
   </circle>
 </template>
 
 <script>
 export default {
-  props:{
+  props: {
     x: Number,
     y: Number,
     stroke_width: Number,

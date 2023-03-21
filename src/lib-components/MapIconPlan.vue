@@ -11,14 +11,31 @@ Draws a PROformajs Protocol.Plan svg "icon"
 </docs>
 
 <template>
-  <rect :x="x+stroke_width/2" :y="y-20+stroke_width/2" :width="50-stroke_width" :height="40-stroke_width" :rx="stroke_width" :ry="stroke_width" :fill="fill" :stroke="stroke" :stroke-width="stroke_width">
-    <animate v-if="animate" attributeName="fill" dur="1s" begin="0s" repeatCount="indefinite" :values="stroke + ';#FFF;' + stroke"/>
+  <rect
+    :x="x + stroke_width / 2"
+    :y="y - 20 + stroke_width / 2"
+    :width="50 - stroke_width"
+    :height="40 - stroke_width"
+    :rx="stroke_width"
+    :ry="stroke_width"
+    :fill="fill"
+    :stroke="stroke"
+    :stroke-width="stroke_width"
+  >
+    <animate
+      v-if="animate"
+      attributeName="fill"
+      dur="1s"
+      begin="0s"
+      repeatCount="indefinite"
+      :values="stroke + ';#FFF;' + stroke"
+    />
   </rect>
 </template>
 
 <script>
 export default {
-  props:{
+  props: {
     x: Number,
     y: Number,
     stroke_width: Number,
