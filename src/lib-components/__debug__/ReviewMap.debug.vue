@@ -59,6 +59,8 @@ const template = {
             },
             "caption": "Plan C",
             "name": "planC",
+            "preCondition": "is_completed('actionA')",
+            "waitCondition": "is_finished('actionA')",
             "autonomous": true
         }
     ]
