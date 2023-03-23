@@ -187,9 +187,22 @@ export default {
       message: "Default"
     };
   },
+  computed: {
+    inlineDescription() {
+      return this.showDescriptionInline ? this.source.description : '';
+    },
+    placeholder() {
+      return this.source.class == 'Date' ? 'dd/mm/yyyy' : '';
+    },
+    useDatalist() {
+      return this.source.meta && this.source.meta.ui && this.source.meta.ui.useDatalist;
+    }
+  },
   mounted() {
     nextTick(() => {
-      this.message = document.getElementById('target:source' + this.source.path).innerHTML
+      if (document.getElementById('target:source' + this.source.path)) {
+        this.message = document.getElementById('target:source' + this.source.path).innerHTML
+      }
       console.log("---Message---: " + this.message)
     })
   },
