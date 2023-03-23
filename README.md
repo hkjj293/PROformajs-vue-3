@@ -1,6 +1,6 @@
 # proformajs-vue-3
 
-This template should help get you started developing with Vue 3 in Vite.
+This is a vue-3 version of PROformajs-vue.
 
 ## Recommended IDE Setup
 
