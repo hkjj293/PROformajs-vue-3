@@ -3,7 +3,7 @@
 This is a vue-3 version of PROformajs-vue.
 
 # Vue Component Hierarchy
-()
+![alt text](https://github.com/hkjj293/PROformajs-vue-3/blob/main/DepandencyGraph.png)
 
 ## Recommended IDE Setup
 
