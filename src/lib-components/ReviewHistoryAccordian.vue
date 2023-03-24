@@ -112,6 +112,10 @@ export default {
 </script>
 
 <style scoped>
+.card-body {
+  padding: 1.25rem;
+}
+
 .btn {
   overflow-anchor: none;
   width: 100%;
