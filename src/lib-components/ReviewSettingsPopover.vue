@@ -16,8 +16,8 @@ Provides a UI settings button that opens a popover form.
 
 <template>
   <div>
-    <PopoverButton :id="id" :msg="message" :placement="placement" variant="outline-secondary" trigger="click"
-      :title="title" @show="OnShowPopover">
+    <PopoverButton :id="id" :msg="message" :targetId="'target:' + id" :placement="placement" variant="outline-secondary"
+      trigger="focus" :title="title" @shown="OnShowPopover">
       <font-awesome-icon icon="cog" />
     </PopoverButton>
     <div :id="'target:' + id" hidden>
@@ -37,7 +37,8 @@ Provides a UI settings button that opens a popover form.
       <div class="font-weight-bold pb-2">Enquiries</div>
       <label><input :name="'target:' + id + ':Enquiry:useDefaults'" type="checkbox" />
         Use defaults</label>
-      <button v-if="restart" class="btn btn-outline-secondary btn-sm" @click="sendRestart" block>
+      <button :name="'target:' + id + 'restart'" v-if="restart" class="btn btn-outline-secondary btn-sm"
+        @click="sendRestart" block>
         <font-awesome-icon icon="redo-alt" /> Restart
       </button>
     </div>
@@ -69,9 +70,8 @@ export default {
   emits: ['restart-enactment', 'close', 'change-option'],
   data() {
     return {
-      message: "msg",
-      title: "title",
-      showPopover: "auto"
+      message: "Loading Options...",
+      title: "Review Settings"
     }
   },
   mounted() {
@@ -100,8 +100,6 @@ export default {
       }
     },
     OnShowPopover() {
-      this.message = document.getElementById('target:' + this.id).innerHTML
-      this.title = "Review Settings"
       this.setOnClick('target:' + this.id + ':debug')
       this.setOnClick('target:' + this.id + ':Decision:showInactiveArguments')
       this.setOnClick('target:' + this.id + ':Decision:showExpressions')
@@ -119,7 +117,6 @@ export default {
         const cat = d.length > 3 ? d[2] : ''
         const opts = d.length > 3 ? d[3] : d[2]
         ele.onclick = this.OnClickBox
-        console.log(this.options)
         ele.checked = d.length > 3 ? this.options[cat][opts] : this.options[opts]
       }
     }

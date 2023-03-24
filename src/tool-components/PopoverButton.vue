@@ -3,11 +3,14 @@ import { Popover } from "bootstrap"
 
 export default {
     name: "PopoverButton",
-    emits: ['show'],
+    emits: ['shown'],
     props: {
         msg: {
             type: String,
             required: true
+        },
+        targetId: {
+            type: String,
         },
         varient: {
             type: String,
@@ -40,34 +43,31 @@ export default {
         }
     },
     data() {
-        return { popover: null }
+        return { popover: null, message: this.msg }
     },
     mounted() {
         this.popover = new Popover(this.$el, { sanitize: false })
-        this.$el.addEventListener('shown.bs.popover', this.onShown)
-    },
-    watch: {
-        msg: function (newMsg, oldMsg) {
-            if (newMsg != oldMsg) {
-                this.popover.setContent({ '.popover-body': newMsg })
-            }
-        },
-        title: function (newTitle, oldTitle) {
-            this.popover.setContent({ '.popover-header': newTitle })
+        if (this.targetId && document.getElementById(this.targetId)) {
+            this.message = document.getElementById(this.targetId).innerHTML
         }
+        this.popover.setContent({
+            '.popover-body': this.message,
+            '.popover-header': this.title
+        })
+        this.$el.addEventListener('shown.bs.popover', this.onShown)
     },
     methods: {
         onShown(evt) {
-            this.$emit("show")
-        }
+            this.$emit("shown")
+        },
     }
 }
 </script>
 
 <template>
-    <button type="button" :class="classes" :data-bs-container="container" :data-bs-trigger="trigger"
-        data-bs-toggle="popover" :data-bs-placement="placements" :data-bs-html="html" :data-bs-title="title ? title : null"
-        :data-bs-content="msg">
+    <button type="button" :class="classes" data-content-id="popover-27" :data-bs-container="container"
+        :data-bs-trigger="trigger" data-bs-toggle="popover" :data-bs-placement="placements" :data-bs-html="html"
+        :data-bs-title="title" :data-bs-content="msg" @blur="onBlur">
         <slot />
     </button>
 </template>
