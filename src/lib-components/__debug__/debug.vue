@@ -1,7 +1,7 @@
 <template>
     <div class="debug">
         <h2 @click="Trigger"><b>{{ title }}</b></h2>
-        <span :hidden="trigger">
+        <span v-show="trigger">
             <slot />
             <br />
         </span>
@@ -19,7 +19,7 @@ export default {
     },
     data() {
         return {
-            trigger: true
+            trigger: false
         }
     },
     methods: {
