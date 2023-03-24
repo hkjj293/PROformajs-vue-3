@@ -1,9 +1,9 @@
 <script>
-import { placements } from "@popperjs/core";
-import { Popover } from "bootstrap";
+import { Popover } from "bootstrap"
 
 export default {
     name: "PopoverButton",
+    emits: ['show'],
     props: {
         msg: {
             type: String,
@@ -28,7 +28,11 @@ export default {
         container: {
             type: String,
             default: "body"
-        }
+        },
+        title: {
+            type: String,
+            default: "Title"
+        },
     },
     computed: {
         classes() {
@@ -36,14 +40,25 @@ export default {
         }
     },
     data() {
-        return { popover: null };
+        return { popover: null }
     },
     mounted() {
-        this.popover = new Popover(this.$el)
+        this.popover = new Popover(this.$el, { sanitize: false })
+        this.$el.addEventListener('shown.bs.popover', this.onShown)
     },
     watch: {
         msg: function (newMsg, oldMsg) {
-            this.popover.setContent({ '.popover-body': newMsg })
+            if (newMsg != oldMsg) {
+                this.popover.setContent({ '.popover-body': newMsg })
+            }
+        },
+        title: function (newTitle, oldTitle) {
+            this.popover.setContent({ '.popover-header': newTitle })
+        }
+    },
+    methods: {
+        onShown(evt) {
+            this.$emit("show")
         }
     }
 }
@@ -51,7 +66,8 @@ export default {
 
 <template>
     <button type="button" :class="classes" :data-bs-container="container" :data-bs-trigger="trigger"
-        data-bs-toggle="popover" :data-bs-placement="placements" :data-bs-html="html" :data-bs-content="msg">
+        data-bs-toggle="popover" :data-bs-placement="placements" :data-bs-html="html" :data-bs-title="title ? title : null"
+        :data-bs-content="msg">
         <slot />
     </button>
 </template>
