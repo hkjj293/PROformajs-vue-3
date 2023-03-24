@@ -30,6 +30,6 @@ describe('ReviewSource', () => {
         hideCaption: false,
       }
     });
-    expect(wrapper.text()).toContain('Age');
+    expect(wrapper).toContain('Age');
   })
 })
