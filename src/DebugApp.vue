@@ -26,6 +26,7 @@ import MapIconTaskDebug from './lib-components/__debug__/MapIconTask.debug.vue';
     <ReviewSettingsPopoverDebug />
     <ReviewhistoryAccordianDebug />
     <ReviewCompactDebug />
+    <ReviewDebug />
 </template>
 
 <script>
@@ -45,6 +46,7 @@ import ReviewDataBadgesDebug from './lib-components/__debug__/ReviewDataBadges.d
 import ReviewSettingsPopoverDebug from './lib-components/__debug__/ReviewSettingsPopover.debug.vue';
 import ReviewhistoryAccordianDebug from './lib-components/__debug__/ReviewhistoryAccordian.debug.vue';
 import ReviewCompactDebug from './lib-components/__debug__/ReviewCompact.debug.vue';
+import ReviewDebug from './lib-components/__debug__/Review.debug.vue';
 
 export default {
     name: "DebugApp",
@@ -64,7 +66,8 @@ export default {
         ReviewDataBadgesDebug,
         ReviewSettingsPopoverDebug,
         ReviewhistoryAccordianDebug,
-        ReviewCompactDebug
+        ReviewCompactDebug,
+        ReviewDebug
     }
 }
 </script>
