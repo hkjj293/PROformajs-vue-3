@@ -55,11 +55,21 @@ export default {
             '.popover-header': this.title
         })
         this.$el.addEventListener('shown.bs.popover', this.onShown)
+        this.$el.addEventListener('show.bs.popover', this.onShow)
     },
     methods: {
         onShown(evt) {
             this.$emit("shown")
         },
+        onShow(evt) {
+            if (this.targetId && document.getElementById(this.targetId)) {
+                this.message = document.getElementById(this.targetId).innerHTML
+            }
+            this.popover.setContent({
+                '.popover-body': this.message,
+                '.popover-header': this.title
+            })
+        }
     }
 }
 </script>
