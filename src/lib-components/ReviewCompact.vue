@@ -145,76 +145,19 @@ todo:
                   value: !options.Enquiry.useDefaults
                 })
               " />
-              Use defaults</label>
+                Use defaults</label>
+            </div>
+            <button class="btn btn-outline-secondary btn-sm btn-block" @click="restartEnactment">
+              <font-awesome-icon icon="redo-alt" /> Restart
+            </button>
           </div>
-          <button class="btn btn-outline-secondary btn-sm btn-block" @click="restartEnactment">
-            <font-awesome-icon icon="redo-alt" /> Restart
-          </button>
         </div>
       </div>
-    </div>
-    <div class="col-md-3 d-none d-md-block">
-      <template v-if="enactment.protocol.tasks">
-        <!-- Use ReviewSettingPopover instead -->
-        <pr-settings class="float-end" :options="options" placement="left" @change-option="OnUpdateOptions" />
-        <!-- settings popover for plans in desktop view -->
-        <!-- <div class="float-end">
-            <PopoverButton msg="Loading" targetId="review-compact-task-settings" variant="outline-secondary"
-              placement="left" title="Decision Settings" trigger="focus" href="#" tabindex="0">
-              <font-awesome-icon icon="cog" />
-            </PopoverButton>
-          </div>
-          <div id="review-compact-task-settings" hidden>
-            <label v-if="debug"><input type="checkbox" :checked="options.debug"
-                @click="$emit('change-option', { option: 'debug', value: !options.debug })" />
-              Debug expressions</label>
-            <div class="font-weight-bold pb-2">Decisions</div>
-            <label><input type="checkbox" :checked="options.Decision.showInactiveArguments" @click="
-              $emit('change-option', {
-                category: 'Decision',
-                option: 'showInactiveArguments',
-                value: !options.Decision.showInactiveArguments
-              })
-            " />
-              Show inactive arguments</label>
-            <label><input type="checkbox" :checked="options.Decision.showExpressions" @click="
-              $emit('change-option', {
-                category: 'Decision',
-                option: 'showExpressions',
-                value: !options.Decision.showExpressions
-              })
-            " />
-              Show expressions</label>
-            <label><input type="checkbox" :checked="options.Candidate.autoConfirmRecommended" @click="
-              $emit('change-option', {
-                category: 'Candidate',
-                option: 'autoConfirmRecommended',
-                value: !options.Candidate.autoConfirmRecommended
-              })
-            " />
-              Auto-confirm candidates</label>
-            <label><input type="checkbox" :checked="options.Decision.allowDownloads" @click="
-              $emit('change-option', {
-                category: 'Decision',
-                              option: 'allowDownloads',
-                              value: !options.Decision.allowDownloads
-                            })
-                          " />
-                            Allow Downloads</label>
-                          <div class="font-weight-bold pb-2">Enquiries</div>
-                          <label><input type="checkbox" :checked="options.Enquiry.useDefaults" @click="
-                            $emit('change-option', {
-                              category: 'Enquiry',
-                              option: 'useDefaults',
-                              value: !options.Enquiry.useDefaults
-                            })
-                          " />
-                            Use defaults</label>
-                          <button class="btn btn-outline-secondary btn-sm btn-block d-block d-sm-none"
-                            @click="$emit('restart-enactment')">
-                            <font-awesome-icon icon="redo-alt" /> Restart
-                          </button>
-                        </div> -->
+      <div class="col-md-3 d-none d-md-block">
+        <template v-if="enactment.protocol.tasks">
+          <!-- Use ReviewSettingPopover instead -->
+          <pr-settings class="float-end" :options="options" :restart="false" placement="left"
+            @change-option="OnUpdateOptions" />
           <h4 class="mt-2">
             Tasks
             <span class="badge badge-warning" v-show="status.finished">Completed</span>
