@@ -5,7 +5,7 @@
 <template>
     <div>
         <debug title="ReviewSettingsPopover">
-            <ReviewSettingsPopover v-bind="testPRProps1" @change-option="updateOption" />
+            <ReviewSettingsPopover v-bind="testPRProps1" restart="false" @change-option="updateOption" />
         </debug>
     </div>
 </template>
