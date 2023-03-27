@@ -12,6 +12,7 @@ export const ReviewMixin = {
       path: null // selected task
     }
   },
+  emits: ['change-enactment'],
   components: {
     'pr-map': ReviewMap,
     'pr-task': ReviewTask,

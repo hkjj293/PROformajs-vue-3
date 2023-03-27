@@ -20,7 +20,7 @@ export default {
             type: Boolean,
             default: true
         },
-        placements: {
+        placement: {
             type: String,
             default: "top"
         },
@@ -66,7 +66,7 @@ export default {
 
 <template>
     <button type="button" :class="classes" data-content-id="popover-27" :data-bs-container="container"
-        :data-bs-trigger="trigger" data-bs-toggle="popover" :data-bs-placement="placements" :data-bs-html="html"
+        :data-bs-trigger="trigger" data-bs-toggle="popover" :data-bs-placement="placement" :data-bs-html="html"
         :data-bs-title="title" :data-bs-content="msg" @blur="onBlur">
         <slot />
     </button>

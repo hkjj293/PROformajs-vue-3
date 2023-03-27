@@ -16,7 +16,7 @@ Provides a UI settings button that opens a popover form.
 
 <template>
   <div>
-    <PopoverButton :id="id" :msg="message" :targetId="'target:' + id" :placement="placement" variant="outline-secondary"
+    <PopoverButton :id="id" :msg="message" :targetId="'target:' + id" :placement="placement" varient="outline-secondary"
       trigger="focus" :title="title" @shown="OnShowPopover">
       <font-awesome-icon icon="cog" />
     </PopoverButton>
