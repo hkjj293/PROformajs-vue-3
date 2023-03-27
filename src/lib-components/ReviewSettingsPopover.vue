@@ -17,7 +17,7 @@ Provides a UI settings button that opens a popover form.
 <template>
   <div>
     <PopoverButton :id="id" :msg="message" :targetId="'target:' + id" :placement="placement" varient="outline-secondary"
-      trigger="focus" :title="title" @shown="OnShowPopover">
+      trigger="click" :title="title" @shown="OnShowPopover">
       <font-awesome-icon icon="cog" />
     </PopoverButton>
     <div :id="'target:' + id" hidden>
@@ -37,8 +37,8 @@ Provides a UI settings button that opens a popover form.
       <div class="font-weight-bold pb-2">Enquiries</div>
       <label><input :name="'target:' + id + ':Enquiry:useDefaults'" type="checkbox" />
         Use defaults</label>
-      <button :name="'target:' + id + 'restart'" v-if="restart" class="btn btn-outline-secondary btn-sm"
-        @click="sendRestart" block>
+      <button :name="'target:' + id + ':restart'" v-if="restart"
+        class="btn btn-outline-secondary btn-sm btn-block d-block" @click="sendRestart" block>
         <font-awesome-icon icon="redo-alt" /> Restart
       </button>
     </div>
