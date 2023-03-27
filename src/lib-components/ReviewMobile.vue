@@ -21,7 +21,7 @@ todo:
   <div v-if="enactment">
     <div class="row">
       <div class="col">
-        <div class="progress">
+        <div class="progress" style="height: 3px;">
           <div class="progress-bar" role="progressbar" aria-label="Progress" :aria-valuenow="progress.toString()"
             aria-valuemin="0" :aria-valuemax="taskCount.toString()" :style="{
               width: (progress * 100 / taskCount).toString() + '%'
