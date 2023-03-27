@@ -158,7 +158,7 @@ export default {
         <!-- </b-tab> -->
         <!-- </b-tabs> -->
         <!-- === Debug === -->
-        <DebugApp></DebugApp>
+        <DebugApp />
       </div>
     </main>
   </div>
