@@ -18,8 +18,8 @@ Managing the active tab is slightly tricky as if you click a plan task tab you w
 </docs>
 
 <template>
-  <div class="card">
-    <div class="card-header">
+  <div class="card border-0">
+    <div class=" card-header">
       <ul class="nav nav-tabs card-header-tabs"
         :id="'review-tabs-' + (this.plan && this.plan.name ? this.plan.name.replaceAll(':', '-') : 'no-name')"
         role="tablist">
