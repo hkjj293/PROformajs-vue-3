@@ -42,9 +42,9 @@ values are highlighted and shown with their value.
       <hr class="mb-1" />
       <div class="float-end">
         <small>Key:</small>
-        <span class="badge rounded-pill bg-light">unknown</span>
-        <span class="badge rounded-pill bg-dark">known</span>
-        <span class="badge rounded-pill bg-info">selected</span>
+        <span class="badge rounded-pill bg-light text-dark m-1">unknown</span>
+        <span class="badge rounded-pill bg-dark m-1">known</span>
+        <span class="badge rounded-pill bg-info m-1">selected</span>
       </div>
     </template>
     <p v-else class="text-muted">No data definitions available</p>
