@@ -18,28 +18,32 @@ Managing the active tab is slightly tricky as if you click a plan task tab you w
 </docs>
 
 <template>
-  <div>
-    <ul class="nav nav-tabs"
-      :id="'review-tabs-' + (this.plan && this.plan.name ? this.plan.name.replaceAll(':', '-') : 'no-name')"
-      role="tablist">
-      <li class="nav-item" role="presentation" v-for="(task, index) in tabs" :key="task.path">
-        <button
-          :class="'nav-link ' + (activeTab == task.path ? 'active ' : '') + (task.state != 'in_progress' ? 'disabled' : '')"
-          :id="'tabs-' + task.path.replaceAll(':', '-')" data-bs-toggle="tab"
-          :data-bs-target="'#tabs-content-' + task.path.replaceAll(':', '-')" type="button" role="tab"
-          :aria-controls="'tabs-content-' + task.path.replaceAll(':', '-')" :aria-selected="activeTab == task.path"
-          @click="$emit('select-task', { value: task.path })">
-          {{ task.caption || task.name }}
-        </button>
-      </li>
-    </ul>
-    <div class="tab-content mt-3">
-      <div v-for="(task, index) in tabs" :key="'content-' + task.path"
-        :id="'tabs-content-' + task.path.replaceAll(':', '-')"
-        :class="'tab-pane ' + (activeTab == task.path ? 'active ' : '')" role="tabpanel"
-        :aria-labelledby="'tabs-content-' + task.path.replaceAll(':', '-')" tabindex="0">
-        <pr-tabbed-tabs v-if="Object.keys(task).includes('tasks')" :plan="task" :selected="selected"
-          @select-task="$emit('select-task', $event)" />
+  <div class="card">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs"
+        :id="'review-tabs-' + (this.plan && this.plan.name ? this.plan.name.replaceAll(':', '-') : 'no-name')"
+        role="tablist">
+        <li class="nav-item" role="presentation" v-for="(task, index) in tabs" :key="task.path">
+          <button
+            :class="'nav-link ' + (activeTab == task.path ? 'active ' : '') + (task.state != 'in_progress' ? 'disabled' : '')"
+            :id="'tabs-' + task.path.replaceAll(':', '-')" data-bs-toggle="tab"
+            :data-bs-target="'#tabs-content-' + task.path.replaceAll(':', '-')" type="button" role="tab"
+            :aria-controls="'tabs-content-' + task.path.replaceAll(':', '-')" :aria-selected="activeTab == task.path"
+            @click="$emit('select-task', { value: task.path })">
+            {{ task.caption || task.name }}
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body p-0">
+      <div class="tab-content">
+        <div v-for="(task, index) in tabs" :key="'content-' + task.path"
+          :id="'tabs-content-' + task.path.replaceAll(':', '-')"
+          :class="'tab-pane ' + (activeTab == task.path ? 'active ' : '')" role="tabpanel"
+          :aria-labelledby="'tabs-content-' + task.path.replaceAll(':', '-')" tabindex="0">
+          <pr-tabbed-tabs style="border-radius: 0px; border: none;" v-if="Object.keys(task).includes('tasks')"
+            :plan="task" :selected="selected" @select-task="$emit('select-task', $event)" />
+        </div>
       </div>
     </div>
   </div>
