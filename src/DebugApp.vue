@@ -6,34 +6,39 @@ import MapIconTaskDebug from './lib-components/__debug__/MapIconTask.debug.vue';
 </docs>
 
 <template>
-    <h1>Dev Debug Mode</h1>
-    <hr>
-    <ReviewSourceDebug />
-    <ReviewExpressionDebug />
-    <ReviewTaskDebug />
-    <debug title="MapIcons">
-        <MapIconTaskDebug />
-        <MapIconDecisionDebug />
-        <MapIconPlanDebug />
-        <MapIconEnquiryDebug />
-        <MapIconActionDebug />
-    </debug>
-    <ReviewMapTaskDebug />
-    <MapBreadcrumbDebug />
-    <MapArrowDebug />
-    <ReviewMapDebug />
-    <ReviewDataBadgesDebug />
-    <ReviewSettingsPopoverDebug />
-    <ReviewhistoryAccordianDebug />
-    <ReviewCompactDebug />
-    <ReviewDebug />
-    <ReviewFixedDebug />
-    <ReviewCustomDebug />
-    <ReviewMobileDebug />
-    <ReviewTabbedTabsDebug />
-    <ReviewTabbedDebug />
-    <hr />
-    <ComposeReviewDebug />
+    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseDebug" role="button" aria-expanded="false"
+        aria-controls="collapseDebug">
+        <h1>Dev Debug Mode</h1>
+    </a>
+    <div class="collapse" id="collapseDebug">
+        <hr>
+        <ReviewSourceDebug />
+        <ReviewExpressionDebug />
+        <ReviewTaskDebug />
+        <debug title="MapIcons">
+            <MapIconTaskDebug />
+            <MapIconDecisionDebug />
+            <MapIconPlanDebug />
+            <MapIconEnquiryDebug />
+            <MapIconActionDebug />
+        </debug>
+        <ReviewMapTaskDebug />
+        <MapBreadcrumbDebug />
+        <MapArrowDebug />
+        <ReviewMapDebug />
+        <ReviewDataBadgesDebug />
+        <ReviewSettingsPopoverDebug />
+        <ReviewhistoryAccordianDebug />
+        <ReviewCompactDebug />
+        <ReviewDebug />
+        <ReviewFixedDebug />
+        <ReviewCustomDebug />
+        <ReviewMobileDebug />
+        <ReviewTabbedTabsDebug />
+        <ReviewTabbedDebug />
+        <hr />
+        <ComposeReviewDebug />
+    </div>
 </template>
 
 <script>

@@ -3,7 +3,7 @@
 // import ComposeTask from './ComposeTask.vue'
 // import ComposeTree from './ComposeTree.vue'
 // import ComposeCode from './ComposeCode.vue'
-//import ComposeReview from './ComposeReview.vue'
+import ComposeReview from './ComposeReview.vue'
 // import ComposeMap from './ComposeMap.vue'
 import ReviewMarkdown from './ReviewMarkdown.vue'
 
@@ -20,7 +20,7 @@ export {
   //     ComposeTask,
   //     ComposeTree,
   //     ComposeCode,
-  //    ComposeReview,
+  ComposeReview,
   ReviewMarkdown
 
   // === Tools ===
