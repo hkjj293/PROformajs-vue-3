@@ -36,7 +36,8 @@ Provides a tabbed UI for a proformajs Enactment.
               <div class="col-sm">
                 <h3>Data</h3>
                 <div class="mt-3">
-                  <span :class="'badge rounded-pill ' + 'bg-' + variant(dd) + ' m-1 p-1 clickable'"
+                  <span
+                    :class="'badge rounded-pill ' + 'bg-' + variant(dd) + (variant(dd) == 'light' ? ' text-dark' : '') + ' m-1 p-1 clickable'"
                     v-for="dd in enactment.getDataDefinitions()" :key="key(dd)">
                     {{ dd.name }}<span v-if="value(dd)"> = {{ value(dd) }}</span>
                   </span>
