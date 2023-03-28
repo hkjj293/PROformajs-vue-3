@@ -372,8 +372,6 @@ export default {
     downloadData() {
       let headings = ''
       let values = ''
-      // let enactment = this.enactment;
-      // let task = this.task;
       let decision = this.enactment.protocol.getComponent(this.task.path)
       for (const name of dependentDataDefs(decision)) {
         let def = decision.allDataDefinitions().find((dd) => dd.name == name)

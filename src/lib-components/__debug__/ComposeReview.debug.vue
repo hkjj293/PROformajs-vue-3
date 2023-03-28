@@ -141,7 +141,37 @@ export default {
         }
     },
     methods: {
+        updateProtocol(e) {
+            checkMeta(e.value);
+            this.protocol = e.value
+            if (e.selected) {
+                this.selectedtask = e.selected
+            }
+            try {
+                let selected = this.protocol.getComponent(this.selectedtask);
+            } catch (e) {
+                // drop back to root path in case of error, assumed caused by name changes
+                this.selectedtask = this.protocol.name;
+            }
 
+        },
+        resetProtocol(clazz) {
+            if (clazz && ['Action', 'Decision', 'Enquiry'].indexOf(clazz) > -1) {
+                let proto = new Protocol[clazz]({
+                    name: clazz.toLowerCase(),
+                    caption: clazz,
+                    meta: { svg: { width: 400, height: 200 }, pos: { x: 190, y: 100 } }
+                })
+                this.protocol = proto
+                this.selectedtask = clazz.toLowerCase()
+            } else {
+                this.protocol = new Protocol.Plan(template)
+                this.selectedtask = template.name
+            }
+        },
+        updateSelectedTask(evt) {
+            this.selectedtask = evt.value
+        }
     },
     components: { ComposeReview }
 }

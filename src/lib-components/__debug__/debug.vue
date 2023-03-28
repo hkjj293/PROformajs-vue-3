@@ -1,7 +1,7 @@
 <template>
     <div class="debug">
         <h2 @click="Trigger"><b>{{ title }}</b></h2>
-        <span v-show="trigger">
+        <span v-if="trigger">
             <slot />
             <br />
         </span>
