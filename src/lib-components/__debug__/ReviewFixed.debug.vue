@@ -161,33 +161,9 @@ export default {
     },
     methods: {
         updateEnactment(evt) {
-            let enactment = this.testPRProps1.enactment
-            // Debug pre complete states
-            console.log(JSON.stringify(enactment._state))
-            let update = {}
-            console.log("Path to complete " + evt.path)
-            switch (evt.action) {
-                case 'complete':
-                    enactment.complete(evt.path)
-                    break
-                case 'set':
-                    update[evt.source] = evt.value
-                    enactment.set(evt.path, update)
-                    break
-                case 'unset':
-                    enactment.unset(evt.path, evt.source)
-                    break
-                case 'confirm':
-                    enactment.confirm(evt.path)
-                    break
-                case 'unconfirm':
-                    enactment.unconfirm(evt.path)
-                    break
-            }
-            this.testPRProps1.enactment = enactment
-            // Debug post complete states
-            console.log(JSON.stringify(enactment._state))
-            console.log(enactment)
+            let json = JSON.stringify(evt.value)
+            this.testPRProps1.enactment = json ? Enactment.inflate(json) : null
+
         },
         resetEnactment() {
             if (this.protocol && this.protocol.isValid()) {
