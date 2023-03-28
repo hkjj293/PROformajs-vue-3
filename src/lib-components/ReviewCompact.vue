@@ -156,9 +156,9 @@ todo:
       <div class="col-md-3 d-none d-md-block">
         <template v-if="enactment.protocol.tasks">
           <!-- Use ReviewSettingPopover instead -->
-          <pr-settings class="float-end" :options="options" :restart="false" placement="left"
-            @change-option="OnUpdateOptions" />
-          <h4 class="mt-2">
+          <pr-settings :id="'popover-reivew-compact'" class="float-end" :options="options" :restart="false"
+            placement="left" @change-option="OnUpdateOptions" />
+          <h4 class=" mt-2">
             Tasks
             <span class="badge badge-warning" v-show="status.finished">Completed</span>
           </h4>

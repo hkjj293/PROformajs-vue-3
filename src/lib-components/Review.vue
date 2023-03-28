@@ -26,10 +26,10 @@ Provides a UI for a proformajs Enactment.
             <!-- <b-button id="task-settings" href="#" tabindex="0" class="btn btn-outline-secondary ms-1"> -->
             <!-- <font-awesome-icon icon="cog" /> -->
             <!-- </b-button>  -->
-            <pr-settings class="d-none d-sm-inline ms-1" :options="options" placement="left"
-              @change-option="OnUpdateOptions" />
+            <pr-settings :id="'popover-reivew'" class="d-none d-sm-inline ms-1" :options="options" placement="left"
+              @change-option="OnUpdateOptions" @restart-enactment="$emit('restart-enactment')" />
           </div>
-          <!-- <b-popover target="task-settings" placement="left" title="Review Settings" triggers="focus"> -->
+          <!-- <b-popover target=" task-settings" placement="left" title="Review Settings" triggers="focus"> -->
           <!-- <label v-if="debug"><input type='checkbox' :checked="options.debug" -->
           <!-- @click="$emit('change-option', { option: 'debug', value: !options.debug })" /> Debug expressions</label> -->
           <!-- <div class="font-weight-bold pb-2">Decisions</div> -->
@@ -78,7 +78,8 @@ Provides a UI for a proformajs Enactment.
             <!-- <b-button id="task-settings" variant="outline-secondary" href="#" tabindex="0"> -->
             <!-- <font-awesome-icon icon="cog" /> -->
             <!-- </b-button> -->
-            <pr-settings :options="options" placement="left" @change-option="OnUpdateOptions" />
+            <pr-settings :id="'popover-reivew'" :options="options" placement="left" @change-option="OnUpdateOptions"
+              @restart-enactment="$emit('restart-enactment')" />
           </div>
         </template>
         <div v-if="status.finished">

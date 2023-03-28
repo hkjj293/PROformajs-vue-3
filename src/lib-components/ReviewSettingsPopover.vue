@@ -37,7 +37,7 @@ Provides a UI settings button that opens a popover form.
       <div class="font-weight-bold pb-2">Enquiries</div>
       <label><input :name="'target:' + id + ':Enquiry:useDefaults'" type="checkbox" />
         Use defaults</label>
-      <button :name="'target:' + id + ':restart'" v-if="restart"
+      <button :name="'target:' + id + ':send:restart'" v-if="restart"
         class="btn btn-outline-secondary btn-sm btn-block d-block" @click="sendRestart" block>
         <font-awesome-icon icon="redo-alt" /> Restart
       </button>
@@ -80,7 +80,7 @@ export default {
   methods: {
     sendRestart() {
       this.$emit('restart-enactment')
-      this.$refs[this.id].$emit('close')
+      //this.$refs[this.id].$emit('close')
     },
     OnClickBox(evt) {
       const d = evt.target.name.split(':')
@@ -100,14 +100,15 @@ export default {
       }
     },
     OnShowPopover() {
-      this.setOnClick('target:' + this.id + ':debug')
-      this.setOnClick('target:' + this.id + ':Decision:showInactiveArguments')
-      this.setOnClick('target:' + this.id + ':Decision:showExpressions')
-      this.setOnClick('target:' + this.id + ':Candidate:autoConfirmRecommended')
-      this.setOnClick('target:' + this.id + ':Decision:allowDownloads')
-      this.setOnClick('target:' + this.id + ':Enquiry:useDefaults')
+      this.setOnClick('target:' + this.id + ':debug', this.OnClickBox)
+      this.setOnClick('target:' + this.id + ':Decision:showInactiveArguments', this.OnClickBox)
+      this.setOnClick('target:' + this.id + ':Decision:showExpressions', this.OnClickBox)
+      this.setOnClick('target:' + this.id + ':Candidate:autoConfirmRecommended', this.OnClickBox)
+      this.setOnClick('target:' + this.id + ':Decision:allowDownloads', this.OnClickBox)
+      this.setOnClick('target:' + this.id + ':Enquiry:useDefaults', this.OnClickBox)
+      this.setOnClick('target:' + this.id + ':send:restart', this.sendRestart, false)
     },
-    setOnClick(eleName) {
+    setOnClick(eleName, fn, isCheckbox = true) {
       const eles = document.getElementsByName(eleName)
       for (const ele of eles) {
         if (ele.parentElement.parentElement.getAttribute('hidden')) {
@@ -116,8 +117,10 @@ export default {
         const d = eleName.split(':')
         const cat = d.length > 3 ? d[2] : ''
         const opts = d.length > 3 ? d[3] : d[2]
-        ele.onclick = this.OnClickBox
-        ele.checked = d.length > 3 ? this.options[cat][opts] : this.options[opts]
+        ele.onclick = fn
+        if (isCheckbox) {
+          ele.checked = d.length > 3 ? this.options[cat][opts] : this.options[opts]
+        }
       }
     }
 
