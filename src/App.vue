@@ -145,19 +145,35 @@ export default {
       </nav>
 
       <div class="container-fluid">
-        <!-- <b-tabs content-class="mt-3" class="mt-3"> -->
-        <!-- <b-tab title="Compose" active> -->
-        <!-- <p-compose :protocol="protocol" :selectedtask="selectedtask" @change-protocol="updateProtocol" -->
-        <!-- @select-task="updateSelectedTask" /> -->
-        <!-- </b-tab> -->
-        <!-- <b-tab title="Review" :disabled="!protocol || !protocol.isValid()"> -->
-
-        <!-- !!!! needed for review part. Commented on debug only -->
-        <!-- <pc-review :protocol="protocol" :debug="true" :initialData="startData" -->
-        <!-- :template="protocol && protocol.meta && protocol.meta.enact && protocol.meta.enact.template ? protocol.meta.enact.template : 'compact'" /> -->
-        <!-- </b-tab> -->
-        <!-- </b-tabs> -->
+        <ul class="nav nav-tabs mt-3" id="main-tabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button :class="'nav-link disabled'" :id="'main-compose'" data-bs-toggle="tab"
+              :data-bs-target="'#main-content-compose'" type="button" role="tab" :aria-controls="'main-content-compose'">
+              Compose
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button :class="'nav-link active' + (!protocol || !protocol.isValid() ? ' disabled' : '')" :id="'main-review'"
+              data-bs-toggle="tab" :data-bs-target="'#main-content-review'" type="button" role="tab"
+              :aria-controls="'main-content-review'">
+              Review
+            </button>
+          </li>
+        </ul>
+        <div class="tab-content mt-3">
+          <div :id="'main-content-compose'" :class="'tab-pane '" role="tabpanel" :aria-labelledby="'main-content-compose'"
+            tabindex="0">
+            <!-- <p-compose :protocol="protocol" :selectedtask="selectedtask" @change-protocol="updateProtocol" -->
+            <!-- @select-task="updateSelectedTask" /> -->
+          </div>
+          <div :id="'main-content-review'" :class="'tab-pane active'" role="tabpanel"
+            :aria-labelledby="'main-content-review'" tabindex="0">
+            <pc-review :protocol="protocol" :debug="true" :initialData="startData"
+              :template="protocol && protocol.meta && protocol.meta.enact && protocol.meta.enact.template ? protocol.meta.enact.template : 'compact'" />
+          </div>
+        </div>
         <!-- === Debug === -->
+        <hr style="border-width: 10px;" />
         <DebugApp />
       </div>
     </main>
