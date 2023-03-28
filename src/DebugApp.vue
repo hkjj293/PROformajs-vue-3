@@ -30,6 +30,7 @@ import MapIconTaskDebug from './lib-components/__debug__/MapIconTask.debug.vue';
     <ReviewFixedDebug />
     <ReviewCustomDebug />
     <ReviewMobileDebug />
+    <ReviewTabbedTabsDebug />
 </template>
 
 <script>
@@ -53,6 +54,7 @@ import ReviewDebug from './lib-components/__debug__/Review.debug.vue';
 import ReviewFixedDebug from './lib-components/__debug__/ReviewFixed.debug.vue';
 import ReviewCustomDebug from './lib-components/__debug__/ReviewCustom.debug.vue';
 import ReviewMobileDebug from './lib-components/__debug__/ReviewMobile.debug.vue';
+import ReviewTabbedTabsDebug from './lib-components/__debug__/ReviewTabbedTabs.debug.vue';
 
 export default {
     name: "DebugApp",
@@ -76,7 +78,8 @@ export default {
         ReviewDebug,
         ReviewFixedDebug,
         ReviewCustomDebug,
-        ReviewMobileDebug
+        ReviewMobileDebug,
+        ReviewTabbedTabsDebug
     }
 }
 </script>

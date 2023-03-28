@@ -94,7 +94,7 @@ Provides a UI for a proformajs Enactment.
       <div class="col-md-6 order-md-1"><!-- enactment status tabs -->
         <div>
           <ul class="nav nav-tabs" id="debug-review-tabs" role="tablist">
-            <li class="nav-item" role="presentation" v-if="enactment.protocol.tasks" active>
+            <li class="nav-item" role="presentation" v-if="enactment.protocol.tasks">
               <button class="nav-link active" id="debug-review-map-tab" data-bs-toggle="tab"
                 data-bs-target="#debug-review-map" type="button" role="tab" aria-controls="debug-review-map-tab-pane"
                 aria-selected="true">Map <font-awesome-icon icon="directions" /></button>
