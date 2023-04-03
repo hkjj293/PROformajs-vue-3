@@ -24,11 +24,11 @@ Draws a PROformajs task for the ReviewMap component.
 </template>
 
 <script>
-import MapIconTask from './MapIconTask.vue'
-import MapIconDecision from './MapIconDecision.vue'
-import MapIconPlan from './MapIconPlan.vue'
-import MapIconEnquiry from './MapIconEnquiry.vue'
-import MapIconAction from './MapIconAction.vue'
+import MapIconTask from './Core/MapIconTask.vue'
+import MapIconDecision from './Core/MapIconDecision.vue'
+import MapIconPlan from './Core/MapIconPlan.vue'
+import MapIconEnquiry from './Core/MapIconEnquiry.vue'
+import MapIconAction from './Core/MapIconAction.vue'
 import { task_colors, discarded_color } from './map.js'
 
 export default {
