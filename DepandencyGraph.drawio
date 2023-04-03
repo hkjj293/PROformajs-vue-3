@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-04-03T10:48:33.355Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="uZboDdT2C4Fky1Xmxjs3" version="21.1.2" type="github">
+<mxfile host="app.diagrams.net" modified="2023-04-03T14:28:59.400Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="bwPTh-b3oS6uzPlc3l-v" version="21.1.2" type="github">
   <diagram name="v1.0.0" id="n8G7o3eAPn_Wvr_kKuBB">
     <mxGraphModel dx="2875" dy="743" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -573,6 +573,9 @@
         <mxCell id="oN7eqfgRcnpaMSwysXvP-27" value="ReviewMap" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#ff8800;strokeWidth=4;" parent="1" vertex="1">
           <mxGeometry x="543.5" y="530" width="80" height="40" as="geometry" />
         </mxCell>
+        <mxCell id="1Sh4EC-GFjN5RX8Deifn-4" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="oN7eqfgRcnpaMSwysXvP-28" target="1Sh4EC-GFjN5RX8Deifn-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="oN7eqfgRcnpaMSwysXvP-28" value="MapArrow" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#ff8800;strokeWidth=4;" parent="1" vertex="1">
           <mxGeometry x="303.5" y="640" width="78.5" height="50" as="geometry" />
         </mxCell>
@@ -586,19 +589,25 @@
           <mxGeometry x="623.5" y="530" width="80" height="40" as="geometry" />
         </mxCell>
         <mxCell id="oN7eqfgRcnpaMSwysXvP-32" value="Components&lt;br&gt;in Review" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#ff8800;strokeWidth=4;" parent="1" vertex="1">
-          <mxGeometry x="1070" y="40" width="80" height="40" as="geometry" />
+          <mxGeometry x="1070" y="15" width="80" height="40" as="geometry" />
         </mxCell>
         <mxCell id="oN7eqfgRcnpaMSwysXvP-33" value="Components&lt;br&gt;in progress" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=4;strokeColor=#FF0F0F;" parent="1" vertex="1">
-          <mxGeometry x="960" y="40" width="100" height="40" as="geometry" />
+          <mxGeometry x="960" y="10" width="100" height="40" as="geometry" />
         </mxCell>
         <mxCell id="oN7eqfgRcnpaMSwysXvP-34" value="Components on hold" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3399FF;strokeWidth=4;" parent="1" vertex="1">
-          <mxGeometry x="850" y="40" width="95" height="40" as="geometry" />
+          <mxGeometry x="850" y="10" width="95" height="40" as="geometry" />
         </mxCell>
         <mxCell id="oN7eqfgRcnpaMSwysXvP-35" value="End point components" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-          <mxGeometry x="905" y="110" width="130" height="40" as="geometry" />
+          <mxGeometry x="905" y="60" width="130" height="40" as="geometry" />
         </mxCell>
         <mxCell id="oN7eqfgRcnpaMSwysXvP-36" value="Components with depandencies" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="1050" y="110" width="120" height="40" as="geometry" />
+          <mxGeometry x="1040" y="60" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="1Sh4EC-GFjN5RX8Deifn-1" value="Third-party" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#00FFFF;strokeWidth=4;" vertex="1" parent="1">
+          <mxGeometry x="750" y="10" width="95" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="1Sh4EC-GFjN5RX8Deifn-2" value="Hammerjs" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#00FFFF;strokeWidth=4;" vertex="1" parent="1">
+          <mxGeometry x="310" y="710" width="76.5" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
