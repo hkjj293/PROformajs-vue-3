@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "Matt South <matt.south@openclinical.net>",
   "contributors": [
-    "Chris Hui <k.n.c.hui@bham.ac.uk"
+    "Chris Hui <k.n.c.hui@bham.ac.uk>"
   ],
   "description": "A library of Vuejs 3 Single File Components (SFC) to support creating webapps for PROformajs",
   "type": "module",
@@ -32,6 +32,10 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/vue-fontawesome": "^3.0.3",
+    "dompurify": "^2.4.4",
+    "file-saver": "^2.0.5",
+    "marked": "^4.2.12",
+    "moment": "^2.29.1",
     "@openclinical/proformajs": "^0.8.2",
     "bootstrap": "^5.2.3",
     "vue": "^3.2.47"

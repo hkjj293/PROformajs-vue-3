@@ -1,81 +1,134 @@
 <script>
-import { Protocol } from '@openclinical/proformajs';
+import { Protocol } from '@openclinical/proformajs'
+import DebugApp from './DebugApp.vue'
 
 const template = {
-  "class": "Plan",
-  "name": "plan",
-  "caption": "Plan",
-  "dataDefinitions": [],
-  "tasks": [],
-  "autonomous": true,
-  "meta": {
-    "svg": {
-      "width": 800,
-      "height": 400
+  class: 'Plan',
+  name: 'plan',
+  caption: 'Plan',
+  dataDefinitions: [],
+  tasks: [],
+  autonomous: true,
+  meta: {
+    svg: {
+      width: 800,
+      height: 400
     }
   }
-};
+}
+
+function checkTaskMeta(plan) {
+  if (plan.tasks) {
+    for (const [idx, task] of plan.tasks.entries()) {
+      if (!task.meta || !task.meta.pos) {
+        if (!task.meta) {
+          task.meta = {};
+        }
+        task.meta.pos = {
+          x: 80 + idx * 80,
+          y: 80
+        }
+      }
+      if (task.tasks) {
+        checkTaskMeta(task);
+      }
+    }
+  }
+}
+
+function checkMeta(protocol) {
+  if (!protocol.meta || !protocol.meta.svg) {
+    if (!protocol.meta) {
+      protocol.meta = {};
+    }
+    protocol.meta.svg = {
+      width: 800,
+      height: 400
+    }
+  }
+  if (protocol.tasks) {
+    checkTaskMeta(protocol);
+  }
+}
+
 
 export default {
   name: 'ServeDev',
   data: function () {
     return {
       selectedtask: template.name, // initial value,
-      tab: "compose",
+      tab: 'compose',
       protocol: new Protocol.Plan(template),
-      initialData: {}
-    };
+      initialData: {},
+    }
   },
   created: function () {
     // initial data can be passed in the querystring
     // see https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
-    const urlParams = new URLSearchParams(window.location.search);
+    const urlParams = new URLSearchParams(window.location.search)
     for (let entry of urlParams.entries()) {
-      this.initialData[entry[0]] = JSON.parse(entry[1]);
+      this.initialData[entry[0]] = JSON.parse(entry[1])
     }
   },
   computed: {
     startData() {
-      let result = {};
+      let result = {}
       if (this.initialData && Object.keys(this.initialData).length > 0) {
-        result[this.protocol.name] = this.initialData;
+        result[this.protocol.name] = this.initialData
       }
-      return result;
+      return result
     }
   },
   methods: {
     updateProtocol(e) {
-      this.protocol = e.value;
+      checkMeta(e.value);
+      this.protocol = e.value
       if (e.selected) {
-        this.selectedtask = e.selected;
+        this.selectedtask = e.selected
       }
+      try {
+        let selected = this.protocol.getComponent(this.selectedtask);
+      } catch (e) {
+        // drop back to root path in case of error, assumed caused by name changes
+        this.selectedtask = this.protocol.name;
+      }
+
     },
     resetProtocol(clazz) {
-      if (clazz && ["Action", "Decision", "Enquiry"].indexOf(clazz) > -1) {
-        let proto = new Protocol[clazz]({ name: clazz.toLowerCase(), caption: clazz, meta: { svg: { width: 400, height: 200 }, pos: { x: 190, y: 100 } } });
-        this.protocol = proto;
-        this.selectedtask = clazz.toLowerCase();
+      if (clazz && ['Action', 'Decision', 'Enquiry'].indexOf(clazz) > -1) {
+        let proto = new Protocol[clazz]({
+          name: clazz.toLowerCase(),
+          caption: clazz,
+          meta: { svg: { width: 400, height: 200 }, pos: { x: 190, y: 100 } }
+        })
+        this.protocol = proto
+        this.selectedtask = clazz.toLowerCase()
       } else {
-        this.protocol = new Protocol.Plan(template);
-        this.selectedtask = template.name;
+        this.protocol = new Protocol.Plan(template)
+        this.selectedtask = template.name
       }
     },
     updateSelectedTask(evt) {
-      this.selectedtask = evt.value;
-    },
+      this.selectedtask = evt.value
+    }
   },
-};
+  components: {
+    DebugApp
+  }
+}
 </script>
 
 <template>
   <div id="app">
     <main role="main">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
           <div class="navbar-brand">PRO<em>formajs</em></div>
           <button type="button" aria-label="Toggle navigation" class="navbar-toggler collapsed" aria-expanded="false"
-            aria-controls="nav_collapse" style="overflow-anchor: none;"><span class="navbar-toggler-icon"></span></button>
-          <div id="nav_collapse" class="navbar-collapse collapse" style="display: none;">
+            aria-controls="nav_collapse" style="overflow-anchor: none">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div id="nav_collapse" class="navbar-collapse collapse" style="display: none">
             <ul class="navbar-nav ml-auto">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Reset
@@ -90,18 +143,39 @@ export default {
           </div>
         </div>
       </nav>
-      <!-- <div class="container-fluid"> -->
-      <!-- <b-tabs content-class="mt-3" class="mt-3"> -->
-      <!-- <b-tab title="Compose" active> -->
-      <!-- <p-compose :protocol="protocol" :selectedtask="selectedtask" @change-protocol="updateProtocol" -->
-      <!-- @select-task="updateSelectedTask" /> -->
-      <!-- </b-tab> -->
-      <!-- <b-tab title="Review" :disabled="!protocol || !protocol.isValid()"> -->
-      <!-- <pc-review :protocol="protocol" :debug="true" :initialData="startData" -->
-      <!-- :template="protocol && protocol.meta && protocol.meta.enact && protocol.meta.enact.template ? protocol.meta.enact.template : 'compact'" /> -->
-      <!-- </b-tab> -->
-      <!-- </b-tabs> -->
-      <!-- </div> -->
+
+      <div class="container-fluid">
+        <ul class="nav nav-tabs mt-3" id="main-tabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button :class="'nav-link disabled'" :id="'main-compose'" data-bs-toggle="tab"
+              :data-bs-target="'#main-content-compose'" type="button" role="tab" :aria-controls="'main-content-compose'">
+              Compose
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button :class="'nav-link active' + (!protocol || !protocol.isValid() ? ' disabled' : '')" :id="'main-review'"
+              data-bs-toggle="tab" :data-bs-target="'#main-content-review'" type="button" role="tab"
+              :aria-controls="'main-content-review'">
+              Review
+            </button>
+          </li>
+        </ul>
+        <div class="tab-content mt-3">
+          <div :id="'main-content-compose'" :class="'tab-pane '" role="tabpanel" :aria-labelledby="'main-content-compose'"
+            tabindex="0">
+            <!-- <p-compose :protocol="protocol" :selectedtask="selectedtask" @change-protocol="updateProtocol" -->
+            <!-- @select-task="updateSelectedTask" /> -->
+          </div>
+          <div :id="'main-content-review'" :class="'tab-pane active'" role="tabpanel"
+            :aria-labelledby="'main-content-review'" tabindex="0">
+            <pc-review :protocol="protocol" :debug="true" :initialData="startData"
+              :template="protocol && protocol.meta && protocol.meta.enact && protocol.meta.enact.template ? protocol.meta.enact.template : 'compact'" />
+          </div>
+        </div>
+        <!-- === Debug === -->
+        <hr style="border-width: 10px;" />
+        <DebugApp />
+      </div>
     </main>
   </div>
 </template>
