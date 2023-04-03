@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import ReviewSource from '../Review/ReviewSource.vue'
+import ReviewSource from '../../Review/ReviewSource.vue'
 
 const testPRSource1 = {
   source: {

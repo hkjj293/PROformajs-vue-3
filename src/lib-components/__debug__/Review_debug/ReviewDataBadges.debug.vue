@@ -1,22 +1,18 @@
 <docs>
-    Debug for ReviewHistoryAccordian
+    Debug for ReviewExpression
 </docs>
 
 <template>
   <div>
-    <debug title="ReviewHistoryAccordian">
-      <ReviewHistoryAccordian v-bind="testPRProps1" />
+    <debug title="ReviewDataBadges" v-if="testPRProps1.enactment">
+      <ReviewDataBadges v-bind="testPRProps1" />
     </debug>
   </div>
 </template>
 
 <script>
-import ReviewHistoryAccordian from '../Review/ReviewHistoryAccordian.vue'
+import ReviewDataBadges from '../../Review/ReviewDataBadges.vue'
 import { Enactment, Protocol } from '@openclinical/proformajs'
-
-const testPRProps1 = {
-  enactment: { _audit: '' }
-}
 
 const template = {
   class: 'Plan',
@@ -48,12 +44,46 @@ const template = {
       },
       caption: 'Action A',
       name: 'actionA'
+    },
+    {
+      class: 'Plan',
+      meta: {
+        pos: {
+          x: 257.14920905916057,
+          y: 217.92286216470376
+        }
+      },
+      caption: 'Plan C',
+      name: 'planC',
+      preCondition: "is_completed('actionA')",
+      waitCondition: "is_finished('actionA')",
+      autonomous: true
     }
   ]
 }
 
+const reviewOptions = {
+  Decision: {
+    showInactiveArguments: true,
+    showExpressions: true,
+    allowDownloads: true
+  },
+  Enquiry: {
+    useDefaults: true
+  },
+  Candidate: {
+    autoConfirmRecommended: true
+  },
+  debug: true
+}
+
+const testPRProps1 = {
+  enactment: null,
+  options: reviewOptions
+}
+
 export default {
-  name: 'ReviewHistoryAccordianDebug',
+  name: 'ReviewDataBadgesDebug',
   data: function () {
     return {
       testPRProps1: testPRProps1,
@@ -74,7 +104,8 @@ export default {
     })
     let json = JSON.stringify(local)
     this.testPRProps1.enactment = Enactment.inflate(json)
+    //console.log(this.testPRProps1.plan)
   },
-  components: { ReviewHistoryAccordian }
+  components: { ReviewDataBadges }
 }
 </script>

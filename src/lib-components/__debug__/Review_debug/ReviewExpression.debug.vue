@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import ReviewExpression from '../Review/ReviewExpression.vue'
+import ReviewExpression from '../../Review/ReviewExpression.vue'
 import { Enactment, Protocol } from '@openclinical/proformajs'
 
 const testPRProps1 = {

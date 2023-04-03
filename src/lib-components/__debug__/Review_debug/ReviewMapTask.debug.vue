@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import ReviewMapTask from '../Review/ReviewMapTask.vue'
+import ReviewMapTask from '../../Review/ReviewMapTask.vue'
 import { Enactment, Protocol } from '@openclinical/proformajs'
 
 const testPRProps1 = {

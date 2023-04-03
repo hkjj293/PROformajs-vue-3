@@ -12,7 +12,7 @@
 
 <script>
 import { Enactment, Protocol } from '@openclinical/proformajs'
-import ReviewTabbedTabs from '../Review/ReviewTabbedTabs.vue'
+import ReviewTabbedTabs from '../../Review/ReviewTabbedTabs.vue'
 
 const template = {
   class: 'Plan',
@@ -101,8 +101,8 @@ export default {
     root() {
       return this.enactment
         ? this.enactment.getComponent(
-            this.enactment.runtimeFromDesignPath(this.enactment.protocol.name)
-          )
+          this.enactment.runtimeFromDesignPath(this.enactment.protocol.name)
+        )
         : null
     }
   },

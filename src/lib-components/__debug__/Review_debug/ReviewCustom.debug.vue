@@ -1,22 +1,18 @@
 <docs>
-    Debug for ReviewTabbed
+    Debug for ReviewCustom
 </docs>
 
 <template>
   <div>
-    <debug title="ReviewTabbed">
-      <ReviewTabbed
-        v-bind="testPRProps1"
-        @change-enactment="updateEnactment"
-        @restart-enactment="resetEnactment"
-        @change-option="updateOption"
-      />
+    <debug title="ReviewCustom">
+      <ReviewCustom v-bind="testPRProps1" @change-enactment="updateEnactment" @restart-enactment="resetEnactment"
+        @change-option="updateOption" />
     </debug>
   </div>
 </template>
 
 <script>
-import ReviewTabbed from '../Review/ReviewTabbed.vue'
+import ReviewCustom from '../../Review/ReviewCustom.vue'
 import { Enactment, Protocol } from '@openclinical/proformajs'
 
 const reviewOptions = {
@@ -48,7 +44,7 @@ const template = {
       height: 400
     },
     enact: {
-      template: 'tabbed',
+      template: 'custom',
       ui: {
         cols: [
           {
@@ -155,7 +151,7 @@ const template = {
 }
 
 export default {
-  name: 'ReviewTabbedDebug',
+  name: 'ReviewCustomDebug',
   data: function () {
     return {
       testPRProps1: testPRProps1,
@@ -225,6 +221,6 @@ export default {
       this.testPRProps1.enactment = enactment
     }
   },
-  components: { ReviewTabbed }
+  components: { ReviewCustom }
 }
 </script>

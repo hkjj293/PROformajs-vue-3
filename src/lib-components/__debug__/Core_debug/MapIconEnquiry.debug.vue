@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import MapIconEnquiry from '../Core/MapIconEnquiry.vue'
-import { task_colors, discarded_color } from '../Core/map.js'
+import MapIconEnquiry from '../../Core/MapIconEnquiry.vue'
+import { task_colors, discarded_color } from '../../Core/map.js'
 
 const testPRProps1 = {
     x: 50,

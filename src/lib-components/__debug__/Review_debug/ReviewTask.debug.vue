@@ -1,22 +1,18 @@
 <docs>
-    Debug for ReviewCompact
+    Debug for ReviewTask
 </docs>
 
 <template>
   <div>
-    <debug title="ReviewCompact">
-      <ReviewCompact
-        v-bind="testPRProps1"
-        @change-enactment="updateEnactment"
-        @restart-enactment="resetEnactment"
-        @change-option="updateOption"
-      />
+    <debug title="ReviewTask">
+      <ReviewTask v-bind="testPRProps1" @update-enactment="updateEnactment" @send-trigger="sendTrigger" />
+      <ReviewTask v-bind="testPRProps2" @update-enactment="updateEnactment" @send-trigger="sendTrigger" />
     </debug>
   </div>
 </template>
 
 <script>
-import ReviewCompact from '../Review/ReviewCompact.vue'
+import ReviewTask from '../../Review/ReviewTask.vue'
 import { Enactment, Protocol } from '@openclinical/proformajs'
 
 const reviewOptions = {
@@ -35,7 +31,15 @@ const reviewOptions = {
 }
 
 const testPRProps1 = {
-  debug: true,
+  task: '',
+  taskName: 'plan:enquiryB',
+  enactment: null,
+  options: reviewOptions
+}
+
+const testPRProps2 = {
+  task: '',
+  taskName: 'plan:decisionA',
   enactment: null,
   options: reviewOptions
 }
@@ -139,12 +143,12 @@ const template = {
 }
 
 export default {
-  name: 'ReviewCompactDebug',
+  name: 'ReviewTaskDebug',
   data: function () {
     return {
       testPRProps1: testPRProps1,
+      testPRProps2: testPRProps2,
       protocol: new Protocol.Plan(template),
-      reviewOptions: reviewOptions,
       enactmentOptions: {
         Enquiry: {
           useDefaults: true
@@ -160,55 +164,53 @@ export default {
     })
     let json = JSON.stringify(local)
     this.testPRProps1.enactment = Enactment.inflate(json)
+    this.testPRProps1.task = this.testPRProps1.enactment.getComponent(this.testPRProps1.taskName)
+    this.testPRProps2.enactment = this.testPRProps1.enactment
+    this.testPRProps2.task = this.testPRProps2.enactment.getComponent(this.testPRProps2.taskName)
   },
   methods: {
     updateEnactment(evt) {
-      let json = JSON.stringify(evt.value)
-      this.testPRProps1.enactment = json ? Enactment.inflate(json) : null
-    },
-    resetEnactment() {
-      if (this.protocol && this.protocol.isValid()) {
-        try {
-          let local = null
-          if (this.initialData && Object.keys(this.initialData).length > 0) {
-            local = new Enactment({
-              start: false,
-              protocol: this.protocol,
-              options: this.enactmentOptions
-            })
-            local.setData(this.initialData)
-          } else {
-            local = new Enactment({
-              start: true,
-              protocol: this.protocol,
-              options: this.enactmentOptions
-            })
-          }
-          let json = JSON.stringify(local)
-          this.testPRProps1.enactment = Enactment.inflate(json)
-        } catch (e) {
-          this.exception = e.message
-        }
+      let enactment = this.testPRProps1.enactment
+      // Debug pre complete states
+      console.log(JSON.stringify(enactment._state))
+      let update = {}
+      console.log('Path to complete ' + evt.path)
+      switch (evt.action) {
+        case 'complete':
+          enactment.complete(evt.path)
+          break
+        case 'set':
+          update[evt.source] = evt.value
+          enactment.set(evt.path, update)
+          break
+        case 'unset':
+          enactment.unset(evt.path, evt.source)
+          break
+        case 'confirm':
+          enactment.confirm(evt.path)
+          break
+        case 'unconfirm':
+          enactment.unconfirm(evt.path)
+          break
       }
-    },
-    updateOption(evt) {
-      if (evt.category) {
-        this.testPRProps1.options[evt.category][evt.option] = evt.value
-      } else {
-        this.testPRProps1.options[evt.option] = evt.value
-      }
-      // a change in eqnuiry options requires restarting the enactment
-      if (evt.category == 'Enquiry') {
-        this.resetEnactment()
-      }
+      this.testPRProps1.enactment = enactment
+      this.testPRProps1.task = this.testPRProps1.enactment.getComponent(this.testPRProps1.taskName)
+      this.testPRProps2.enactment = this.testPRProps1.enactment
+      this.testPRProps2.task = this.testPRProps2.enactment.getComponent(this.testPRProps2.taskName)
+      // Debug post complete states
+      console.log(JSON.stringify(enactment._state))
+      console.log(enactment)
     },
     sendTrigger(trigger) {
       let enactment = this.testPRProps1.enactment
       enactment.sendTrigger(trigger)
       this.$emit('change-enactment', { value: enactment, action: 'trigger', trigger: trigger })
       this.testPRProps1.enactment = enactment
+      this.testPRProps1.task = this.testPRProps1.enactment.getComponent(this.testPRProps1.taskName)
+      this.testPRProps2.enactment = this.testPRProps1.enactment
+      this.testPRProps2.task = this.testPRProps2.enactment.getComponent(this.testPRProps2.taskName)
     }
   },
-  components: { ReviewCompact }
+  components: { ReviewTask }
 }
 </script>

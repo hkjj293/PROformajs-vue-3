@@ -4,10 +4,10 @@
 
 <template>
     <div>
-        <debug title="MapIconPlan">
+        <debug title="MapIconDecision">
             <svg ref="svg" width="100%" tabindex="0" :viewBox="viewbox">
                 <g class="task draggable" @click="handleClick">
-                    <MapIconPlan v-bind="testPRProps1" />
+                    <MapIconDecision v-bind="testPRProps1" />
                 </g>
             </svg>
         </debug>
@@ -15,26 +15,26 @@
 </template>
 
 <script>
-import MapIconPlan from '../Core/MapIconPlan.vue'
-import { task_colors, discarded_color } from '../Core/map.js'
+import MapIconDecision from '../../Core/MapIconDecision.vue'
+import { task_colors, discarded_color } from '../../Core/map.js'
 
 const testPRProps1 = {
     x: 50,
     y: 50,
     stroke_width: 8,
-    stroke: task_colors.plan.done,
-    fill: task_colors.plan.done,
+    stroke: task_colors.decision.done,
+    fill: task_colors.decision.done,
     animate: true
 }
 
 export default {
-    name: 'MapIconPlanDebug',
+    name: 'MapIconDecisionDebug',
     data: function () {
         return {
             testPRProps1: testPRProps1
         }
     },
     mounted: function () { },
-    components: { MapIconPlan }
+    components: { MapIconDecision }
 }
 </script>

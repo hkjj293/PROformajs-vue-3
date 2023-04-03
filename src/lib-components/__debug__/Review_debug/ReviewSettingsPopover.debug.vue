@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import ReviewSettingsPopover from '../Review/ReviewSettingsPopover.vue'
+import ReviewSettingsPopover from '../../Review/ReviewSettingsPopover.vue'
 
 const reviewOptions = {
   Decision: {

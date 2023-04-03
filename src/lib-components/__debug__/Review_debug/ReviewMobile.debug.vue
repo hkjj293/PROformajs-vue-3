@@ -1,22 +1,18 @@
 <docs>
-    Debug for ReviewCompact
+    Debug for ReviewMobile
 </docs>
 
 <template>
   <div>
-    <debug title="Review">
-      <Review
-        v-bind="testPRProps1"
-        @change-enactment="updateEnactment"
-        @restart-enactment="resetEnactment"
-        @change-option="updateOption"
-      />
+    <debug title="ReviewMobile">
+      <ReviewMobile v-bind="testPRProps1" @change-enactment="updateEnactment" @restart-enactment="resetEnactment"
+        @change-option="updateOption" />
     </debug>
   </div>
 </template>
 
 <script>
-import Review from '../Review/Review.vue'
+import ReviewMobile from '../../Review/ReviewMobile.vue'
 import { Enactment, Protocol } from '@openclinical/proformajs'
 
 const reviewOptions = {
@@ -46,6 +42,22 @@ const template = {
     svg: {
       width: 800,
       height: 400
+    },
+    enact: {
+      template: 'mobile',
+      ui: {
+        cols: [
+          {
+            contents: [
+              {
+                component: 'fixed',
+                path: 'plan:enquiryB'
+              }
+            ],
+            width: '2'
+          }
+        ]
+      }
     }
   },
   caption: 'Plan',
@@ -139,7 +151,7 @@ const template = {
 }
 
 export default {
-  name: 'ReviewDebug',
+  name: 'ReviewMobileDebug',
   data: function () {
     return {
       testPRProps1: testPRProps1,
@@ -209,6 +221,6 @@ export default {
       this.testPRProps1.enactment = enactment
     }
   },
-  components: { Review }
+  components: { ReviewMobile }
 }
 </script>

@@ -1,22 +1,18 @@
 <docs>
-    Debug for ReviewCustom
+    Debug for ReviewFixed
 </docs>
 
 <template>
   <div>
-    <debug title="ReviewCustom">
-      <ReviewCustom
-        v-bind="testPRProps1"
-        @change-enactment="updateEnactment"
-        @restart-enactment="resetEnactment"
-        @change-option="updateOption"
-      />
+    <debug title="ReviewFixed">
+      <ReviewFixed taskpath="plan:enquiryB" v-bind="testPRProps1" @change-enactment="updateEnactment"
+        @restart-enactment="resetEnactment" @change-option="updateOption" />
     </debug>
   </div>
 </template>
 
 <script>
-import ReviewCustom from '../Review/ReviewCustom.vue'
+import ReviewFixed from '../../Review/ReviewFixed.vue'
 import { Enactment, Protocol } from '@openclinical/proformajs'
 
 const reviewOptions = {
@@ -46,22 +42,6 @@ const template = {
     svg: {
       width: 800,
       height: 400
-    },
-    enact: {
-      template: 'custom',
-      ui: {
-        cols: [
-          {
-            contents: [
-              {
-                component: 'fixed',
-                path: 'plan:enquiryB'
-              }
-            ],
-            width: '2'
-          }
-        ]
-      }
     }
   },
   caption: 'Plan',
@@ -155,7 +135,7 @@ const template = {
 }
 
 export default {
-  name: 'ReviewCustomDebug',
+  name: 'ReviewFixedDebug',
   data: function () {
     return {
       testPRProps1: testPRProps1,
@@ -225,6 +205,6 @@ export default {
       this.testPRProps1.enactment = enactment
     }
   },
-  components: { ReviewCustom }
+  components: { ReviewFixed }
 }
 </script>
