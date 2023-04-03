@@ -102,37 +102,18 @@ const template2 = {
 
 const template = {
   "class": "Plan",
+  "name": "plan",
+  "caption": "Plan",
+  "dataDefinitions": [],
+  "tasks": [],
+  "autonomous": true,
   "meta": {
     "svg": {
       "width": 800,
       "height": 400
     }
-  },
-  "caption": "Plan",
-  "name": "plan",
-  "autonomous": true,
-  "dataDefinitions": [
-    {
-      "class": "Integer",
-      "caption": "A",
-      "name": "a",
-      "valueCondition": "2"
-    }
-  ],
-  "tasks": [
-    {
-      "class": "Action",
-      "meta": {
-        "pos": {
-          "x": 135.54356301541733,
-          "y": 181.13459032695374
-        }
-      },
-      "caption": "Action A",
-      "name": "actionA"
-    }
-  ]
-}
+  }
+};
 /*{
   class: 'Plan',
   name: 'plan',
