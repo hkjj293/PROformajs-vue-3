@@ -101,6 +101,20 @@ const template2 = {
 }
 
 const template = {
+  "class": "Plan",
+  "name": "plan",
+  "caption": "Plan",
+  "dataDefinitions": [],
+  "tasks": [],
+  "autonomous": true,
+  "meta": {
+    "svg": {
+      "width": 800,
+      "height": 400
+    }
+  }
+};
+/*{
   class: 'Plan',
   name: 'plan',
   caption: 'Plan',
@@ -113,7 +127,7 @@ const template = {
       height: 400
     }
   }
-}
+}*/
 
 function checkTaskMeta(plan) {
   if (plan.tasks) {
@@ -217,7 +231,7 @@ export default {
 <template>
   <div id="app">
     <main role="main">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-3">
         <div class="container-fluid">
           <div class="navbar-brand">PRO<em>formajs</em></div>
           <button type="button" aria-label="Toggle navigation" class="navbar-toggler" aria-expanded="false"
