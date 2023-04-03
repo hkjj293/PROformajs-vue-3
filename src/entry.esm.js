@@ -1,5 +1,5 @@
 // Import vue components
-import * as components from '@/lib-components/index'
+import * as components from '@/lib-components/Core/index.js'
 
 // hammerjs used for doubletap and (todo: gestures) on the ipad
 //import { VueHammer } from 'vue2-hammer'
@@ -50,7 +50,7 @@ library.add(
   faCog
 )
 
-// install function executed by Vue.use()
+// install function executed by app.use()
 const install = function installProformajsVue(app) {
   Object.entries(components).forEach(([componentName, component]) => {
     // next line altered from the standard sfc-init to respect component name
@@ -70,9 +70,9 @@ const install = function installProformajsVue(app) {
   })
 }
 
-// Create module definition for Vue.use()
+// Create module definition for app.use()
 export default install
 
 // To allow individual component use, export components
-// each can be registered via Vue.component()
-export * from '@/lib-components/index'
+// each can be registered via app.component()
+export * from '@/lib-components/Core/index.js'

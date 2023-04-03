@@ -22,8 +22,8 @@ purify.addHook('afterSanitizeAttributes', function (node) {
     node.setAttribute(
       'onclick',
       'this.dispatchEvent(new CustomEvent("send-trigger", {bubbles: true, detail: "' +
-      trigger +
-      '"}))'
+        trigger +
+        '"}))'
     )
   }
 })

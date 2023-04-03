@@ -3,16 +3,16 @@
 // import ComposeTask from './ComposeTask.vue'
 // import ComposeTree from './ComposeTree.vue'
 // import ComposeCode from './ComposeCode.vue'
-import ComposeReview from './ComposeReview.vue'
+import ComposeReview from '../Review/ComposeReview.vue'
 // import ComposeMap from './ComposeMap.vue'
-import ReviewMarkdown from './ReviewMarkdown.vue'
+import ReviewMarkdown from '../Review/ReviewMarkdown.vue'
 
 // === Tools ===
-import PopoverButton from '../tool-components/PopoverButton.vue'
+import PopoverButton from '../../tool-components/PopoverButton.vue'
 
 // === Debug ===
-import debug from './__debug__/debug.vue'
-import * as debugComponents from './__debug__/debug'
+import debug from '../__debug__/debug.vue'
+import * as debugComponents from '../__debug__/debug'
 
 export {
   //     Compose,
@@ -21,12 +21,12 @@ export {
   //     ComposeTree,
   //     ComposeCode,
   ComposeReview,
-  ReviewMarkdown
+  ReviewMarkdown,
 
   // === Tools ===
-  , PopoverButton
+  PopoverButton,
 
   // === Debug ===
-  , debug
-  , debugComponents
+  debug,
+  debugComponents
 }

@@ -17,12 +17,18 @@ Provides a UI for a single task  in a proformajs Enactment.
 
 <template>
   <div v-if="indicatedTask">
-    <pr-task :task="indicatedTask" :enactment="enactment" @update-enactment="updateEnactment" :options="options" @send-trigger="sendTrigger"/>
+    <pr-task
+      :task="indicatedTask"
+      :enactment="enactment"
+      @update-enactment="updateEnactment"
+      :options="options"
+      @send-trigger="sendTrigger"
+    />
   </div>
 </template>
 
 <script>
-import { ReviewMixin } from './review';
+import { ReviewMixin } from './review'
 
 export default {
   name: 'pr-fixed',
@@ -30,7 +36,7 @@ export default {
   props: ['taskpath'],
   computed: {
     indicatedTask() {
-      return this.enactment && this.taskpath ? this.enactment.getComponent(this.taskpath) : null;
+      return this.enactment && this.taskpath ? this.enactment.getComponent(this.taskpath) : null
     }
   }
 }

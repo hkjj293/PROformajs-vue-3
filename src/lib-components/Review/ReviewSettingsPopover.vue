@@ -16,29 +16,51 @@ Provides a UI settings button that opens a popover form.
 
 <template>
   <div>
-    <PopoverButton :id="id" :msg="message" :targetId="'target:' + id" :placement="placement" varient="outline-secondary"
-      trigger="click" :title="title" @shown="OnShowPopover">
+    <PopoverButton
+      :id="id"
+      :msg="message"
+      :targetId="'target:' + id"
+      :placement="placement"
+      varient="outline-secondary"
+      trigger="click"
+      :title="title"
+      @shown="OnShowPopover"
+    >
       <font-awesome-icon icon="cog" />
     </PopoverButton>
     <div :id="'target:' + id" hidden>
-      <label v-if="debug"><input :name="'target:' + id + ':debug'" type="checkbox" />
-        Debug expressions</label>
+      <label v-if="debug"
+        ><input :name="'target:' + id + ':debug'" type="checkbox" /> Debug expressions</label
+      >
       <div class="font-weight-bold pb-2">Decisions</div>
       <label>
         <input :name="'target:' + id + ':Decision:showInactiveArguments'" type="checkbox" />
         Show inactive arguments
       </label>
-      <label><input :name="'target:' + id + ':Decision:showExpressions'" type="checkbox" />
-        Show expressions</label>
-      <label><input :name="'target:' + id + ':Candidate:autoConfirmRecommended'" type="checkbox" />
-        Auto-confirm candidates</label>
-      <label><input :name="'target:' + id + ':Decision:allowDownloads'" type="checkbox" />
-        Allow Downloads</label>
+      <label
+        ><input :name="'target:' + id + ':Decision:showExpressions'" type="checkbox" /> Show
+        expressions</label
+      >
+      <label
+        ><input :name="'target:' + id + ':Candidate:autoConfirmRecommended'" type="checkbox" />
+        Auto-confirm candidates</label
+      >
+      <label
+        ><input :name="'target:' + id + ':Decision:allowDownloads'" type="checkbox" /> Allow
+        Downloads</label
+      >
       <div class="font-weight-bold pb-2">Enquiries</div>
-      <label><input :name="'target:' + id + ':Enquiry:useDefaults'" type="checkbox" />
-        Use defaults</label>
-      <button :name="'target:' + id + ':send:restart'" v-if="restart"
-        class="btn btn-outline-secondary btn-sm btn-block d-block" @click="sendRestart" block>
+      <label
+        ><input :name="'target:' + id + ':Enquiry:useDefaults'" type="checkbox" /> Use
+        defaults</label
+      >
+      <button
+        :name="'target:' + id + ':send:restart'"
+        v-if="restart"
+        class="btn btn-outline-secondary btn-sm btn-block d-block"
+        @click="sendRestart"
+        block
+      >
         <font-awesome-icon icon="redo-alt" /> Restart
       </button>
     </div>
@@ -46,7 +68,6 @@ Provides a UI settings button that opens a popover form.
 </template>
 
 <script>
-
 export default {
   props: {
     options: Object,
@@ -70,8 +91,8 @@ export default {
   emits: ['restart-enactment', 'close', 'change-option'],
   data() {
     return {
-      message: "Loading Options...",
-      title: "Review Settings"
+      message: 'Loading Options...',
+      title: 'Review Settings'
     }
   },
   mounted() {
@@ -123,7 +144,6 @@ export default {
         }
       }
     }
-
   }
 }
 </script>

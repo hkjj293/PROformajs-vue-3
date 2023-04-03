@@ -18,8 +18,14 @@ an expression that consists of the name of a data def without a value will be un
   <div>
     <div>
       <label for="expressions">Debug expressions</label>
-      <input type="text" class="form-control" :id="id + 'expression'" :aria-describedby="id + 'expressionHelp'"
-        placeholder="Enter test expression" @change="testExpression" />
+      <input
+        type="text"
+        class="form-control"
+        :id="id + 'expression'"
+        :aria-describedby="id + 'expressionHelp'"
+        placeholder="Enter test expression"
+        @change="testExpression"
+      />
       <small :id="id + 'expressionHelp'" class="form-text text-muted">{{ description }}</small>
       <div class="text-danger">{{ message }}</div>
     </div>
@@ -57,49 +63,55 @@ export default {
   },
   methods: {
     testExpression(evt) {
-      this.message = null;
+      this.message = null
       if (evt.target.value.length > 0) {
         try {
           // in lieu of a designPathFromRuntimePath function in enactment ....
-          let design = this.path.split(":").map((name) => name.indexOf("[") > 0 ? name.substring(0, name.indexOf("[")) : name).join(":");
-          let result = this.enactment.evaluate(evt.target.value, design);
+          let design = this.path
+            .split(':')
+            .map((name) => (name.indexOf('[') > 0 ? name.substring(0, name.indexOf('[')) : name))
+            .join(':')
+          let result = this.enactment.evaluate(evt.target.value, design)
           if (!this.expressions.map((item) => item.expression).includes(evt.target.value)) {
-            this.expressions.push({ expression: evt.target.value, value: result != undefined ? result.toString() : "undefined" });
+            this.expressions.push({
+              expression: evt.target.value,
+              value: result != undefined ? result.toString() : 'undefined'
+            })
           }
-          this.expression = null;
+          this.expression = null
         } catch (e) {
           // extract relevant portion from message, e.g.
           // _evaluate failed for "is_finish('taskC')" from plan:taskA (this.is_finish is not a function)
-          this.expression = evt.target.value;
+          this.expression = evt.target.value
           if (e.message.indexOf('(') > -1) {
-            let pos = e.message.lastIndexOf('(');
-            this.message = e.message.substr(pos + 1, e.message.length - pos - 2);
+            let pos = e.message.lastIndexOf('(')
+            this.message = e.message.substr(pos + 1, e.message.length - pos - 2)
             if (this.message.startsWith('this.')) {
-              this.message = this.message.substring(5);
+              this.message = this.message.substring(5)
             }
           } else {
-            this.message = e.message;
+            this.message = e.message
           }
         }
       }
     },
     populateControl(txt) {
-      this.expression = txt;
+      this.expression = txt
     },
     deleteExpression(idx) {
-      this.expressions.splice(idx, 1);
+      this.expressions.splice(idx, 1)
     }
   },
   watch: {
     path(value) {
       this.message = null
-      this.expressions = [];
-      this.expression = null;
+      this.expressions = []
+      this.expression = null
     },
     enactment(value) {
       for (let item of this.expressions) {
-        let result = this.enactment.evaluate(item.expression, this.path);
-        item.value = result != undefined ? result.toString() : "undefined";
+        let result = this.enactment.evaluate(item.expression, this.path)
+        item.value = result != undefined ? result.toString() : 'undefined'
       }
     }
   }

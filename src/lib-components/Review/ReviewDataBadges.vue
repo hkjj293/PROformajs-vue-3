@@ -19,13 +19,18 @@ values are highlighted and shown with their value.
     <template v-if="enactment && enactment.getDataDefinitions().length > 0">
       <div class="card mt-2" v-if="selected">
         <div class="card-body">
-          <pr-source v-if="!selected.valueCondition" suffix="data" :source="selected" :value="value(selected)"
-            @erase-source="updateSource" @update-source="updateSource" />
+          <pr-source
+            v-if="!selected.valueCondition"
+            suffix="data"
+            :source="selected"
+            :value="value(selected)"
+            @erase-source="updateSource"
+            @update-source="updateSource"
+          />
           <div v-else>
-            <label for="name" class="col-form-label col-form-label-sm pt-0">{{ selected.caption || selected.name }}
-              <span class="badge rounded-pill bg-secondary">
-                dynamic
-              </span>
+            <label for="name" class="col-form-label col-form-label-sm pt-0"
+              >{{ selected.caption || selected.name }}
+              <span class="badge rounded-pill bg-secondary"> dynamic </span>
             </label>
             <div class="text-secondary">
               <em>{{ selected.valueCondition }}</em>
@@ -34,8 +39,12 @@ values are highlighted and shown with their value.
         </div>
       </div>
       <div class="mt-3">
-        <span v-for="dd in enactment.getDataDefinitions()" :key="key(dd)"
-          :class="'badge rounded-pill ' + 'bg-' + variant(dd) + ' m-1 p-1 clickable'" @click="select(dd.name)">
+        <span
+          v-for="dd in enactment.getDataDefinitions()"
+          :key="key(dd)"
+          :class="'badge rounded-pill ' + 'bg-' + variant(dd) + ' m-1 p-1 clickable'"
+          @click="select(dd.name)"
+        >
           {{ dd.name }}<span v-if="value(dd) != null"> = {{ badgeValue(value(dd)) }}</span>
         </span>
       </div>
@@ -48,8 +57,14 @@ values are highlighted and shown with their value.
       </div>
     </template>
     <p v-else class="text-muted">No data definitions available</p>
-    <pr-expression v-if="options.debug" :enactment="enactment" :path="enactment.protocol.name"
-      description="Evaluate expression from the context of the root task" class="mt-2" id="data" />
+    <pr-expression
+      v-if="options.debug"
+      :enactment="enactment"
+      :path="enactment.protocol.name"
+      description="Evaluate expression from the context of the root task"
+      class="mt-2"
+      id="data"
+    />
   </div>
 </template>
 
@@ -105,8 +120,8 @@ export default {
       return this.selectedName && dd.name == this.selectedName
         ? 'info'
         : dd.value != null
-          ? 'dark'
-          : 'light'
+        ? 'dark'
+        : 'light'
     },
     select(name) {
       this.selectedName = name

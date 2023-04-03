@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import MapIconDecision from '../MapIconDecision.vue'
-import { task_colors, discarded_color } from '../map.js'
+import MapIconDecision from '../Core/MapIconDecision.vue'
+import { task_colors, discarded_color } from '../Core/map.js'
 
 const testPRProps1 = {
     x: 50,
@@ -28,15 +28,13 @@ const testPRProps1 = {
 }
 
 export default {
-    name: "MapIconDecisionDebug",
+    name: 'MapIconDecisionDebug',
     data: function () {
         return {
-            testPRProps1: testPRProps1,
-        };
+            testPRProps1: testPRProps1
+        }
     },
-    mounted: function () {
-
-    },
+    mounted: function () { },
     components: { MapIconDecision }
 }
 </script>

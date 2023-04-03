@@ -55,7 +55,7 @@ function checkTaskMeta(plan) {
     for (const [idx, task] of plan.tasks.entries()) {
       if (!task.meta || !task.meta.pos) {
         if (!task.meta) {
-          task.meta = {};
+          task.meta = {}
         }
         task.meta.pos = {
           x: 80 + idx * 80,
@@ -63,7 +63,7 @@ function checkTaskMeta(plan) {
         }
       }
       if (task.tasks) {
-        checkTaskMeta(task);
+        checkTaskMeta(task)
       }
     }
   }
@@ -72,7 +72,7 @@ function checkTaskMeta(plan) {
 function checkMeta(protocol) {
   if (!protocol.meta || !protocol.meta.svg) {
     if (!protocol.meta) {
-      protocol.meta = {};
+      protocol.meta = {}
     }
     protocol.meta.svg = {
       width: 800,
@@ -80,10 +80,9 @@ function checkMeta(protocol) {
     }
   }
   if (protocol.tasks) {
-    checkTaskMeta(protocol);
+    checkTaskMeta(protocol)
   }
 }
-
 
 export default {
   name: 'ServeDev',
@@ -92,7 +91,7 @@ export default {
       selectedtask: template.name, // initial value,
       tab: 'compose',
       protocol: new Protocol.Plan(template),
-      initialData: {},
+      initialData: {}
     }
   },
   created: function () {
@@ -114,18 +113,17 @@ export default {
   },
   methods: {
     updateProtocol(e) {
-      checkMeta(e.value);
+      checkMeta(e.value)
       this.protocol = e.value
       if (e.selected) {
         this.selectedtask = e.selected
       }
       try {
-        let selected = this.protocol.getComponent(this.selectedtask);
+        let selected = this.protocol.getComponent(this.selectedtask)
       } catch (e) {
         // drop back to root path in case of error, assumed caused by name changes
-        this.selectedtask = this.protocol.name;
+        this.selectedtask = this.protocol.name
       }
-
     },
     resetProtocol(clazz) {
       if (clazz && ['Action', 'Decision', 'Enquiry'].indexOf(clazz) > -1) {
@@ -205,12 +203,15 @@ export default {
           </div>
           <div :id="'main-content-review'" :class="'tab-pane active'" role="tabpanel"
             :aria-labelledby="'main-content-review'" tabindex="0">
-            <pc-review :protocol="protocol" :debug="true" :initialData="startData"
-              :template="protocol && protocol.meta && protocol.meta.enact && protocol.meta.enact.template ? protocol.meta.enact.template : 'compact'" />
+            <pc-review :protocol="protocol" :debug="true" :initialData="startData" :template="
+              protocol && protocol.meta && protocol.meta.enact && protocol.meta.enact.template
+                ? protocol.meta.enact.template
+                : 'compact'
+            " />
           </div>
         </div>
         <!-- === Debug === -->
-        <hr style="border-width: 10px;" />
+        <hr style="border-width: 10px" />
         <DebugApp />
       </div>
     </main>

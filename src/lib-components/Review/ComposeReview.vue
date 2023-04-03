@@ -24,8 +24,16 @@ new data values and newly created cyclic tasks which is why its not used.
 </docs>
 
 <template>
-  <component v-if="!exception" v-bind:is="'p-review-' + template" :enactment="enactment" :options="reviewOptions"
-    @change-enactment="updateEnactment" @restart-enactment="resetEnactment" @change-option="updateOption" :debug="debug">
+  <component
+    v-if="!exception"
+    v-bind:is="'p-review-' + template"
+    :enactment="enactment"
+    :options="reviewOptions"
+    @change-enactment="updateEnactment"
+    @restart-enactment="resetEnactment"
+    @change-option="updateOption"
+    :debug="debug"
+  >
     <template slot="finished">
       <slot name="finished"></slot>
     </template>
@@ -43,11 +51,11 @@ new data values and newly created cyclic tasks which is why its not used.
 
 <script>
 import { Enactment } from '@openclinical/proformajs'
-import Review from './Review.vue';
+import Review from './Review.vue'
 import ReviewCompact from './ReviewCompact.vue'
-import ReviewTabbed from './ReviewTabbed.vue';
-import ReviewCustom from './ReviewCustom.vue';
-import ReviewMobile from './ReviewMobile.vue';
+import ReviewTabbed from './ReviewTabbed.vue'
+import ReviewCustom from './ReviewCustom.vue'
+import ReviewMobile from './ReviewMobile.vue'
 
 export default {
   name: 'pc-review',
