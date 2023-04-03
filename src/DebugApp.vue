@@ -5,17 +5,11 @@ import MapIconTaskDebug from './lib-components/__debug__/MapIconTask.debug.vue';
 </docs>
 
 <template>
-  <a
-    class="btn btn-primary"
-    data-bs-toggle="collapse"
-    href="#collapseDebug"
-    role="button"
-    aria-expanded="false"
-    aria-controls="collapseDebug"
-  >
-    <h1>Dev Debug Mode</h1>
+  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseDebugReview" role="button" aria-expanded="false"
+    aria-controls="collapseDebugReview">
+    <h1>Dev Debug Mode (Reivew)</h1>
   </a>
-  <div class="collapse" id="collapseDebug">
+  <div class="collapse" id="collapseDebugReview">
     <hr />
     <ReviewSourceDebug />
     <ReviewExpressionDebug />
@@ -44,32 +38,45 @@ import MapIconTaskDebug from './lib-components/__debug__/MapIconTask.debug.vue';
     <hr />
     <ComposeReviewDebug />
   </div>
+  <br />
+  <br />
+  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseDebugCompose" role="button" aria-expanded="false"
+    aria-controls="collapseDebugCompose">
+    <h1>Dev Debug Mode (Compose)</h1>
+  </a>
+  <div class="collapse" id="collapseDebugCompose">
+    <hr />
+    <MapTaskHandleDebug />
+    <ComposeMapTaskDebug />
+  </div>
 </template>
 
 <script>
-import ReviewMapDebug from './lib-components/__debug__/ReviewMap.debug.vue'
-import MapIconPlanDebug from './lib-components/__debug__/MapIconPlan.debug.vue'
-import MapIconDecisionDebug from './lib-components/__debug__/MapIconDecision.debug.vue'
-import MapIconTaskDebug from './lib-components/__debug__/MapIconTask.debug.vue'
-import ReviewExpressionDebug from './lib-components/__debug__/ReviewExpression.debug.vue'
-import ReviewSourceDebug from './lib-components/__debug__/ReviewSource.debug.vue'
-import ReviewTaskDebug from './lib-components/__debug__/ReviewTask.debug.vue'
-import MapIconEnquiryDebug from './lib-components/__debug__/MapIconEnquiry.debug.vue'
-import MapIconActionDebug from './lib-components/__debug__/MapIconAction.debug.vue'
-import ReviewMapTaskDebug from './lib-components/__debug__/ReviewMapTask.debug.vue'
-import MapBreadcrumbDebug from './lib-components/__debug__/MapBreadcrumb.debug.vue'
-import MapArrowDebug from './lib-components/__debug__/MapArrow.debug.vue'
-import ReviewDataBadgesDebug from './lib-components/__debug__/ReviewDataBadges.debug.vue'
-import ReviewSettingsPopoverDebug from './lib-components/__debug__/ReviewSettingsPopover.debug.vue'
-import ReviewhistoryAccordianDebug from './lib-components/__debug__/ReviewhistoryAccordian.debug.vue'
-import ReviewCompactDebug from './lib-components/__debug__/ReviewCompact.debug.vue'
-import ReviewDebug from './lib-components/__debug__/Review.debug.vue'
-import ReviewFixedDebug from './lib-components/__debug__/ReviewFixed.debug.vue'
-import ReviewCustomDebug from './lib-components/__debug__/ReviewCustom.debug.vue'
-import ReviewMobileDebug from './lib-components/__debug__/ReviewMobile.debug.vue'
-import ReviewTabbedTabsDebug from './lib-components/__debug__/ReviewTabbedTabs.debug.vue'
-import ReviewTabbedDebug from './lib-components/__debug__/ReviewTabbed.debug.vue'
-import ComposeReviewDebug from './lib-components/__debug__/ComposeReview.debug.vue'
+import ReviewMapDebug from './lib-components/__debug__/Review_debug/ReviewMap.debug.vue'
+import MapIconPlanDebug from './lib-components/__debug__/Core_debug/MapIconPlan.debug.vue'
+import MapIconDecisionDebug from './lib-components/__debug__/Core_debug/MapIconDecision.debug.vue'
+import MapIconTaskDebug from './lib-components/__debug__/Core_debug/MapIconTask.debug.vue'
+import ReviewExpressionDebug from './lib-components/__debug__/Review_debug/ReviewExpression.debug.vue'
+import ReviewSourceDebug from './lib-components/__debug__/Review_debug/ReviewSource.debug.vue'
+import ReviewTaskDebug from './lib-components/__debug__/Review_debug/ReviewTask.debug.vue'
+import MapIconEnquiryDebug from './lib-components/__debug__/Core_debug/MapIconEnquiry.debug.vue'
+import MapIconActionDebug from './lib-components/__debug__/Core_debug/MapIconAction.debug.vue'
+import ReviewMapTaskDebug from './lib-components/__debug__/Review_debug/ReviewMapTask.debug.vue'
+import MapBreadcrumbDebug from './lib-components/__debug__/Core_debug/MapBreadcrumb.debug.vue'
+import MapArrowDebug from './lib-components/__debug__/Core_debug/MapArrow.debug.vue'
+import ReviewDataBadgesDebug from './lib-components/__debug__/Review_debug/ReviewDataBadges.debug.vue'
+import ReviewSettingsPopoverDebug from './lib-components/__debug__/Review_debug/ReviewSettingsPopover.debug.vue'
+import ReviewhistoryAccordianDebug from './lib-components/__debug__/Review_debug/ReviewhistoryAccordian.debug.vue'
+import ReviewCompactDebug from './lib-components/__debug__/Review_debug/ReviewCompact.debug.vue'
+import ReviewDebug from './lib-components/__debug__/Review_debug/Review.debug.vue'
+import ReviewFixedDebug from './lib-components/__debug__/Review_debug/ReviewFixed.debug.vue'
+import ReviewCustomDebug from './lib-components/__debug__/Review_debug/ReviewCustom.debug.vue'
+import ReviewMobileDebug from './lib-components/__debug__/Review_debug/ReviewMobile.debug.vue'
+import ReviewTabbedTabsDebug from './lib-components/__debug__/Review_debug/ReviewTabbedTabs.debug.vue'
+import ReviewTabbedDebug from './lib-components/__debug__/Review_debug/ReviewTabbed.debug.vue'
+import ComposeReviewDebug from './lib-components/__debug__/Review_debug/ComposeReview.debug.vue'
+import MapTaskHandleDebug from './lib-components/__debug__/Compose_debug/MapTaskHandle.debug.vue'
+import ComposeMapTaskDebug from './lib-components/__debug__/Compose_debug/ComposeMapTask.debug.vue'
 
 export default {
   name: 'DebugApp',
@@ -96,7 +103,9 @@ export default {
     ReviewMobileDebug,
     ReviewTabbedTabsDebug,
     ReviewTabbedDebug,
-    ComposeReviewDebug
+    ComposeReviewDebug,
+    MapTaskHandleDebug,
+    ComposeMapTaskDebug
   }
 }
 </script>
