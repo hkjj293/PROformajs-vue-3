@@ -52,9 +52,11 @@ const template2 = {
               support: 1,
               activeCondition: ' random() > 0.4'
             }
-          ]
+          ],
         }
-      ]
+      ],
+      preCondition: "is_completed('actionC')",
+      waitCondition: "is_finished('actionC')"
     },
     {
       class: 'Enquiry',
@@ -83,7 +85,8 @@ const template2 = {
       },
       caption: 'Action C',
       name: 'actionC',
-      preCondition: 'index()==2'
+      preCondition: "index()==2 && is_completed('enquiryB')",
+      waitCondition: "is_finished('enquiryB')"
     },
     {
       class: 'Plan',
@@ -95,8 +98,10 @@ const template2 = {
       },
       caption: 'Plan D',
       name: 'planD',
-      autonomous: true
-    }
+      autonomous: true,
+      preCondition: "is_completed('decisionA')",
+      waitCondition: "is_finished('decisionA')"
+    },
   ]
 }
 
@@ -114,20 +119,6 @@ const template = {
     }
   }
 };
-/*{
-  class: 'Plan',
-  name: 'plan',
-  caption: 'Plan',
-  dataDefinitions: [],
-  tasks: [],
-  autonomous: true,
-  meta: {
-    svg: {
-      width: 800,
-      height: 400
-    }
-  }
-}*/
 
 function checkTaskMeta(plan) {
   if (plan.tasks) {
