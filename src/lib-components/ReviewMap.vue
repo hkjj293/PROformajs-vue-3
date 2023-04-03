@@ -35,8 +35,8 @@ Provides an svg element that can be used to visualise an enactment as a map and:
 
 <script>
 import ReviewMapTask from './ReviewMapTask.vue'
-import MapArrow from './MapArrow.vue'
-import MapBreadcrumb from './MapBreadcrumb.vue'
+import MapArrow from './Core/MapArrow.vue'
+import MapBreadcrumb from './Core/MapBreadcrumb.vue'
 import { TemporalConstraintMixin } from './compose.js'
 
 export default {
