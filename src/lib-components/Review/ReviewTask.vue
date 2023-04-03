@@ -21,32 +21,65 @@ interactable.
         task.state
       }}</span>
     </h3>
-    <pr-markdown v-if="task.description" :text="task.description" @send-trigger="$emit('send-trigger', $event)" />
+    <pr-markdown
+      v-if="task.description"
+      :text="task.description"
+      @send-trigger="$emit('send-trigger', $event)"
+    />
     <div v-if="task.sources">
       <hr />
       <div class="row">
         <div class="col" v-if="task.sources.length == 1">
-          <pr-source suffix="task" :key="task.sources[0].type" :source="task.sources[0]"
-            :disabled="task.state != 'in_progress'" :value="enactment.get(task.path, task.sources[0].type)"
-            @erase-source="updateSource" @update-source="updateSource" :hideEraser="hideEraser"
-            :showDescriptionInline="showDescriptionInline" :useButtons="useButtons" :hideCaption="hideSourcesCaptions">
+          <pr-source
+            suffix="task"
+            :key="task.sources[0].type"
+            :source="task.sources[0]"
+            :disabled="task.state != 'in_progress'"
+            :value="enactment.get(task.path, task.sources[0].type)"
+            @erase-source="updateSource"
+            @update-source="updateSource"
+            :hideEraser="hideEraser"
+            :showDescriptionInline="showDescriptionInline"
+            :useButtons="useButtons"
+            :hideCaption="hideSourcesCaptions"
+          >
             <hr />
           </pr-source>
         </div>
         <template v-else>
           <div class="col-md-6">
-            <pr-source suffix="task" v-for="source in sourceCols[0]" :key="source.type" :source="source"
-              :disabled="task.state != 'in_progress'" :value="enactment.get(task.path, source.type)"
-              @erase-source="updateSource" @update-source="updateSource" :hideEraser="hideEraser"
-              :showDescriptionInline="showDescriptionInline" :useButtons="useButtons" :hideCaption="hideSourcesCaptions">
+            <pr-source
+              suffix="task"
+              v-for="source in sourceCols[0]"
+              :key="source.type"
+              :source="source"
+              :disabled="task.state != 'in_progress'"
+              :value="enactment.get(task.path, source.type)"
+              @erase-source="updateSource"
+              @update-source="updateSource"
+              :hideEraser="hideEraser"
+              :showDescriptionInline="showDescriptionInline"
+              :useButtons="useButtons"
+              :hideCaption="hideSourcesCaptions"
+            >
               <hr />
             </pr-source>
           </div>
           <div class="col-md-6">
-            <pr-source suffix="task" v-for="source in sourceCols[1]" :key="source.type" :source="source"
-              :disabled="task.state != 'in_progress'" :value="enactment.get(task.path, source.type)"
-              @erase-source="updateSource" @update-source="updateSource" :hideEraser="hideEraser"
-              :showDescriptionInline="showDescriptionInline" :useButtons="useButtons" :hideCaption="hideSourcesCaptions">
+            <pr-source
+              suffix="task"
+              v-for="source in sourceCols[1]"
+              :key="source.type"
+              :source="source"
+              :disabled="task.state != 'in_progress'"
+              :value="enactment.get(task.path, source.type)"
+              @erase-source="updateSource"
+              @update-source="updateSource"
+              :hideEraser="hideEraser"
+              :showDescriptionInline="showDescriptionInline"
+              :useButtons="useButtons"
+              :hideCaption="hideSourcesCaptions"
+            >
               <hr />
             </pr-source>
           </div>
@@ -65,26 +98,53 @@ interactable.
                 <font-awesome-icon icon="times" v-if="candidate.support == '--'" />
               </span>
               <!-- checkbox, candidate caption and net_support -->
-              <input v-if="singleChoiceDecision" type="radio" :name="task.name" :value="candidate.name"
-                :id="candidate.name" :checked="candidate.confirmed" @change="handleConfirmedChange"
-                :disabled="task.state != 'in_progress'" class="mt-1 me-2" />
-              <input v-else type="checkbox" :name="candidate.name" :id="candidate.name" :checked="candidate.confirmed"
-                @change="handleConfirmedChange" :disabled="task.state != 'in_progress'" class="mt-1 me-2" />
+              <input
+                v-if="singleChoiceDecision"
+                type="radio"
+                :name="task.name"
+                :value="candidate.name"
+                :id="candidate.name"
+                :checked="candidate.confirmed"
+                @change="handleConfirmedChange"
+                :disabled="task.state != 'in_progress'"
+                class="mt-1 me-2"
+              />
+              <input
+                v-else
+                type="checkbox"
+                :name="candidate.name"
+                :id="candidate.name"
+                :checked="candidate.confirmed"
+                @change="handleConfirmedChange"
+                :disabled="task.state != 'in_progress'"
+                class="mt-1 me-2"
+              />
             </div>
           </div>
           <div class="col">
             <label :for="candidate.name" :disabled="task.state != 'in_progress'" class="mb-1">
               <span class="review-candidate">{{ candidate.caption || candidate.name }}</span>
-              <span class="badge rounded-pill bg-secondary ms-1 align-middle" v-show="
-                candidate.support != 0 &&
-                candidate.support != Infinity &&
-                candidate.support != -Infinity
-              " :disabled="task.state != 'in_progress'">{{ candidate.support }}</span>
+              <span
+                class="badge rounded-pill bg-secondary ms-1 align-middle"
+                v-show="
+                  candidate.support != 0 &&
+                  candidate.support != Infinity &&
+                  candidate.support != -Infinity
+                "
+                :disabled="task.state != 'in_progress'"
+                >{{ candidate.support }}</span
+              >
             </label>
-            <pr-markdown v-if="showCandidateDescriptionInline && candidate.description" :text="candidate.description"
-              class="mb-1 markdown" />
-            <PopoverButton v-if="!showCandidateDescriptionInline && candidate.description" :msg="candidate.description"
-              class="pb-1 pt-0 pe-0">
+            <pr-markdown
+              v-if="showCandidateDescriptionInline && candidate.description"
+              :text="candidate.description"
+              class="mb-1 markdown"
+            />
+            <PopoverButton
+              v-if="!showCandidateDescriptionInline && candidate.description"
+              :msg="candidate.description"
+              class="pb-1 pt-0 pe-0"
+            >
               <font-awesome-icon icon="info-circle" />
             </PopoverButton>
             <div v-if="options.Decision.showExpressions" class="text-muted font-italic">
@@ -92,26 +152,61 @@ interactable.
             </div>
           </div>
         </div>
-        <div v-for="(argument, index) in candidate.arguments" :key="index" :data-key="index" class="row g-0">
+        <div
+          v-for="(argument, index) in candidate.arguments"
+          :key="index"
+          :data-key="index"
+          class="row g-0"
+        >
           <div v-if="argument.active" style="width: 90px">
             <div class="float-end pe-2">
-              <span v-if="Math.abs(argument.support) > 1 && Math.abs(argument.support) < Infinity"
-                class="text-muted meta me-1">{{ Math.abs(argument.support) }}</span>
-              <font-awesome-icon v-if="argument.support == Infinity" icon="plus-circle" class="text-success" />
-              <font-awesome-icon v-if="argument.support > 0 || argument.support == '++'" icon="plus-circle"
-                class="text-success" />
-              <font-awesome-icon v-if="argument.support < 0 || argument.support == '--'" icon="minus-circle"
-                class="text-danger" />
-              <font-awesome-icon v-if="argument.support == -Infinity" icon="minus-circle" class="text-danger" />
+              <span
+                v-if="Math.abs(argument.support) > 1 && Math.abs(argument.support) < Infinity"
+                class="text-muted meta me-1"
+                >{{ Math.abs(argument.support) }}</span
+              >
+              <font-awesome-icon
+                v-if="argument.support == Infinity"
+                icon="plus-circle"
+                class="text-success"
+              />
+              <font-awesome-icon
+                v-if="argument.support > 0 || argument.support == '++'"
+                icon="plus-circle"
+                class="text-success"
+              />
+              <font-awesome-icon
+                v-if="argument.support < 0 || argument.support == '--'"
+                icon="minus-circle"
+                class="text-danger"
+              />
+              <font-awesome-icon
+                v-if="argument.support == -Infinity"
+                icon="minus-circle"
+                class="text-danger"
+              />
             </div>
           </div>
-          <div v-if="!argument.active && options.Decision.showInactiveArguments" style="width: 90px" class="text-muted">
+          <div
+            v-if="!argument.active && options.Decision.showInactiveArguments"
+            style="width: 90px"
+            class="text-muted"
+          >
             <div class="float-end pe-2">
-              <span v-if="Math.abs(argument.support) > 1 && Math.abs(argument.support) < Infinity"
-                class="text-muted meta me-1">{{ Math.abs(argument.support) }}</span>
+              <span
+                v-if="Math.abs(argument.support) > 1 && Math.abs(argument.support) < Infinity"
+                class="text-muted meta me-1"
+                >{{ Math.abs(argument.support) }}</span
+              >
               <font-awesome-icon v-if="argument.support == '++'" icon="plus-circle" />
-              <font-awesome-icon v-if="argument.support > 0 || argument.support == '++'" icon="plus-circle" />
-              <font-awesome-icon v-if="argument.support < 0 || argument.support == '--'" icon="minus-circle" />
+              <font-awesome-icon
+                v-if="argument.support > 0 || argument.support == '++'"
+                icon="plus-circle"
+              />
+              <font-awesome-icon
+                v-if="argument.support < 0 || argument.support == '--'"
+                icon="minus-circle"
+              />
               <font-awesome-icon v-if="argument.support == '--'" icon="minus-circle" />
             </div>
           </div>
@@ -119,8 +214,12 @@ interactable.
             <div v-if="argument.active">
               {{ argument.caption }}
               <template v-if="argument.description">
-                <pr-markdown v-if="showArgumentDescriptionInline" :text="argument.description"
-                  @send-trigger="$emit('send-trigger', $event)" class="mb-1 markdown text-muted" />
+                <pr-markdown
+                  v-if="showArgumentDescriptionInline"
+                  :text="argument.description"
+                  @send-trigger="$emit('send-trigger', $event)"
+                  class="mb-1 markdown text-muted"
+                />
                 <template v-else>
                   <PopoverButton :msg="argument.description" class="btn-link btn-sm pb-1 pt-0">
                     <font-awesome-icon icon="info-circle" />
@@ -131,7 +230,10 @@ interactable.
                 {{ argument.activeCondition }}
               </div>
             </div>
-            <div v-if="!argument.active && options.Decision.showInactiveArguments" class="d-inline-block">
+            <div
+              v-if="!argument.active && options.Decision.showInactiveArguments"
+              class="d-inline-block"
+            >
               <span class="text-muted">
                 {{ argument.caption }}
               </span>
@@ -144,19 +246,43 @@ interactable.
       </div>
     </template>
     <template v-if="showComplete">
-      <div role="group" class="btn-group float-end" v-if="task.candidates && options.Decision.allowDownloads">
-        <button class="btn btn-outline-secondary btn-sm" v-if="task.candidates" @click="downloadData">
+      <div
+        role="group"
+        class="btn-group float-end"
+        v-if="task.candidates && options.Decision.allowDownloads"
+      >
+        <button
+          class="btn btn-outline-secondary btn-sm"
+          v-if="task.candidates"
+          @click="downloadData"
+        >
           <font-awesome-icon icon="file-download" />
         </button>
-        <button class="btn btn-info" @click="$emit('update-enactment', { action: 'complete', path: task.path })"
-          :disabled="!task.completeable">Complete</button>
+        <button
+          class="btn btn-info"
+          @click="$emit('update-enactment', { action: 'complete', path: task.path })"
+          :disabled="!task.completeable"
+        >
+          Complete
+        </button>
       </div>
-      <button class="btn btn-info float-end" v-else
+      <button
+        class="btn btn-info float-end"
+        v-else
         @click="$emit('update-enactment', { action: 'complete', path: task.path })"
-        :disabled="!task.completeable">Complete</button>
+        :disabled="!task.completeable"
+      >
+        Complete
+      </button>
     </template>
-    <pr-expression v-if="options.debug" :enactment="enactment" :path="task.path" :description="debugDescription"
-      class="mt-5" it="task" />
+    <pr-expression
+      v-if="options.debug"
+      :enactment="enactment"
+      :path="task.path"
+      :description="debugDescription"
+      class="mt-5"
+      it="task"
+    />
   </div>
   <div v-else>
     <h3>No active task</h3>
@@ -207,9 +333,9 @@ function dependentDataDefs(decision) {
 export default {
   props: ['task', 'enactment', 'options'],
   components: {
-    "pr-source": ReviewSource,
-    "pr-expression": ReviewExpression,
-    "pr-markdown": ReviewMarkdown,
+    'pr-source': ReviewSource,
+    'pr-expression': ReviewExpression,
+    'pr-markdown': ReviewMarkdown
   },
   data: function () {
     return {

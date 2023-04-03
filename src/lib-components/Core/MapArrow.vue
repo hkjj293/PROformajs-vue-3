@@ -8,8 +8,12 @@ Draws a temporal dependency between two tasks on the map.
 </docs>
 
 <template>
-  <g class="arrow" :data-source="source" :data-target="target"
-    @dblclick="$emit('delete-arrow', { source: source, target: target })">
+  <g
+    class="arrow"
+    :data-source="source"
+    :data-target="target"
+    @dblclick="$emit('delete-arrow', { source: source, target: target })"
+  >
     <path :d="shaftPath" :stroke="arrowColor" stroke-width="3" />
     <path :d="headPath" :stroke="arrowColor" :fill="arrowColor" />
     <!--circle v-if="selected" :cx="sx" :cy="sy" r="4" fill="none" stroke="black"/-->

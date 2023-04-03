@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import MapIconTask from '../MapIconTask.vue'
-import { task_colors, discarded_color } from '../map.js'
+import MapIconTask from '../Core/MapIconTask.vue'
+import { task_colors, discarded_color } from '../Core/map.js'
 
 const testPRProps1 = {
     x: 50,
@@ -28,15 +28,13 @@ const testPRProps1 = {
 }
 
 export default {
-    name: "MapIconTaskDebug",
+    name: 'MapIconTaskDebug',
     data: function () {
         return {
-            testPRProps1: testPRProps1,
-        };
+            testPRProps1: testPRProps1
+        }
     },
-    mounted: function () {
-
-    },
+    mounted: function () { },
     components: { MapIconTask }
 }
 </script>

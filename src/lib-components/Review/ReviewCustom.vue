@@ -67,11 +67,22 @@ The shortness of breath example uses this meta:
     <div class="row">
       <div v-for="(col, index) of cols" :class="'col-' + col.width">
         <template v-for="(comp, index) of col.contents">
-          <pr-fixed v-if="comp.component == 'fixed'" :enactment="enactment" :options="options" :debug="debug"
-            :taskpath="comp.path" @changes-enactment="$emit('change-enactment', $event)" />
-          <pr-settings :id="'popover-reivew-custom'" class="float-end" v-if="comp.component == 'settings'"
-            :options="options" @restart-enactment="$emit('restart-enactment')"
-            @change-option="$emit('change-option', $event)" />
+          <pr-fixed
+            v-if="comp.component == 'fixed'"
+            :enactment="enactment"
+            :options="options"
+            :debug="debug"
+            :taskpath="comp.path"
+            @changes-enactment="$emit('change-enactment', $event)"
+          />
+          <pr-settings
+            :id="'popover-reivew-custom'"
+            class="float-end"
+            v-if="comp.component == 'settings'"
+            :options="options"
+            @restart-enactment="$emit('restart-enactment')"
+            @change-option="$emit('change-option', $event)"
+          />
         </template>
       </div>
     </div>
@@ -79,8 +90,8 @@ The shortness of breath example uses this meta:
 </template>
 
 <script>
-import { ReviewMixin } from './review';
-import ReviewFixed from './ReviewFixed.vue';
+import { ReviewMixin } from './review'
+import ReviewFixed from './ReviewFixed.vue'
 
 export default {
   mixins: [ReviewMixin],
@@ -90,8 +101,8 @@ export default {
   },
   computed: {
     cols() {
-      let meta = this.enactment.protocol.meta;
-      return meta && meta.enact && meta.enact.ui && meta.enact.ui.cols ? meta.enact.ui.cols : [];
+      let meta = this.enactment.protocol.meta
+      return meta && meta.enact && meta.enact.ui && meta.enact.ui.cols ? meta.enact.ui.cols : []
     }
   }
 }

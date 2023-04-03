@@ -21,12 +21,18 @@ todo:
   <div v-if="enactment">
     <div class="row">
       <div class="col">
-        <div class="progress" style="height: 3px;">
-          <div class="progress-bar" role="progressbar" aria-label="Progress" :aria-valuenow="progress.toString()"
-            aria-valuemin="0" :aria-valuemax="taskCount.toString()" :style="{
-              width: (progress * 100 / taskCount).toString() + '%'
-            }">
-          </div>
+        <div class="progress" style="height: 3px">
+          <div
+            class="progress-bar"
+            role="progressbar"
+            aria-label="Progress"
+            :aria-valuenow="progress.toString()"
+            aria-valuemin="0"
+            :aria-valuemax="taskCount.toString()"
+            :style="{
+              width: ((progress * 100) / taskCount).toString() + '%'
+            }"
+          ></div>
         </div>
         <div v-if="status.finished">
           <slot name="finished">
@@ -37,8 +43,13 @@ todo:
           </slot>
         </div>
         <div v-else>
-          <pr-task :task="activeTask" :enactment="enactment" @update-enactment="updateEnactment" :options="options"
-            @send-trigger="sendTrigger" />
+          <pr-task
+            :task="activeTask"
+            :enactment="enactment"
+            @update-enactment="updateEnactment"
+            :options="options"
+            @send-trigger="sendTrigger"
+          />
         </div>
       </div>
     </div>
@@ -46,7 +57,7 @@ todo:
 </template>
 
 <script>
-import { ReviewMixin } from './review';
+import { ReviewMixin } from './review'
 
 export default {
   mixins: [ReviewMixin],
@@ -54,17 +65,28 @@ export default {
   computed: {
     taskCount() {
       console.log('total: ' + (this.enactment ? this.enactment.getTasks().length : 1))
-      return this.enactment ? this.enactment.getTasks().length : 1;
+      return this.enactment ? this.enactment.getTasks().length : 1
     },
     progress() {
-      console.log('finished: ' + (this.enactment ? this.enactment.getTasks().filter((task) => task.state == "discarded" || task.state == "completed").length : 0))
-      return this.enactment ? this.enactment.getTasks().filter((task) => task.state == "discarded" || task.state == "completed").length : 0;
+      console.log(
+        'finished: ' +
+          (this.enactment
+            ? this.enactment
+                .getTasks()
+                .filter((task) => task.state == 'discarded' || task.state == 'completed').length
+            : 0)
+      )
+      return this.enactment
+        ? this.enactment
+            .getTasks()
+            .filter((task) => task.state == 'discarded' || task.state == 'completed').length
+        : 0
     }
   },
   methods: {
     restartEnactment() {
-      this.view = 'task';
-      this.$emit('restart-enactment');
+      this.view = 'task'
+      this.$emit('restart-enactment')
     }
   }
 }

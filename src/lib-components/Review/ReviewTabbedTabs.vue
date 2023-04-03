@@ -19,17 +19,31 @@ Managing the active tab is slightly tricky as if you click a plan task tab you w
 
 <template>
   <div class="card border-0">
-    <div class=" card-header">
-      <ul class="nav nav-tabs card-header-tabs"
-        :id="'review-tabs-' + (this.plan && this.plan.name ? this.plan.name.replaceAll(':', '-') : 'no-name')"
-        role="tablist">
+    <div class="card-header">
+      <ul
+        class="nav nav-tabs card-header-tabs"
+        :id="
+          'review-tabs-' +
+          (this.plan && this.plan.name ? this.plan.name.replaceAll(':', '-') : 'no-name')
+        "
+        role="tablist"
+      >
         <li class="nav-item" role="presentation" v-for="(task, index) in tabs" :key="task.path">
           <button
-            :class="'nav-link ' + (activeTab == task.path ? 'active ' : '') + (task.state != 'in_progress' ? 'disabled' : '')"
-            :id="'tabs-' + task.path.replaceAll(':', '-')" data-bs-toggle="tab"
-            :data-bs-target="'#tabs-content-' + task.path.replaceAll(':', '-')" type="button" role="tab"
-            :aria-controls="'tabs-content-' + task.path.replaceAll(':', '-')" :aria-selected="activeTab == task.path"
-            @click="$emit('select-task', { value: task.path })">
+            :class="
+              'nav-link ' +
+              (activeTab == task.path ? 'active ' : '') +
+              (task.state != 'in_progress' ? 'disabled' : '')
+            "
+            :id="'tabs-' + task.path.replaceAll(':', '-')"
+            data-bs-toggle="tab"
+            :data-bs-target="'#tabs-content-' + task.path.replaceAll(':', '-')"
+            type="button"
+            role="tab"
+            :aria-controls="'tabs-content-' + task.path.replaceAll(':', '-')"
+            :aria-selected="activeTab == task.path"
+            @click="$emit('select-task', { value: task.path })"
+          >
             {{ task.caption || task.name }}
           </button>
         </li>
@@ -37,12 +51,22 @@ Managing the active tab is slightly tricky as if you click a plan task tab you w
     </div>
     <div class="card-body p-0">
       <div class="tab-content">
-        <div v-for="(task, index) in tabs" :key="'content-' + task.path"
+        <div
+          v-for="(task, index) in tabs"
+          :key="'content-' + task.path"
           :id="'tabs-content-' + task.path.replaceAll(':', '-')"
-          :class="'tab-pane ' + (activeTab == task.path ? 'active ' : '')" role="tabpanel"
-          :aria-labelledby="'tabs-content-' + task.path.replaceAll(':', '-')" tabindex="0">
-          <pr-tabbed-tabs style="border-radius: 0px; border: none;" v-if="Object.keys(task).includes('tasks')"
-            :plan="task" :selected="selected" @select-task="$emit('select-task', $event)" />
+          :class="'tab-pane ' + (activeTab == task.path ? 'active ' : '')"
+          role="tabpanel"
+          :aria-labelledby="'tabs-content-' + task.path.replaceAll(':', '-')"
+          tabindex="0"
+        >
+          <pr-tabbed-tabs
+            style="border-radius: 0px; border: none"
+            v-if="Object.keys(task).includes('tasks')"
+            :plan="task"
+            :selected="selected"
+            @select-task="$emit('select-task', $event)"
+          />
         </div>
       </div>
     </div>
@@ -60,32 +84,32 @@ export default {
   props: ['plan', 'selected'],
   computed: {
     tabs() {
-      let result = [];
-      let activated = false; // this need happen only once
+      let result = []
+      let activated = false // this need happen only once
       if (this.plan && this.plan.tasks) {
         for (const task of this.plan.tasks) {
-          if (task.state == "dormant" || task.state == "in_progress") {
-            result.push(task);
+          if (task.state == 'dormant' || task.state == 'in_progress') {
+            result.push(task)
             if (this.selected && !activated) {
               if (task.path == this.selected) {
-                this.activeTab = task.path;
-                activated = true;
+                this.activeTab = task.path
+                activated = true
               }
               // selected task is a child of this task
               if (this.selected.length > task.path.length && this.selected.startsWith(task.path)) {
-                this.activeTab = task.path;
-                activated = true;
+                this.activeTab = task.path
+                activated = true
               }
               // this task is a child of the selected task
               if (task.path.length > this.selected.length && task.path.startsWith(this.selected)) {
-                this.$emit('select-task', { value: task.path });
-                activated = true;
+                this.$emit('select-task', { value: task.path })
+                activated = true
               }
             }
           }
         }
       }
-      return result;
+      return result
     }
   }
 }

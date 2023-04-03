@@ -21,8 +21,12 @@ Provides a tabbed UI for a proformajs Enactment.
         <div v-if="status.finished">
           <slot name="finished">
             <div class="float-end">
-              <pr-settings :options="options" id="popover-finished" @restart-enactment="$emit('restart-enactment')"
-                @change-option="$emit('change-option', $event)" />
+              <pr-settings
+                :options="options"
+                id="popover-finished"
+                @restart-enactment="$emit('restart-enactment')"
+                @change-option="$emit('change-option', $event)"
+              />
             </div>
             <slot name="finished">
               <h3>All done!</h3>
@@ -37,8 +41,16 @@ Provides a tabbed UI for a proformajs Enactment.
                 <h3>Data</h3>
                 <div class="mt-3">
                   <span
-                    :class="'badge rounded-pill ' + 'bg-' + variant(dd) + (variant(dd) == 'light' ? ' text-dark' : '') + ' m-1 p-1 clickable'"
-                    v-for="dd in enactment.getDataDefinitions()" :key="key(dd)">
+                    :class="
+                      'badge rounded-pill ' +
+                      'bg-' +
+                      variant(dd) +
+                      (variant(dd) == 'light' ? ' text-dark' : '') +
+                      ' m-1 p-1 clickable'
+                    "
+                    v-for="dd in enactment.getDataDefinitions()"
+                    :key="key(dd)"
+                  >
                     {{ dd.name }}<span v-if="value(dd)"> = {{ value(dd) }}</span>
                   </span>
                 </div>
@@ -58,11 +70,20 @@ Provides a tabbed UI for a proformajs Enactment.
             <pr-tabbed-tabs :plan="root" :selected="path" @select-task="updatePath" />
             <div class="card-body">
               <div class="float-end">
-                <pr-settings :options="options" :id="'popover-' + root.path"
-                  @restart-enactment="$emit('restart-enactment')" @change-option="$emit('change-option', $event)" />
+                <pr-settings
+                  :options="options"
+                  :id="'popover-' + root.path"
+                  @restart-enactment="$emit('restart-enactment')"
+                  @change-option="$emit('change-option', $event)"
+                />
               </div>
-              <pr-task :task="activeTask" :enactment="enactment" @update-enactment="updateEnactment" :options="options"
-                @send-trigger="sendTrigger" />
+              <pr-task
+                :task="activeTask"
+                :enactment="enactment"
+                @update-enactment="updateEnactment"
+                :options="options"
+                @send-trigger="sendTrigger"
+              />
             </div>
           </div>
         </template>
@@ -72,8 +93,8 @@ Provides a tabbed UI for a proformajs Enactment.
 </template>
 
 <script>
-import { ReviewMixin } from './review';
-import ReviewTabbedTabs from './ReviewTabbedTabs.vue';
+import { ReviewMixin } from './review'
+import ReviewTabbedTabs from './ReviewTabbedTabs.vue'
 
 export default {
   mixins: [ReviewMixin],
@@ -82,23 +103,25 @@ export default {
   },
   computed: {
     root() {
-      return this.enactment.getComponent(this.enactment.runtimeFromDesignPath(this.enactment.protocol.name));
+      return this.enactment.getComponent(
+        this.enactment.runtimeFromDesignPath(this.enactment.protocol.name)
+      )
     }
   },
   methods: {
     key(dd) {
-      return "accordian" + dd.path.replace("[", "").replace("]", "").replace(":", "");
+      return 'accordian' + dd.path.replace('[', '').replace(']', '').replace(':', '')
     },
     value(dd) {
       switch (dd.class) {
-        case "Date":
-          return dd.value ? moment(dd.value).format('DD/MM/YYYY') : '';
+        case 'Date':
+          return dd.value ? moment(dd.value).format('DD/MM/YYYY') : ''
         default:
-          return dd.value != undefined ? dd.value.toString() : undefined;
+          return dd.value != undefined ? dd.value.toString() : undefined
       }
     },
     variant(dd) {
-      return dd.value != null ? "dark" : "light";
+      return dd.value != null ? 'dark' : 'light'
     }
   }
 }

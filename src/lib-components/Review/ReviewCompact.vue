@@ -30,7 +30,11 @@ todo:
             </h3>
             <div class="row" v-if="enactment && enactment.protocol.description">
               <div class="col">
-                <pr-markdown class="mb-0" :text="enactment.protocol.description" @send-trigger="sendTrigger" />
+                <pr-markdown
+                  class="mb-0"
+                  :text="enactment.protocol.description"
+                  @send-trigger="sendTrigger"
+                />
               </div>
             </div>
             <hr />
@@ -41,8 +45,14 @@ todo:
             </slot>
           </div>
           <div v-else>
-            <pr-task :task="activeTask" :enactment="enactment" @update-enactment="updateEnactment" :options="options" f
-              @send-trigger="sendTrigger" />
+            <pr-task
+              :task="activeTask"
+              :enactment="enactment"
+              @update-enactment="updateEnactment"
+              :options="options"
+              f
+              @send-trigger="sendTrigger"
+            />
           </div>
         </template>
         <!-- data view -->
@@ -64,15 +74,24 @@ todo:
           </div>
           <div class="row">
             <div class="col-sm-6">
-              <div><!-- used to be a card-deck -->
+              <div>
+                <!-- used to be a card-deck -->
                 <div class="card">
                   <template slot="header">
                     <h5>Available Tasks</h5>
                   </template>
                   <div class="list-group" v-if="availableTasks.length > 0">
-                    <button v-for="task in availableTasks" :data-path="path" :data-taskpath="task.path"
-                      :class="'list-group-item list-group-item-action ' + ((task.path == path) ? 'active' : '')"
-                      :key="task.name" @click="updatePath({ value: task.path })">
+                    <button
+                      v-for="task in availableTasks"
+                      :data-path="path"
+                      :data-taskpath="task.path"
+                      :class="
+                        'list-group-item list-group-item-action ' +
+                        (task.path == path ? 'active' : '')
+                      "
+                      :key="task.name"
+                      @click="updatePath({ value: task.path })"
+                    >
                       {{ task.caption || task.name }}
                     </button>
                   </div>
@@ -81,14 +100,22 @@ todo:
               </div>
             </div>
             <div class="col-sm-6">
-              <div><!-- used to be a card-deck -->
+              <div>
+                <!-- used to be a card-deck -->
                 <div class="card">
                   <template slot="header">
                     <h5>Triggers</h5>
                   </template>
-                  <div class="list-group" v-if="status && status.triggers && status.triggers.length > 0">
-                    <button class="list-group-item list-group-item-action" v-for="(trigger, index) in status.triggers"
-                      :key="index" @click="sendTrigger(trigger)">
+                  <div
+                    class="list-group"
+                    v-if="status && status.triggers && status.triggers.length > 0"
+                  >
+                    <button
+                      class="list-group-item list-group-item-action"
+                      v-for="(trigger, index) in status.triggers"
+                      :key="index"
+                      @click="sendTrigger(trigger)"
+                    >
                       {{ trigger }}
                     </button>
                   </div>
@@ -102,50 +129,79 @@ todo:
         <div v-if="view == 'settings'" class="row">
           <div class="col">
             <h3>Settings</h3>
-            <label v-if="debug"><input type="checkbox" :checked="options.debug"
-                @click="$emit('change-option', { option: 'debug', value: !options.debug })" />
-              Debug expressions</label>
+            <label v-if="debug"
+              ><input
+                type="checkbox"
+                :checked="options.debug"
+                @click="$emit('change-option', { option: 'debug', value: !options.debug })"
+              />
+              Debug expressions</label
+            >
             <h5>Decisions</h5>
             <div>
-              <label><input type="checkbox" :checked="options.Decision.showInactiveArguments" @click="
-                $emit('change-option', {
-                  category: 'Decision',
-                  option: 'showInactiveArguments',
-                  value: !options.Decision.showInactiveArguments
-                })
-              " />
-                Show inactive arguments</label>
+              <label
+                ><input
+                  type="checkbox"
+                  :checked="options.Decision.showInactiveArguments"
+                  @click="
+                    $emit('change-option', {
+                      category: 'Decision',
+                      option: 'showInactiveArguments',
+                      value: !options.Decision.showInactiveArguments
+                    })
+                  "
+                />
+                Show inactive arguments</label
+              >
             </div>
             <div>
-              <label><input type="checkbox" :checked="options.Decision.showExpressions" @click="
-                $emit('change-option', {
-                  category: 'Decision',
-                  option: 'showExpressions',
-                  value: !options.Decision.showExpressions
-                })
-              " />
-                Show expressions</label>
+              <label
+                ><input
+                  type="checkbox"
+                  :checked="options.Decision.showExpressions"
+                  @click="
+                    $emit('change-option', {
+                      category: 'Decision',
+                      option: 'showExpressions',
+                      value: !options.Decision.showExpressions
+                    })
+                  "
+                />
+                Show expressions</label
+              >
             </div>
             <div>
-              <label><input type="checkbox" :checked="options.Candidate.autoConfirmRecommended" @click="
-                $emit('change-option', {
-                  category: 'Candidate',
-                  option: 'autoConfirmRecommended',
-                  value: !options.Candidate.autoConfirmRecommended
-                })
-              " />
-                Auto-confirm candidates</label>
+              <label
+                ><input
+                  type="checkbox"
+                  :checked="options.Candidate.autoConfirmRecommended"
+                  @click="
+                    $emit('change-option', {
+                      category: 'Candidate',
+                      option: 'autoConfirmRecommended',
+                      value: !options.Candidate.autoConfirmRecommended
+                    })
+                  "
+                />
+                Auto-confirm candidates</label
+              >
             </div>
             <h5>Enquiries</h5>
             <div>
-              <label><input type="checkbox" :checked="options.Enquiry.useDefaults" @click="
-                $emit('change-option', {
-                  category: 'Enquiry',
-                  option: 'useDefaults',
-                  value: !options.Enquiry.useDefaults
-                })
-              " />
-                Use defaults</label>
+              <label
+                ><input
+                  type="checkbox"
+                  :checked="options.Enquiry.useDefaults"
+                  @click="
+                    $emit('change-option', {
+                      category: 'Enquiry',
+                      option: 'useDefaults',
+                      value: !options.Enquiry.useDefaults
+                    })
+                  "
+                />
+                Use defaults</label
+              >
             </div>
             <button class="btn btn-outline-secondary btn-sm btn-block" @click="restartEnactment">
               <font-awesome-icon icon="redo-alt" /> Restart
@@ -156,92 +212,152 @@ todo:
       <div class="col-md-3 d-none d-md-block">
         <template v-if="enactment.protocol.tasks">
           <!-- Use ReviewSettingPopover instead -->
-          <pr-settings :id="'popover-reivew-compact'" class="float-end" :options="options" :restart="false"
-            placement="left" @change-option="OnUpdateOptions" @restart-enactment="$emit('restart-enactment')" />
-          <h4 class=" mt-2">
+          <pr-settings
+            :id="'popover-reivew-compact'"
+            class="float-end"
+            :options="options"
+            :restart="false"
+            placement="left"
+            @change-option="OnUpdateOptions"
+            @restart-enactment="$emit('restart-enactment')"
+          />
+          <h4 class="mt-2">
             Tasks
             <span class="badge badge-warning" v-show="status.finished">Completed</span>
           </h4>
           <div class="d-grid gap-2">
-            <button v-for="task in availableTasks" :data-path="path" :data-taskpath="task.path"
-              v-bind:class="'btn btn-outline-secondary btn-block d-block ' + ((view == 'task' && task.path == path) ? 'active' : '')"
-              :key="task.name" @click="selectTask(task.path)">
+            <button
+              v-for="task in availableTasks"
+              :data-path="path"
+              :data-taskpath="task.path"
+              v-bind:class="
+                'btn btn-outline-secondary btn-block d-block ' +
+                (view == 'task' && task.path == path ? 'active' : '')
+              "
+              :key="task.name"
+              @click="selectTask(task.path)"
+            >
               {{ task.caption || task.name }}
             </button>
           </div>
         </template>
         <template v-else>
           <!-- settings for a single task are inline in desktop view -->
-          <button v-bind:class="'btn btn-outline-secondary btn-block ' + ((view == 'task') ? 'active' : '')"
-            @click="view = 'task'" block>
+          <button
+            v-bind:class="'btn btn-outline-secondary btn-block ' + (view == 'task' ? 'active' : '')"
+            @click="view = 'task'"
+            block
+          >
             <font-awesome-icon icon="clipboard-check" /> Task
           </button>
-          <label class="mt-2" v-if="debug"><input type="checkbox" :checked="options.debug"
-              @click="$emit('change-option', { option: 'debug', value: !options.debug })" />
-            Debug expressions</label>
+          <label class="mt-2" v-if="debug"
+            ><input
+              type="checkbox"
+              :checked="options.debug"
+              @click="$emit('change-option', { option: 'debug', value: !options.debug })"
+            />
+            Debug expressions</label
+          >
           <template v-if="enactment.protocol.candidates">
             <div class="font-weight-bold pb-2">Decisions</div>
             <div>
-              <label><input type="checkbox" :checked="options.Decision.showInactiveArguments" @click="
-                $emit('change-option', {
-                  category: 'Decision',
-                  option: 'showInactiveArguments',
-                  value: !options.Decision.showInactiveArguments
-                })
-              " />
-                Show inactive arguments</label>
+              <label
+                ><input
+                  type="checkbox"
+                  :checked="options.Decision.showInactiveArguments"
+                  @click="
+                    $emit('change-option', {
+                      category: 'Decision',
+                      option: 'showInactiveArguments',
+                      value: !options.Decision.showInactiveArguments
+                    })
+                  "
+                />
+                Show inactive arguments</label
+              >
             </div>
             <div>
-              <label><input type="checkbox" :checked="options.Decision.showExpressions" @click="
-                $emit('change-option', {
-                  category: 'Decision',
-                  option: 'showExpressions',
-                  value: !options.Decision.showExpressions
-                })
-              " />
-                Show expressions</label>
+              <label
+                ><input
+                  type="checkbox"
+                  :checked="options.Decision.showExpressions"
+                  @click="
+                    $emit('change-option', {
+                      category: 'Decision',
+                      option: 'showExpressions',
+                      value: !options.Decision.showExpressions
+                    })
+                  "
+                />
+                Show expressions</label
+              >
             </div>
             <div>
-              <label><input type="checkbox" :checked="options.Candidate.autoConfirmRecommended" @click="
-                $emit('change-option', {
-                  category: 'Candidate',
-                  option: 'autoConfirmRecommended',
-                  value: !options.Candidate.autoConfirmRecommended
-                })
-              " />
-                Auto-confirm candidates</label>
+              <label
+                ><input
+                  type="checkbox"
+                  :checked="options.Candidate.autoConfirmRecommended"
+                  @click="
+                    $emit('change-option', {
+                      category: 'Candidate',
+                      option: 'autoConfirmRecommended',
+                      value: !options.Candidate.autoConfirmRecommended
+                    })
+                  "
+                />
+                Auto-confirm candidates</label
+              >
             </div>
             <div>
-              <label><input type="checkbox" :checked="options.Decision.allowDownloads" @click="
-                $emit('change-option', {
-                  category: 'Decision',
-                  option: 'allowDownloads',
-                  value: !options.Decision.allowDownloads
-                })
-              " />
-                Allow Downloads</label>
+              <label
+                ><input
+                  type="checkbox"
+                  :checked="options.Decision.allowDownloads"
+                  @click="
+                    $emit('change-option', {
+                      category: 'Decision',
+                      option: 'allowDownloads',
+                      value: !options.Decision.allowDownloads
+                    })
+                  "
+                />
+                Allow Downloads</label
+              >
             </div>
           </template>
         </template>
         <template v-if="status && status.triggers && status.triggers.length > 0">
           <h4>Triggers</h4>
           <div class="d-grid gap-2">
-            <button class="btn btn-block" v-for="(trigger, index) in status.triggers" :key="index"
-              @click="sendTrigger(trigger)">
+            <button
+              class="btn btn-block"
+              v-for="(trigger, index) in status.triggers"
+              :key="index"
+              @click="sendTrigger(trigger)"
+            >
               {{ trigger }}
             </button>
           </div>
         </template>
         <template v-if="enactment.protocol.tasks">
-          <pr-map :enactment="enactment" :selectedtask="path" @select-task="updatePath" class="mt-2" />
+          <pr-map
+            :enactment="enactment"
+            :selectedtask="path"
+            @select-task="updatePath"
+            class="mt-2"
+          />
         </template>
         <div class="d-grid gap-2">
-          <button :class="'btn btn-outline-secondary btn-block' + ((view == 'data') ? 'active' : '')"
-            @click="view = 'data'">
+          <button
+            :class="'btn btn-outline-secondary btn-block' + (view == 'data' ? 'active' : '')"
+            @click="view = 'data'"
+          >
             <font-awesome-icon icon="table" /> Data
           </button>
-          <button :class="'btn btn-outline-secondary btn-block' + ((view == 'history') ? 'active' : '')"
-            @click="view = 'history'">
+          <button
+            :class="'btn btn-outline-secondary btn-block' + (view == 'history' ? 'active' : '')"
+            @click="view = 'history'"
+          >
             <font-awesome-icon icon="history" /> History
           </button>
           <button class="btn btn-outline-secondary btn-block" @click="restartEnactment">
@@ -256,22 +372,32 @@ todo:
         <nav class="navbar navbar-light fixed-bottom">
           <div class="container-fluid">
             <ul class="navbar-nav">
-              <li @click="view = 'task'" :class="'nav-item ' + ((view == 'task') ? 'active' : '')">
+              <li @click="view = 'task'" :class="'nav-item ' + (view == 'task' ? 'active' : '')">
                 <font-awesome-icon icon="clipboard-check" size="lg" class="me-2" />
               </li>
-              <li v-if="enactment.protocol.tasks" @click="view = 'select'"
-                :class="'nav-item ' + ((view == 'select') ? 'active' : '')">
+              <li
+                v-if="enactment.protocol.tasks"
+                @click="view = 'select'"
+                :class="'nav-item ' + (view == 'select' ? 'active' : '')"
+              >
                 <font-awesome-icon icon="hand-pointer" size="lg" class="me-2" />
               </li>
-              <li @click="view = 'data'" :class="'nav-item ' + ((view == 'data') ? 'active' : '')">
+              <li @click="view = 'data'" :class="'nav-item ' + (view == 'data' ? 'active' : '')">
                 <font-awesome-icon icon="table" size="lg" class="me-2" />
               </li>
-              <li @click="view = 'history'" v-bind:class="'nav-item ' + ((view == 'history') ? 'active' : '')">
+              <li
+                @click="view = 'history'"
+                v-bind:class="'nav-item ' + (view == 'history' ? 'active' : '')"
+              >
                 <font-awesome-icon icon="history" size="lg" class="me-2" />
               </li>
             </ul>
-            <ul class="navbar-nav ms-auto"><!-- right aligned-->
-              <li @click="view = 'settings'" :class="'nav-item ' + ((view == 'settings') ? 'active' : '')">
+            <ul class="navbar-nav ms-auto">
+              <!-- right aligned-->
+              <li
+                @click="view = 'settings'"
+                :class="'nav-item ' + (view == 'settings' ? 'active' : '')"
+              >
                 <font-awesome-icon icon="cog" size="lg" />
               </li>
             </ul>
