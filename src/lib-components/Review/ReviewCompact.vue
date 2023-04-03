@@ -150,9 +150,11 @@ todo:
               " />
                 Use defaults</label>
             </div>
-            <button class="btn btn-outline-secondary btn-sm btn-block" @click="restartEnactment">
-              <font-awesome-icon icon="redo-alt" /> Restart
-            </button>
+            <div class="d-grid gap-2">
+              <button class="btn btn-outline-secondary btn-sm " @click="restartEnactment">
+                <font-awesome-icon icon="redo-alt" /> Restart
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -167,7 +169,7 @@ todo:
           </h4>
           <div class="d-grid gap-2">
             <button v-for="task in availableTasks" :data-path="path" :data-taskpath="task.path" v-bind:class="
-              'btn btn-outline-secondary btn-block d-block ' +
+              'btn btn-outline-secondary d-block ' +
               (view == 'task' && task.path == path ? 'active' : '')
             " :key="task.name" @click="selectTask(task.path)">
               {{ task.caption || task.name }}
@@ -176,62 +178,63 @@ todo:
         </template>
         <template v-else>
           <!-- settings for a single task are inline in desktop view -->
-          <button v-bind:class="'btn btn-outline-secondary btn-block ' + (view == 'task' ? 'active' : '')"
-            @click="view = 'task'" block>
-            <font-awesome-icon icon="clipboard-check" /> Task
-          </button>
-          <label class="mt-2" v-if="debug"><input type="checkbox" :checked="options.debug"
-              @click="$emit('change-option', { option: 'debug', value: !options.debug })" />
-            Debug expressions</label>
-          <template v-if="enactment.protocol.candidates">
-            <div class="font-weight-bold pb-2">Decisions</div>
-            <div>
-              <label><input type="checkbox" :checked="options.Decision.showInactiveArguments" @click="
-                $emit('change-option', {
-                  category: 'Decision',
-                  option: 'showInactiveArguments',
-                  value: !options.Decision.showInactiveArguments
-                })
-              " />
-                Show inactive arguments</label>
-            </div>
-            <div>
-              <label><input type="checkbox" :checked="options.Decision.showExpressions" @click="
-                $emit('change-option', {
-                  category: 'Decision',
-                  option: 'showExpressions',
-                  value: !options.Decision.showExpressions
-                })
-              " />
-                Show expressions</label>
-            </div>
-            <div>
-              <label><input type="checkbox" :checked="options.Candidate.autoConfirmRecommended" @click="
-                $emit('change-option', {
-                  category: 'Candidate',
-                  option: 'autoConfirmRecommended',
-                  value: !options.Candidate.autoConfirmRecommended
-                })
-              " />
-                Auto-confirm candidates</label>
-            </div>
-            <div>
-              <label><input type="checkbox" :checked="options.Decision.allowDownloads" @click="
-                $emit('change-option', {
-                  category: 'Decision',
-                  option: 'allowDownloads',
-                  value: !options.Decision.allowDownloads
-                })
-              " />
-                Allow Downloads</label>
-            </div>
-          </template>
+          <div class="d-grid">
+            <button v-bind:class="'btn btn-outline-secondary ' + (view == 'task' ? 'active' : '')" @click="view = 'task'"
+              block>
+              <font-awesome-icon icon="clipboard-check" /> Task
+            </button>
+            <label class="my-2" v-if="debug"><input type="checkbox" :checked="options.debug"
+                @click="$emit('change-option', { option: 'debug', value: !options.debug })" />
+              Debug expressions</label>
+            <template v-if="enactment.protocol.candidates">
+              <div class="fw-bold">Decisions</div>
+              <div>
+                <label class="mt-2"><input type="checkbox" :checked="options.Decision.showInactiveArguments" @click="
+                  $emit('change-option', {
+                    category: 'Decision',
+                    option: 'showInactiveArguments',
+                    value: !options.Decision.showInactiveArguments
+                  })
+                " />
+                  Show inactive arguments</label>
+              </div>
+              <div>
+                <label class="mt-2"><input type="checkbox" :checked="options.Decision.showExpressions" @click="
+                  $emit('change-option', {
+                    category: 'Decision',
+                    option: 'showExpressions',
+                    value: !options.Decision.showExpressions
+                  })
+                " />
+                  Show expressions</label>
+              </div>
+              <div>
+                <label class="mt-2"><input type="checkbox" :checked="options.Candidate.autoConfirmRecommended" @click="
+                  $emit('change-option', {
+                    category: 'Candidate',
+                    option: 'autoConfirmRecommended',
+                    value: !options.Candidate.autoConfirmRecommended
+                  })
+                " />
+                  Auto-confirm candidates</label>
+              </div>
+              <div>
+                <label class="mt-2"><input type="checkbox" :checked="options.Decision.allowDownloads" @click="
+                  $emit('change-option', {
+                    category: 'Decision',
+                    option: 'allowDownloads',
+                    value: !options.Decision.allowDownloads
+                  })
+                " />
+                  Allow Downloads</label>
+              </div>
+            </template>
+          </div>
         </template>
         <template v-if="status && status.triggers && status.triggers.length > 0">
           <h4>Triggers</h4>
           <div class="d-grid gap-2">
-            <button class="btn btn-block" v-for="(trigger, index) in status.triggers" :key="index"
-              @click="sendTrigger(trigger)">
+            <button class="btn " v-for="(trigger, index) in status.triggers" :key="index" @click="sendTrigger(trigger)">
               {{ trigger }}
             </button>
           </div>
@@ -239,16 +242,14 @@ todo:
         <template v-if="enactment.protocol.tasks">
           <pr-map :enactment="enactment" :selectedtask="path" @select-task="updatePath" class="mt-2" />
         </template>
-        <div class="d-grid gap-2">
-          <button :class="'btn btn-outline-secondary btn-block' + (view == 'data' ? 'active' : '')"
-            @click="view = 'data'">
+        <div class="d-grid gap-2 mt-2">
+          <button :class="'btn btn-outline-secondary ' + (view == 'data' ? 'active' : '')" @click="view = 'data'">
             <font-awesome-icon icon="table" /> Data
           </button>
-          <button :class="'btn btn-outline-secondary btn-block' + (view == 'history' ? 'active' : '')"
-            @click="view = 'history'">
+          <button :class="'btn btn-outline-secondary ' + (view == 'history' ? 'active' : '')" @click="view = 'history'">
             <font-awesome-icon icon="history" /> History
           </button>
-          <button class="btn btn-outline-secondary btn-block" @click="restartEnactment">
+          <button class="btn btn-outline-secondary " @click="restartEnactment">
             <font-awesome-icon icon="redo-alt" /> Restart
           </button>
         </div>

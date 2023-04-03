@@ -102,12 +102,12 @@ todo:
         <div v-if="view == 'settings'" class="row">
           <div class="col">
             <h3>Settings</h3>
-            <label v-if="debug"><input type="checkbox" :checked="options.debug"
+            <label class="mt-2" v-if="debug"><input type="checkbox" :checked="options.debug"
                 @click="$emit('change-option', { option: 'debug', value: !options.debug })" />
               Debug expressions</label>
             <h5>Decisions</h5>
             <div>
-              <label><input type="checkbox" :checked="options.Decision.showInactiveArguments" @click="
+              <label class="mt-2"><input type="checkbox" :checked="options.Decision.showInactiveArguments" @click="
                 $emit('change-option', {
                   category: 'Decision',
                   option: 'showInactiveArguments',
@@ -117,7 +117,7 @@ todo:
                 Show inactive arguments</label>
             </div>
             <div>
-              <label><input type="checkbox" :checked="options.Decision.showExpressions" @click="
+              <label class="mt-2"><input type="checkbox" :checked="options.Decision.showExpressions" @click="
                 $emit('change-option', {
                   category: 'Decision',
                   option: 'showExpressions',
@@ -127,7 +127,7 @@ todo:
                 Show expressions</label>
             </div>
             <div>
-              <label><input type="checkbox" :checked="options.Candidate.autoConfirmRecommended" @click="
+              <label class="mt-2"><input type="checkbox" :checked="options.Candidate.autoConfirmRecommended" @click="
                 $emit('change-option', {
                   category: 'Candidate',
                   option: 'autoConfirmRecommended',
@@ -138,7 +138,7 @@ todo:
             </div>
             <h5>Enquiries</h5>
             <div>
-              <label><input type="checkbox" :checked="options.Enquiry.useDefaults" @click="
+              <label class="mt-2"><input type="checkbox" :checked="options.Enquiry.useDefaults" @click="
                 $emit('change-option', {
                   category: 'Enquiry',
                   option: 'useDefaults',
@@ -147,9 +147,11 @@ todo:
               " />
                 Use defaults</label>
             </div>
-            <button class="btn btn-outline-secondary btn-sm btn-block" @click="restartEnactment">
-              <font-awesome-icon icon="redo-alt" /> Restart
-            </button>
+            <div class="d-grid gap-2">
+              <button class="btn btn-outline-secondary btn-sm" @click="restartEnactment">
+                <font-awesome-icon icon="redo-alt" /> Restart
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -164,7 +166,7 @@ todo:
           </h4>
           <div class="d-grid gap-2">
             <button v-for="task in availableTasks" :data-path="path" :data-taskpath="task.path"
-              v-bind:class="'btn btn-outline-secondary btn-block d-block ' + ((view == 'task' && task.path == path) ? 'active' : '')"
+              v-bind:class="'btn btn-outline-secondary ' + ((view == 'task' && task.path == path) ? 'active' : '')"
               :key="task.name" @click="selectTask(task.path)">
               {{ task.caption || task.name }}
             </button>
@@ -172,61 +174,63 @@ todo:
         </template>
         <template v-else>
           <!-- settings for a single task are inline in desktop view -->
-          <button v-bind:class="'btn btn-outline-secondary btn-block ' + ((view == 'task') ? 'active' : '')"
-            @click="view = 'task'" block>
-            <font-awesome-icon icon="clipboard-check" /> Task
-          </button>
-          <label class="mt-2" v-if="debug"><input type="checkbox" :checked="options.debug"
-              @click="$emit('change-option', { option: 'debug', value: !options.debug })" />
-            Debug expressions</label>
-          <template v-if="enactment.protocol.candidates">
-            <div class="font-weight-bold pb-2">Decisions</div>
-            <div>
-              <label><input type="checkbox" :checked="options.Decision.showInactiveArguments" @click="
-                $emit('change-option', {
-                  category: 'Decision',
-                  option: 'showInactiveArguments',
-                  value: !options.Decision.showInactiveArguments
-                })
-              " />
-                Show inactive arguments</label>
-            </div>
-            <div>
-              <label><input type="checkbox" :checked="options.Decision.showExpressions" @click="
-                $emit('change-option', {
-                  category: 'Decision',
-                  option: 'showExpressions',
-                  value: !options.Decision.showExpressions
-                })
-              " />
-                Show expressions</label>
-            </div>
-            <div>
-              <label><input type="checkbox" :checked="options.Candidate.autoConfirmRecommended" @click="
-                $emit('change-option', {
-                  category: 'Candidate',
-                  option: 'autoConfirmRecommended',
-                  value: !options.Candidate.autoConfirmRecommended
-                })
-              " />
-                Auto-confirm candidates</label>
-            </div>
-            <div>
-              <label><input type="checkbox" :checked="options.Decision.allowDownloads" @click="
-                $emit('change-option', {
-                  category: 'Decision',
-                  option: 'allowDownloads',
-                  value: !options.Decision.allowDownloads
-                })
-              " />
-                Allow Downloads</label>
-            </div>
-          </template>
+          <div class="d-grid gap-2">
+            <button v-bind:class="'btn btn-outline-secondary ' + ((view == 'task') ? 'active' : '')"
+              @click="view = 'task'" block>
+              <font-awesome-icon icon="clipboard-check" /> Task
+            </button>
+            <label class="mt-2" v-if="debug"><input type="checkbox" :checked="options.debug"
+                @click="$emit('change-option', { option: 'debug', value: !options.debug })" />
+              Debug expressions</label>
+            <template v-if="enactment.protocol.candidates">
+              <div class="fw-bold pb-2">Decisions</div>
+              <div>
+                <label class="mt-2"><input type="checkbox" :checked="options.Decision.showInactiveArguments" @click="
+                  $emit('change-option', {
+                    category: 'Decision',
+                    option: 'showInactiveArguments',
+                    value: !options.Decision.showInactiveArguments
+                  })
+                " />
+                  Show inactive arguments</label>
+              </div>
+              <div>
+                <label class="mt-2"><input type="checkbox" :checked="options.Decision.showExpressions" @click="
+                  $emit('change-option', {
+                    category: 'Decision',
+                    option: 'showExpressions',
+                    value: !options.Decision.showExpressions
+                  })
+                " />
+                  Show expressions</label>
+              </div>
+              <div>
+                <label class="mt-2"><input type="checkbox" :checked="options.Candidate.autoConfirmRecommended" @click="
+                  $emit('change-option', {
+                    category: 'Candidate',
+                    option: 'autoConfirmRecommended',
+                    value: !options.Candidate.autoConfirmRecommended
+                  })
+                " />
+                  Auto-confirm candidates</label>
+              </div>
+              <div>
+                <label class="mt-2"><input type="checkbox" :checked="options.Decision.allowDownloads" @click="
+                  $emit('change-option', {
+                    category: 'Decision',
+                    option: 'allowDownloads',
+                    value: !options.Decision.allowDownloads
+                  })
+                " />
+                  Allow Downloads</label>
+              </div>
+            </template>
+          </div>
         </template>
         <template v-if="status && status.triggers && status.triggers.length > 0">
           <h4>Triggers</h4>
           <div class="d-grid gap-2">
-            <button class="btn btn-block" v-for="(trigger, index) in status.triggers" :key="index"
+            <button class="btn mt-2" v-for="(trigger, index) in status.triggers" :key="index"
               @click="sendTrigger(trigger)">
               {{ trigger }}
             </button>
@@ -236,15 +240,13 @@ todo:
           <pr-map :enactment="enactment" :selectedtask="path" @select-task="updatePath" class="mt-2" />
         </template>
         <div class="d-grid gap-2">
-          <button :class="'btn btn-outline-secondary btn-block' + ((view == 'data') ? 'active' : '')"
-            @click="view = 'data'">
+          <button :class="'btn btn-outline-secondary ' + ((view == 'data') ? 'active' : '')" @click="view = 'data'">
             <font-awesome-icon icon="table" /> Data
           </button>
-          <button :class="'btn btn-outline-secondary btn-block' + ((view == 'history') ? 'active' : '')"
-            @click="view = 'history'">
+          <button :class="'btn btn-outline-secondary ' + ((view == 'history') ? 'active' : '')" @click="view = 'history'">
             <font-awesome-icon icon="history" /> History
           </button>
-          <button class="btn btn-outline-secondary btn-block" @click="restartEnactment">
+          <button class="btn btn-outline-secondary " @click="restartEnactment">
             <font-awesome-icon icon="redo-alt" /> Restart
           </button>
         </div>
