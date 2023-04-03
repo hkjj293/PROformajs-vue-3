@@ -2,6 +2,104 @@
 import { Protocol } from '@openclinical/proformajs'
 import DebugApp from './DebugApp.vue'
 
+const template2 = {
+  class: 'Plan',
+  meta: {
+    svg: {
+      width: 800,
+      height: 400
+    }
+  },
+  caption: 'Plan',
+  name: 'plan',
+  autonomous: true,
+  dataDefinitions: [
+    {
+      class: 'Integer',
+      caption: ' B',
+      name: 'B'
+    }
+  ],
+  tasks: [
+    {
+      class: 'Decision',
+      meta: {
+        pos: {
+          x: 270.04226258851673,
+          y: 137.24439206971024
+        }
+      },
+      caption: 'Decision A',
+      name: 'decisionA',
+      candidates: [
+        {
+          class: 'Candidate',
+          caption: 'A',
+          name: 'a',
+          recommendCondition: "net_support('a')>0",
+          arguments: [
+            {
+              class: 'Argument',
+              caption: 'random() > 0.2',
+              description: 'Description 0',
+              support: 1,
+              activeCondition: 'random() > 0.2'
+            },
+            {
+              class: 'Argument',
+              caption: ' random() > 0.4',
+              description: 'Description 1',
+              support: 1,
+              activeCondition: ' random() > 0.4'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      class: 'Enquiry',
+      meta: {
+        pos: {
+          x: 114.93010398272196,
+          y: 132.0448634423179
+        }
+      },
+      caption: 'Enquiry B',
+      name: 'enquiryB',
+      sources: [
+        {
+          class: 'Source',
+          type: 'B'
+        }
+      ]
+    },
+    {
+      class: 'Action',
+      meta: {
+        pos: {
+          x: 197.58842645773524,
+          y: 32.22691806539074
+        }
+      },
+      caption: 'Action C',
+      name: 'actionC',
+      preCondition: 'index()==2'
+    },
+    {
+      class: 'Plan',
+      meta: {
+        pos: {
+          x: 173.52608901109784,
+          y: 251.02243172115897
+        }
+      },
+      caption: 'Plan D',
+      name: 'planD',
+      autonomous: true
+    }
+  ]
+}
+
 const template = {
   "class": "Plan",
   "meta": {
@@ -88,9 +186,9 @@ export default {
   name: 'ServeDev',
   data: function () {
     return {
-      selectedtask: template.name, // initial value,
+      selectedtask: template2.name, // initial value,
       tab: 'compose',
-      protocol: new Protocol.Plan(template),
+      protocol: new Protocol.Plan(template2),
       initialData: {}
     }
   },
@@ -160,7 +258,7 @@ export default {
             style="overflow-anchor: none">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div id="nav_collapse" class="navbar-collapse collapse" style="justify-content: endvv;">
+          <div id="nav_collapse" class="navbar-collapse collapse" style="justify-content: end">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
