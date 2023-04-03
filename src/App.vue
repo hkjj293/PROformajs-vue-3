@@ -3,6 +3,39 @@ import { Protocol } from '@openclinical/proformajs'
 import DebugApp from './DebugApp.vue'
 
 const template = {
+  "class": "Plan",
+  "meta": {
+    "svg": {
+      "width": 800,
+      "height": 400
+    }
+  },
+  "caption": "Plan",
+  "name": "plan",
+  "autonomous": true,
+  "dataDefinitions": [
+    {
+      "class": "Integer",
+      "caption": "A",
+      "name": "a",
+      "valueCondition": "2"
+    }
+  ],
+  "tasks": [
+    {
+      "class": "Action",
+      "meta": {
+        "pos": {
+          "x": 135.54356301541733,
+          "y": 181.13459032695374
+        }
+      },
+      "caption": "Action A",
+      "name": "actionA"
+    }
+  ]
+}
+/*{
   class: 'Plan',
   name: 'plan',
   caption: 'Plan',
@@ -15,7 +48,7 @@ const template = {
       height: 400
     }
   }
-}
+}*/
 
 function checkTaskMeta(plan) {
   if (plan.tasks) {
@@ -121,24 +154,28 @@ export default {
 <template>
   <div id="app">
     <main role="main">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-3">
         <div class="container-fluid">
           <div class="navbar-brand">PRO<em>formajs</em></div>
-          <button type="button" aria-label="Toggle navigation" class="navbar-toggler collapsed" aria-expanded="false"
-            aria-controls="nav_collapse" style="overflow-anchor: none">
+          <button type="button" aria-label="Toggle navigation" class="navbar-toggler" aria-expanded="false"
+            aria-controls="nav_collapse" data-bs-toggle="collapse" data-bs-target="#nav_collapse"
+            style="overflow-anchor: none">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div id="nav_collapse" class="navbar-collapse collapse" style="display: none">
+          <div id="nav_collapse" class="navbar-collapse collapse" style="justify-content: endvv;">
             <ul class="navbar-nav ml-auto">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Reset
-              </a>
-              <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-right">
-                <li role="presentation" @click="resetProtocol">Plan</li>
-                <li role="presentation" @click="resetProtocol('Decision')">Decision</li>
-                <li role="presentation" @click="resetProtocol('Action')">Action</li>
-                <li role="presentation" @click="resetProtocol('Enquiry')">Enquiry</li>
-              </ul>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Reset
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li class="dropdown-item" role="presentation" @click="resetProtocol">Plan</li>
+                  <li class="dropdown-item" role="presentation" @click="resetProtocol('Decision')">Decision</li>
+                  <li class="dropdown-item" role="presentation" @click="resetProtocol('Action')">Action</li>
+                  <li class="dropdown-item" role="presentation" @click="resetProtocol('Enquiry')">Enquiry</li>
+                </ul>
+              </li>
             </ul>
           </div>
         </div>
