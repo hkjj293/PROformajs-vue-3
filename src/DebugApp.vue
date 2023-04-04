@@ -51,6 +51,7 @@ import MapIconTaskDebug from './lib-components/__debug__/MapIconTask.debug.vue';
     <MapTaskBarDebug />
     <ComposeMapDebug />
     <ComposeIconDebug />
+    <ComposeTreeDebug />
   </div>
 </template>
 
@@ -83,6 +84,7 @@ import ComposeMapTaskDebug from './lib-components/__debug__/Compose_debug/Compos
 import MapTaskBarDebug from './lib-components/__debug__/Compose_debug/MapTaskBar.debug.vue'
 import ComposeMapDebug from './lib-components/__debug__/Compose_debug/ComposeMap.debug.vue'
 import ComposeIconDebug from './lib-components/__debug__/Compose_debug/ComposeIcon.debug.vue'
+import ComposeTreeDebug from './lib-components/__debug__/Compose_debug/ComposeTree.debug.vue'
 
 export default {
   name: 'DebugApp',
@@ -114,7 +116,8 @@ export default {
     ComposeMapTaskDebug,
     MapTaskBarDebug,
     ComposeMapDebug,
-    ComposeIconDebug
+    ComposeIconDebug,
+    ComposeTreeDebug
   }
 }
 </script>
