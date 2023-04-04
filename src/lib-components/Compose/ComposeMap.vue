@@ -55,8 +55,6 @@ import MapBreadcrumb from '../Core/MapBreadcrumb.vue';
 import MapTaskBar from './MapTaskBar.vue';
 import { TemporalConstraintMixin } from '../Core/compose.js';
 import { Protocol } from '@openclinical/proformajs';
-import { createApp } from 'vue'
-//import Vue from 'vue';
 
 let selectedElement, offset, transform; // used in dragging tasks
 //let arrowElement; // used in connecting tasks
