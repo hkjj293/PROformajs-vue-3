@@ -37,6 +37,9 @@ Provides an svg element that can be used to visualise a PROformajs protocol as a
         <pm-arrow v-for="dep in deps" :key="dep.target.name + '-' + dep.source.name" :tx="dep.target.x" :ty="dep.target.y"
           :sx="dep.source.x" :sy="dep.source.y" :source="dep.source.name" :target="dep.target.name"
           @delete-arrow="handleDeleteArrow" :selected="arrowSelected(dep)" />
+        <!-- Arrow for drag -->
+        <pm-arrow v-if="dragArrow.show" :tx="dragArrow.tx" :ty="dragArrow.ty" :sx="dragArrow.sx" :sy="dragArrow.sy"
+          :source="dragArrow.source" />
       </template>
       <pc-maptask v-else :task="plan" :x="taskPos(protocol).x" :y="taskPos(protocol).y" :stroke_width="stroke_width"
         :selected="true" :no_handle="true" :data-path="plan.path()" :data-fromx="20 + (protocol.meta.svg.width / 2)"
@@ -52,10 +55,11 @@ import MapBreadcrumb from '../Core/MapBreadcrumb.vue';
 import MapTaskBar from './MapTaskBar.vue';
 import { TemporalConstraintMixin } from '../Core/compose.js';
 import { Protocol } from '@openclinical/proformajs';
+import { createApp } from 'vue'
 //import Vue from 'vue';
 
 let selectedElement, offset, transform; // used in dragging tasks
-let arrowElement; // used in connecting tasks
+//let arrowElement; // used in connecting tasks
 
 export default {
   name: 'pc-map',
@@ -83,6 +87,14 @@ export default {
       },
       breadcrumb: {
         height: 30
+      },
+      dragArrow: {
+        show: false,
+        sx: 0,
+        sy: 0,
+        tx: 0,
+        ty: 0,
+        source: ""
       }
     }
   },
@@ -244,14 +256,12 @@ export default {
           if (sourceElement.dataset.path) {
             offset = this.getMousePosition(evt);
             let source = sourceElement.dataset.path.split(":").pop()
-            //let ArrowClass = Vue.extend(MapArrow);
-            arrowElement = new MapArrow({
-              propsData: { sx: this.ports[source].from.x, sy: this.ports[source].from.y, tx: offset.x, ty: offset.y, source: source }
-            });
-            arrowElement.$mount()
-            this.$refs.svg.appendChild(arrowElement.$el)
-          } else {
-            arrowElement = null;
+            this.dragArrow.show = true;
+            this.dragArrow.source = source;
+            this.dragArrow.sx = this.ports[source].from.x;
+            this.dragArrow.sy = this.ports[source].from.y;
+            this.dragArrow.tx = offset.x;
+            this.dragArrow.ty = offset.y;
           }
         }
       } else if (evt.target.parentNode && evt.target.parentNode.classList.contains('arrow')) {
@@ -275,11 +285,11 @@ export default {
           // move element by updating position on svg canvas
           transform.setTranslate(coord.x - offset.x, coord.y - offset.y);
         }
-      } else if (arrowElement) {
+      } else if (this.dragArrow.show) {
         evt.preventDefault();
         var coord = this.getMousePosition(evt);
-        arrowElement.tx = coord.x;
-        arrowElement.ty = coord.y;
+        this.dragArrow.tx = coord.x;
+        this.dragArrow.ty = coord.y;
       }
     },
     endDrag(evt) {
@@ -346,20 +356,19 @@ export default {
         }
       }
       selectedElement = null;
-      if (arrowElement) {
+      if (this.dragArrow.show) {
         let coord = this.getMousePosition(evt);
         for (let task of this.plan.tasks) {
-          if (task.name != arrowElement.source) {
+          if (task.name != this.dragArrow.source) {
             let p = this.ports[task.name];
             if ((coord.x >= p.to.x) && (coord.x <= p.from.x) && (coord.y >= (p.to.y - 20)) && (coord.y <= (p.to.y + 20))) {
-              this.addAntecedent(this.plan.path(), arrowElement.source, task.name);
+              this.addAntecedent(this.plan.path(), this.dragArrow.source, task.name);
               this.$emit('change-protocol', { value: this.protocol, emitter: 'pc-map.4' });
             }
           }
         }
-        this.$refs.svg.removeChild(arrowElement.$el);
+        this.dragArrow.show = false;
       }
-      arrowElement = null; // TODO remove element if its not landed
     },
     getMousePosition(evt) {
       let CTM = this.$refs.svg.getScreenCTM();

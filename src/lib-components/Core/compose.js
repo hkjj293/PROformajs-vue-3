@@ -181,7 +181,7 @@ export const TemporalConstraintMixin = {
       if (task[attribute] && task[attribute].length > 0) {
         task[attribute] = clause + ' && ' + task[attribute]
       } else {
-        this.$set(task, attribute, clause)
+        task[attribute] = clause
       }
     },
     replaceClause(task, attribute, existing, replacing) {
