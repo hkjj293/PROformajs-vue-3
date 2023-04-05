@@ -56,6 +56,10 @@ import MapIconTaskDebug from './lib-components/__debug__/MapIconTask.debug.vue';
     <ComposeSourceDebug />
     <ComposeCheckboxDebug />
     <ComposeConditionDebug />
+    <ComposeNameDebug />
+    <ComposeInputDebug />
+    <ComposeTextAreaDebug />
+    <ComposeArgumentDebug />
   </div>
 </template>
 
@@ -93,6 +97,10 @@ import ComposeNonTemporalConditionDebug from './lib-components/__debug__/Compose
 import ComposeSourceDebug from './lib-components/__debug__/Compose_debug/ComposeSource.debug.vue'
 import ComposeCheckboxDebug from './lib-components/__debug__/Compose_debug/ComposeCheckbox.debug.vue'
 import ComposeConditionDebug from './lib-components/__debug__/Compose_debug/ComposeCondition.debug.vue'
+import ComposeNameDebug from './lib-components/__debug__/Compose_debug/ComposeName.debug.vue'
+import ComposeInputDebug from './lib-components/__debug__/Compose_debug/ComposeInput.debug.vue'
+import ComposeTextAreaDebug from './lib-components/__debug__/Compose_debug/ComposeTextArea.debug.vue'
+import ComposeArgumentDebug from './lib-components/__debug__/Compose_debug/ComposeArgument.debug.vue'
 
 export default {
   name: 'DebugApp',
@@ -129,7 +137,11 @@ export default {
     ComposeNonTemporalConditionDebug,
     ComposeSourceDebug,
     ComposeCheckboxDebug,
-    ComposeConditionDebug
+    ComposeConditionDebug,
+    ComposeNameDebug,
+    ComposeInputDebug,
+    ComposeTextAreaDebug,
+    ComposeArgumentDebug
   }
 }
 </script>
