@@ -45,22 +45,24 @@ Provides the means to review and edit a PROformajs argument's attributes and chi
       </li>
     </ul>
     <div class="tab-content mt-2">
-      <div id="pc-arg-tabs-details">
+      <div class="tab-pane active" id="pc-arg-tabs-details">
         <form>
           <pc-input att="caption" :comp="argument" @change-attribute="updateAttribute" />
           <pc-textarea att="description" :comp="argument" @change-attribute="updateAttribute" />
-          <div label="Support" label-for="supportType" class="mb-1 col-sm-3">
-            <b-form-radio-group id="supportType" size="sm" buttons button-variant="outline-secondary"
-              v-model="supportSymbol"
-              :options="[{ value: '--', text: '--' }, { value: '-', text: '-' }, { value: '+', text: '+' }, { value: '++', text: '++' }]"
-              name="supportType" />
-            <div class="btn-group">
+          <div class="mb-1 row g-3">
+            <label class="d-block" for="supportType">Support</label>
+            <div id="supportType" class="input-group mb-3 col-auto" name="supportType">
+              <template v-for="symbol in support">
+                <input type="radio" class="btn-check" :name="symbol.value" :id="symbol.value" :value="symbol.value"
+                  autocomplete="off" :v-model="supportSymbol" :checked="supportSymbol == symbol.value">
+                <label class="btn btn-outline-secondary btn-sm" :for="symbol">{{ symbol.text }}</label>
+              </template>
               <input type="number" name="supportValue" size="2" :value="Math.abs(argument.support)" />
             </div>
           </div>
         </form>
       </div>
-      <div id="pc-arg-tabs-condition">
+      <div class="tab-pane" id="pc-arg-tabs-condition">
         <pc-condition att="activeCondition" :comp="argument" :description="activeConditionExample"
           :issues="attributeIssues('activeCondition')" @change-attribute="updateAttribute" />
       </div>
@@ -87,7 +89,8 @@ export default {
   data() {
     return {
       magnitude: 1,
-      tabIndex: 0
+      tabIndex: 0,
+      support: [{ value: '--', text: '--' }, { value: '-', text: '-' }, { value: '+', text: '+' }, { value: '++', text: '++' }]
     }
   },
   computed: {
@@ -131,6 +134,8 @@ export default {
       return this.argument._parent ? this.argument._parent.name : '';
     },
     numSiblings() {
+      console.log(this.argument)
+      console.log(this.argument._parent)
       return this.argument._parent ? this.argument._parent.arguments.length : -1;
     }
   },

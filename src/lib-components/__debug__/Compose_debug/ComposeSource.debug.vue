@@ -84,7 +84,7 @@ export default {
     data: function () {
         return {
             protocol: new Protocol.Plan(template),
-            sourcePath: "plan:enquiryB",
+            sourcePath: "plan:enquiryB:a",
             tabIndex: 0
         }
     },

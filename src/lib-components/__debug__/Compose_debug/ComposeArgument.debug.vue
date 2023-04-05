@@ -66,6 +66,33 @@ const template = {
             cyclic: true
         },
         {
+            "class": "Decision",
+            "meta": {
+                "pos": {
+                    "x": 366.8865885462589,
+                    "y": 151.96591271848806
+                }
+            },
+            "caption": "Decision A",
+            "name": "decisionA",
+            "candidates": [
+                {
+                    "class": "Candidate",
+                    "caption": "I",
+                    "name": "i",
+                    "recommendCondition": "net_support('i')>0",
+                    "arguments": [
+                        {
+                            "class": "Argument",
+                            "caption": "k",
+                            "support": 1,
+                            "activeCondition": "k"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             class: 'Plan',
             meta: {
                 pos: {
@@ -93,9 +120,9 @@ export default {
                 }
             },
             enactment: null,
-            path: "plan:actionA",
-            argumentPath: "plan:actionA",
-            selectedtask: "plan:actionA",
+            path: "plan:decisionA",
+            argumentPath: "plan:decisionA:i:0",
+            selectedtask: "plan:decisionA",
             jsonValid: true,
             issues: [],
         }

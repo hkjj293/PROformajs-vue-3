@@ -31,7 +31,7 @@ Provides the means to review and edit a PROformajs source details
       :id="'pc-source-tabs-' + (this.plan && this.plan.name ? this.plan.name.replaceAll(':', '-') : 'no-name')"
       role="tablist">
       <li class="nav-item" role="presentation">
-        <button :class="'nav-link '" :id="'pc-source-tabs'" data-bs-toggle="tab"
+        <button :class="'nav-link'" :id="'pc-source-tabs'" data-bs-toggle="tab"
           :data-bs-target="'#pc-source-tabs-content'" type="button" role="tab" :aria-controls="'pc-source-tabs-content'"
           :aria-selected="true">
           Details
@@ -39,11 +39,11 @@ Provides the means to review and edit a PROformajs source details
       </li>
     </ul>
     <div class="tab-content">
-      <div id="pc-source-tabs-content">
+      <div class="tab-pane show active" role="tabpanel" tabindex="0" id="pc-source-tabs-content">
         <div class="alert alert-info" :show="custom">
           Custom requestCondition detected. Please refer to the code view.
         </div>
-        <div class="col-sm-3">
+        <div class="col">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="required" :disabled="custom" :checked="required"
               @change="setRequired">
@@ -58,12 +58,12 @@ Provides the means to review and edit a PROformajs source details
               ... from within a specified period
             </label>
           </div>
-          <div :disabled="custom || !timely" class="form-row">
-            <div class="col">
-              <input type="number" class="form-control form-control-sm" id="timeunits" ref="timeUnits" v-model="timeUnits"
+          <div class="row g-3" :disabled="custom || !timely">
+            <div class="col-auto">
+              <input class="form-control form-control-sm" type="number" id="timeunits" ref="timeUnits" v-model="timeUnits"
                 :disabled="custom || !required || !timely" @change="setRequestCondition">
             </div>
-            <div class="col">
+            <div class="col-auto">
               <select class="form-control form-control-sm" id="timeunit" ref="timeUnit" v-model="timeUnit"
                 :disabled="custom || !required || !timely" @change="setRequestCondition">
                 <option value="minutes">Minutes</option>
