@@ -1,18 +1,19 @@
 <docs>
-    Debug for ComposeNonTemporalCondition
+    Debug for ComposeCondition
 </docs>
 
 <template>
     <div>
-        <debug title="ComposeNonTemporalCondition">
-            <ComposeNonTemporalCondition att="waitCondition" :comp="task" @change-attribute="updateAttribute"
-                :issues="attributeIssues('waitCondition')" />
+        <debug title="ComposeCondition">
+            <ComposeCondition att="cycleUntil" :comp="task" @change-attribute="updateAttribute" :disabled="!task.cyclic"
+                description="e.g. index()==2" :issues="attributeIssues('cycleCondition')" />
         </debug>
     </div>
 </template >
 
 <script>
-import ComposeNonTemporalCondition from '../../Compose/ComposeNonTemporalCondition.vue'
+import ComposeCondition from '../../Compose/ComposeCondition.vue'
+
 import { Enactment, Protocol } from '@openclinical/proformajs'
 
 const template = {
@@ -30,8 +31,7 @@ const template = {
         {
             class: 'Integer',
             caption: 'A',
-            name: 'a',
-            valueCondition: '2'
+            name: 'a'
         }
     ],
     tasks: [
@@ -44,7 +44,26 @@ const template = {
                 }
             },
             caption: 'Action A',
-            name: 'actionA'
+            name: 'actionA',
+            cyclic: true
+        },
+        {
+            class: "Enquiry",
+            meta: {
+                pos: {
+                    x: 372.6915158116656,
+                    y: 101.34660723319621
+                }
+            },
+            caption: "Enquiry B",
+            name: "enquiryB",
+            sources: [
+                {
+                    class: "Source",
+                    type: "a"
+                }
+            ],
+            cyclic: true
         },
         {
             class: 'Plan',
@@ -64,8 +83,7 @@ const template = {
 }
 
 export default {
-
-    name: 'ComposeNonTemporalConditionDebug',
+    name: 'ComposeConditionDebug',
     data: function () {
         return {
             protocol: new Protocol.Plan(template),
@@ -139,6 +157,6 @@ export default {
             return this.selectedTaskIssues.filter((issue) => issue.attribute == att);
         },
     },
-    components: { ComposeNonTemporalCondition }
+    components: { ComposeCondition }
 }
 </script>

@@ -53,6 +53,9 @@ import MapIconTaskDebug from './lib-components/__debug__/MapIconTask.debug.vue';
     <ComposeIconDebug />
     <ComposeTreeDebug />
     <ComposeNonTemporalConditionDebug />
+    <ComposeSourceDebug />
+    <ComposeCheckboxDebug />
+    <ComposeConditionDebug />
   </div>
 </template>
 
@@ -87,6 +90,9 @@ import ComposeMapDebug from './lib-components/__debug__/Compose_debug/ComposeMap
 import ComposeIconDebug from './lib-components/__debug__/Compose_debug/ComposeIcon.debug.vue'
 import ComposeTreeDebug from './lib-components/__debug__/Compose_debug/ComposeTree.debug.vue'
 import ComposeNonTemporalConditionDebug from './lib-components/__debug__/Compose_debug/ComposeNonTemporalCondition.debug.vue'
+import ComposeSourceDebug from './lib-components/__debug__/Compose_debug/ComposeSource.debug.vue'
+import ComposeCheckboxDebug from './lib-components/__debug__/Compose_debug/ComposeCheckbox.debug.vue'
+import ComposeConditionDebug from './lib-components/__debug__/Compose_debug/ComposeCondition.debug.vue'
 
 export default {
   name: 'DebugApp',
@@ -120,7 +126,10 @@ export default {
     ComposeMapDebug,
     ComposeIconDebug,
     ComposeTreeDebug,
-    ComposeNonTemporalConditionDebug
+    ComposeNonTemporalConditionDebug,
+    ComposeSourceDebug,
+    ComposeCheckboxDebug,
+    ComposeConditionDebug
   }
 }
 </script>
