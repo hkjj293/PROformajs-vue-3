@@ -83,8 +83,8 @@ interactable.
             </label>
             <pr-markdown v-if="showCandidateDescriptionInline && candidate.description" :text="candidate.description"
               class="mb-1 markdown" />
-            <PopoverButton v-if="!showCandidateDescriptionInline && candidate.description" :msg="candidate.description"
-              class="pb-1 pt-0 pe-0">
+            <PopoverButton :noTitle="true" v-if="!showCandidateDescriptionInline && candidate.description"
+              :msg="candidate.description" class="pb-1 pt-0 pe-0">
               <font-awesome-icon icon="info-circle" />
             </PopoverButton>
             <div v-if="options.Decision.showExpressions" class="text-muted font-italic">
@@ -122,7 +122,7 @@ interactable.
                 <pr-markdown v-if="showArgumentDescriptionInline" :text="argument.description"
                   @send-trigger="$emit('send-trigger', $event)" class="mb-1 markdown text-muted" />
                 <template v-else>
-                  <PopoverButton :msg="argument.description" class="btn-link btn-sm pb-1 pt-0">
+                  <PopoverButton :noTitle="true" :msg="argument.description" class="btn-link btn-sm pb-1 pt-0">
                     <font-awesome-icon icon="info-circle" />
                   </PopoverButton>
                 </template>
