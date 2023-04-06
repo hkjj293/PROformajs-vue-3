@@ -1,5 +1,6 @@
 <script>
 import { Popover } from 'bootstrap'
+import { nextTick } from 'vue'
 
 export default {
   name: 'PopoverButton',

@@ -39,7 +39,7 @@ Just about works.  Current coverage shown below.
 
         <!-- If showDescriptionInline && source.description-->
         <template v-if="!showDescriptionInline && source.description">
-          <PopoverButton :msg="message" noTitle="true">
+          <PopoverButton :targetId="'target:source' + source.path" :msg="message" :noTitle="true">
             <font-awesome-icon icon="info-circle" />
           </PopoverButton>
           <div :id="'target:source' + source.path" hidden>
@@ -197,14 +197,6 @@ export default {
     useDatalist() {
       return this.source.meta && this.source.meta.ui && this.source.meta.ui.useDatalist
     }
-  },
-  mounted() {
-    nextTick(() => {
-      if (document.getElementById('target:source' + this.source.path)) {
-        this.message = document.getElementById('target:source' + this.source.path).innerHTML
-      }
-      console.log('---Message---: ' + this.message)
-    })
   },
   methods: {
     handleBlur(evt) {
