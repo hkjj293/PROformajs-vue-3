@@ -31,15 +31,16 @@ Provides the means to review and edit a PROformajs argument's attributes and chi
       :id="'pc-arg-tabs-' + (this.plan && this.plan.name ? this.plan.name.replaceAll(':', '-') : 'no-name')"
       role="tablist">
       <li class="nav-item" role="presentation">
-        <button :class="'nav-link active'" :id="'pc-arg-tabs'" data-bs-toggle="tab"
+        <button :class="'nav-link ' + (tabIndex == 0 ? 'active' : '')" :id="'pc-arg-tabs'" data-bs-toggle="tab"
           :data-bs-target="'#pc-arg-tabs-details'" type="button" role="tab" :aria-controls="'pc-arg-tabs-details'"
           :aria-selected="true">
           Details
         </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button :class="'nav-link '" :id="'pc-arg-tabs'" data-bs-toggle="tab" :data-bs-target="'#pc-arg-tabs-condition'"
-          type="button" role="tab" :aria-controls="'pc-arg-tabs-condition'" :aria-selected="true">
+        <button :class="'nav-link ' + (tabIndex == 1 ? 'active' : '')" :id="'pc-arg-tabs'" data-bs-toggle="tab"
+          :data-bs-target="'#pc-arg-tabs-condition'" type="button" role="tab" :aria-controls="'pc-arg-tabs-condition'"
+          :aria-selected="true">
           Condition
         </button>
       </li>

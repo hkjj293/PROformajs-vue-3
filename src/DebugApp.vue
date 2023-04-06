@@ -60,6 +60,7 @@ import MapIconTaskDebug from './lib-components/__debug__/MapIconTask.debug.vue';
     <ComposeInputDebug />
     <ComposeTextAreaDebug />
     <ComposeArgumentDebug />
+    <ComposeCandidateDebug />
   </div>
 </template>
 
@@ -101,6 +102,7 @@ import ComposeNameDebug from './lib-components/__debug__/Compose_debug/ComposeNa
 import ComposeInputDebug from './lib-components/__debug__/Compose_debug/ComposeInput.debug.vue'
 import ComposeTextAreaDebug from './lib-components/__debug__/Compose_debug/ComposeTextArea.debug.vue'
 import ComposeArgumentDebug from './lib-components/__debug__/Compose_debug/ComposeArgument.debug.vue'
+import ComposeCandidateDebug from './lib-components/__debug__/Compose_debug/ComposeCandidate.debug.vue'
 
 export default {
   name: 'DebugApp',
@@ -141,7 +143,8 @@ export default {
     ComposeNameDebug,
     ComposeInputDebug,
     ComposeTextAreaDebug,
-    ComposeArgumentDebug
+    ComposeArgumentDebug,
+    ComposeCandidateDebug
   }
 }
 </script>
