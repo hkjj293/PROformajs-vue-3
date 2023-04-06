@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-04-05T12:16:51.577Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="OtF6nlVEh--sHCMPOmpR" version="21.1.4" type="github">
+<mxfile host="app.diagrams.net" modified="2023-04-06T15:31:05.624Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="kKFRFYFkAnO8j7BHX4Ln" version="21.1.4" type="github">
   <diagram name="v1.0.0" id="n8G7o3eAPn_Wvr_kKuBB">
-    <mxGraphModel dx="2875" dy="743" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2875" dy="793" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -197,7 +197,7 @@
         <mxCell id="FQSfcEZK8xAJ8cy2tzZz-69" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fillColor=#d80073;strokeColor=#A50040;" parent="1" source="FQSfcEZK8xAJ8cy2tzZz-42" target="FQSfcEZK8xAJ8cy2tzZz-48" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="FQSfcEZK8xAJ8cy2tzZz-42" value="ComposeData" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="FQSfcEZK8xAJ8cy2tzZz-42" value="ComposeData" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#FF8000;strokeWidth=4;" parent="1" vertex="1">
           <mxGeometry x="-857.5" y="420" width="90" height="50" as="geometry" />
         </mxCell>
         <mxCell id="FQSfcEZK8xAJ8cy2tzZz-43" value="ComposeSource" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#007FFF;strokeWidth=4;" parent="1" vertex="1">
@@ -275,7 +275,7 @@
         <mxCell id="FQSfcEZK8xAJ8cy2tzZz-82" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fillColor=#6a00ff;strokeColor=#3700CC;" parent="1" source="FQSfcEZK8xAJ8cy2tzZz-71" target="FQSfcEZK8xAJ8cy2tzZz-47" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="FQSfcEZK8xAJ8cy2tzZz-71" value="ComposeonArgument" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="FQSfcEZK8xAJ8cy2tzZz-71" value="ComposeonArgument" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=4;strokeColor=#007FFF;" parent="1" vertex="1">
           <mxGeometry x="-1070" y="560" width="152.5" height="50" as="geometry" />
         </mxCell>
         <mxCell id="FQSfcEZK8xAJ8cy2tzZz-78" value="" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="FQSfcEZK8xAJ8cy2tzZz-4" target="FQSfcEZK8xAJ8cy2tzZz-44" edge="1">
@@ -284,7 +284,7 @@
             <mxPoint x="-149" y="590" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="FQSfcEZK8xAJ8cy2tzZz-44" value="ComposeCandidate" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="FQSfcEZK8xAJ8cy2tzZz-44" value="ComposeCandidate" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=4;strokeColor=#FF8000;" parent="1" vertex="1">
           <mxGeometry x="-747.5" y="420" width="115" height="50" as="geometry" />
         </mxCell>
         <mxCell id="FQSfcEZK8xAJ8cy2tzZz-99" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="FQSfcEZK8xAJ8cy2tzZz-84" target="FQSfcEZK8xAJ8cy2tzZz-98" edge="1">
@@ -651,7 +651,7 @@
         <mxCell id="hgqMB4pY9LAcgHJK_ChO-5" value="IconSource" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=4;strokeColor=#FF8000;" parent="1" vertex="1">
           <mxGeometry x="-95.5" y="800" width="70" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="wM6DHVGYjsXBMmTnMNck-1" value="ComposeTextArea" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#FF8000;strokeWidth=4;" vertex="1" parent="1">
+        <mxCell id="wM6DHVGYjsXBMmTnMNck-1" value="ComposeTextArea" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#FF8000;strokeWidth=4;" parent="1" vertex="1">
           <mxGeometry x="-1035" y="700" width="115" height="50" as="geometry" />
         </mxCell>
       </root>
