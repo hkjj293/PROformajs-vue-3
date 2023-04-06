@@ -38,8 +38,8 @@ Provides an svg element that can be used to visualise a PROformajs protocol as a
           :sx="dep.source.x" :sy="dep.source.y" :source="dep.source.name" :target="dep.target.name"
           @delete-arrow="handleDeleteArrow" :selected="arrowSelected(dep)" />
         <!-- Arrow for drag -->
-        <pm-arrow v-if="dragArrow.show" :tx="dragArrow.tx" :ty="dragArrow.ty" :sx="dragArrow.sx" :sy="dragArrow.sy"
-          :source="dragArrow.source" />
+        <pm-arrow class="task" v-if="dragArrow.show" :tx="dragArrow.tx" :ty="dragArrow.ty" :sx="dragArrow.sx"
+          :sy="dragArrow.sy" :source="dragArrow.source" />
       </template>
       <pc-maptask v-else :task="plan" :x="taskPos(protocol).x" :y="taskPos(protocol).y" :stroke_width="stroke_width"
         :selected="true" :no_handle="true" :data-path="plan.path()" :data-fromx="20 + (protocol.meta.svg.width / 2)"
@@ -258,8 +258,10 @@ export default {
             this.dragArrow.source = source;
             this.dragArrow.sx = this.ports[source].from.x;
             this.dragArrow.sy = this.ports[source].from.y;
-            this.dragArrow.tx = offset.x;
-            this.dragArrow.ty = offset.y;
+            this.dragArrow.tx = offset.x + 1;
+            this.dragArrow.ty = offset.y + 1;
+          } else {
+            this.dragArrow.show = false;
           }
         }
       } else if (evt.target.parentNode && evt.target.parentNode.classList.contains('arrow')) {
@@ -286,8 +288,8 @@ export default {
       } else if (this.dragArrow.show) {
         evt.preventDefault();
         var coord = this.getMousePosition(evt);
-        this.dragArrow.tx = coord.x;
-        this.dragArrow.ty = coord.y;
+        this.dragArrow.tx = coord.x + 1;
+        this.dragArrow.ty = coord.y + 1;
       }
     },
     endDrag(evt) {
