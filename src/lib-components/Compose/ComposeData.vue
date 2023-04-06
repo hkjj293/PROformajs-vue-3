@@ -18,8 +18,8 @@ Provides the means to review and edit a PROformajs data definition's attributes 
       <button class="btn btn-outline-secondary btn-sm" @click="$emit('select-path', { value: '' })">
         &lt;&lt; {{ def._parent.constructor.name }}: {{ def._parent.name }}
       </button>
-      <button class="btn btn-outline-secondary btn-sm" size="sm" v-if="numSiblings > 1"
-        :disabled="defIdx = pc - data - tabs= 0" @click="prevDef">
+      <button class="btn btn-outline-secondary btn-sm" size="sm" v-if="numSiblings > 1" :disabled="defIdx == 0"
+        @click="prevDef">
         &lt; Prev
       </button>
       <button class="btn btn-outline-secondary btn-sm" size="sm" v-if="numSiblings > 1"
@@ -27,7 +27,6 @@ Provides the means to review and edit a PROformajs data definition's attributes 
         Next &gt;
       </button>
     </div>
-
     <ul class="nav nav-tabs"
       :id="'pc-arg-tabs-' + (this.plan && this.plan.name ? this.plan.name.replaceAll(':', '-') : 'no-name')"
       role="tablist">
@@ -50,41 +49,50 @@ Provides the means to review and edit a PROformajs data definition's attributes 
           :data-bs-target="'#pc-data-tabs-range-p'" type="button" role="tab" :aria-controls="'pc-data-tabs-range-p'"
           :aria-selected="true">
           Range
+          <span class="badge rounded-pill text-bg-secondary" v-if="def.range && def.range.length > 0">
+            {{ def.range.length }}
+          </span>
         </button>
       </li>
     </ul>
-
-    <b-tabs small v-model="tabIndex" content-class="mt-2">
-      <b-tab title="Details" active>
+    <div class="tab-content mt-2">
+      <div class="tab-pane active" id="pc-data-tabs-details-p">
         <form>
           <pc-name :comp="def" @change-attribute="updateAttribute" />
           <pc-input att="caption" :comp="def" @change-attribute="updateAttribute" />
           <pc-textarea att="description" :comp="def" @change-attribute="updateAttribute" />
-          <b-form-group label="Data type" label-size="sm">
-            <b-form-radio-group buttons id="dataDefinitionClass" name="dataDefinitionClass" size="sm"
-              button-variant="outline-secondary" v-model="clazz"
-              :options="['Boolean', 'Text', 'Integer', 'Float', 'Date']" />
-          </b-form-group>
+          <div class="form-group">
+            <label for="dataDefinitionClass" class="col-form-label col-form-label-sm pt-0"> Data type </label>
+            <div id="dataDefinitionClass" class="input-group mb-3 col-auto">
+              <template v-for="dataType in ['Boolean', 'Text', 'Integer', 'Float', 'Date']">
+                <input type="radio" class="btn-check" name="dataDefinitionClass" :id="dataType" :value="dataType"
+                  autocomplete="off" @input="clazz = dataType" :checked="clazz == dataType">
+                <label class="btn btn-outline-secondary btn-sm" :for="dataType">{{ dataType }}</label>
+              </template>
+            </div>
+          </div>
         </form>
-      </b-tab>
-      <b-tab title="Value">
+      </div>
+      <div class="tab-pane" id="pc-data-tabs-value-p">
         <form>
           <pc-checkbox att="multiValued" :comp="def" @change-attribute="updateAttribute" />
           <pc-input att="defaultValue" :comp="def" @change-attribute="updateAttribute" />
           <pc-condition att="valueCondition" :comp="def" :issues="attributeIssues('valueCondition')"
             @change-attribute="updateAttribute" :description="valueConditionExample" />
         </form>
-      </b-tab>
-      <b-tab title="Range">
-        <template slot="title">
-          Range
-          <b-badge v-if="def.range && def.range.length > 0" pill variant="secondary">{{ def.range.length }}</b-badge>
-        </template>
-        <b-form-group class="ml-1 mb-2" v-if="!def.range || (def.range && def.range.length == 0)">
-          <b-form-radio-group id="rangeAnnotated" size="sm" buttons button-variant="outline-secondary"
-            v-model="rangeAnnotatedToggle" :options="[{ value: true, text: 'Annotated' }, { value: false, text: 'Raw' }]"
-            name="rangeAnnotated" />
-        </b-form-group>
+      </div>
+      <div class="tab-pane" id="pc-data-tabs-range-p">
+        <div class="form-group ml-1 mb-2" v-if="!def.range || (def.range && def.range.length == 0)">
+          <label for="rangeAnnotated" class="col-form-label col-form-label-sm pt-0"> Data type </label>
+          <div id="rangeAnnotated" class="input-group mb-3 col-auto">
+            <template v-for="range in [{ value: true, text: 'Annotated' }, { value: false, text: 'Raw' }]">
+              <input type="radio" class="btn-check" name="rangeAnnotated" :id="range.text" :value="range.value"
+                autocomplete="off" @input="rangeAnnotatedToggle = range.value"
+                :checked="rangeAnnotatedToggle == range.value">
+              <label class="btn btn-outline-secondary btn-sm" :for="range.text">{{ range.text }}</label>
+            </template>
+          </div>
+        </div>
         <table class="table table-sm mt-2">
           <tbody>
             <!-- view / edit / delete existing range values -->
@@ -99,9 +107,9 @@ Provides the means to review and edit a PROformajs data definition's attributes 
                     <input type="text" class="form-control form-control-sm" id="editrangecaption" :value="val.caption">
                   </td>
                   <td>
-                    <b-btn variant="light" size="sm" @click="editRangeItem(idx, $event)">
+                    <button class="btn btn-light btn-sm" @click="editRangeItem(idx, $event)">
                       <font-awesome-icon icon="edit" />
-                    </b-btn>
+                    </button>
                   </td>
                 </template>
                 <!--  view / delete annotated range value -->
@@ -113,9 +121,9 @@ Provides the means to review and edit a PROformajs data definition's attributes 
                     {{ val.caption }}
                   </td>
                   <td>
-                    <b-btn variant="light" size="sm" @click="deleteRangeItem(idx)">
+                    <button class="btn btn-light btn-sm" @click="deleteRangeItem(idx)">
                       &times;
-                    </b-btn>
+                    </button>
                   </td>
                 </template>
               </template>
@@ -128,9 +136,9 @@ Provides the means to review and edit a PROformajs data definition's attributes 
                 <!--  view / delete raw range value -->
                 <template v-else>
                   <span class="clickable" @click="rangeEditIdx = idx">{{ val }}</span>
-                  <b-btn variant="light" size="sm" class="float-sm-right" @click="deleteRangeItem(idx)">
+                  <button class="btn btn-light btn-sm float-sm-end" @click="deleteRangeItem(idx)">
                     &times;
-                  </b-btn>
+                  </button>
                 </template>
               </td>
             </tr>
@@ -146,9 +154,9 @@ Provides the means to review and edit a PROformajs data definition's attributes 
                     placeholder="Enter caption">
                 </td>
                 <td>
-                  <b-btn variant="light" size="sm" @click="addRangeItem">
+                  <button class="btn btn-light btn-sm" @click="addRangeItem">
                     &plus;
-                  </b-btn>
+                  </button>
                 </td>
               </template>
               <template v-else>
@@ -160,8 +168,8 @@ Provides the means to review and edit a PROformajs data definition's attributes 
             </tr>
           </tbody>
         </table>
-      </b-tab>
-    </b-tabs>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -223,7 +231,7 @@ export default {
         // Note that changing the class of a data definition may generate validation errors if it already has range values
         let newdef = new Protocol[evt](this.def);
         // without $set this next change wouldnt be visible to vue, see https://vuejs.org/v2/guide/list.html#Caveats
-        this.$set(this.def._parent.dataDefinitions, this.defIdx, newdef);
+        this.def._parent.dataDefinitions[this.defIdx] = newdef;
         this.$emit('change-protocol', { value: this.protocol, emitter: 'pc-data.0' });
       }
     },
@@ -256,6 +264,7 @@ export default {
       }
     },
     getValue(value) {
+      console.log(this.clazz)
       if (this.clazz == 'Integer') {
         return parseInt(value);
       } else {
@@ -264,13 +273,13 @@ export default {
     },
     addRangeItem() {
       if (!this.def.range) {
-        this.$set(this.def, 'range', []);
+        this.def['range'] = [];
       }
       if (this.rangeAnnotated) {
-        this.$set(this.def.range, this.def.range.length, { value: this.getValue(this.$refs.rangeValue.value.trim()), caption: this.$refs.rangeCaption.value.trim() });
+        this.def.range[this.def.range.length] = { value: this.getValue(this.$refs.rangeValue.value.trim()), caption: this.$refs.rangeCaption.value.trim() };
         this.$refs.rangeCaption.value = null;
       } else {
-        this.$set(this.def.range, this.def.range.length, this.getValue(this.$refs.rangeValue.value.trim()));
+        this.def.range[this.def.range.length] = this.getValue(this.$refs.rangeValue.value.trim());
       }
       this.$refs.rangeValue.value = null;
       this.$refs.rangeValue.focus();
@@ -299,9 +308,9 @@ export default {
       this.rangeEditIdx = -1;
     },
     deleteRangeItem(idx) {
-      this.$delete(this.def.range, idx);
+      this.def.range.splice(idx, 1);
       if (this.def.range.length == 0) {
-        this.$delete(this.def, 'range');
+        delete this.def['range'];
       }
       this.$emit('change-protocol', { value: this.protocol, emitter: 'pc-data.4' });
     },
