@@ -35,6 +35,10 @@ export default {
     title: {
       type: String,
       default: 'Title'
+    },
+    noTitle: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -50,10 +54,16 @@ export default {
     if (this.targetId && document.getElementById(this.targetId)) {
       this.message = document.getElementById(this.targetId).innerHTML
     }
-    this.popover.setContent({
+    let content = {
       '.popover-body': this.message,
       '.popover-header': this.title
-    })
+    }
+    if (this.noTitle) {
+      content = {
+        '.popover-body': this.message
+      }
+    }
+    this.popover.setContent(content)
     this.$el.addEventListener('shown.bs.popover', this.onShown)
     this.$el.addEventListener('show.bs.popover', this.onShow)
   },
@@ -65,29 +75,25 @@ export default {
       if (this.targetId && document.getElementById(this.targetId)) {
         this.message = document.getElementById(this.targetId).innerHTML
       }
-      this.popover.setContent({
+      let content = {
         '.popover-body': this.message,
         '.popover-header': this.title
-      })
+      }
+      if (this.noTitle) {
+        content = {
+          '.popover-body': this.message
+        }
+      }
+      this.popover.setContent(content)
     }
   }
 }
 </script>
 
 <template>
-  <button
-    type="button"
-    :class="classes"
-    data-content-id="popover-27"
-    :data-bs-container="container"
-    :data-bs-trigger="trigger"
-    data-bs-toggle="popover"
-    :data-bs-placement="placement"
-    :data-bs-html="html"
-    :data-bs-title="title"
-    :data-bs-content="msg"
-    @blur="onBlur"
-  >
+  <button type="button" :class="classes" data-content-id="popover-27" :data-bs-container="container"
+    :data-bs-trigger="trigger" data-bs-toggle="popover" :data-bs-placement="placement" :data-bs-html="html"
+    :data-bs-title="noTitle ? ' ' : title" :data-bs-content="msg" @blur="onBlur">
     <slot />
   </button>
 </template>

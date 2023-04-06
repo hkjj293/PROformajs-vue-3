@@ -39,7 +39,7 @@ Just about works.  Current coverage shown below.
 
         <!-- If showDescriptionInline && source.description-->
         <template v-if="!showDescriptionInline && source.description">
-          <PopoverButton :msg="message">
+          <PopoverButton :msg="message" noTitle="true">
             <font-awesome-icon icon="info-circle" />
           </PopoverButton>
           <div :id="'target:source' + source.path" hidden>
