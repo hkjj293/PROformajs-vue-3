@@ -135,8 +135,6 @@ export default {
       return this.argument._parent ? this.argument._parent.name : '';
     },
     numSiblings() {
-      console.log(this.argument)
-      console.log(this.argument._parent)
       return this.argument._parent ? this.argument._parent.arguments.length : -1;
     }
   },

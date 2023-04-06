@@ -16,7 +16,7 @@ Provides the means to review and edit a PROformajs candidates's attributes and c
     <pc-argument v-if="argumentPath != ''" :protocol="protocol" :path="argumentPath"
       @change-protocol="$emit('change-protocol', $event)" @select-path="updateArgumentPath" ref="argumentEditor"
       :issues="subComponentIssues(argumentPath)" />
-    <div v-show="argumentPath == ''">
+    <div :class="(argumentPath == '') ? 'd-block' : 'd-none'">
       <h4>Candidate: {{ candidate.name }}</h4>
       <div class="mb-2">
         <button class="btn btn-outline-secondary btn-sm" @click="$emit('select-path', { value: '' })">

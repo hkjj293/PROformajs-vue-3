@@ -34,7 +34,7 @@ but I cant work out how to position these correctly.  See also MapBreadcrumb.
   <g class="task draggable" @dblclick="changePath"> <!-- v-hammer:tap="doubleTapChangePath"-->
     <component v-bind:is="'pm-icon-' + clazz" :x="x" :y="y" fill="#FFF" :stroke="taskStroke" :animate="false"
       :stroke_width="stroke_width" />
-    <pm-task-handle class="grabbable" v-if="!no_handle" :x="handleX" :y="y + 20 + 16" />
+    <!-- <pm-task-handle v-if="!no_handle" :x="handleX" :y="y + 20 + 16" /> -->
     <text text-anchor="middle" :x="x + midline + (no_handle ? 0 : 3)" :y="y + 20 + 16" class="grabbable"
       v-bind:class="{ selected: selected }" :ref="'caption_' + task.path()">
       {{ task.name }}
@@ -92,7 +92,6 @@ export default {
   },
   computed: {
     clazz: function () {
-      console.log(this.task);
       return this.task.constructor.name.toLowerCase();
     },
     midline: function () {

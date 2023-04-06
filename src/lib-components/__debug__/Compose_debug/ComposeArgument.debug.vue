@@ -16,61 +16,24 @@ import ComposeArgument from '../../Compose/ComposeArgument.vue'
 
 import { Enactment, Protocol } from '@openclinical/proformajs'
 
-const template = {
-    class: 'Plan',
-    meta: {
-        svg: {
-            width: 800,
-            height: 400
+const template1 = {
+    "class": "Plan",
+    "meta": {
+        "svg": {
+            "width": 800,
+            "height": 400
         }
     },
-    caption: 'Plan',
-    name: 'plan',
-    autonomous: true,
-    dataDefinitions: [
-        {
-            class: 'Integer',
-            caption: 'A',
-            name: 'a'
-        }
-    ],
-    tasks: [
-        {
-            class: 'Action',
-            meta: {
-                pos: {
-                    x: 135.54356301541733,
-                    y: 181.13459032695374
-                }
-            },
-            caption: 'Action A',
-            name: 'actionA',
-            cyclic: true
-        },
-        {
-            class: "Enquiry",
-            meta: {
-                pos: {
-                    x: 372.6915158116656,
-                    y: 101.34660723319621
-                }
-            },
-            caption: "Enquiry B",
-            name: "enquiryB",
-            sources: [
-                {
-                    class: "Source",
-                    type: "a"
-                }
-            ],
-            cyclic: true
-        },
+    "caption": "Plan",
+    "name": "plan",
+    "autonomous": true,
+    "tasks": [
         {
             "class": "Decision",
             "meta": {
                 "pos": {
-                    "x": 366.8865885462589,
-                    "y": 151.96591271848806
+                    "x": 214.51445649762252,
+                    "y": 127.53034646889859
                 }
             },
             "caption": "Decision A",
@@ -78,42 +41,29 @@ const template = {
             "candidates": [
                 {
                     "class": "Candidate",
-                    "caption": "I",
-                    "name": "i",
-                    "recommendCondition": "net_support('i')>0",
+                    "caption": "K",
+                    "name": "k",
+                    "recommendCondition": "net_support('k')>0",
                     "arguments": [
                         {
                             "class": "Argument",
-                            "caption": "k",
+                            "caption": "o",
+                            "description": "l",
                             "support": 1,
-                            "activeCondition": "k"
+                            "activeCondition": "true"
                         }
                     ]
                 }
             ]
-        },
-        {
-            class: 'Plan',
-            meta: {
-                pos: {
-                    x: 257.14920905916057,
-                    y: 217.92286216470376
-                }
-            },
-            caption: 'Plan C',
-            name: 'planC',
-            preCondition: "is_completed('actionA')",
-            waitCondition: "is_finished('actionA')",
-            autonomous: true
         }
     ]
-}
+};
 
 export default {
     name: 'ComposeArgumentDebug',
     data: function () {
         return {
-            protocol: new Protocol.Plan(template),
+            protocol: new Protocol.Plan(template1),
             enactmentOptions: {
                 Enquiry: {
                     useDefaults: true
@@ -121,7 +71,7 @@ export default {
             },
             enactment: null,
             path: "plan:decisionA",
-            argumentPath: "plan:decisionA:i:0",
+            argumentPath: "plan:decisionA:k:0",
             selectedtask: "plan:decisionA",
             jsonValid: true,
             issues: [],

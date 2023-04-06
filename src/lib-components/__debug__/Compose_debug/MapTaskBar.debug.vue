@@ -5,7 +5,7 @@
 <template>
     <div>
         <debug title="MapTaskBar">
-            <svg ref="svg" width="100%" :height="testPRProps1.height" tabindex="0" :viewBox="viewbox">
+            <svg width="100%" :height="testPRProps1.height" tabindex="0" :viewBox="viewbox">
                 <MapTaskBar v-bind="testPRProps1" />
             </svg>
         </debug>

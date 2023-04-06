@@ -5,7 +5,7 @@
 <template>
     <div>
         <debug title="MapIconAction">
-            <svg ref="svg" width="100%" tabindex="0" :viewBox="viewbox">
+            <svg width="100%" tabindex="0" :viewBox="viewbox">
                 <g class="task draggable" @click="handleClick">
                     <MapIconAction v-bind="testPRProps1" />
                 </g>

@@ -5,7 +5,7 @@
 <template>
     <div>
         <debug title="ComposeMapTask">
-            <svg ref="svg" width="100%" tabindex="0" :viewBox="viewbox">
+            <svg width="100%" tabindex="0" :viewBox="viewbox">
                 <ComposeMapTask v-bind="testPRProps1" />
             </svg>
         </debug>

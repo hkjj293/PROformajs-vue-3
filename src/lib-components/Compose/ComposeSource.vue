@@ -93,7 +93,9 @@ class RequestCondition {
     this.source = source;
   }
   isRequired() {
+    console.log(this.source.requestCondition);
     if (this.source && this.source.requestCondition) {
+      console.log(this.source.requestCondition);
       let mtch = this.source.requestCondition.match(cls1);
       return mtch && mtch[1] == this.source.type;
     } else {
@@ -102,6 +104,7 @@ class RequestCondition {
   }
   timely() {
     if (this.source && this.source.requestCondition) {
+      console.log(this.source.requestCondition);
       let mtch = this.source.requestCondition.match(cls2)
       if (mtch && mtch.length == 4 && mtch[1] == this.source.type) {
         return { unit: mtch[2], value: mtch[3] };
