@@ -49,7 +49,7 @@ const template1 = {
                             "class": "Argument",
                             "caption": "o",
                             "description": "l",
-                            "support": 1,
+                            "support": -1,
                             "activeCondition": "true"
                         }
                     ]

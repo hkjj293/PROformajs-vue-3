@@ -50,12 +50,13 @@ Provides the means to review and edit a PROformajs argument's attributes and chi
         <form>
           <pc-input att="caption" :comp="argument" @change-attribute="updateAttribute" />
           <pc-textarea att="description" :comp="argument" @change-attribute="updateAttribute" />
-          <div class="mb-1 row g-3">
+          <div class="mb-1 row g-3 mt-1">
             <label class="d-block" for="supportType">Support</label>
-            <div id="supportType" class="input-group mb-3 col-auto" name="supportType">
-              <template v-for="symbol in support">
-                <input type="radio" class="btn-check" :name="symbol.value" :id="symbol.value" :value="symbol.value"
-                  autocomplete="off" :v-model="supportSymbol" :checked="supportSymbol == symbol.value">
+            <div id="supportType" class="input-group mb-3 col-auto">
+              <template
+                v-for="symbol in [{ value: '--', text: '--' }, { value: '-', text: '-' }, { value: '+', text: '+' }, { value: '++', text: '++' }]">
+                <input type="radio" class="btn-check" name="supportType" :id="symbol.value" :value="symbol.value"
+                  autocomplete="off" @input="supportSymbol = symbol.value" :checked="supportSymbol == symbol.value">
                 <label class="btn btn-outline-secondary btn-sm" :for="symbol">{{ symbol.text }}</label>
               </template>
               <input type="number" name="supportValue" size="2" :value="Math.abs(argument.support)" />
@@ -91,7 +92,6 @@ export default {
     return {
       magnitude: 1,
       tabIndex: 0,
-      support: [{ value: '--', text: '--' }, { value: '-', text: '-' }, { value: '+', text: '+' }, { value: '++', text: '++' }]
     }
   },
   computed: {
