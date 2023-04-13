@@ -27,11 +27,11 @@ Provides the means to review and edit a PROformajs source details
         Next &gt;
       </button>
     </div>
-    <ul class="nav nav-tabs"
+    <ul class="nav nav-tabs small"
       :id="'pc-source-tabs-' + (this.plan && this.plan.name ? this.plan.name.replaceAll(':', '-') : 'no-name')"
       role="tablist">
       <li class="nav-item" role="presentation">
-        <button :class="'nav-link'" :id="'pc-source-tabs'" data-bs-toggle="tab"
+        <button :class="'nav-link active'" :id="'pc-source-tabs'" data-bs-toggle="tab"
           :data-bs-target="'#pc-source-tabs-content'" type="button" role="tab" :aria-controls="'pc-source-tabs-content'"
           :aria-selected="true">
           Details
@@ -39,8 +39,8 @@ Provides the means to review and edit a PROformajs source details
       </li>
     </ul>
     <div class="tab-content">
-      <div class="tab-pane show active" role="tabpanel" tabindex="0" id="pc-source-tabs-content">
-        <div class="alert alert-info" :show="custom">
+      <div class="tab-pane active" role="tabpanel" tabindex="0" id="pc-source-tabs-content">
+        <div class="alert alert-info" v-if="custom">
           Custom requestCondition detected. Please refer to the code view.
         </div>
         <div class="col">
@@ -93,9 +93,7 @@ class RequestCondition {
     this.source = source;
   }
   isRequired() {
-    console.log(this.source.requestCondition);
     if (this.source && this.source.requestCondition) {
-      console.log(this.source.requestCondition);
       let mtch = this.source.requestCondition.match(cls1);
       return mtch && mtch[1] == this.source.type;
     } else {
@@ -104,7 +102,6 @@ class RequestCondition {
   }
   timely() {
     if (this.source && this.source.requestCondition) {
-      console.log(this.source.requestCondition);
       let mtch = this.source.requestCondition.match(cls2)
       if (mtch && mtch.length == 4 && mtch[1] == this.source.type) {
         return { unit: mtch[2], value: mtch[3] };
@@ -117,6 +114,7 @@ class RequestCondition {
   }
   // true if there is an expression that doesnt match the expected form
   isCustom() {
+    console.log(this.source.requestCondition)
     if (this.source && this.source.requestCondition) {
       let mtch1 = this.source.requestCondition.match(cls1)
       if (!mtch1 || (mtch1 && mtch1[1] != this.source.type)) {
@@ -135,6 +133,7 @@ export default {
     protocol: Object,
     path: String
   },
+  emits: ['change-protocol', 'select-path'],
   data() {
     return {
       timeUnit: 'hours',
@@ -146,10 +145,7 @@ export default {
     source() {
       let component;
       try {
-        console.log(this.protocol);
-        console.log(this.path)
         component = this.protocol.getComponent(this.path);
-        console.log(component);
       } catch (e) {
         component = null;
       }
@@ -167,6 +163,7 @@ export default {
       return result;
     },
     custom() {
+      console.log(this.expressionTester.isCustom())
       return this.expressionTester != null && this.expressionTester.isCustom();
     },
     sourceIdx() {
@@ -178,11 +175,11 @@ export default {
   },
   methods: {
     setRequired(evt) {
-      this.source.requestCondition = this.requestCondition(evt, null);
+      this.source.requestCondition = this.requestCondition(evt.target.checked, null);
       this.$emit('change-protocol', { value: this.protocol, emitter: 'pc-source.0' });
     },
     setTimely(evt) {
-      this.source.requestCondition = this.requestCondition(true, evt);
+      this.source.requestCondition = this.requestCondition(true, evt.target.checked);
       this.$emit('change-protocol', { value: this.protocol, emitter: 'pc-source.1' });
     },
     setRequestCondition() {
