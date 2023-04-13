@@ -114,7 +114,6 @@ class RequestCondition {
   }
   // true if there is an expression that doesnt match the expected form
   isCustom() {
-    console.log(this.source.requestCondition)
     if (this.source && this.source.requestCondition) {
       let mtch1 = this.source.requestCondition.match(cls1)
       if (!mtch1 || (mtch1 && mtch1[1] != this.source.type)) {
@@ -163,7 +162,6 @@ export default {
       return result;
     },
     custom() {
-      console.log(this.expressionTester.isCustom())
       return this.expressionTester != null && this.expressionTester.isCustom();
     },
     sourceIdx() {

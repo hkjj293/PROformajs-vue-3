@@ -334,7 +334,6 @@ export default {
     updateAttribute(evt) {
       // There is no setComponent method in a PROformajs protocol so we focus on attributes instead
       let comp = this.protocol.getComponent(this.path);
-      console.log(evt.value)
       if (evt.name == "name") {
         // update temporal constraints of tasks that depend on this one
         if (evt.value != null && evt.value.length > 0) {
@@ -480,7 +479,6 @@ export default {
       this.$emit('delete-task', evt);
     },
     relayChangeEvent(evt, idx) {
-      console.log(evt)
       evt.relay = "pc-task." + idx;
       this.$emit('change-protocol', evt);
     }
