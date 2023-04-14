@@ -4,16 +4,15 @@ import DebugApp from './DebugApp.vue'
 
 const template = {
   "class": "Plan",
-  "name": "plan",
-  "caption": "Plan",
-  "dataDefinitions": [],
-  "tasks": [],
   "meta": {
     "svg": {
       "width": 800,
       "height": 400
     }
-  }
+  },
+  "caption": "Plan",
+  "name": "plan",
+  "autonomous": true
 };
 
 function checkTaskMeta(plan) {
