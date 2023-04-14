@@ -52,6 +52,12 @@ function checkMeta(protocol) {
 
 export default {
   name: 'ServeDev',
+  props: {
+    debug: {
+      type: Boolean,
+      default: false
+    }
+  },
   data: function () {
     return {
       selectedtask: template.name, // initial value,
@@ -177,8 +183,10 @@ export default {
           </div>
         </div>
         <!-- === Debug === -->
-        <!-- <hr style="border-width: 10px" /> -->
-        <!-- <DebugApp /> -->
+        <div v-if="debug">
+          <hr style="border-width: 10px" />
+          <DebugApp />
+        </div>
       </div>
     </main>
   </div>
