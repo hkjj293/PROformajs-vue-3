@@ -8,7 +8,6 @@ const template = {
   "caption": "Plan",
   "dataDefinitions": [],
   "tasks": [],
-  "autonomous": true,
   "meta": {
     "svg": {
       "width": 800,

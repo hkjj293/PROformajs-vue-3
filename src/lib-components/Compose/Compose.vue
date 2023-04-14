@@ -59,8 +59,8 @@ that can be used to edit a PROformajs protocol:
             <pc-tree :protocol="protocol" :selectedtask="selectedtask" @select-task="$emit('select-task', $event)" />
           </div>
           <div class="col-sm-8">
-            <!-- <pc-code ref="code" :protocol="protocol" :selectedtask="selectedtask" -->
-            <!-- @change-protocol="relayChangeEvent($event, 2)" /> -->
+            <pc-code ref="code" :protocol="protocol" :selectedtask="selectedtask"
+              @change-protocol="relayChangeEvent($event, 2)" />
           </div>
         </div>
       </div>

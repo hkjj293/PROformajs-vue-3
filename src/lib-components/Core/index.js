@@ -2,7 +2,7 @@
 import Compose from '../Compose/Compose.vue'
 import ComposeTask from '../Compose/ComposeTask.vue'
 import ComposeTree from '../Compose/ComposeTree.vue'
-//import ComposeCode from '../Compose/ComposeCode.vue'
+import ComposeCode from '../Compose/ComposeCode.vue'
 import ComposeReview from '../Review/ComposeReview.vue'
 import ComposeMap from '../Compose/ComposeMap.vue'
 import ReviewMarkdown from '../Review/ReviewMarkdown.vue'
@@ -19,7 +19,7 @@ export {
   ComposeMap,
   ComposeTask,
   ComposeTree,
-  //ComposeCode,
+  ComposeCode,
   ComposeReview,
   ReviewMarkdown,
 
