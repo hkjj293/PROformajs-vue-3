@@ -53,7 +53,6 @@ that can be used to edit a PROformajs protocol:
         </div>
       </div>
       <div class="tab-pane" id="pc-tabs-code-p">
-        <!-- Implementation required -->
         <div class="row">
           <div class="col-sm-4">
             <pc-tree :protocol="protocol" :selectedtask="selectedtask" @select-task="$emit('select-task', $event)" />
@@ -83,7 +82,7 @@ that can be used to edit a PROformajs protocol:
 import ComposeMap from './ComposeMap.vue';
 import ComposeTask from './ComposeTask.vue';
 import ComposeTree from './ComposeTree.vue';
-//import ComposeCode from './ComposeCode.vue';
+import ComposeCode from './ComposeCode.vue';
 import { Protocol } from '@openclinical/proformajs';
 import { TemporalConstraintMixin } from '../Core/compose.js';
 
@@ -93,7 +92,7 @@ export default {
   emits: ['change-protocol', 'select-task'],
   props: ['protocol', 'selectedtask'],
   components: {
-    //'pc-code': ComposeCode,
+    'pc-code': ComposeCode,
     'pc-task': ComposeTask,
     'pc-map': ComposeMap,
     'pc-tree': ComposeTree
