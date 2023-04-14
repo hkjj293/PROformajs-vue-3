@@ -12,7 +12,7 @@ Prevents a user from deleting a name which would break the underlying protocol.
 </docs>
 
 <template>
-  <div class="form-group">
+  <div>
     <label for="name" class="col-form-label col-form-label-sm pt-0">Name</label>
     <input type="text" class="form-control form-control-sm" id="name" :value="comp['name']" @change="updateName"
       :disabled="disabled">

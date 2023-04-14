@@ -67,6 +67,7 @@ export default {
     selectedtask: String,
     issues: Array
   },
+  emits: ['change-protocol', 'delete-task', 'select-task'],
   data: function () {
     return {
       selectedplan: this.protocol.name, // default value which will change via interaction with map or breadcrumb

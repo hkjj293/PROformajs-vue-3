@@ -91,15 +91,19 @@ Provides the means to review and edit a PROformajs task's attributes and childre
       <div class="tab-content mt-2">
         <div class="tab-pane active" id="pc-task-tabs-details-p">
           <form>
-            <pc-name :comp="task" @change-attribute="updateAttribute" v-if="protocol.tasks" />
-            <pc-input att="caption" :comp="task" @change-attribute="updateAttribute" />
-            <pc-textarea att="description" :comp="task" @change-attribute="updateAttribute" />
-            <pc-checkbox :comp="task" :disabled="disableAutonomous" att="autonomous"
-              @change-attribute="updateAttribute" />
-            <pc-checkbox v-if="task._parent" :comp="task" att="optional" @change-attribute="updateAttribute" />
-            <pc-checkbox :comp="task" :disabled="disableCyclic" att="cyclic" @change-attribute="updateAttribute" />
-            <button v-if="task._parent" class="btn btn-outline-danger btn-sm float-end"
-              @click="deleteTask">Delete</button>
+            <pc-name class="mb-3" :comp="task" @change-attribute="updateAttribute" v-if="protocol.tasks" />
+            <pc-input class="mb-3" att="caption" :comp="task" @change-attribute="updateAttribute" />
+            <pc-textarea class="mb-3" att="description" :comp="task" @change-attribute="updateAttribute" />
+            <div>
+              <pc-checkbox class="form-check-inline" :comp="task" :disabled="disableAutonomous" att="autonomous"
+                @change-attribute="updateAttribute" />
+              <pc-checkbox class="form-check-inline" v-if="task._parent" :comp="task" att="optional"
+                @change-attribute="updateAttribute" />
+              <pc-checkbox class="form-check-inline" :comp="task" :disabled="disableCyclic" att="cyclic"
+                @change-attribute="updateAttribute" />
+            </div>
+            <button v-if="task._parent" class="btn btn-outline-danger btn-sm d-block float-end"
+              @click.prevent="deleteTask">Delete</button>
           </form>
           <ul class="list-unstyled">
             <li v-for="(issue, idx) in issues" :key="idx"
@@ -244,7 +248,7 @@ export default {
     path: String, // path of the selected component,
     issues: Array
   },
-  emits: ['change-protocol'],
+  emits: ['change-protocol', 'delete-task'],
   mixins: [
     TemporalConstraintMixin
   ],

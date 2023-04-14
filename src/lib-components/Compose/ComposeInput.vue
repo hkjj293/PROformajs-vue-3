@@ -15,7 +15,7 @@ Provides the means to review and edit a PROformajs component's text-valued attri
 </docs>
 
 <template>
-  <div class="form-group">
+  <div>
     <label for="name" class="col-form-label col-form-label-sm pt-0">{{ labelValue }}</label>
     <input :type="typeValue" class="form-control form-control-sm" :id="att" :value="comp[att]"
       @change="$emit('change-attribute', { name: att, value: $event.target.value })" :disabled="disabled">

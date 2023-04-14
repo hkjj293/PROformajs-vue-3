@@ -14,14 +14,12 @@ Provides the means to review and edit a PROformajs component's boolean attribute
 </docs>
 
 <template>
-  <div class="col-sm-3">
-    <div class="form-check">
-      <input :id="att" class="form-check-input" type="checkbox" id="required" :disabled="disabled" :checked="comp[att]"
-        @change="$emit('change-attribute', { name: att, value: !comp[att] })" :value="true">
-      <label class="form-check-label" for="required">
-        {{ labelValue }}
-      </label>
-    </div>
+  <div class="form-check small">
+    <input :id="att" class="form-check-input" type="checkbox" :disabled="disabled" :checked="comp[att]"
+      @change="$emit('change-attribute', { name: att, value: $event.target.checked })" :value="true">
+    <label class="form-check-label" :for="att">
+      {{ labelValue }}
+    </label>
   </div>
 </template>
 

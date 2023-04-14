@@ -23,18 +23,34 @@ that can be used to edit a PROformajs protocol:
         <div class="row">
           <div v-bind:class="{ 'col-sm-8': protocol.tasks, 'col-sm-5': !protocol.tasks }">
             <pc-map :protocol="protocol" :selectedtask="selectedtask" @select-task="$emit('select-task', $event)"
-              @delete-task="$refs.deleteTaskModal.show()" :issues="allIssues" />
+              @delete-task="modal.show()" :issues="allIssues" />
           </div>
           <div v-bind:class="{ 'col-sm-4': protocol.tasks, 'col-sm-7': !protocol.tasks }">
             <pc-task ref="taskEditor" :protocol="protocol" :path="selectedtask" :issues="selectedTaskIssues"
-              @change-protocol="relayChangeEvent($event, 1)" @delete-task="$refs.deleteTaskModal.show()"
+              @change-protocol="relayChangeEvent($event, 1)" @delete-task="modal.show()"
               @select-task="$emit('select-task', $event)" />
           </div>
         </div>
         <!-- Modal Component -->
-        <!-- <b-modal ref="deleteTaskModal" id="deleteTask" title="Remove task" @ok="deleteTask"> -->
-        <!-- <p class="my-4">Are you sure you wish to remove this task?</p> -->
-        <!-- </b-modal> -->
+        <div ref="deleteTaskModal" class="modal fade" id="pc-modal" tabindex="-1" aria-labelledby="pc-modal-label"
+          aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="pc-modal-label">Remove task</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p class="my-4">Are you sure you wish to remove this task?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                  @click.prevent="deleteTask">OK</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="tab-pane" id="pc-tabs-code-p">
         <!-- Implementation required -->
@@ -84,8 +100,14 @@ export default {
   },
   data: function () {
     return {
-      jsonValid: true
+      jsonValid: true,
+      modal: undefined,
     };
+  },
+  mounted() {
+    this.modal = new bootstrap.Modal('#pc-modal', {
+      keyboard: true
+    })
   },
   computed: {
     allIssues() {
