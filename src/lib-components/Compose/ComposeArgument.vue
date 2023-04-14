@@ -57,7 +57,7 @@ Provides the means to review and edit a PROformajs argument's attributes and chi
                 v-for="symbol in [{ value: '--', text: '--' }, { value: '-', text: '-' }, { value: '+', text: '+' }, { value: '++', text: '++' }]">
                 <input type="radio" class="btn-check" name="supportType" :id="symbol.value" :value="symbol.value"
                   autocomplete="off" @input="supportSymbol = symbol.value" :checked="supportSymbol == symbol.value">
-                <label class="btn btn-outline-secondary btn-sm" :for="symbol">{{ symbol.text }}</label>
+                <label class="btn btn-outline-secondary btn-sm" :for="symbol.value">{{ symbol.text }}</label>
               </template>
               <input type="number" name="supportValue" size="2" :value="Math.abs(argument.support)" />
             </div>
