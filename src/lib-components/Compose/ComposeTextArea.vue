@@ -17,20 +17,26 @@ Provides the means to review and edit a PROformajs component's attribute with an
 <template>
   <div>
     <label :for="att" class="col-form-label col-form-label-sm">{{ labelValue }}</label>
-    <textarea class="form-control form-control-sm" :id="att" :rows="rowsValue" :value="comp[att]"
-      @change="$emit('change-attribute', { name: att, value: $event.target.value })" :disabled="disabled" />
+    <textarea
+      class="form-control form-control-sm"
+      :id="att"
+      :rows="rowsValue"
+      :value="comp[att]"
+      @change="$emit('change-attribute', { name: att, value: $event.target.value })"
+      :disabled="disabled"
+    />
   </div>
 </template>
 
 <script>
-import { AttributeMixin } from '../Core/attribute.js';
+import { AttributeMixin } from '../Core/attribute.js'
 
 export default {
   mixins: [AttributeMixin],
   props: ['rows'],
   computed: {
     rowsValue: function () {
-      return this.rows || 6;
+      return this.rows || 6
     }
   }
 }

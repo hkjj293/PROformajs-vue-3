@@ -173,7 +173,7 @@ export const TemporalConstraintMixin = {
           return exprs.temporal
         }
       } else {
-        task[attribute] = expression;
+        task[attribute] = expression
       }
     },
     // concaternates the passed clause to the existing expression

@@ -5,8 +5,14 @@ import MapIconTaskDebug from './lib-components/__debug__/MapIconTask.debug.vue';
 </docs>
 
 <template>
-  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseDebugReview" role="button" aria-expanded="false"
-    aria-controls="collapseDebugReview">
+  <a
+    class="btn btn-primary"
+    data-bs-toggle="collapse"
+    href="#collapseDebugReview"
+    role="button"
+    aria-expanded="false"
+    aria-controls="collapseDebugReview"
+  >
     <h1>Dev Debug Mode (Reivew)</h1>
   </a>
   <div class="collapse" id="collapseDebugReview">
@@ -40,8 +46,14 @@ import MapIconTaskDebug from './lib-components/__debug__/MapIconTask.debug.vue';
   </div>
   <br />
   <br />
-  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseDebugCompose" role="button" aria-expanded="false"
-    aria-controls="collapseDebugCompose">
+  <a
+    class="btn btn-primary"
+    data-bs-toggle="collapse"
+    href="#collapseDebugCompose"
+    role="button"
+    aria-expanded="false"
+    aria-controls="collapseDebugCompose"
+  >
     <h1>Dev Debug Mode (Compose)</h1>
   </a>
   <div class="collapse" id="collapseDebugCompose">

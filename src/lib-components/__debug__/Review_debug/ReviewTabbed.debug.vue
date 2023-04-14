@@ -5,8 +5,12 @@
 <template>
   <div>
     <debug title="ReviewTabbed">
-      <ReviewTabbed v-bind="testPRProps1" @change-enactment="updateEnactment" @restart-enactment="resetEnactment"
-        @change-option="updateOption" />
+      <ReviewTabbed
+        v-bind="testPRProps1"
+        @change-enactment="updateEnactment"
+        @restart-enactment="resetEnactment"
+        @change-option="updateOption"
+      />
     </debug>
   </div>
 </template>

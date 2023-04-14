@@ -17,27 +17,35 @@ TaskMap that these tasks are templates that create new tasks when dragged.
 <template>
   <g id="taskbar">
     <line :x1="width" y1="0" :x2="width" :y2="height" stroke="gray"></line>
-    <pm-task v-for="(pos, clazz) in layout" :key="clazz" :task="task(clazz)" :x="pos.x" :y="pos.y" :stroke_width="stroke_width" :data-clazz="clazz" />
+    <pm-task
+      v-for="(pos, clazz) in layout"
+      :key="clazz"
+      :task="task(clazz)"
+      :x="pos.x"
+      :y="pos.y"
+      :stroke_width="stroke_width"
+      :data-clazz="clazz"
+    />
   </g>
 </template>
 
 <script>
-import MapTask from './ComposeMapTask.vue';
-import { Protocol } from '@openclinical/proformajs';
+import MapTask from './ComposeMapTask.vue'
+import { Protocol } from '@openclinical/proformajs'
 
 export default {
   props: {
     width: Number,
     height: Number,
     layout: Object,
-    stroke_width : Number
+    stroke_width: Number
   },
   components: {
     'pm-task': MapTask
   },
   methods: {
     task(clazz) {
-      return new Protocol[clazz]({name: clazz});
+      return new Protocol[clazz]({ name: clazz })
     }
   }
 }

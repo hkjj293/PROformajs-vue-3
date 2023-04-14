@@ -16,20 +16,58 @@ Provides an svg element that can be used to visualise an enactment as a map and:
 <template>
   <svg ref="svg" width="100%" tabindex="0" :viewBox="viewbox">
     <template v-if="plan.tasks">
-      <pm-breadcrumb v-if="plan.tasks" :plan="plan" :review="true" :height="breadcrumb.height"
-        :width="protocol.meta.svg.width" :offset="0" @select-task="updatePlan"
-        :selected="selectedplan === selectedtask" />
-      <pr-maptask v-for="task in runtimeTasks(plan)" :key="task.path" :task="task" :review="true" :state="task.state"
-        :x="task.meta.pos.x" :y="task.meta.pos.y + breadcrumb.height" :stroke_width="stroke_width"
-        :selected="task.path === selectedtask" :data-path="task.path" :data-fromx="ports[task.name].from.x"
-        :data-fromy="ports[task.name].from.y" @select-plan="updatePlan" @select-task="updateTask" />
-      <pm-arrow v-for="(dep, idx) in deps" :key="idx" :tx="dep.target.x" :ty="dep.target.y" :sx="dep.source.x"
-        :sy="dep.source.y" :source="dep.source.name" :target="dep.target.name" />
+      <pm-breadcrumb
+        v-if="plan.tasks"
+        :plan="plan"
+        :review="true"
+        :height="breadcrumb.height"
+        :width="protocol.meta.svg.width"
+        :offset="0"
+        @select-task="updatePlan"
+        :selected="selectedplan === selectedtask"
+      />
+      <pr-maptask
+        v-for="task in runtimeTasks(plan)"
+        :key="task.path"
+        :task="task"
+        :review="true"
+        :state="task.state"
+        :x="task.meta.pos.x"
+        :y="task.meta.pos.y + breadcrumb.height"
+        :stroke_width="stroke_width"
+        :selected="task.path === selectedtask"
+        :data-path="task.path"
+        :data-fromx="ports[task.name].from.x"
+        :data-fromy="ports[task.name].from.y"
+        @select-plan="updatePlan"
+        @select-task="updateTask"
+      />
+      <pm-arrow
+        v-for="(dep, idx) in deps"
+        :key="idx"
+        :tx="dep.target.x"
+        :ty="dep.target.y"
+        :sx="dep.source.x"
+        :sy="dep.source.y"
+        :source="dep.source.name"
+        :target="dep.target.name"
+      />
     </template>
-    <pr-maptask v-else :task="plan" :review="true" :state="getState(plan)" :x="taskPos(plan).x" :y="taskPos(plan).y"
-      :stroke_width="stroke_width" :selected="selectedplan + ':' + plan.name === selectedtask" :data-path="plan.path()"
-      :data-fromx="plan.meta.svg.width / 2 + 20" :data-fromy="plan.meta.svg.height / 2" @select-plan="updatePlan"
-      @select-task="updateTask" />
+    <pr-maptask
+      v-else
+      :task="plan"
+      :review="true"
+      :state="getState(plan)"
+      :x="taskPos(plan).x"
+      :y="taskPos(plan).y"
+      :stroke_width="stroke_width"
+      :selected="selectedplan + ':' + plan.name === selectedtask"
+      :data-path="plan.path()"
+      :data-fromx="plan.meta.svg.width / 2 + 20"
+      :data-fromy="plan.meta.svg.height / 2"
+      @select-plan="updatePlan"
+      @select-task="updateTask"
+    />
   </svg>
 </template>
 

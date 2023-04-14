@@ -5,8 +5,13 @@
 <template>
   <div>
     <debug title="ReviewFixed">
-      <ReviewFixed taskpath="plan:enquiryB" v-bind="testPRProps1" @change-enactment="updateEnactment"
-        @restart-enactment="resetEnactment" @change-option="updateOption" />
+      <ReviewFixed
+        taskpath="plan:enquiryB"
+        v-bind="testPRProps1"
+        @change-enactment="updateEnactment"
+        @restart-enactment="resetEnactment"
+        @change-option="updateOption"
+      />
     </debug>
   </div>
 </template>

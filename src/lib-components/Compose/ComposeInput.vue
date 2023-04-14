@@ -17,14 +17,22 @@ Provides the means to review and edit a PROformajs component's text-valued attri
 <template>
   <div>
     <label for="name" class="col-form-label col-form-label-sm pt-0">{{ labelValue }}</label>
-    <input :type="typeValue" class="form-control form-control-sm" :id="att" :value="comp[att]"
-      @change="$emit('change-attribute', { name: att, value: $event.target.value })" :disabled="disabled">
-    <small v-if="description" id="passwordHelpBlock" class="form-text text-muted">{{ description }}</small>
+    <input
+      :type="typeValue"
+      class="form-control form-control-sm"
+      :id="att"
+      :value="comp[att]"
+      @change="$emit('change-attribute', { name: att, value: $event.target.value })"
+      :disabled="disabled"
+    />
+    <small v-if="description" id="passwordHelpBlock" class="form-text text-muted">{{
+      description
+    }}</small>
   </div>
 </template>
 
 <script>
-import { AttributeMixin, TypeMixin } from '../Core/attribute.js';
+import { AttributeMixin, TypeMixin } from '../Core/attribute.js'
 export default {
   mixins: [AttributeMixin, TypeMixin]
 }

@@ -14,13 +14,18 @@ Provides an html tree, as drawn as a nested series of unordered lists.
 <template>
   <div class="tree">
     <ul>
-      <pc-tree-node :component="protocol" :expanded="true" @select-task="$emit('select-task', $event)" :selectedtask="selectedtask"/>
+      <pc-tree-node
+        :component="protocol"
+        :expanded="true"
+        @select-task="$emit('select-task', $event)"
+        :selectedtask="selectedtask"
+      />
     </ul>
   </div>
 </template>
 
 <script>
-import ComposeTreeNode from './ComposeTreeNode.vue';
+import ComposeTreeNode from './ComposeTreeNode.vue'
 
 export default {
   name: 'pc-tree',

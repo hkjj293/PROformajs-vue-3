@@ -14,8 +14,14 @@ Prevents a user from deleting a name which would break the underlying protocol.
 <template>
   <div>
     <label for="name" class="col-form-label col-form-label-sm pt-0">Name</label>
-    <input type="text" class="form-control form-control-sm" id="name" :value="comp['name']" @change="updateName"
-      :disabled="disabled">
+    <input
+      type="text"
+      class="form-control form-control-sm"
+      id="name"
+      :value="comp['name']"
+      @change="updateName"
+      :disabled="disabled"
+    />
   </div>
 </template>
 
@@ -24,12 +30,12 @@ export default {
   props: ['comp', 'disabled'],
   methods: {
     updateName(evt) {
-      let name = evt.target.value;
+      let name = evt.target.value
       if (name.length == 0) {
         // undo erasing the name - names cannot be blank
-        evt.srcElement.value = this.value;
+        evt.srcElement.value = this.value
       } else {
-        this.$emit('change-attribute', { name: 'name', value: name });
+        this.$emit('change-attribute', { name: 'name', value: name })
       }
     }
   }

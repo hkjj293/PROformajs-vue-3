@@ -101,8 +101,8 @@ export default {
     root() {
       return this.enactment
         ? this.enactment.getComponent(
-          this.enactment.runtimeFromDesignPath(this.enactment.protocol.name)
-        )
+            this.enactment.runtimeFromDesignPath(this.enactment.protocol.name)
+          )
         : null
     }
   },

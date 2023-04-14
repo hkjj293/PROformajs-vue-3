@@ -74,6 +74,7 @@ export default {
       required: false
     }
   },
+  emits: ['update-enactment', 'start-enactment'],
   components: {
     'p-review-development': Review,
     'p-review-compact': ReviewCompact,

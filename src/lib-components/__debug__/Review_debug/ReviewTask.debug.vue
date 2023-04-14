@@ -5,8 +5,16 @@
 <template>
   <div>
     <debug title="ReviewTask">
-      <ReviewTask v-bind="testPRProps1" @update-enactment="updateEnactment" @send-trigger="sendTrigger" />
-      <ReviewTask v-bind="testPRProps2" @update-enactment="updateEnactment" @send-trigger="sendTrigger" />
+      <ReviewTask
+        v-bind="testPRProps1"
+        @update-enactment="updateEnactment"
+        @send-trigger="sendTrigger"
+      />
+      <ReviewTask
+        v-bind="testPRProps2"
+        @update-enactment="updateEnactment"
+        @send-trigger="sendTrigger"
+      />
     </debug>
   </div>
 </template>

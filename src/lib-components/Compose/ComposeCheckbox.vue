@@ -15,8 +15,15 @@ Provides the means to review and edit a PROformajs component's boolean attribute
 
 <template>
   <div class="form-check small">
-    <input :id="att" class="form-check-input" type="checkbox" :disabled="disabled" :checked="comp[att]"
-      @change="$emit('change-attribute', { name: att, value: $event.target.checked })" :value="true">
+    <input
+      :id="att"
+      class="form-check-input"
+      type="checkbox"
+      :disabled="disabled"
+      :checked="comp[att]"
+      @change="$emit('change-attribute', { name: att, value: $event.target.checked })"
+      :value="true"
+    />
     <label class="form-check-label" :for="att">
       {{ labelValue }}
     </label>
@@ -24,10 +31,10 @@ Provides the means to review and edit a PROformajs component's boolean attribute
 </template>
 
 <script>
-import { AttributeMixin } from '../Core/attribute.js';
+import { AttributeMixin } from '../Core/attribute.js'
 
 export default {
   mixins: [AttributeMixin],
-  emits: ['change-attribute'],
+  emits: ['change-attribute']
 }
 </script>
