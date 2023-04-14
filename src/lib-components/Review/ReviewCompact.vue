@@ -165,7 +165,7 @@ todo:
             placement="left" @change-option="OnUpdateOptions" @restart-enactment="$emit('restart-enactment')" />
           <h4 class="mt-2">
             Tasks
-            <span class="badge text-bg-warning" v-show="status.finished">Completed</span>
+            <span class="badge text-bg-warning py-1 px-2" v-show="status.finished">Completed</span>
           </h4>
           <div class="d-grid gap-2">
             <button v-for="task in availableTasks" :data-path="path" :data-taskpath="task.path" v-bind:class="
