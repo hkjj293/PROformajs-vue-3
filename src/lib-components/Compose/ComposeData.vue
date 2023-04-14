@@ -18,77 +18,39 @@ Provides the means to review and edit a PROformajs data definition's attributes 
       <button class="btn btn-outline-secondary btn-sm" @click="$emit('select-path', { value: '' })">
         &lt;&lt; {{ def._parent.constructor.name }}: {{ def._parent.name }}
       </button>
-      <button
-        class="btn btn-outline-secondary btn-sm"
-        size="sm"
-        v-if="numSiblings > 1"
-        :disabled="defIdx == 0"
-        @click="prevDef"
-      >
+      <button class="btn btn-outline-secondary btn-sm" size="sm" v-if="numSiblings > 1" :disabled="defIdx == 0"
+        @click="prevDef">
         &lt; Prev
       </button>
-      <button
-        class="btn btn-outline-secondary btn-sm"
-        size="sm"
-        v-if="numSiblings > 1"
-        :disabled="defIdx == numSiblings - 1"
-        @click="nextDef"
-      >
+      <button class="btn btn-outline-secondary btn-sm" size="sm" v-if="numSiblings > 1"
+        :disabled="defIdx == numSiblings - 1" @click="nextDef">
         Next &gt;
       </button>
     </div>
-    <ul
-      class="nav nav-tabs small"
-      :id="
-        'pc-arg-tabs-' +
-        (this.plan && this.plan.name ? this.plan.name.replaceAll(':', '-') : 'no-name')
-      "
-      role="tablist"
-    >
+    <ul class="nav nav-tabs small" :id="
+      'pc-arg-tabs-' +
+      (this.plan && this.plan.name ? this.plan.name.replaceAll(':', '-') : 'no-name')
+    " role="tablist">
       <li class="nav-item" role="presentation">
-        <button
-          :class="'nav-link ' + (tabIndex == 0 ? 'active' : '')"
-          :id="'pc-data-tabs-details'"
-          data-bs-toggle="tab"
-          :data-bs-target="'#pc-data-tabs-details-p'"
-          type="button"
-          role="tab"
-          :aria-controls="'pc-data-tabs-details-p'"
-          :aria-selected="true"
-        >
+        <button :class="'nav-link ' + (tabIndex == 0 ? 'active' : '')" :id="'pc-data-tabs-details'" data-bs-toggle="tab"
+          :data-bs-target="'#pc-data-tabs-details-p'" type="button" role="tab" :aria-controls="'pc-data-tabs-details-p'"
+          :aria-selected="true">
           Details
         </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button
-          :class="'nav-link ' + (tabIndex == 1 ? 'active' : '')"
-          :id="'pc-data-tabs-value'"
-          data-bs-toggle="tab"
-          :data-bs-target="'#pc-data-tabs-value-p'"
-          type="button"
-          role="tab"
-          :aria-controls="'pc-data-tabs-value-p'"
-          :aria-selected="true"
-        >
+        <button :class="'nav-link ' + (tabIndex == 1 ? 'active' : '')" :id="'pc-data-tabs-value'" data-bs-toggle="tab"
+          :data-bs-target="'#pc-data-tabs-value-p'" type="button" role="tab" :aria-controls="'pc-data-tabs-value-p'"
+          :aria-selected="true">
           Value
         </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button
-          :class="'nav-link ' + (tabIndex == 2 ? 'active' : '')"
-          :id="'pc-data-tabs-range'"
-          data-bs-toggle="tab"
-          :data-bs-target="'#pc-data-tabs-range-p'"
-          type="button"
-          role="tab"
-          :aria-controls="'pc-data-tabs-range-p'"
-          :aria-selected="true"
-        >
+        <button :class="'nav-link ' + (tabIndex == 2 ? 'active' : '')" :id="'pc-data-tabs-range'" data-bs-toggle="tab"
+          :data-bs-target="'#pc-data-tabs-range-p'" type="button" role="tab" :aria-controls="'pc-data-tabs-range-p'"
+          :aria-selected="true">
           Range
-          <span
-            class="badge rounded-pill text-bg-secondary"
-            v-if="def.range && def.range.length > 0"
-          >
+          <span class="badge rounded-pill text-bg-secondary" v-if="def.range && def.range.length > 0">
             {{ def.range.length }}
           </span>
         </button>
@@ -106,19 +68,11 @@ Provides the means to review and edit a PROformajs data definition's attributes 
             </label>
             <div id="dataDefinitionClass" class="input-group mb-3 col-auto">
               <template v-for="dataType in ['Boolean', 'Text', 'Integer', 'Float', 'Date']">
-                <input
-                  type="radio"
-                  class="btn-check"
-                  name="dataDefinitionClass"
-                  :id="dataType"
-                  :value="dataType"
-                  autocomplete="off"
-                  @input="clazz = dataType"
-                  :checked="clazz == dataType"
-                />
-                <label class="btn btn-outline-secondary btn-sm" :for="dataType">{{
-                  dataType
-                }}</label>
+                <input type="radio" class="btn-check" name="dataDefinitionClass" :id="dataType" :value="dataType"
+                  autocomplete="off" @input="clazz = dataType" :checked="clazz == dataType" />
+                <label class="btn btn-outline-secondary btn-sm" :for="dataType">
+                  {{ dataType }}
+                </label>
               </template>
             </div>
           </div>
@@ -128,13 +82,8 @@ Provides the means to review and edit a PROformajs data definition's attributes 
         <form>
           <pc-checkbox att="multiValued" :comp="def" @change-attribute="updateAttribute" />
           <pc-input att="defaultValue" :comp="def" @change-attribute="updateAttribute" />
-          <pc-condition
-            att="valueCondition"
-            :comp="def"
-            :issues="attributeIssues('valueCondition')"
-            @change-attribute="updateAttribute"
-            :description="valueConditionExample"
-          />
+          <pc-condition att="valueCondition" :comp="def" :issues="attributeIssues('valueCondition')"
+            @change-attribute="updateAttribute" :description="valueConditionExample" />
         </form>
       </div>
       <div :class="'tab-pane ' + (tabIndex == 2 ? 'active' : '')" id="pc-data-tabs-range-p">
@@ -143,22 +92,13 @@ Provides the means to review and edit a PROformajs data definition's attributes 
             Data type
           </label>
           <div id="rangeAnnotated" class="input-group mb-3 col-auto">
-            <template
-              v-for="range in [
-                { value: true, text: 'Annotated' },
-                { value: false, text: 'Raw' }
-              ]"
-            >
-              <input
-                type="radio"
-                class="btn-check"
-                name="rangeAnnotated"
-                :id="range.text"
-                :value="range.value"
-                autocomplete="off"
-                @input="rangeAnnotatedToggle = range.value"
-                :checked="rangeAnnotatedToggle == range.value"
-              />
+            <template v-for="range in [
+              { value: true, text: 'Annotated' },
+              { value: false, text: 'Raw' }
+            ]">
+              <input type="radio" class="btn-check" name="rangeAnnotated" :id="range.text" :value="range.value"
+                autocomplete="off" @input="rangeAnnotatedToggle = range.value"
+                :checked="rangeAnnotatedToggle == range.value" />
               <label class="btn btn-outline-secondary btn-sm" :for="range.text">{{
                 range.text
               }}</label>
@@ -173,20 +113,10 @@ Provides the means to review and edit a PROformajs data definition's attributes 
                 <!-- edit annotated range value-->
                 <template v-if="rangeEditIdx == idx">
                   <td>
-                    <input
-                      type="text"
-                      class="form-control form-control-sm"
-                      id="editrangevalue"
-                      :value="val.value"
-                    />
+                    <input type="text" class="form-control form-control-sm" id="editrangevalue" :value="val.value" />
                   </td>
                   <td>
-                    <input
-                      type="text"
-                      class="form-control form-control-sm"
-                      id="editrangecaption"
-                      :value="val.caption"
-                    />
+                    <input type="text" class="form-control form-control-sm" id="editrangecaption" :value="val.caption" />
                   </td>
                   <td>
                     <button class="btn btn-light btn-sm" @click="editRangeItem(idx, $event)">
@@ -212,15 +142,8 @@ Provides the means to review and edit a PROformajs data definition's attributes 
               <td v-else>
                 <!-- edit raw range value -->
                 <template v-if="rangeEditIdx == idx">
-                  <input
-                    type="text"
-                    class="form-control form-control-sm"
-                    id="editrangevalue"
-                    :value="val"
-                    @blur="rangeEditIdx = -1"
-                    @change="editRangeItem(idx, $event)"
-                    v-focus
-                  />
+                  <input type="text" class="form-control form-control-sm" id="editrangevalue" :value="val"
+                    @blur="rangeEditIdx = -1" @change="editRangeItem(idx, $event)" v-focus />
                 </template>
                 <!--  view / delete raw range value -->
                 <template v-else>
@@ -235,22 +158,12 @@ Provides the means to review and edit a PROformajs data definition's attributes 
             <tr v-show="rangeEditIdx == -1">
               <template v-if="rangeAnnotated">
                 <td>
-                  <input
-                    type="text"
-                    class="form-control form-control-sm"
-                    id="rangevalue"
-                    ref="rangeValue"
-                    placeholder="Enter value"
-                  />
+                  <input type="text" class="form-control form-control-sm" id="rangevalue" ref="rangeValue"
+                    placeholder="Enter value" />
                 </td>
                 <td>
-                  <input
-                    type="text"
-                    class="form-control form-control-sm"
-                    id="rangecaption"
-                    ref="rangeCaption"
-                    placeholder="Enter caption"
-                  />
+                  <input type="text" class="form-control form-control-sm" id="rangecaption" ref="rangeCaption"
+                    placeholder="Enter caption" />
                 </td>
                 <td>
                   <button class="btn btn-light btn-sm" @click="addRangeItem">&plus;</button>
@@ -258,14 +171,8 @@ Provides the means to review and edit a PROformajs data definition's attributes 
               </template>
               <template v-else>
                 <td>
-                  <input
-                    type="text"
-                    class="form-control form-control-sm"
-                    id="rangevalue"
-                    ref="rangeValue"
-                    @change="addRangeItem"
-                    placeholder="Enter range value"
-                  />
+                  <input type="text" class="form-control form-control-sm" id="rangevalue" ref="rangeValue"
+                    @change="addRangeItem" placeholder="Enter range value" />
                 </td>
               </template>
             </tr>
@@ -333,8 +240,6 @@ export default {
       },
       set: function (evt) {
         // Note that changing the class of a data definition may generate validation errors if it already has range values
-        console.log(evt)
-        console.log(Protocol[evt])
         let newdef = new Protocol[evt](this.def)
         console.log(newdef)
         this.def._parent.dataDefinitions[this.defIdx] = newdef

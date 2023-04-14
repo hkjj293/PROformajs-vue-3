@@ -24,16 +24,8 @@ new data values and newly created cyclic tasks which is why its not used.
 </docs>
 
 <template>
-  <component
-    v-if="!exception"
-    v-bind:is="'p-review-' + template"
-    :enactment="enactment"
-    :options="reviewOptions"
-    @change-enactment="updateEnactment"
-    @restart-enactment="resetEnactment"
-    @change-option="updateOption"
-    :debug="debug"
-  >
+  <component v-if="!exception" v-bind:is="'p-review-' + template" :enactment="enactment" :options="reviewOptions"
+    @change-enactment="updateEnactment" @restart-enactment="resetEnactment" @change-option="updateOption" :debug="debug">
     <template slot="finished">
       <slot name="finished"></slot>
     </template>
