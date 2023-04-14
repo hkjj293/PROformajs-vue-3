@@ -66,36 +66,40 @@ todo:
             <div class="col-sm-6">
               <div>
                 <!-- used to be a card-deck -->
-                <div class="card">
-                  <template slot="header">
+                <div class="card my-2">
+                  <div class="card-header">
                     <h5>Available Tasks</h5>
-                  </template>
-                  <div class="list-group" v-if="availableTasks.length > 0">
-                    <button v-for="task in availableTasks" :data-path="path" :data-taskpath="task.path" :class="
-                      'list-group-item list-group-item-action ' +
-                      (task.path == path ? 'active' : '')
-                    " :key="task.name" @click="updatePath({ value: task.path })">
-                      {{ task.caption || task.name }}
-                    </button>
                   </div>
-                  <p v-else class="text-muted">No currently available tasks</p>
+                  <div class="card-body">
+                    <div class="list-group" v-if="availableTasks.length > 0">
+                      <button v-for="task in availableTasks" :data-path="path" :data-taskpath="task.path" :class="
+                        'list-group-item list-group-item-action ' +
+                        (task.path == path ? 'active' : '')
+                      " :key="task.name" @click="updatePath({ value: task.path })">
+                        {{ task.caption || task.name }}
+                      </button>
+                    </div>
+                    <p v-else class="text-muted">No currently available tasks</p>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="col-sm-6">
               <div>
                 <!-- used to be a card-deck -->
-                <div class="card">
-                  <template slot="header">
+                <div class="card my-2">
+                  <div class="card-header">
                     <h5>Triggers</h5>
-                  </template>
-                  <div class="list-group" v-if="status && status.triggers && status.triggers.length > 0">
-                    <button class="list-group-item list-group-item-action" v-for="(trigger, index) in status.triggers"
-                      :key="index" @click="sendTrigger(trigger)">
-                      {{ trigger }}
-                    </button>
                   </div>
-                  <p v-else class="text-muted">No available triggers</p>
+                  <div class="card-body">
+                    <div class="list-group" v-if="status && status.triggers && status.triggers.length > 0">
+                      <button class="list-group-item list-group-item-action" v-for="(trigger, index) in status.triggers"
+                        :key="index" @click="sendTrigger(trigger)">
+                        {{ trigger }}
+                      </button>
+                    </div>
+                    <p v-else class="text-muted">No available triggers</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -258,26 +262,26 @@ todo:
     <!-- navbar for mobile view (visible only on sm or xs viewports)-->
     <div class="row d-md-none">
       <div class="col">
-        <nav class="navbar navbar-light fixed-bottom">
+        <nav class="navbar navbar-light fixed-bottom bg-light navbar-expand">
           <div class="container-fluid">
-            <ul class="navbar-nav">
-              <li @click="view = 'task'" :class="'nav-item ' + (view == 'task' ? 'active' : '')">
+            <ul class="navbar-nav px-1">
+              <li @click="view = 'task'" :class="'p-2 nav-item ' + (view == 'task' ? 'active' : '')">
                 <font-awesome-icon icon="clipboard-check" size="lg" class="me-2" />
               </li>
               <li v-if="enactment.protocol.tasks" @click="view = 'select'"
-                :class="'nav-item ' + (view == 'select' ? 'active' : '')">
+                :class="'p-2 nav-item ' + (view == 'select' ? 'active' : '')">
                 <font-awesome-icon icon="hand-pointer" size="lg" class="me-2" />
               </li>
-              <li @click="view = 'data'" :class="'nav-item ' + (view == 'data' ? 'active' : '')">
+              <li @click="view = 'data'" :class="'p-2 nav-item ' + (view == 'data' ? 'active' : '')">
                 <font-awesome-icon icon="table" size="lg" class="me-2" />
               </li>
-              <li @click="view = 'history'" v-bind:class="'nav-item ' + (view == 'history' ? 'active' : '')">
+              <li @click="view = 'history'" v-bind:class="'p-2 nav-item ' + (view == 'history' ? 'active' : '')">
                 <font-awesome-icon icon="history" size="lg" class="me-2" />
               </li>
             </ul>
             <ul class="navbar-nav ms-auto">
               <!-- right aligned-->
-              <li @click="view = 'settings'" :class="'nav-item ' + (view == 'settings' ? 'active' : '')">
+              <li @click="view = 'settings'" :class="'p-2 nav-item ' + (view == 'settings' ? 'active' : '')">
                 <font-awesome-icon icon="cog" size="lg" />
               </li>
             </ul>
