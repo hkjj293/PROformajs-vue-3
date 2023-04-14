@@ -28,16 +28,16 @@ Provides the means to review and edit a PROformajs task's attributes and childre
       </h4>
       <ul class="nav nav-tabs small" :id="'pc-task-tabs'" role="tablist">
         <li class="nav-item" role="presentation">
-          <button :class="'nav-link active'" :id="'pc-task-tabs-details'" data-bs-toggle="tab"
+          <button :class="'nav-link ' + (tabIndex == 0 ? 'active' : '')" :id="'pc-task-tabs-details'" data-bs-toggle="tab"
             :data-bs-target="'#pc-task-tabs-details-p'" type="button" role="tab" :aria-controls="'pc-task-tabs-details-p'"
-            :aria-selected="true">
+            :aria-selected="true" @click.prevent="tabIndex = 0">
             Details
           </button>
         </li>
         <li class="nav-item" role="presentation" v-if="!task._parent">
-          <button :class="'nav-link '" :id="'pc-task-tabs-data'" data-bs-toggle="tab"
+          <button :class="'nav-link ' + (tabIndex == 1 ? 'active' : '')" :id="'pc-task-tabs-data'" data-bs-toggle="tab"
             :data-bs-target="'#pc-task-tabs-data-p'" type="button" role="tab" :aria-controls="'pc-task-tabs-data-p'"
-            :aria-selected="true">
+            :aria-selected="true" @click.prevent="tabIndex = 1">
             <span class="d-block d-sm-none">
               Data <span class="badge rounded-pill text-bg-secondary"
                 v-if="task.dataDefinitions && task.dataDefinitions.length > 0">
@@ -53,9 +53,9 @@ Provides the means to review and edit a PROformajs task's attributes and childre
           </button>
         </li>
         <li class="nav-item" role="presentation" v-if="task.constructor.name == 'Enquiry'">
-          <button :class="'nav-link '" :id="'pc-task-tabs-source'" data-bs-toggle="tab"
+          <button :class="'nav-link ' + (tabIndex == 2 ? 'active' : '')" :id="'pc-task-tabs-source'" data-bs-toggle="tab"
             :data-bs-target="'#pc-task-tabs-source-p'" type="button" role="tab" :aria-controls="'pc-task-tabs-source-p'"
-            :aria-selected="true">
+            :aria-selected="true" @click.prevent="tabIndex = 2">
             Sources
             <span class="badge rounded-pill text-bg-secondary" v-if="task.sources && task.sources.length > 0">
               {{ task.sources.length }}
@@ -63,9 +63,9 @@ Provides the means to review and edit a PROformajs task's attributes and childre
           </button>
         </li>
         <li class="nav-item" role="presentation" v-if="task.constructor.name == 'Decision'">
-          <button :class="'nav-link '" :id="'pc-task-tabs-candidates'" data-bs-toggle="tab"
-            :data-bs-target="'#pc-task-tabs-candidates-p'" type="button" role="tab"
-            :aria-controls="'pc-task-tabs-candidates-p'" :aria-selected="true">
+          <button :class="'nav-link ' + (tabIndex == 3 ? 'active' : '')" :id="'pc-task-tabs-candidates'"
+            data-bs-toggle="tab" :data-bs-target="'#pc-task-tabs-candidates-p'" type="button" role="tab"
+            :aria-controls="'pc-task-tabs-candidates-p'" :aria-selected="true" @click.prevent="tabIndex = 3">
             <span class="d-block d-sm-none">
               Cands <span class="badge rounded-pill text-bg-secondary"
                 v-if="task.candidates && task.candidates.length > 0">
@@ -81,15 +81,15 @@ Provides the means to review and edit a PROformajs task's attributes and childre
           </button>
         </li>
         <li class="nav-item" role="presentation">
-          <button :class="'nav-link '" :id="'pc-task-tabs-constraints'" data-bs-toggle="tab"
-            :data-bs-target="'#pc-task-tabs-constraints-p'" type="button" role="tab"
-            :aria-controls="'pc-task-constraints-p'" :aria-selected="true">
+          <button :class="'nav-link ' + (tabIndex == 4 ? 'active' : '')" :id="'pc-task-tabs-constraints'"
+            data-bs-toggle="tab" :data-bs-target="'#pc-task-tabs-constraints-p'" type="button" role="tab"
+            :aria-controls="'pc-task-constraints-p'" :aria-selected="true" @click.prevent="tabIndex = 4">
             constraints
           </button>
         </li>
       </ul>
       <div class="tab-content mt-2">
-        <div class="tab-pane active" id="pc-task-tabs-details-p">
+        <div :class="'tab-pane ' + (tabIndex == 0 ? 'active' : '')" id="pc-task-tabs-details-p">
           <form>
             <pc-name class="mb-3" :comp="task" @change-attribute="updateAttribute" v-if="protocol.tasks" />
             <pc-input class="mb-3" att="caption" :comp="task" @change-attribute="updateAttribute" />
@@ -115,7 +115,7 @@ Provides the means to review and edit a PROformajs task's attributes and childre
             </li>
           </ul>
         </div>
-        <div class="tab-pane" id="pc-task-tabs-data-p" v-if="!task._parent">
+        <div :class="'tab-pane ' + (tabIndex == 1 ? 'active' : '')" id="pc-task-tabs-data-p" v-if="!task._parent">
           <div class="form-group">
             <input type="text" class="form-control form-control-sm" id="newcdatadef" @change="handleDDText"
               placeholder="Enter data definition name" autocapitalize="off">
@@ -140,7 +140,8 @@ Provides the means to review and edit a PROformajs task's attributes and childre
             </table>
           </div>
         </div>
-        <div class="tab-pane" id="pc-task-tabs-source-p" v-if="task.constructor.name == 'Enquiry'">
+        <div :class="'tab-pane ' + (tabIndex == 2 ? 'active' : '')" id="pc-task-tabs-source-p"
+          v-if="task.constructor.name == 'Enquiry'">
           <form>
             <template v-if="sourceDataDefs().length > 0">
               <template v-if="availableDataDefs().length > 0">
@@ -185,7 +186,8 @@ Provides the means to review and edit a PROformajs task's attributes and childre
             </p>
           </form>
         </div>
-        <div class="tab-pane" id="pc-task-tabs-candidates-p" v-if="task.constructor.name == 'Decision'">
+        <div :class="'tab-pane ' + (tabIndex == 3 ? 'active' : '')" id="pc-task-tabs-candidates-p"
+          v-if="task.constructor.name == 'Decision'">
           <div class="form-group">
             <input type="text" class="form-control form-control-sm" id="newcandidate" @change="addCandidate"
               placeholder="Enter candidate name" autocapitalize="off">
@@ -211,7 +213,7 @@ Provides the means to review and edit a PROformajs task's attributes and childre
             </table>
           </div>
         </div>
-        <div class="tab-pane" id="pc-task-tabs-constraints-p">
+        <div :class="'tab-pane ' + (tabIndex == 4 ? 'active' : '')" id="pc-task-tabs-constraints-p">
           <form>
             <pc-nt-condition att="waitCondition" :comp="task" @change-attribute="updateAttribute"
               :issues="attributeIssues('waitCondition')" />

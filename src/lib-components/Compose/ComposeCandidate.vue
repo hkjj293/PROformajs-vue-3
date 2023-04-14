@@ -31,7 +31,7 @@ Provides the means to review and edit a PROformajs candidates's attributes and c
           Next &gt;
         </button>
       </div>
-      <ul class="nav nav-tabs"
+      <ul class="nav nav-tabs small"
         :id="'pc-arg-tabs-' + (this.plan && this.plan.name ? this.plan.name.replaceAll(':', '-') : 'no-name')"
         role="tablist">
         <li class="nav-item" role="presentation">
