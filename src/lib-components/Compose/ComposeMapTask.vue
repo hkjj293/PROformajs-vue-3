@@ -31,7 +31,7 @@ but I cant work out how to position these correctly.  See also MapBreadcrumb.
 </docs>
 
 <template>
-  <g class="task draggable" @dblclick="changePath">
+  <g ref="mapTask" class="task draggable" @dblclick="changePath">
     <!-- v-hammer:tap="doubleTapChangePath"-->
     <component v-bind:is="'pm-icon-' + clazz" :x="x" :y="y" fill="#FFF" :stroke="taskStroke" :animate="false"
       :stroke_width="stroke_width" />
@@ -125,6 +125,9 @@ export default {
     }
   },
   mounted: function () {
+    var manager = new Hammer.Manager(this.$refs.mapTask)
+    manager.add(new Hammer.Tap({ event: 'doubletap', taps: 2 }))
+    manager.on('doubletap', this.doubleTapChangePath)
     this.$nextTick(function () {
       this.setHandleX()
     })
