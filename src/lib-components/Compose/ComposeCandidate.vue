@@ -13,104 +13,54 @@ Provides the means to review and edit a PROformajs candidates's attributes and c
 
 <template>
   <div>
-    <pc-argument
-      v-if="argumentPath != ''"
-      :protocol="protocol"
-      :path="argumentPath"
-      @change-protocol="$emit('change-protocol', $event)"
-      @select-path="updateArgumentPath"
-      ref="argumentEditor"
-      :issues="subComponentIssues(argumentPath)"
-    />
+    <pc-argument v-if="argumentPath != ''" :protocol="protocol" :path="argumentPath"
+      @change-protocol="$emit('change-protocol', $event)" @select-path="updateArgumentPath" ref="argumentEditor"
+      :issues="subComponentIssues(argumentPath)" />
     <div :class="argumentPath == '' ? 'd-block' : 'd-none'">
       <h4>Candidate: {{ candidate.name }}</h4>
       <div class="mb-2">
-        <button
-          class="btn btn-outline-secondary btn-sm"
-          @click="$emit('select-path', { value: '' })"
-        >
+        <button class="btn btn-outline-secondary btn-sm" @click="$emit('select-path', { value: '' })">
           &lt;&lt; Decision: {{ parentName }}
         </button>
-        <button
-          class="btn btn-outline-secondary btn-sm"
-          v-if="numSiblings > 1"
-          :disabled="candIdx == 0"
-          @click="prevCand"
-        >
+        <button class="btn btn-outline-secondary btn-sm" v-if="numSiblings > 1" :disabled="candIdx == 0"
+          @click="prevCand">
           &lt; Prev
         </button>
-        <button
-          class="btn btn-outline-secondary btn-sm"
-          size="sm"
-          v-if="numSiblings > 1"
-          :disabled="candIdx == numSiblings - 1"
-          @click="nextCand"
-        >
+        <button class="btn btn-outline-secondary btn-sm" size="sm" v-if="numSiblings > 1"
+          :disabled="candIdx == numSiblings - 1" @click="nextCand">
           Next &gt;
         </button>
       </div>
-      <ul
-        class="nav nav-tabs small"
-        :id="
-          'pc-arg-tabs-' +
-          (this.plan && this.plan.name ? this.plan.name.replaceAll(':', '-') : 'no-name')
-        "
-        role="tablist"
-      >
+      <ul class="nav nav-tabs small" :id="
+        'pc-arg-tabs-' +
+        (this.plan && this.plan.name ? this.plan.name.replaceAll(':', '-') : 'no-name')
+      " role="tablist">
         <li class="nav-item" role="presentation">
-          <button
-            :class="'nav-link ' + (tabIndex == 0 ? 'active' : '')"
-            :id="'pc-cand-tabs-details'"
-            data-bs-toggle="tab"
-            :data-bs-target="'#pc-cand-tabs-details-p'"
-            type="button"
-            role="tab"
-            :aria-controls="'pc-cand-tabs-details-p'"
-            :aria-selected="true"
-          >
+          <button :class="'nav-link ' + (tabIndex == 0 ? 'active' : '')" :id="'pc-cand-tabs-details'" data-bs-toggle="tab"
+            :data-bs-target="'#pc-cand-tabs-details-p'" type="button" role="tab" :aria-controls="'pc-cand-tabs-details-p'"
+            :aria-selected="true">
             Details
           </button>
         </li>
         <li class="nav-item" role="presentation">
-          <button
-            :class="'nav-link ' + (tabIndex == 1 ? 'active' : '')"
-            :id="'pc-cand-tabs-argument'"
-            data-bs-toggle="tab"
-            :data-bs-target="'#pc-cand-tabs-argument-p'"
-            type="button"
-            role="tab"
-            :aria-controls="'pc-cand-tabs-argument-p'"
-            :aria-selected="true"
-          >
+          <button :class="'nav-link ' + (tabIndex == 1 ? 'active' : '')" :id="'pc-cand-tabs-argument'"
+            data-bs-toggle="tab" :data-bs-target="'#pc-cand-tabs-argument-p'" type="button" role="tab"
+            :aria-controls="'pc-cand-tabs-argument-p'" :aria-selected="true">
             <span class="d-block d-sm-none">
               Args
-              <span
-                class="badge rounded-pill text-bg-secondary"
-                v-if="candidate.arguments && candidate.arguments.length > 0"
-                >{{ candidate.arguments.length }}</span
-              >
+              <span class="badge rounded-pill text-bg-secondary"
+                v-if="candidate.arguments && candidate.arguments.length > 0">{{ candidate.arguments.length }}</span>
             </span>
-            <span class="d-none d-sm-block"
-              >Arguments
-              <span
-                class="badge rounded-pill text-bg-secondary"
-                v-if="candidate.arguments && candidate.arguments.length > 0"
-                >{{ candidate.arguments.length }}</span
-              >
+            <span class="d-none d-sm-block">Arguments
+              <span class="badge rounded-pill text-bg-secondary"
+                v-if="candidate.arguments && candidate.arguments.length > 0">{{ candidate.arguments.length }}</span>
             </span>
           </button>
         </li>
         <li class="nav-item" role="presentation">
-          <button
-            :class="'nav-link ' + (tabIndex == 2 ? 'active' : '')"
-            :id="'pc-cand-tabs-recommend'"
-            data-bs-toggle="tab"
-            :data-bs-target="'#pc-cand-tabs-recommend-p'"
-            type="button"
-            role="tab"
-            :aria-controls="'pc-cand-tabs-recommend-p'"
-            :aria-selected="true"
-          >
+          <button :class="'nav-link ' + (tabIndex == 2 ? 'active' : '')" :id="'pc-cand-tabs-recommend'"
+            data-bs-toggle="tab" :data-bs-target="'#pc-cand-tabs-recommend-p'" type="button" role="tab"
+            :aria-controls="'pc-cand-tabs-recommend-p'" :aria-selected="true">
             Recommend
           </button>
         </li>
@@ -123,17 +73,9 @@ Provides the means to review and edit a PROformajs candidates's attributes and c
         </div>
         <div class="tab-pane" id="pc-cand-tabs-argument-p">
           <div>
-            <input
-              type="text"
-              class="form-control form-control-sm"
-              id="newargument"
-              @change="addArgument"
-              placeholder="Enter argument caption"
-            />
-            <table
-              class="table table-sm mt-3"
-              v-show="candidate.arguments && candidate.arguments.length > 0"
-            >
+            <input type="text" class="form-control form-control-sm" id="newargument" @change="addArgument"
+              placeholder="Enter argument caption" />
+            <table class="table table-sm mt-3" v-show="candidate.arguments && candidate.arguments.length > 0">
               <tbody>
                 <!-- existing candidates -->
                 <tr v-for="(arg, idx) in candidate.arguments" :key="idx">
@@ -151,13 +93,8 @@ Provides the means to review and edit a PROformajs candidates's attributes and c
           </div>
         </div>
         <div class="tab-pane" id="pc-cand-tabs-recommend-p">
-          <pc-condition
-            att="recommendCondition"
-            :comp="candidate"
-            :description="example"
-            @change-attribute="updateAttribute"
-            :issues="attributeIssues('recommendCondition')"
-          />
+          <pc-condition att="recommendCondition" :comp="candidate" :description="example"
+            @change-attribute="updateAttribute" :issues="attributeIssues('recommendCondition')" />
         </div>
       </div>
     </div>
@@ -178,6 +115,7 @@ export default {
     path: String,
     issues: Array
   },
+  emits: ['select-path', 'change-protocol'],
   components: {
     'pc-argument': ComposeArgument,
     'pc-name': ComposeName,

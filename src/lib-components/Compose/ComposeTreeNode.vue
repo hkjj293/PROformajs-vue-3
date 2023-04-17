@@ -15,26 +15,15 @@ Provides the node of an html tree, as a (possible nested) unordered list.
 <template>
   <li v-if="component">
     <span class="clickable" style="color: lightgrey">
-      <font-awesome-icon
-        :icon="buttonIcon"
-        v-if="subComponents.length > 0"
-        size="xs"
-        @click="openClose"
-      />
+      <font-awesome-icon :icon="buttonIcon" v-if="subComponents.length > 0" size="xs" @click="openClose" />
     </span>
     <pc-icon :icon="component.constructor.name" class="mx-1" />
     <span @click="selectTask" class="clickable" v-bind:class="{ selected: isSelected }">{{
       heading(component)
     }}</span>
     <ul v-if="expandedLocal && subComponents.length > 0">
-      <pc-tree-node
-        v-for="sub in subComponents"
-        :component="sub"
-        :selectedtask="selectedtask"
-        :key="sub.name"
-        :expanded="expandComp(sub)"
-        @select-task="$emit('select-task', $event)"
-      />
+      <pc-tree-node v-for="sub in subComponents" :component="sub" :selectedtask="selectedtask" :key="sub.name"
+        :expanded="expandComp(sub)" @select-task="$emit('select-task', $event)" />
     </ul>
   </li>
 </template>
@@ -54,6 +43,7 @@ export default {
     selectedtask: String,
     expanded: Boolean
   },
+  emits: ['select-path'],
   components: {
     'pc-icon': ComposeIcon
   },

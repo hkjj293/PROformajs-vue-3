@@ -22,8 +22,8 @@ purify.addHook('afterSanitizeAttributes', function (node) {
     node.setAttribute(
       'onclick',
       'this.dispatchEvent(new CustomEvent("send-trigger", {bubbles: true, detail: "' +
-        trigger +
-        '"}))'
+      trigger +
+      '"}))'
     )
   }
 })
@@ -37,6 +37,7 @@ export default {
       default: false
     }
   },
+  emits: ['send-trigger'],
   computed: {
     html() {
       // make a custom renderer to handle trigger links (markdown urls which look like "!trigger")
