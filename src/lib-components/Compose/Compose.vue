@@ -22,45 +22,23 @@ that can be used to edit a PROformajs protocol:
       <div class="tab-pane active" id="pc-tabs-editor-p">
         <div class="row">
           <div v-bind:class="{ 'col-sm-8': protocol.tasks, 'col-sm-5': !protocol.tasks }">
-            <pc-map
-              :protocol="protocol"
-              :selectedtask="selectedtask"
-              @select-task="$emit('select-task', $event)"
-              @delete-task="modal.show()"
-              :issues="allIssues"
-            />
+            <pc-map :protocol="protocol" :selectedtask="selectedtask" @select-task="$emit('select-task', $event)"
+              @delete-task="modal.show()" :issues="allIssues" />
           </div>
           <div v-bind:class="{ 'col-sm-4': protocol.tasks, 'col-sm-7': !protocol.tasks }">
-            <pc-task
-              ref="taskEditor"
-              :protocol="protocol"
-              :path="selectedtask"
-              :issues="selectedTaskIssues"
-              @change-protocol="relayChangeEvent($event, 1)"
-              @delete-task="modal.show()"
-              @select-task="$emit('select-task', $event)"
-            />
+            <pc-task ref="taskEditor" :protocol="protocol" :path="selectedtask" :issues="selectedTaskIssues"
+              @change-protocol="relayChangeEvent($event, 1)" @delete-task="modal.show()"
+              @select-task="$emit('select-task', $event)" />
           </div>
         </div>
         <!-- Modal Component -->
-        <div
-          ref="deleteTaskModal"
-          class="modal fade"
-          id="pc-modal"
-          tabindex="-1"
-          aria-labelledby="pc-modal-label"
-          aria-hidden="true"
-        >
+        <div ref="deleteTaskModal" class="modal fade" id="pc-modal" tabindex="-1" aria-labelledby="pc-modal-label"
+          aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
                 <h1 class="modal-title fs-5" id="pc-modal-label">Remove task</h1>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
                 <p class="my-4">Are you sure you wish to remove this task?</p>
@@ -69,12 +47,7 @@ that can be used to edit a PROformajs protocol:
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                   Cancel
                 </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-bs-dismiss="modal"
-                  @click.prevent="deleteTask"
-                >
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click.prevent="deleteTask">
                   OK
                 </button>
               </div>
@@ -85,19 +58,11 @@ that can be used to edit a PROformajs protocol:
       <div class="tab-pane" id="pc-tabs-code-p">
         <div class="row">
           <div class="col-sm-4">
-            <pc-tree
-              :protocol="protocol"
-              :selectedtask="selectedtask"
-              @select-task="$emit('select-task', $event)"
-            />
+            <pc-tree :protocol="protocol" :selectedtask="selectedtask" @select-task="$emit('select-task', $event)" />
           </div>
           <div class="col-sm-8">
-            <pc-code
-              ref="code"
-              :protocol="protocol"
-              :selectedtask="selectedtask"
-              @change-protocol="relayChangeEvent($event, 2)"
-            />
+            <pc-code ref="code" :protocol="protocol" :selectedtask="selectedtask"
+              @change-protocol="relayChangeEvent($event, 2)" />
           </div>
         </div>
       </div>
@@ -105,30 +70,14 @@ that can be used to edit a PROformajs protocol:
 
     <ul class="nav nav-pills" :id="'pc-tabs'" role="tablist">
       <li class="nav-item" role="presentation">
-        <button
-          class="nav-link active"
-          id="pc-tabs-editor"
-          data-bs-toggle="pill"
-          data-bs-target="#pc-tabs-editor-p"
-          type="button"
-          role="tab"
-          aria-controls="pc-tabs-editor-p"
-          aria-selected="true"
-        >
+        <button class="nav-link active" id="pc-tabs-editor" data-bs-toggle="pill" data-bs-target="#pc-tabs-editor-p"
+          type="button" role="tab" aria-controls="pc-tabs-editor-p" aria-selected="true">
           Editor
         </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button
-          class="nav-link"
-          id="pc-tabs-code"
-          data-bs-toggle="pill"
-          data-bs-target="#pc-tabs-code-p"
-          type="button"
-          role="tab"
-          aria-controls="pc-tabs-code-p"
-          aria-selected="true"
-        >
+        <button class="nav-link" id="pc-tabs-code" data-bs-toggle="pill" data-bs-target="#pc-tabs-code-p" type="button"
+          role="tab" aria-controls="pc-tabs-code-p" aria-selected="true">
           Code
         </button>
       </li>
@@ -162,7 +111,7 @@ export default {
     }
   },
   mounted() {
-    this.modal = new bootstrap.Modal('#pc-modal', {
+    this.modal = new window.bootstrap.Modal('#pc-modal', {
       keyboard: true
     })
   },
@@ -206,7 +155,7 @@ export default {
       const task = parentTask(this.protocol.getComponent(path)).path()
       this.$emit('select-task', { value: task })
     },
-    deleteTask(evt) {
+    deleteTask() {
       let selected = this.protocol.getComponent(this.selectedtask)
       let plan = selected._parent
       // remove downstream tasks

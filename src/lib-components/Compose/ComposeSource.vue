@@ -18,42 +18,23 @@ Provides the means to review and edit a PROformajs source details
       <button class="btn btn-outline-secondary btn-sm" @click="$emit('select-path', { value: '' })">
         &lt;&lt; {{ source._parent.constructor.name }}: {{ source._parent.name }}
       </button>
-      <button
-        class="btn btn-outline-secondary btn-sm"
-        v-if="numSiblings > 1"
-        :disabled="sourceIdx == 0"
-        @click="prevSource"
-      >
+      <button class="btn btn-outline-secondary btn-sm" v-if="numSiblings > 1" :disabled="sourceIdx == 0"
+        @click="prevSource">
         &lt; Prev
       </button>
-      <button
-        class="btn btn-outline-secondary btn-sm"
-        v-if="numSiblings > 1"
-        :disabled="sourceIdx == numSiblings - 1"
-        @click="nextSource"
-      >
+      <button class="btn btn-outline-secondary btn-sm" v-if="numSiblings > 1" :disabled="sourceIdx == numSiblings - 1"
+        @click="nextSource">
         Next &gt;
       </button>
     </div>
-    <ul
-      class="nav nav-tabs small"
-      :id="
-        'pc-source-tabs-' +
-        (this.plan && this.plan.name ? this.plan.name.replaceAll(':', '-') : 'no-name')
-      "
-      role="tablist"
-    >
+    <ul class="nav nav-tabs small" :id="
+      'pc-source-tabs-' +
+      (this.plan && this.plan.name ? this.plan.name.replaceAll(':', '-') : 'no-name')
+    " role="tablist">
       <li class="nav-item" role="presentation">
-        <button
-          :class="'nav-link active'"
-          :id="'pc-source-tabs'"
-          data-bs-toggle="tab"
-          :data-bs-target="'#pc-source-tabs-content'"
-          type="button"
-          role="tab"
-          :aria-controls="'pc-source-tabs-content'"
-          :aria-selected="true"
-        >
+        <button :class="'nav-link active'" :id="'pc-source-tabs'" data-bs-toggle="tab"
+          :data-bs-target="'#pc-source-tabs-content'" type="button" role="tab" :aria-controls="'pc-source-tabs-content'"
+          :aria-selected="true">
           Details
         </button>
       </li>
@@ -65,50 +46,25 @@ Provides the means to review and edit a PROformajs source details
         </div>
         <div class="col">
           <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="required"
-              :disabled="custom"
-              :checked="required"
-              @change="setRequired"
-            />
+            <input class="form-check-input" type="checkbox" id="required" :disabled="custom" :checked="required"
+              @change="setRequired" />
             <label class="form-check-label" for="required"> Required? </label>
           </div>
           <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="specific-period"
-              :disabled="custom || !required"
-              :checked="timely != null"
-              @change="setTimely"
-            />
+            <input class="form-check-input" type="checkbox" id="specific-period" :disabled="custom || !required"
+              :checked="timely != null" @change="setTimely" />
             <label class="form-check-label" for="specific-period">
               ... from within a specified period
             </label>
           </div>
           <div class="row g-3" :disabled="custom || !timely">
             <div class="col-auto">
-              <input
-                class="form-control form-control-sm"
-                type="number"
-                id="timeunits"
-                ref="timeUnits"
-                v-model="timeUnits"
-                :disabled="custom || !required || !timely"
-                @change="setRequestCondition"
-              />
+              <input class="form-control form-control-sm" type="number" id="timeunits" ref="timeUnits" v-model="timeUnits"
+                :disabled="custom || !required || !timely" @change="setRequestCondition" />
             </div>
             <div class="col-auto">
-              <select
-                class="form-control form-control-sm"
-                id="timeunit"
-                ref="timeUnit"
-                v-model="timeUnit"
-                :disabled="custom || !required || !timely"
-                @change="setRequestCondition"
-              >
+              <select class="form-control form-control-sm" id="timeunit" ref="timeUnit" v-model="timeUnit"
+                :disabled="custom || !required || !timely" @change="setRequestCondition">
                 <option value="minutes">Minutes</option>
                 <option value="hours">Hours</option>
                 <option value="days">Days</option>
@@ -124,9 +80,9 @@ Provides the means to review and edit a PROformajs source details
 
 <script>
 // for use in RequestCondition
-const cls1 = /\!is_known\(\'(\w+)\'\)/
+const cls1 = /!is_known\('(\w+)'\)/
 const cls2 =
-  /\|\|\s*last_updated\(\'(\w+)\'\)\.diff\(now\(\),\s*\'(minutes|hours|days|months|years)\'\)>(\d+)/
+  /\|\|\s*last_updated\('(\w+)'\)\.diff\(now\(\),\s*'(minutes|hours|days|months|years)'\)>(\d+)/
 
 class RequestCondition {
   // helper class to interpret expressions of the form
@@ -199,10 +155,6 @@ export default {
     },
     timely() {
       let result = this.expressionTester ? this.expressionTester.timely() : null
-      if (result) {
-        this.timeUnit = result.unit
-        this.timeUnits = result.value
-      }
       return result
     },
     custom() {
@@ -266,8 +218,18 @@ export default {
     },
     source: {
       immediate: true,
-      handler: function () {
-        this.expressionTester = new RequestCondition(this.source)
+      handler: function (newSource) {
+        this.expressionTester = new RequestCondition(newSource)
+      }
+    },
+    expressionTester: {
+      immediate: true,
+      handler: function (newTester) {
+        let result = newTester ? newTester.timely() : null
+        if (result) {
+          this.timeUnit = result.unit
+          this.timeUnits = result.value
+        }
       }
     }
   }

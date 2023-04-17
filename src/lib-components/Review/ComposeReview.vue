@@ -26,7 +26,7 @@ new data values and newly created cyclic tasks which is why its not used.
 <template>
   <component v-if="!exception" v-bind:is="'p-review-' + template" :enactment="enactment" :options="reviewOptions"
     @change-enactment="updateEnactment" @restart-enactment="resetEnactment" @change-option="updateOption" :debug="debug">
-    <template slot="finished">
+    <template v-slot:finished>
       <slot name="finished"></slot>
     </template>
   </component>
@@ -161,7 +161,7 @@ export default {
     protocol: {
       // https://stackoverflow.com/questions/44584078/vuejs-2-0-cant-hook-a-component-on-props-update
       deep: true, // without this flag changes only percolate when the protocol is saved
-      handler(val, oldval) {
+      handler() {
         this.resetEnactment()
       }
     }

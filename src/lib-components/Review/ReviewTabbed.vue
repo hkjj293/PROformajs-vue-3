@@ -78,6 +78,7 @@ Provides a tabbed UI for a proformajs Enactment.
 <script>
 import { ReviewMixin } from './review'
 import ReviewTabbedTabs from './ReviewTabbedTabs.vue'
+import moment from 'moment'
 
 export default {
   mixins: [ReviewMixin],

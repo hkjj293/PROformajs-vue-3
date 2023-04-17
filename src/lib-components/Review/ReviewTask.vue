@@ -227,7 +227,8 @@ export default {
   computed: {
     sortedCands: function () {
       if (this.task.candidates) {
-        let result = this.task.candidates.sort((left, right) => {
+        let candidates = this.task.candidates.slice(0)
+        let result = candidates.sort((left, right) => {
           if ((left.recommended && right.recommended) || (!left.recommended && !right.recommended))
             return right.support - left.support
           else if (left.recommended) return -1 // left recommended by not right

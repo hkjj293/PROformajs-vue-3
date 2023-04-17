@@ -59,7 +59,7 @@ Provides the means to review and edit a PROformajs argument's attributes and chi
                 { value: '-', text: '-' },
                 { value: '+', text: '+' },
                 { value: '++', text: '++' }
-              ]">
+              ]" :key="symbol.value">
                 <input type="radio" class="btn-check" name="supportType" :id="symbol.value" :value="symbol.value"
                   autocomplete="off" @input="supportSymbol = symbol.value" :checked="supportSymbol == symbol.value" />
                 <label class="btn btn-outline-secondary btn-sm" :for="symbol.value">{{

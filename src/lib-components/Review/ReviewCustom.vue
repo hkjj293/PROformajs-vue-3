@@ -65,8 +65,8 @@ The shortness of breath example uses this meta:
 <template>
   <div v-if="enactment">
     <div class="row">
-      <div v-for="(col, index) of cols" :class="'col-' + col.width">
-        <template v-for="(comp, index) of col.contents">
+      <div v-for="(col, index) of cols" :class="'col-' + col.width" :key="index">
+        <template v-for="(comp, index) of col.contents" :key="index">
           <pr-fixed v-if="comp.component == 'fixed'" :enactment="enactment" :options="options" :debug="debug"
             :taskpath="comp.path" @changes-enactment="$emit('change-enactment', $event)" />
           <pr-settings :id="'popover-reivew-custom'" class="float-end" v-if="comp.component == 'settings'"

@@ -5,12 +5,8 @@
 <template>
   <div>
     <debug title="Compose">
-      <Compose
-        :protocol="protocol"
-        :selectedtask="selectedtask"
-        @change-protocol="updateProtocol"
-        @select-task="updateSelectedTask"
-      />
+      <Compose :protocol="protocol" :selectedtask="selectedtask" @change-protocol="updateProtocol"
+        @select-task="updateSelectedTask" />
     </debug>
   </div>
 </template>
@@ -18,21 +14,6 @@
 <script>
 import Compose from '../../Compose/Compose.vue'
 import { Enactment, Protocol } from '@openclinical/proformajs'
-
-const reviewOptions = {
-  Decision: {
-    showInactiveArguments: true,
-    showExpressions: true,
-    allowDownloads: true
-  },
-  Enquiry: {
-    useDefaults: true
-  },
-  Candidate: {
-    autoConfirmRecommended: true
-  },
-  debug: true
-}
 
 const template = {
   class: 'Plan',
@@ -160,13 +141,12 @@ export default {
   },
   methods: {
     updateProtocol(e) {
-      checkMeta(e.value)
       this.protocol = e.value
       if (e.selected) {
         this.selectedtask = e.selected
       }
       try {
-        let selected = this.protocol.getComponent(this.selectedtask)
+        this.protocol.getComponent(this.selectedtask)
       } catch (e) {
         // drop back to root path in case of error, assumed caused by name changes
         this.selectedtask = this.protocol.name

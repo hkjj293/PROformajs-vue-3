@@ -1,8 +1,8 @@
+//Import Vue nextTick
+import { nextTick } from 'vue'
+
 // Import vue components
 import * as components from '@/lib-components/Core/index.js'
-
-// hammerjs used for doubletap and (todo: gestures) on the ipad
-//import { VueHammer } from 'vue2-hammer'
 
 // fontawesome icons
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -56,13 +56,11 @@ const install = function installProformajsVue(app) {
     // next line altered from the standard sfc-init to respect component name
     app.component(component.name || componentName, component)
 
-    //app.use(VueHammer)
-
     app.component('font-awesome-icon', FontAwesomeIcon)
     // v-focus directive on dynamic inputs, see https://vuejs.org/v2/guide/custom-directive.html
     app.directive('focus', {
       inserted: function (el) {
-        Vue.nextTick(function () {
+        nextTick(function () {
           el.focus()
         })
       }

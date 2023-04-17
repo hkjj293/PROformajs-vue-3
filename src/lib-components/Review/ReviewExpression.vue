@@ -18,14 +18,8 @@ an expression that consists of the name of a data def without a value will be un
   <div>
     <div>
       <label for="expressions">Debug expressions</label>
-      <input
-        type="text"
-        class="form-control"
-        :id="id + 'expression'"
-        :aria-describedby="id + 'expressionHelp'"
-        placeholder="Enter test expression"
-        @change="testExpression"
-      />
+      <input type="text" class="form-control" :id="id + 'expression'" :aria-describedby="id + 'expressionHelp'"
+        placeholder="Enter test expression" @change="testExpression" />
       <small :id="id + 'expressionHelp'" class="form-text text-muted">{{ description }}</small>
       <div class="text-danger">{{ message }}</div>
     </div>
@@ -103,12 +97,12 @@ export default {
     }
   },
   watch: {
-    path(value) {
+    path() {
       this.message = null
       this.expressions = []
       this.expression = null
     },
-    enactment(value) {
+    enactment() {
       for (let item of this.expressions) {
         let result = this.enactment.evaluate(item.expression, this.path)
         item.value = result != undefined ? result.toString() : 'undefined'

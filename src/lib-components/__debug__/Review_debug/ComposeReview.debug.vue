@@ -5,23 +5,18 @@
 <template>
   <div>
     <debug title="ComposeReview">
-      <ComposeReview
-        :protocol="protocol"
-        :debug="true"
-        :initialData="startData"
-        :template="
-          protocol && protocol.meta && protocol.meta.enact && protocol.meta.enact.template
-            ? protocol.meta.enact.template
-            : 'compact'
-        "
-      />
+      <ComposeReview :protocol="protocol" :debug="true" :initialData="startData" :template="
+        protocol && protocol.meta && protocol.meta.enact && protocol.meta.enact.template
+          ? protocol.meta.enact.template
+          : 'compact'
+      " />
     </debug>
   </div>
 </template>
 
 <script>
 import ComposeReview from '../../Review/ComposeReview.vue'
-import { Enactment, Protocol } from '@openclinical/proformajs'
+import { Protocol } from '@openclinical/proformajs'
 
 const template = {
   class: 'Plan',
@@ -150,13 +145,12 @@ export default {
   },
   methods: {
     updateProtocol(e) {
-      checkMeta(e.value)
       this.protocol = e.value
       if (e.selected) {
         this.selectedtask = e.selected
       }
       try {
-        let selected = this.protocol.getComponent(this.selectedtask)
+        this.protocol.getComponent(this.selectedtask)
       } catch (e) {
         // drop back to root path in case of error, assumed caused by name changes
         this.selectedtask = this.protocol.name

@@ -17,52 +17,6 @@
 <script>
 import MapArrow from '../../Core/MapArrow.vue'
 
-const template = {
-  class: 'Plan',
-  meta: {
-    svg: {
-      width: 800,
-      height: 400
-    }
-  },
-  caption: 'Plan',
-  name: 'plan',
-  autonomous: true,
-  dataDefinitions: [
-    {
-      class: 'Integer',
-      caption: 'A',
-      name: 'a',
-      valueCondition: '2'
-    }
-  ],
-  tasks: [
-    {
-      class: 'Action',
-      meta: {
-        pos: {
-          x: 135.54356301541733,
-          y: 181.13459032695374
-        }
-      },
-      caption: 'Action A',
-      name: 'actionA'
-    },
-    {
-      class: 'Plan',
-      meta: {
-        pos: {
-          x: 257.14920905916057,
-          y: 217.92286216470376
-        }
-      },
-      caption: 'Plan C',
-      name: 'planC',
-      autonomous: true
-    }
-  ]
-}
-
 const testPRProps1 = {
   sx: 50.54356301541733,
   sy: 50.13459032695374,

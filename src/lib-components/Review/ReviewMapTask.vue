@@ -15,23 +15,9 @@ Draws a PROformajs task for the ReviewMap component.
 
 <template>
   <g class="task draggable" @click="handleClick">
-    <component
-      v-bind:is="'pm-icon-' + clazz"
-      :x="x"
-      :y="y"
-      :fill="taskFill"
-      :stroke="taskStroke"
-      :animate="task.state == 'in_progress'"
-      :stroke_width="stroke_width"
-      class="clickable"
-    />
-    <text
-      text-anchor="middle"
-      :x="x + midline"
-      :y="y + 20 + 16"
-      v-bind:class="{ selected: selected }"
-      class="clickable"
-    >
+    <component v-bind:is="'pm-icon-' + clazz" :x="x" :y="y" :fill="taskFill" :stroke="taskStroke"
+      :animate="task.state == 'in_progress'" :stroke_width="stroke_width" class="clickable" />
+    <text text-anchor="middle" :x="x + midline" :y="y + 20 + 16" v-bind:class="{ selected: selected }" class="clickable">
       {{ task.caption || task.name }}
     </text>
   </g>
@@ -78,6 +64,7 @@ export default {
         case 'dormant':
           return 'none'
       }
+      return null
     },
     taskStroke: function () {
       switch (this.task.state) {
@@ -91,7 +78,7 @@ export default {
     }
   },
   methods: {
-    handleClick(evt) {
+    handleClick() {
       if (this.task.class == 'Plan') {
         this.$emit('select-plan', { value: this.task.path })
       } else {

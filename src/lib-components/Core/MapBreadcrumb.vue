@@ -26,13 +26,7 @@ but I cant work out how to position these correctly.  See also ComposeMapTask.
 <template>
   <g id="breadcrumb">
     <text :x="offset + 10" y="20">
-      <tspan
-        v-for="crumb in crumbs()"
-        class="clickable"
-        @click="changePath"
-        :data-path="crumb.path"
-        :key="crumb.path"
-      >
+      <tspan v-for="crumb in crumbs()" class="clickable" @click="changePath" :data-path="crumb.path" :key="crumb.path">
         {{ crumb.caption }} :
       </tspan>
       <tspan @click="selectTask" class="clickable" v-bind:class="{ selected: selected }">
@@ -41,15 +35,8 @@ but I cant work out how to position these correctly.  See also ComposeMapTask.
       <tspan v-if="hasError" fill="#E74C3C">[!]</tspan>
       <tspan v-if="hasWarning" fill="#3498DB">(?)</tspan>
       <line :x1="offset" :y1="height" :x2="width" :y2="height" stroke="gray"></line>
-      <tspan
-        v-show="!review && plan.dataDefinitions.length > 0"
-        style="font-size: 10pt"
-        fill="gray"
-      >
-        {{ plan.dataDefinitions.length }} data definition<template
-          v-if="plan.dataDefinitions.length > 1"
-          >s</template
-        >
+      <tspan v-show="!review && plan.dataDefinitions.length > 0" style="font-size: 10pt" fill="gray">
+        {{ plan.dataDefinitions.length }} data definition<template v-if="plan.dataDefinitions.length > 1">s</template>
       </tspan>
     </text>
     <line :x1="offset" :y1="height" :x2="width" :y2="height" stroke="gray"></line>
@@ -89,7 +76,7 @@ export default {
     changePath(evt) {
       this.$emit('select-task', { value: evt.target.dataset.path })
     },
-    selectTask(evt) {
+    selectTask() {
       this.$emit('select-task', { value: this.plan.path() })
     }
   }

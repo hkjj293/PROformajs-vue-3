@@ -90,7 +90,7 @@ export default {
         this.selectedtask = e.selected
       }
       try {
-        let selected = this.protocol.getComponent(this.selectedtask)
+        this.protocol.getComponent(this.selectedtask)
       } catch (e) {
         // drop back to root path in case of error, assumed caused by name changes
         this.selectedtask = this.protocol.name

@@ -67,7 +67,7 @@ Provides the means to review and edit a PROformajs data definition's attributes 
               Data type
             </label>
             <div id="dataDefinitionClass" class="input-group mb-3 col-auto">
-              <template v-for="dataType in ['Boolean', 'Text', 'Integer', 'Float', 'Date']">
+              <template v-for="dataType in ['Boolean', 'Text', 'Integer', 'Float', 'Date']" :key="dataType">
                 <input type="radio" class="btn-check" name="dataDefinitionClass" :id="dataType" :value="dataType"
                   autocomplete="off" @input="clazz = dataType" :checked="clazz == dataType" />
                 <label class="btn btn-outline-secondary btn-sm" :for="dataType">
@@ -95,7 +95,7 @@ Provides the means to review and edit a PROformajs data definition's attributes 
             <template v-for="range in [
               { value: true, text: 'Annotated' },
               { value: false, text: 'Raw' }
-            ]">
+            ]" :key="range">
               <input type="radio" class="btn-check" name="rangeAnnotated" :id="range.text" :value="range.value"
                 autocomplete="off" @input="rangeAnnotatedToggle = range.value"
                 :checked="rangeAnnotatedToggle == range.value" />

@@ -1,6 +1,5 @@
 <script>
 import { Popover } from 'bootstrap'
-import { nextTick } from 'vue'
 
 export default {
   name: 'PopoverButton',
@@ -69,10 +68,10 @@ export default {
     this.$el.addEventListener('show.bs.popover', this.onShow)
   },
   methods: {
-    onShown(evt) {
+    onShown() {
       this.$emit('shown')
     },
-    onShow(evt) {
+    onShow() {
       if (this.targetId && document.getElementById(this.targetId)) {
         this.message = document.getElementById(this.targetId).innerHTML
       }
@@ -92,19 +91,9 @@ export default {
 </script>
 
 <template>
-  <button
-    type="button"
-    :class="classes"
-    data-content-id="popover-27"
-    :data-bs-container="container"
-    :data-bs-trigger="trigger"
-    data-bs-toggle="popover"
-    :data-bs-placement="placement"
-    :data-bs-html="html"
-    :data-bs-title="noTitle ? ' ' : title"
-    :data-bs-content="msg"
-    @blur="onBlur"
-  >
+  <button type="button" :class="classes" data-content-id="popover-27" :data-bs-container="container"
+    :data-bs-trigger="trigger" data-bs-toggle="popover" :data-bs-placement="placement" :data-bs-html="html"
+    :data-bs-title="noTitle ? ' ' : title" :data-bs-content="msg" @blur="onBlur">
     <slot />
   </button>
 </template>

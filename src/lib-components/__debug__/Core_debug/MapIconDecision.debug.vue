@@ -16,7 +16,7 @@
 
 <script>
 import MapIconDecision from '../../Core/MapIconDecision.vue'
-import { task_colors, discarded_color } from '../../Core/map.js'
+import { task_colors } from '../../Core/map.js'
 
 const testPRProps1 = {
   x: 50,
@@ -34,7 +34,7 @@ export default {
       testPRProps1: testPRProps1
     }
   },
-  mounted: function () {},
+  mounted: function () { },
   components: { MapIconDecision }
 }
 </script>

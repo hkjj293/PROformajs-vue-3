@@ -44,15 +44,21 @@ but I cant work out how to position these correctly.  See also MapBreadcrumb.
     </text>
     <text v-show="task.dataDefinitions.length > 0" text-anchor="middle" :x="x + midline" :y="y + 36 + 14" class="meta">{{
       task.dataDefinitions.length }} data definition<template v-if="task.dataDefinitions.length > 1">s</template></text>
-    <text v-if="clazz == 'plan'" v-for="(subtask, idx) in task.tasks" text-anchor="middle" :x="x + midline"
-      :y="task.dataDefinitions.length > 0 ? y + 36 + 28 + idx * 14 : y + 36 + 14 + idx * 14" class="meta">{{ subtask.name
-      }}</text>
-    <text v-if="clazz == 'enquiry'" v-for="(source, idx) in task.sources" text-anchor="middle" :x="x + midline"
-      :y="task.dataDefinitions.length > 0 ? y + 36 + 28 + idx * 14 : y + 36 + 14 + idx * 14" class="meta">{{ source.type
-      }}</text>
-    <template v-if="clazz == 'decision'" v-for="(candidate, idx) in task.candidates">
-      <text text-anchor="middle" :x="x + midline"
-        :y="task.dataDefinitions.length > 0 ? y + 36 + 28 + idx * 14 : y + 36 + 14 + idx * 14" class="meta">{{
+    <template v-if="clazz == 'plan'">
+      <text v-for="(subtask, idx) in task.tasks" text-anchor="middle" :x="x + midline"
+        :y="task.dataDefinitions.length > 0 ? y + 36 + 28 + idx * 14 : y + 36 + 14 + idx * 14" class="meta" :key="idx">{{
+          subtask.name
+        }}</text>
+    </template>
+    <template v-if="clazz == 'enquiry'">
+      <text v-for="(source, idx) in task.sources" text-anchor="middle" :x="x + midline"
+        :y="task.dataDefinitions.length > 0 ? y + 36 + 28 + idx * 14 : y + 36 + 14 + idx * 14" class="meta" :key="idx">{{
+          source.type
+        }}</text>
+    </template>
+    <template v-if="clazz == 'decision'">
+      <text v-for="(candidate, idx) in task.candidates" text-anchor="middle" :x="x + midline"
+        :y="task.dataDefinitions.length > 0 ? y + 36 + 28 + idx * 14 : y + 36 + 14 + idx * 14" class="meta" :key="idx">{{
           candidate.name }} ({{ candidate.arguments.length }} arg<template
           v-if="candidate.arguments.length != 1">s</template>)</text>
     </template>
@@ -67,6 +73,7 @@ import MapIconPlan from '../Core/MapIconPlan.vue'
 import MapIconEnquiry from '../Core/MapIconEnquiry.vue'
 import MapIconAction from '../Core/MapIconAction.vue'
 import { task_colors } from '../Core/map.js'
+import Hammer from 'hammerjs'
 
 export default {
   props: {
@@ -134,7 +141,7 @@ export default {
   },
   methods: {
     setHandleX() {
-      let text = this.$refs['caption_' + this.task.path()]
+      //let text = this.$refs['caption_' + this.task.path()]
       try {
         this.handleX =
           this.x + this.midline - this.$refs['caption_' + this.task.path()].getBBox().width / 2

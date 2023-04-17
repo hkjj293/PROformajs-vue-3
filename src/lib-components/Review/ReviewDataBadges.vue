@@ -54,7 +54,6 @@ values are highlighted and shown with their value.
 <script>
 import ReviewSource from './ReviewSource.vue'
 import ReviewExpression from './ReviewExpression.vue'
-import moment from 'moment'
 
 export default {
   props: ['enactment', 'options'],
@@ -75,9 +74,9 @@ export default {
       } else {
         if (this.enactment && this.enactment.getDataDefinitions().length > 0) {
           let dd = this.enactment.getDataDefinitions()[0]
-          this.selectedName = dd.name
           return dd
         }
+        return null
       }
     }
   },
@@ -109,6 +108,14 @@ export default {
     },
     select(name) {
       this.selectedName = name
+    }
+  },
+  watch: {
+    enactment(newVal) {
+      if (this.selectedName && newVal && newVal.getDataDefinitions().length > 0) {
+        let dd = newVal.getDataDefinitions()[0]
+        this.selectedName = dd.name
+      }
     }
   }
 }

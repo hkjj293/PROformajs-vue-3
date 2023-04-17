@@ -24,7 +24,7 @@ Managing the active tab is slightly tricky as if you click a plan task tab you w
         'review-tabs-' +
         (this.plan && this.plan.name ? this.plan.name.replaceAll(':', '-') : 'no-name')
       " role="tablist">
-        <li class="nav-item" role="presentation" v-for="(task, index) in tabs" :key="task.path">
+        <li class="nav-item" role="presentation" v-for="task in tabs" :key="task.path">
           <button :class="
             'nav-link ' +
             (activeTab == task.path ? 'active ' : '') +
@@ -40,8 +40,7 @@ Managing the active tab is slightly tricky as if you click a plan task tab you w
     </div>
     <div class="card-body p-0">
       <div class="tab-content">
-        <div v-for="(task, index) in tabs" :key="'content-' + task.path"
-          :id="'tabs-content-' + task.path.replaceAll(':', '-')"
+        <div v-for="task in tabs" :key="'content-' + task.path" :id="'tabs-content-' + task.path.replaceAll(':', '-')"
           :class="'tab-pane ' + (activeTab == task.path ? 'active ' : '')" role="tabpanel"
           :aria-labelledby="'tabs-content-' + task.path.replaceAll(':', '-')" tabindex="0">
           <pr-tabbed-tabs style="border-radius: 0px; border: none" v-if="Object.keys(task).includes('tasks')" :plan="task"
@@ -65,31 +64,44 @@ export default {
   computed: {
     tabs() {
       let result = []
-      let activated = false // this need happen only once
       if (this.plan && this.plan.tasks) {
         for (const task of this.plan.tasks) {
           if (task.state == 'dormant' || task.state == 'in_progress') {
             result.push(task)
-            if (this.selected && !activated) {
-              if (task.path == this.selected) {
-                this.activeTab = task.path
-                activated = true
-              }
-              // selected task is a child of this task
-              if (this.selected.length > task.path.length && this.selected.startsWith(task.path)) {
-                this.activeTab = task.path
-                activated = true
-              }
-              // this task is a child of the selected task
-              if (task.path.length > this.selected.length && task.path.startsWith(this.selected)) {
-                this.$emit('select-task', { value: task.path })
-                activated = true
-              }
-            }
           }
         }
       }
       return result
+    }
+  },
+  watch: {
+    plan: {
+      handler(newVal) {
+        let activated = false // this need happen only once
+        if (newVal && newVal.tasks) {
+          for (const task of newVal.tasks) {
+            if (task.state == 'dormant' || task.state == 'in_progress') {
+              if (this.selected && !activated) {
+                if (task.path == this.selected) {
+                  this.activeTab = task.path
+                  activated = true
+                }
+                // selected task is a child of this task
+                if (this.selected.length > task.path.length && this.selected.startsWith(task.path)) {
+                  this.activeTab = task.path
+                  activated = true
+                }
+                // this task is a child of the selected task
+                if (task.path.length > this.selected.length && task.path.startsWith(this.selected)) {
+                  this.$emit('select-task', { value: task.path })
+                  activated = true
+                }
+              }
+            }
+          }
+        }
+      },
+      deep: true
     }
   }
 }
