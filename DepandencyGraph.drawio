@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-04-18T12:24:46.384Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="6cZApIduYmvTOPAmo-r9" version="21.1.8" type="github">
+<mxfile host="app.diagrams.net" modified="2023-04-18T12:24:54.249Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="_DfLDMB9ybOfhSYJFbf7" version="21.1.8" type="github">
   <diagram name="v1.0.0" id="n8G7o3eAPn_Wvr_kKuBB">
     <mxGraphModel dx="2875" dy="743" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -12,7 +12,7 @@
         <mxCell id="FQSfcEZK8xAJ8cy2tzZz-2" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="WLR_GNIUdRpMmE6UeqxM-1" target="WLR_GNIUdRpMmE6UeqxM-2" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="WLR_GNIUdRpMmE6UeqxM-1" value="App.vue" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=4;strokeColor=#FF8000;" parent="1" vertex="1">
+        <mxCell id="WLR_GNIUdRpMmE6UeqxM-1" value="App.vue" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=4;strokeColor=#6600CC;" parent="1" vertex="1">
           <mxGeometry x="383.5" y="10" width="80" height="50" as="geometry" />
         </mxCell>
         <mxCell id="FQSfcEZK8xAJ8cy2tzZz-130" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="WLR_GNIUdRpMmE6UeqxM-2" target="FQSfcEZK8xAJ8cy2tzZz-120" edge="1">
