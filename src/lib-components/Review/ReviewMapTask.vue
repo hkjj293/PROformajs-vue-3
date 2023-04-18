@@ -64,6 +64,7 @@ export default {
         case 'dormant':
           return 'none'
       }
+      return null
     },
     taskStroke: function () {
       switch (this.task.state) {
@@ -77,7 +78,7 @@ export default {
     }
   },
   methods: {
-    handleClick(evt) {
+    handleClick() {
       if (this.task.class == 'Plan') {
         this.$emit('select-plan', { value: this.task.path })
       } else {

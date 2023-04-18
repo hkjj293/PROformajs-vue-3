@@ -26,7 +26,7 @@ export default defineConfig({
   build: {
     lib: {
       // Could also be a dictionary or array of multiple entry points
-      entry: resolve(__dirname, 'src/entry.js'),
+      entry: resolve('./src/entry.js'),
       name: '@openclinical/proformajs-vue',
       // the proper extensions will be added
       fileName: 'proformajs-vue',

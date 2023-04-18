@@ -1,5 +1,5 @@
 <template>
-  <div role="tablist">
+  <div id="accordion">
     <div class="card mb-1" v-for="(event, index) in getHistory()" :key="index">
       <header class="card-header p-1" role="tab">
         <div class="d-grid gap-2">
@@ -9,7 +9,7 @@
           </button>
         </div>
       </header>
-      <div class="collapse" :id="historyId(index)" accordion="history-view" role="tabpanel">
+      <div class="collapse" :id="historyId(index)" role="tabpanel" data-bs-parent="#accordion">
         <div class="card-body">
           <table class="table b-table table-striped table-sm">
             <thead role="rowgroup">

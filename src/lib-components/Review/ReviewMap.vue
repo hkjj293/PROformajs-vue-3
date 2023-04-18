@@ -45,6 +45,7 @@ export default {
     enactment: Object,
     selectedtask: String
   },
+  emits: ['select-task'],
   data: function () {
     return {
       selectedplan: this.enactment.protocol.name, // default value which will change via interaction with map or breadcrumb
@@ -73,7 +74,6 @@ export default {
           .join(':')
         plan = this.protocol.getComponent(designpath)
       } catch (e) {
-        this.selectedplan = this.protocol.name
         plan = this.protocol
       }
       return plan
@@ -86,6 +86,8 @@ export default {
           ' ' +
           (this.protocol.meta.svg.height + this.breadcrumb.height)
         )
+      } else {
+        return null
       }
     },
     ports() {
@@ -155,6 +157,21 @@ export default {
         names.pop()
         this.selectedplan = names.join(':')
       }
+    },
+    protocol: {
+      handler(newVal) {
+        try {
+          // selectedplan is a runtimepath but to draw the map we refer to the design-time definition
+          let designpath = this.selectedplan
+            .split(':')
+            .map((task) => (task.indexOf('[') > -1 ? task.substring(0, task.indexOf('[')) : task))
+            .join(':')
+          newVal.getComponent(designpath)
+        } catch (e) {
+          this.selectedplan = newVal.name
+        }
+      },
+      deep: true
     }
   } // watch
 }

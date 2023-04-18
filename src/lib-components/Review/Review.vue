@@ -195,6 +195,7 @@ import { ReviewMixin } from './review'
 
 export default {
   mixins: [ReviewMixin],
+  emits: ['select-plan', 'restart-enactment'],
   methods: {
     OnUpdateOptions(opts) {
       this.$emit('change-option', opts)

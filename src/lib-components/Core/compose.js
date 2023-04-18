@@ -173,7 +173,7 @@ export const TemporalConstraintMixin = {
           return exprs.temporal
         }
       } else {
-        this.$set(task, attribute, expression)
+        task[attribute] = expression
       }
     },
     // concaternates the passed clause to the existing expression
@@ -181,7 +181,7 @@ export const TemporalConstraintMixin = {
       if (task[attribute] && task[attribute].length > 0) {
         task[attribute] = clause + ' && ' + task[attribute]
       } else {
-        this.$set(task, attribute, clause)
+        task[attribute] = clause
       }
     },
     replaceClause(task, attribute, existing, replacing) {

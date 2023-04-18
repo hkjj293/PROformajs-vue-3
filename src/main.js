@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import * as bootstrap from 'bootstrap'
 window.bootstrap = bootstrap
 
-const app = createApp(App)
+const app = createApp(App, { debug: false })
 
 import ProformajsVue from '@/entry.esm'
 app.use(ProformajsVue)

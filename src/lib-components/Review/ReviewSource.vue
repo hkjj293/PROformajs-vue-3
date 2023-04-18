@@ -39,7 +39,7 @@ Just about works.  Current coverage shown below.
 
         <!-- If showDescriptionInline && source.description-->
         <template v-if="!showDescriptionInline && source.description">
-          <PopoverButton :msg="message">
+          <PopoverButton :targetId="'target:source' + source.path" :msg="message" :noTitle="true">
             <font-awesome-icon icon="info-circle" />
           </PopoverButton>
           <div :id="'target:source' + source.path" hidden>
@@ -89,7 +89,7 @@ Just about works.  Current coverage shown below.
         <div class="input-group" v-if="!source.multiValued && !source.range">
           <input :name="source.name + suffix" class="form-control" type="text" :value="inputValue(value)"
             :placeholder="placeholder" @blur="handleBlur" @keyup.enter.prevent="handleBlur" @keyup.esc="clearInput" />
-          <div class="input-group-text" slot="append" v-if="source.class == 'Date'">
+          <div class="input-group-text" v-if="source.class == 'Date'">
             <font-awesome-icon icon="calendar-alt" />
           </div>
         </div>
@@ -104,17 +104,19 @@ Just about works.  Current coverage shown below.
           <template v-else>
             <template v-if="useDatalist">
               <input :list="source.name + suffix + 'datalist'" :name="source.name + suffix" class="form-control"
-                type="text" :value="inputValue(value)" :placeholder="placeholder" @blur="handleBlur"
+                type="temitext" :value="inputValue(value)" :placeholder="placeholder" @blur="handleBlur"
                 @keyup.enter.prevent="handleBlur" @keyup.esc="clearInput" />
               <datalist :id="source.name + suffix + 'datalist'">
-                <option v-for="item in source.range">{{ rangeText(item) }}</option>
+                <option v-for="(item, idx) in source.range" :key="idx">{{ rangeText(item) }}</option>
               </datalist>
             </template>
-            <div v-else v-for="(item, idx) in source.range" :key="idx" class="form-check">
-              <input class="form-check-input" type="radio" :name="rangeId(item)" :id="rangeId(item)"
-                :value="rangeValue(item)" :checked="value == rangeValue(item)" @change="handleRadioChange" />
-              <label class="form-check-label" :for="rangeId(item)">{{ rangeText(item) }}</label>
-            </div>
+            <template v-else>
+              <div v-for="(item, idx) in source.range" :key="idx" class="form-check">
+                <input class="form-check-input" type="radio" :name="rangeId(item)" :id="rangeId(item)"
+                  :value="rangeValue(item)" :checked="value == rangeValue(item)" @change="handleRadioChange" />
+                <label class="form-check-label" :for="rangeId(item)">{{ rangeText(item) }}</label>
+              </div>
+            </template>
           </template>
         </template>
         <!-- multi un-ranged -->
@@ -129,7 +131,7 @@ Just about works.  Current coverage shown below.
         <div class="input-group" v-if="source.multiValued && !source.range">
           <input class="form-control" :name="source.name + suffix" type="text" @blur="resetInput"
             @keyup.enter="handleMultiEnter" @keyup.esc="resetInput" />
-          <div class="input-group-text" slot="append">
+          <div class="input-group-text">
             <font-awesome-icon icon="list" />
           </div>
         </div>
@@ -154,7 +156,6 @@ Just about works.  Current coverage shown below.
 
 <script>
 import moment from 'moment'
-import { nextTick } from 'vue'
 
 export default {
   props: {
@@ -179,6 +180,7 @@ export default {
       default: false
     }
   },
+  emits: ['send-trigger', 'erase-source', 'update-source'],
   data: function () {
     return {
       isValid: true,
@@ -197,14 +199,6 @@ export default {
     useDatalist() {
       return this.source.meta && this.source.meta.ui && this.source.meta.ui.useDatalist
     }
-  },
-  mounted() {
-    nextTick(() => {
-      if (document.getElementById('target:source' + this.source.path)) {
-        this.message = document.getElementById('target:source' + this.source.path).innerHTML
-      }
-      console.log('---Message---: ' + this.message)
-    })
   },
   methods: {
     handleBlur(evt) {
@@ -236,7 +230,6 @@ export default {
       if (evt.target.checked) {
         arr.push(value)
       } else {
-        let idx = arr.indexOf(value)
         if (arr != -1) {
           arr.splice(arr.indexOf(value), 1)
         }
@@ -251,8 +244,8 @@ export default {
       return false
     },
     removeArrayItem(index) {
-      this.value.splice(index, 1)
-      this.$emit('update-source', { action: 'set', source: this.source.name, value: this.value })
+      let ori = this.value.slice(0)
+      this.$emit('update-source', { action: 'set', source: this.source.name, value: ori.splice(index, 1) })
     },
     getValue(text) {
       let val
