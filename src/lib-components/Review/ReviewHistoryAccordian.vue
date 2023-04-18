@@ -1,48 +1,31 @@
 <template>
-  <div role="tablist">
+  <div id="accordion">
     <div class="card mb-1" v-for="(event, index) in getHistory()" :key="index">
       <header class="card-header p-1" role="tab">
         <div class="d-grid gap-2">
-          <button
-            class="btn btn-link"
-            data-bs-toggle="collapse"
-            :data-bs-target="'#' + historyId(index)"
-            aria-expanded="false"
-            :aria-controls="historyId(index)"
-          >
+          <button class="btn btn-link" data-bs-toggle="collapse" :data-bs-target="'#' + historyId(index)"
+            aria-expanded="false" :aria-controls="historyId(index)">
             {{ event.heading }}
           </button>
         </div>
       </header>
-      <div class="collapse" :id="historyId(index)" accordion="history-view" role="tabpanel">
+      <div class="collapse" :id="historyId(index)" role="tabpanel" data-bs-parent="#accordion">
         <div class="card-body">
           <table class="table b-table table-striped table-sm">
             <thead role="rowgroup">
               <tr>
-                <th
-                  v-for="(field, fieldIndex) in historyFields"
-                  :key="index + '-field-' + fieldIndex"
-                  scope="col"
-                >
+                <th v-for="(field, fieldIndex) in historyFields" :key="index + '-field-' + fieldIndex" scope="col">
                   {{ field.label ? field.label : field.charAt(0).toUpperCase() + field.slice(1) }}
                 </th>
               </tr>
             </thead>
             <tbody class="table-group-divider" style="border-top-color: ">
-              <tr
-                v-for="(action, rowIndex) in event.actions"
-                :key="index + '-rows-' + rowIndex"
-                scope="row"
-              >
-                <td
-                  v-for="(col, colIndex) in historyFields"
-                  :key="index + '-cols-' + colIndex"
-                  scope="col"
-                >
+              <tr v-for="(action, rowIndex) in event.actions" :key="index + '-rows-' + rowIndex" scope="row">
+                <td v-for="(col, colIndex) in historyFields" :key="index + '-cols-' + colIndex" scope="col">
                   {{
                     col.formatter
-                      ? col.formatter(action[col.key ? col.key : col])
-                      : action[col.key ? col.key : col]
+                    ? col.formatter(action[col.key ? col.key : col])
+                    : action[col.key ? col.key : col]
                   }}
                 </td>
               </tr>
