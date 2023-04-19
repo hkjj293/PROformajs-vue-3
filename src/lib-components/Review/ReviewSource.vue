@@ -52,7 +52,7 @@ Just about works.  Current coverage shown below.
           class="text-primary align-top ps-2" />
 
         <!-- v-show="value != null && !hideEraser" -->
-        <button class="btn btn-link btn-sm float-end py-0" v-show="value != null && !hideEraser"
+        <button type="button" class="btn btn-link btn-sm float-end py-0" v-show="value != null && !hideEraser"
           @click.stop="unsetSource">
           <font-awesome-icon icon="eraser" />
         </button>
@@ -69,8 +69,8 @@ Just about works.  Current coverage shown below.
       <template v-if="source.class == 'Boolean'">
         <div v-if="useButtons" class="row">
           <div v-for="(item, idx) in source.range || [true, false]" :key="idx" class="col">
-            <button class="btn btn-outline-dark btn-sm" :pressed="value != null && value == rangeValue(item)"
-              @click="updateValue(rangeValue(item).toString())">
+            <button type="button" class="btn btn-outline-dark btn-sm"
+              :pressed="value != null && value == rangeValue(item)" @click="updateValue(rangeValue(item).toString())">
               {{ booleanSourceRangeText(item) }}
             </button>
           </div>
@@ -96,7 +96,7 @@ Just about works.  Current coverage shown below.
         <!-- single range -->
         <template v-if="!source.multiValued && source.range">
           <div class="d-grid gap-2" v-if="useButtons">
-            <button class="btn btn-outline-dark btn-sm my-1" v-for="(item, idx) in source.range" :key="idx"
+            <button type="button" class="btn btn-outline-dark btn-sm my-1" v-for="(item, idx) in source.range" :key="idx"
               :pressed="value == rangeValue(item)" @click="updateValue(rangeValue(item).toString())">
               {{ rangeText(item) }}
             </button>
@@ -123,7 +123,7 @@ Just about works.  Current coverage shown below.
         <div class="list-group" v-if="source.multiValued && !source.range && value">
           <div class="list-group-item" v-for="(item, index) in value" :key="index">
             {{ item }}
-            <button class="btn btn-outline-warning btn-sm float-end" @click="removeArrayItem(index)">
+            <button type="button" class="btn btn-outline-warning btn-sm float-end" @click="removeArrayItem(index)">
               &times;
             </button>
           </div>

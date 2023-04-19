@@ -35,7 +35,7 @@ an expression that consists of the name of a data def without a value will be un
           <td @click="populateControl(item.expression)" class="clickable">{{ item.expression }}</td>
           <td>{{ item.value }}</td>
           <td>
-            <button class="btn btn-light btn-sm float-sm-end" @click="deleteExpression(idx)">
+            <button type="button" class="btn btn-light btn-sm float-sm-end" @click="deleteExpression(idx)">
               &times;
             </button>
           </td>

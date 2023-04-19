@@ -145,15 +145,15 @@ interactable.
     </template>
     <template v-if="showComplete">
       <div role="group" class="btn-group float-end" v-if="task.candidates && options.Decision.allowDownloads">
-        <button class="btn btn-outline-secondary btn-sm" v-if="task.candidates" @click="downloadData">
+        <button type="button" class="btn btn-outline-secondary btn-sm" v-if="task.candidates" @click="downloadData">
           <font-awesome-icon icon="file-download" />
         </button>
-        <button class="btn btn-info" @click="$emit('update-enactment', { action: 'complete', path: task.path })"
-          :disabled="!task.completeable">
+        <button type="button" class="btn btn-info"
+          @click="$emit('update-enactment', { action: 'complete', path: task.path })" :disabled="!task.completeable">
           Complete
         </button>
       </div>
-      <button class="btn btn-info float-end" v-else
+      <button type="button" class="btn btn-info float-end" v-else
         @click="$emit('update-enactment', { action: 'complete', path: task.path })" :disabled="!task.completeable">
         Complete
       </button>

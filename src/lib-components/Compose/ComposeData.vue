@@ -15,14 +15,14 @@ Provides the means to review and edit a PROformajs data definition's attributes 
   <div>
     <h4>Data Definition: {{ def.name }}</h4>
     <div class="mb-2">
-      <button class="btn btn-outline-secondary btn-sm" @click="$emit('select-path', { value: '' })">
+      <button type="button" class="btn btn-outline-secondary btn-sm" @click="$emit('select-path', { value: '' })">
         &lt;&lt; {{ def._parent.constructor.name }}: {{ def._parent.name }}
       </button>
-      <button class="btn btn-outline-secondary btn-sm" size="sm" v-if="numSiblings > 1" :disabled="defIdx == 0"
-        @click="prevDef">
+      <button type="button" class="btn btn-outline-secondary btn-sm" size="sm" v-if="numSiblings > 1"
+        :disabled="defIdx == 0" @click="prevDef">
         &lt; Prev
       </button>
-      <button class="btn btn-outline-secondary btn-sm" size="sm" v-if="numSiblings > 1"
+      <button type="button" class="btn btn-outline-secondary btn-sm" size="sm" v-if="numSiblings > 1"
         :disabled="defIdx == numSiblings - 1" @click="nextDef">
         Next &gt;
       </button>
@@ -119,7 +119,7 @@ Provides the means to review and edit a PROformajs data definition's attributes 
                     <input type="text" class="form-control form-control-sm" id="editrangecaption" :value="val.caption" />
                   </td>
                   <td>
-                    <button class="btn btn-light btn-sm" @click="editRangeItem(idx, $event)">
+                    <button type="button" class="btn btn-light btn-sm" @click="editRangeItem(idx, $event)">
                       <font-awesome-icon icon="edit" />
                     </button>
                   </td>
@@ -133,7 +133,7 @@ Provides the means to review and edit a PROformajs data definition's attributes 
                     {{ val.caption }}
                   </td>
                   <td>
-                    <button class="btn btn-light btn-sm" @click="deleteRangeItem(idx)">
+                    <button type="button" class="btn btn-light btn-sm" @click="deleteRangeItem(idx)">
                       &times;
                     </button>
                   </td>
@@ -148,7 +148,7 @@ Provides the means to review and edit a PROformajs data definition's attributes 
                 <!--  view / delete raw range value -->
                 <template v-else>
                   <span class="clickable" @click="rangeEditIdx = idx">{{ val }}</span>
-                  <button class="btn btn-light btn-sm float-sm-end" @click="deleteRangeItem(idx)">
+                  <button type="button" class="btn btn-light btn-sm float-sm-end" @click="deleteRangeItem(idx)">
                     &times;
                   </button>
                 </template>
@@ -166,7 +166,7 @@ Provides the means to review and edit a PROformajs data definition's attributes 
                     placeholder="Enter caption" />
                 </td>
                 <td>
-                  <button class="btn btn-light btn-sm" @click="addRangeItem">&plus;</button>
+                  <button type="button" class="btn btn-light btn-sm" @click="addRangeItem">&plus;</button>
                 </td>
               </template>
               <template v-else>

@@ -3,7 +3,7 @@
     <div class="card mb-1" v-for="(event, index) in getHistory()" :key="index">
       <header class="card-header p-1" role="tab">
         <div class="d-grid gap-2">
-          <button class="btn btn-link" data-bs-toggle="collapse" :data-bs-target="'#' + historyId(index)"
+          <button type="button" class="btn btn-link" data-bs-toggle="collapse" :data-bs-target="'#' + historyId(index)"
             aria-expanded="false" :aria-controls="historyId(index)">
             {{ event.heading }}
           </button>
