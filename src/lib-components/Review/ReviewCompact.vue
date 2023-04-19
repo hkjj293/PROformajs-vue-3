@@ -74,10 +74,11 @@ todo:
                   </div>
                   <div class="card-body">
                     <div class="list-group" v-if="availableTasks.length > 0">
-                      <button v-for="task in availableTasks" :data-path="path" :data-taskpath="task.path" :class="
-                        'list-group-item list-group-item-action ' +
-                        (task.path == path ? 'active' : '')
-                      " :key="task.name" @click="updatePath({ value: task.path })">
+                      <button type="button" v-for="task in availableTasks" :data-path="path" :data-taskpath="task.path"
+                        :class="
+                          'list-group-item list-group-item-action ' +
+                          (task.path == path ? 'active' : '')
+                        " :key="task.name" @click="updatePath({ value: task.path })">
                         {{ task.caption || task.name }}
                       </button>
                     </div>
@@ -95,8 +96,8 @@ todo:
                   </div>
                   <div class="card-body">
                     <div class="list-group" v-if="status && status.triggers && status.triggers.length > 0">
-                      <button class="list-group-item list-group-item-action" v-for="(trigger, index) in status.triggers"
-                        :key="index" @click="sendTrigger(trigger)">
+                      <button type="button" class="list-group-item list-group-item-action"
+                        v-for="(trigger, index) in status.triggers" :key="index" @click="sendTrigger(trigger)">
                         {{ trigger }}
                       </button>
                     </div>
@@ -157,7 +158,7 @@ todo:
                 Use defaults</label>
             </div>
             <div class="d-grid gap-2">
-              <button class="btn btn-outline-secondary btn-sm" @click="restartEnactment">
+              <button type="button" class="btn btn-outline-secondary btn-sm" @click="restartEnactment">
                 <font-awesome-icon icon="redo-alt" /> Restart
               </button>
             </div>
@@ -174,10 +175,11 @@ todo:
             <span class="badge text-bg-warning py-1 px-2" v-show="status.finished">Completed</span>
           </h4>
           <div class="d-grid gap-2">
-            <button v-for="task in availableTasks" :data-path="path" :data-taskpath="task.path" v-bind:class="
-              'btn btn-outline-secondary d-block ' +
-              (view == 'task' && task.path == path ? 'active' : '')
-            " :key="task.name" @click="selectTask(task.path)">
+            <button type="button" v-for="task in availableTasks" :data-path="path" :data-taskpath="task.path"
+              v-bind:class="
+                'btn btn-outline-secondary d-block ' +
+                (view == 'task' && task.path == path ? 'active' : '')
+              " :key="task.name" @click="selectTask(task.path)">
               {{ task.caption || task.name }}
             </button>
           </div>
@@ -185,8 +187,8 @@ todo:
         <template v-else>
           <!-- settings for a single task are inline in desktop view -->
           <div class="d-grid">
-            <button v-bind:class="'btn btn-outline-secondary ' + (view == 'task' ? 'active' : '')" @click="view = 'task'"
-              block>
+            <button type="button" v-bind:class="'btn btn-outline-secondary ' + (view == 'task' ? 'active' : '')"
+              @click="view = 'task'" block>
               <font-awesome-icon icon="clipboard-check" /> Task
             </button>
             <label class="my-2" v-if="debug"><input type="checkbox" :checked="options.debug"
@@ -240,7 +242,8 @@ todo:
         <template v-if="status && status.triggers && status.triggers.length > 0">
           <h4>Triggers</h4>
           <div class="d-grid gap-2">
-            <button class="btn" v-for="(trigger, index) in status.triggers" :key="index" @click="sendTrigger(trigger)">
+            <button type="button" class="btn" v-for="(trigger, index) in status.triggers" :key="index"
+              @click="sendTrigger(trigger)">
               {{ trigger }}
             </button>
           </div>
@@ -249,13 +252,15 @@ todo:
           <pr-map :enactment="enactment" :selectedtask="path" @select-task="updatePath" class="mt-2" />
         </template>
         <div class="d-grid gap-2 mt-2">
-          <button :class="'btn btn-outline-secondary ' + (view == 'data' ? 'active' : '')" @click="view = 'data'">
+          <button type="button" :class="'btn btn-outline-secondary ' + (view == 'data' ? 'active' : '')"
+            @click="view = 'data'">
             <font-awesome-icon icon="table" /> Data
           </button>
-          <button :class="'btn btn-outline-secondary ' + (view == 'history' ? 'active' : '')" @click="view = 'history'">
+          <button type="button" :class="'btn btn-outline-secondary ' + (view == 'history' ? 'active' : '')"
+            @click="view = 'history'">
             <font-awesome-icon icon="history" /> History
           </button>
-          <button class="btn btn-outline-secondary" @click="restartEnactment">
+          <button type="button" class="btn btn-outline-secondary" @click="restartEnactment">
             <font-awesome-icon icon="redo-alt" /> Restart
           </button>
         </div>

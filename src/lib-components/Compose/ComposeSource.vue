@@ -15,15 +15,15 @@ Provides the means to review and edit a PROformajs source details
   <div>
     <h4>Source: {{ source.type }}</h4>
     <div class="mb-2">
-      <button class="btn btn-outline-secondary btn-sm" @click="$emit('select-path', { value: '' })">
+      <button type="button" class="btn btn-outline-secondary btn-sm" @click="$emit('select-path', { value: '' })">
         &lt;&lt; {{ source._parent.constructor.name }}: {{ source._parent.name }}
       </button>
-      <button class="btn btn-outline-secondary btn-sm" v-if="numSiblings > 1" :disabled="sourceIdx == 0"
+      <button type="button" class="btn btn-outline-secondary btn-sm" v-if="numSiblings > 1" :disabled="sourceIdx == 0"
         @click="prevSource">
         &lt; Prev
       </button>
-      <button class="btn btn-outline-secondary btn-sm" v-if="numSiblings > 1" :disabled="sourceIdx == numSiblings - 1"
-        @click="nextSource">
+      <button type="button" class="btn btn-outline-secondary btn-sm" v-if="numSiblings > 1"
+        :disabled="sourceIdx == numSiblings - 1" @click="nextSource">
         Next &gt;
       </button>
     </div>

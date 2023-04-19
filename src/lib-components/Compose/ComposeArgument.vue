@@ -15,15 +15,15 @@ Provides the means to review and edit a PROformajs argument's attributes and chi
   <div>
     <h4>Argument: {{ argument.idx }}</h4>
     <div class="mb-2">
-      <button class="btn btn-outline-secondary btn-sm" @click="$emit('select-path', { value: '' })">
+      <button type="button" class="btn btn-outline-secondary btn-sm" @click="$emit('select-path', { value: '' })">
         &lt;&lt; Candidate: {{ parentName }}
       </button>
-      <button class="btn btn-outline-secondary btn-sm" v-if="numSiblings > 1" :disabled="argument.idx == 0"
+      <button type="button" class="btn btn-outline-secondary btn-sm" v-if="numSiblings > 1" :disabled="argument.idx == 0"
         @click="prevArg">
         &lt; Prev
       </button>
-      <button class="btn btn-outline-secondary btn-sm" v-if="numSiblings > 1" :disabled="argument.idx == numSiblings - 1"
-        @click="nextArg">
+      <button type="button" class="btn btn-outline-secondary btn-sm" v-if="numSiblings > 1"
+        :disabled="argument.idx == numSiblings - 1" @click="nextArg">
         Next &gt;
       </button>
     </div>

@@ -20,7 +20,8 @@ Provides a UI for a proformajs Enactment.
       <div class="row">
         <div class="col">
           <div class="float-end">
-            <button @click="$emit('restart-enactment')" class="btn btn-outline-secondary d-none d-sm-inline">
+            <button type="button" @click="$emit('restart-enactment')"
+              class="btn btn-outline-secondary d-none d-sm-inline">
               <font-awesome-icon icon="redo-alt" /> Restart
             </button>
             <pr-settings :id="'popover-reivew'" class="d-none d-sm-inline ms-1" :options="options" placement="left"
@@ -44,7 +45,7 @@ Provides a UI for a proformajs Enactment.
         <!-- Selected task detail -->
         <template v-if="!enactment.protocol.tasks"><!-- settings dialogue for single decision -->
           <div class="float-end">
-            <button @click="$emit('restart-enactment')" role="button"
+            <button type="button" @click="$emit('restart-enactment')" role="button"
               class="btn btn-outline-secondary d-none d-sm-inline">
               <font-awesome-icon icon="redo-alt" /> Restart
             </button>
@@ -115,10 +116,11 @@ Provides a UI for a proformajs Enactment.
                       </div>
                       <div class="card-body">
                         <div class="list-group" v-if="availableTasks.length > 0">
-                          <button v-for="task in availableTasks" :data-path="path" :data-taskpath="task.path" :class="
-                            'list-group-item list-group-item-action ' +
-                            (task.path == path ? 'active' : '')
-                          " :key="task.name" @click="updatePath({ value: task.path })">
+                          <button type="button" v-for="task in availableTasks" :data-path="path"
+                            :data-taskpath="task.path" :class="
+                              'list-group-item list-group-item-action ' +
+                              (task.path == path ? 'active' : '')
+                            " :key="task.name" @click="updatePath({ value: task.path })">
                             {{ task.caption || task.name }}
                           </button>
                         </div>
@@ -136,7 +138,7 @@ Provides a UI for a proformajs Enactment.
                       </div>
                       <div class="card-body">
                         <div class="list-group" v-if="status && status.triggers && status.triggers.length > 0">
-                          <button class="list-group-item list-group-item-action"
+                          <button type="button" class="list-group-item list-group-item-action"
                             v-for="(trigger, index) in status.triggers" :key="index" @click="sendTrigger(trigger)">
                             {{ trigger }}
                           </button>

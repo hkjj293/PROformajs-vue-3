@@ -101,8 +101,8 @@ Provides the means to review and edit a PROformajs task's attributes and childre
               <pc-checkbox class="form-check-inline" :comp="task" :disabled="disableCyclic" att="cyclic"
                 @change-attribute="updateAttribute" />
             </div>
-            <button v-if="task._parent" class="btn btn-outline-danger btn-sm d-block float-end"
-              @click.prevent="deleteTask">
+            <button type="button" v-if="task._parent" class="btn btn-outline-danger btn-sm d-block float-end"
+              @click="deleteTask">
               Delete
             </button>
           </form>
@@ -138,7 +138,7 @@ Provides the means to review and edit a PROformajs task's attributes and childre
                     <span class="badge rounded-pill text-bg-secondary" v-if="def.defaultValue">Default value</span>
                   </td>
                   <td>
-                    <button class="btn btn-light btn-sm float-sm-end" @click="deleteDef(idx)">
+                    <button type="button" class="btn btn-light btn-sm float-sm-end" @click="deleteDef(idx)">
                       &times;
                     </button>
                   </td>
@@ -161,7 +161,8 @@ Provides the means to review and edit a PROformajs task's attributes and childre
                     </select>
                   </div>
                   <div class="col">
-                    <button class="btn btn-outline-secondary btn-sm d-block float-sm-end" @click="addSource" block>
+                    <button type="button" class="btn btn-outline-secondary btn-sm d-block float-sm-end" @click="addSource"
+                      block>
                       New Source
                     </button>
                   </div>
@@ -179,7 +180,7 @@ Provides the means to review and edit a PROformajs task's attributes and childre
                       {{ renderCondition(src) }}
                     </td>
                     <td>
-                      <button class="btn btn-light btn-sm float-sm-end" @click="deleteSource(idx)">
+                      <button type="button" class="btn btn-light btn-sm float-sm-end" @click="deleteSource(idx)">
                         &times;
                       </button>
                     </td>
@@ -213,7 +214,7 @@ Provides the means to review and edit a PROformajs task's attributes and childre
                     </span>
                   </td>
                   <td>
-                    <button class="btn btn-light btn-sm float-sm-end" @click="deleteCandidate(idx)">
+                    <button type="button" class="btn btn-light btn-sm float-sm-end" @click="deleteCandidate(idx)">
                       &times;
                     </button>
                   </td>

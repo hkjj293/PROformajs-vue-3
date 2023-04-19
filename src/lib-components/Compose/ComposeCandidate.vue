@@ -19,14 +19,14 @@ Provides the means to review and edit a PROformajs candidates's attributes and c
     <div :class="argumentPath == '' ? 'd-block' : 'd-none'">
       <h4>Candidate: {{ candidate.name }}</h4>
       <div class="mb-2">
-        <button class="btn btn-outline-secondary btn-sm" @click="$emit('select-path', { value: '' })">
+        <button type="button" class="btn btn-outline-secondary btn-sm" @click="$emit('select-path', { value: '' })">
           &lt;&lt; Decision: {{ parentName }}
         </button>
-        <button class="btn btn-outline-secondary btn-sm" v-if="numSiblings > 1" :disabled="candIdx == 0"
+        <button type="button" class="btn btn-outline-secondary btn-sm" v-if="numSiblings > 1" :disabled="candIdx == 0"
           @click="prevCand">
           &lt; Prev
         </button>
-        <button class="btn btn-outline-secondary btn-sm" size="sm" v-if="numSiblings > 1"
+        <button type="button" class="btn btn-outline-secondary btn-sm" size="sm" v-if="numSiblings > 1"
           :disabled="candIdx == numSiblings - 1" @click="nextCand">
           Next &gt;
         </button>
@@ -83,7 +83,7 @@ Provides the means to review and edit a PROformajs candidates's attributes and c
                     {{ arg.caption }}
                   </td>
                   <td>
-                    <button class="btn btn-light btn-sm float-sm-end" @click="deleteArgument(idx)">
+                    <button type="button" class="btn btn-light btn-sm float-sm-end" @click="deleteArgument(idx)">
                       &times;
                     </button>
                   </td>

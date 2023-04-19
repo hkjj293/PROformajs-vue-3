@@ -53,7 +53,7 @@ Provides a UI settings button that opens a popover form.
           @click="$emit('change-option', { category: 'Enquiry', option: 'useDefaults', value: !options.Enquiry.useDefaults })" />
         Use defaults
       </label>
-      <button :name="'target:' + id + ':send:restart'" v-if="restart"
+      <button type="button" :name="'target:' + id + ':send:restart'" v-if="restart"
         class="btn btn-outline-secondary btn-sm d-block mt-2" @click="sendRestart" block>
         <font-awesome-icon icon="redo-alt" /> Restart
       </button>
