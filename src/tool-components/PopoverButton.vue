@@ -55,14 +55,13 @@ export default {
     this.popover = new Popover(this.$el, { sanitize: false })
     if (this.targetId && document.getElementById(this.targetId)) {
       this.message = document.getElementById(this.targetId)
+      this.message.parentElement.removeChild(this.message)
     }
     let content = {
       '.popover-body': this.message,
       '.popover-header': this.noTitle ? null : this.title
     }
     this.popover.setContent(content)
-    this.popover.show()
-    this.popover.hide()
     if (this.targetId) {
       document.addEventListener('click', this.onClick);
     }
@@ -84,8 +83,9 @@ export default {
         this.popover.tip &&
         !(document.getElementById(this.popover.tip.id).contains(event.target))) {
         this.popover.hide();
+      } else {
+        this.$emit('click', event)
       }
-      this.$emit('click', event)
     }
   },
   watch: {
