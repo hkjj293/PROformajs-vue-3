@@ -22,10 +22,11 @@ Provides a UI settings button that opens a popover form.
     </PopoverButton>
     <div :id="'target:' + id">
       <label class="mt-2" v-if="debug">
-        <input type="checkbox" />
+        <input type="checkbox" @click="$emit('change-option', { option: 'debug', value: !options.debug })" />
         Debug expressions
       </label>
-      <div class="fw-bold mt-2">Decisions</div>
+      <div class=" fw-bold mt-2">Decisions
+      </div>
       <label class="mt-2">
         <input type="checkbox" :checked="options.Decision.showInactiveArguments"
           @click="$emit('change-option', { category: 'Decision', option: 'showInactiveArguments', value: !options.Decision.showInactiveArguments })" />
@@ -93,6 +94,9 @@ export default {
       this.$emit('restart-enactment')
       //this.$refs[this.id].$emit('close')
     },
+    fn() {
+
+    }
   }
 }
 </script>
