@@ -9,6 +9,7 @@ import ReviewMarkdown from '../Review/ReviewMarkdown.vue'
 
 // === Tools ===
 import PopoverButton from '../../tool-components/PopoverButton.vue'
+import PopoverComp from '../../tool-components/PopoverComp.vue'
 
 // === Debug ===
 import debug from '../__debug__/debug.vue'
@@ -25,6 +26,7 @@ export {
 
   // === Tools ===
   PopoverButton,
+  PopoverComp,
 
   // === Debug ===
   debug,

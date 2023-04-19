@@ -3,7 +3,7 @@ import { Popover } from 'bootstrap'
 
 export default {
   name: 'PopoverButton',
-  emits: ['shown'],
+  emits: ['shown', 'show', 'click'],
   props: {
     msg: {
       type: String,
@@ -53,7 +53,16 @@ export default {
   mounted() {
     this.onClick.bind(this)
     this.popover = new Popover(this.$el, { sanitize: false })
-    this.onShow()
+    if (this.targetId && document.getElementById(this.targetId)) {
+      this.message = document.getElementById(this.targetId)
+    }
+    let content = {
+      '.popover-body': this.message,
+      '.popover-header': this.noTitle ? null : this.title
+    }
+    this.popover.setContent(content)
+    this.popover.show()
+    this.popover.hide()
     if (this.targetId) {
       document.addEventListener('click', this.onClick);
     }
@@ -68,19 +77,7 @@ export default {
       this.$emit('shown')
     },
     onShow() {
-      if (this.targetId && document.getElementById(this.targetId)) {
-        this.message = document.getElementById(this.targetId).innerHTML
-      }
-      let content = {
-        '.popover-body': this.message,
-        '.popover-header': this.title
-      }
-      if (this.noTitle) {
-        content = {
-          '.popover-body': this.message
-        }
-      }
-      this.popover.setContent(content)
+      this.$emit('show')
     },
     onClick: function (event) {
       if (this.targetId &&
@@ -88,6 +85,17 @@ export default {
         !(document.getElementById(this.popover.tip.id).contains(event.target))) {
         this.popover.hide();
       }
+      this.$emit('click', event)
+    }
+  },
+  watch: {
+    msg(newVal) {
+      this.message = newVal
+      let content = {
+        '.popover-body': this.message,
+        '.popover-header': this.noTitle ? null : this.title
+      }
+      this.popover.setContent(content)
     }
   }
 }
