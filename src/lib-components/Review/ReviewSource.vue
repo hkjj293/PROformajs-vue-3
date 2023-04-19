@@ -42,7 +42,7 @@ Just about works.  Current coverage shown below.
           <PopoverButton :targetId="'target:source' + source.path" :msg="message" :noTitle="true">
             <font-awesome-icon icon="info-circle" />
           </PopoverButton>
-          <div :id="'target:source' + source.path" hidden>
+          <div :id="'target:source' + source.path">
             <pr-markdown :text="source.description" @send-trigger="$emit('send-trigger', $event)" class="markdown" />
           </div>
         </template>

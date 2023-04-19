@@ -57,6 +57,7 @@ export default {
       this.message = document.getElementById(this.targetId)
       this.message.parentElement.removeChild(this.message)
     }
+    console.log(this.message)
     let content = {
       '.popover-body': this.message,
       '.popover-header': this.noTitle ? null : this.title
@@ -102,9 +103,9 @@ export default {
 </script>
 
 <template>
-  <button type="button" :class="classes" data-content-id="popover-27" :data-bs-container="container"
-    :data-bs-trigger="trigger" data-bs-toggle="popover" :data-bs-placement="placement" :data-bs-html="html"
-    :data-bs-title="noTitle ? ' ' : title" :data-bs-content="msg" @blur="onBlur">
+  <button type="button" :class="classes" :data-bs-container="container" :data-bs-trigger="trigger"
+    data-bs-toggle="popover" :data-bs-placement="placement" :data-bs-html="html" :data-bs-title="noTitle ? ' ' : title"
+    :data-bs-content="msg">
     <slot />
   </button>
 </template>
