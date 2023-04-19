@@ -16,11 +16,10 @@ Provides a UI settings button that opens a popover form.
 
 <template>
   <div>
-    <PopoverButton :id="id" :msg="message" :targetId="'target:' + id" :placement="placement" varient="outline-secondary"
-      trigger="click" :title="title">
+    <button class="btn btn-outline-secondary" type='button' :id="id">
       <font-awesome-icon icon="cog" />
-    </PopoverButton>
-    <div :id="'target:' + id">
+    </button>
+    <PopoverComp :target="id" trigger="click" :title="title" :placement="placement">
       <label class="mt-2" v-if="debug">
         <input type="checkbox" />
         Debug expressions
@@ -56,7 +55,7 @@ Provides a UI settings button that opens a popover form.
         class="btn btn-outline-secondary btn-sm d-block mt-2" @click="sendRestart" block>
         <font-awesome-icon icon="redo-alt" /> Restart
       </button>
-    </div>
+    </PopoverComp>
   </div>
 </template>
 
@@ -91,7 +90,6 @@ export default {
   methods: {
     sendRestart() {
       this.$emit('restart-enactment')
-      //this.$refs[this.id].$emit('close')
     },
   }
 }

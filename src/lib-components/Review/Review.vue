@@ -23,37 +23,9 @@ Provides a UI for a proformajs Enactment.
             <button @click="$emit('restart-enactment')" class="btn btn-outline-secondary d-none d-sm-inline">
               <font-awesome-icon icon="redo-alt" /> Restart
             </button>
-            <!-- <b-button id="task-settings" href="#" tabindex="0" class="btn btn-outline-secondary ms-1"> -->
-            <!-- <font-awesome-icon icon="cog" /> -->
-            <!-- </b-button>  -->
             <pr-settings :id="'popover-reivew'" class="d-none d-sm-inline ms-1" :options="options" placement="left"
               @change-option="OnUpdateOptions" @restart-enactment="$emit('restart-enactment')" />
           </div>
-          <!-- <b-popover target=" task-settings" placement="left" title="Review Settings" triggers="focus"> -->
-          <!-- <label v-if="debug"><input type='checkbox' :checked="options.debug" -->
-          <!-- @click="$emit('change-option', { option: 'debug', value: !options.debug })" /> Debug expressions</label> -->
-          <!-- <div class="font-weight-bold pb-2">Decisions</div> -->
-          <!-- <label><input type='checkbox' :checked="options.Decision.showInactiveArguments" -->
-          <!-- @click="$emit('change-option', { category: 'Decision', option: 'showInactiveArguments', value: !options.Decision.showInactiveArguments })" /> -->
-          <!-- Show inactive arguments</label> -->
-          <!-- <label><input type='checkbox' :checked="options.Decision.showExpressions" -->
-          <!-- @click="$emit('change-option', { category: 'Decision', option: 'showExpressions', value: !options.Decision.showExpressions })" /> -->
-          <!-- Show expressions</label> -->
-          <!--  <label><input type='checkbox' :checked="options.Candidate.autoConfirmRecommended" -->
-          <!-- @click="$emit('change-option', { category: 'Candidate', option: 'autoConfirmRecommended', value: !options.Candidate.autoConfirmRecommended })" /> -->
-          <!-- Auto-confirm candidates</label> -->
-          <!-- <label><input type='checkbox' :checked="options.Decision.allowDownloads" -->
-          <!-- @click="$emit('change-option', { category: 'Decision', option: 'allowDownloads', value: !options.Decision.allowDownloads })" /> -->
-          <!-- Allow Downloads</label> -->
-          <!-- <div class="font-weight-bold pb-2">Enquiries</div> -->
-          <!-- <label><input type='checkbox' :checked="options.Enquiry.useDefaults" -->
-          <!-- @click="$emit('change-option', { category: 'Enquiry', option: 'useDefaults', value: !options.Enquiry.useDefaults })" /> -->
-          <!-- Use defaults</label> -->
-          <!-- <b-btn variant="outline-secondary" size="sm" @click="$emit('restart-enactment')" class="d-block d-sm-none" -->
-          <!-- block> -->
-          <!-- <font-awesome-icon icon="redo-alt" /> Restart -->
-          <!-- </b-btn> -->
-          <!-- </b-popover> -->
           <h3>
             {{ enactment ? enactment.protocol.caption || enactment.protocol.name : '' }}
             <span class="badge text-bg-warning" v-show="status.finished">Completed</span>
@@ -76,9 +48,6 @@ Provides a UI for a proformajs Enactment.
               class="btn btn-outline-secondary d-none d-sm-inline">
               <font-awesome-icon icon="redo-alt" /> Restart
             </button>
-            <!-- <b-button id="task-settings" variant="outline-secondary" href="#" tabindex="0"> -->
-            <!-- <font-awesome-icon icon="cog" /> -->
-            <!-- </b-button> -->
             <pr-settings :id="'popover-reivew'" :options="options" placement="left" @change-option="OnUpdateOptions"
               @restart-enactment="$emit('restart-enactment')" />
           </div>
