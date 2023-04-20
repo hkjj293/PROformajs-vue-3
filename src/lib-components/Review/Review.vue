@@ -20,12 +20,21 @@ Provides a UI for a proformajs Enactment.
       <div class="row">
         <div class="col">
           <div class="float-end">
-            <button type="button" @click="$emit('restart-enactment')"
-              class="btn btn-outline-secondary d-none d-sm-inline">
+            <button
+              type="button"
+              @click="$emit('restart-enactment')"
+              class="btn btn-outline-secondary d-none d-sm-inline"
+            >
               <font-awesome-icon icon="redo-alt" /> Restart
             </button>
-            <pr-settings :id="'popover-reivew'" class="d-none d-sm-inline ms-1" :options="options" placement="left"
-              @change-option="OnUpdateOptions" @restart-enactment="$emit('restart-enactment')" />
+            <pr-settings
+              :id="'popover-reivew'"
+              class="d-none d-sm-inline ms-1"
+              :options="options"
+              placement="left"
+              @change-option="OnUpdateOptions"
+              @restart-enactment="$emit('restart-enactment')"
+            />
           </div>
           <h3>
             {{ enactment ? enactment.protocol.caption || enactment.protocol.name : '' }}
@@ -35,7 +44,11 @@ Provides a UI for a proformajs Enactment.
       </div>
       <div class="row" v-if="enactment && enactment.protocol.description">
         <div class="col">
-          <pr-markdown class="mb-0" :text="enactment.protocol.description" @send-trigger="sendTrigger" />
+          <pr-markdown
+            class="mb-0"
+            :text="enactment.protocol.description"
+            @send-trigger="sendTrigger"
+          />
         </div>
       </div>
       <hr />
@@ -43,14 +56,24 @@ Provides a UI for a proformajs Enactment.
     <div class="row">
       <div class="col-md-6 order-md-2">
         <!-- Selected task detail -->
-        <template v-if="!enactment.protocol.tasks"><!-- settings dialogue for single decision -->
+        <template v-if="!enactment.protocol.tasks"
+          ><!-- settings dialogue for single decision -->
           <div class="float-end">
-            <button type="button" @click="$emit('restart-enactment')" role="button"
-              class="btn btn-outline-secondary d-none d-sm-inline">
+            <button
+              type="button"
+              @click="$emit('restart-enactment')"
+              role="button"
+              class="btn btn-outline-secondary d-none d-sm-inline"
+            >
               <font-awesome-icon icon="redo-alt" /> Restart
             </button>
-            <pr-settings :id="'popover-reivew'" :options="options" placement="left" @change-option="OnUpdateOptions"
-              @restart-enactment="$emit('restart-enactment')" />
+            <pr-settings
+              :id="'popover-reivew'"
+              :options="options"
+              placement="left"
+              @change-option="OnUpdateOptions"
+              @restart-enactment="$emit('restart-enactment')"
+            />
           </div>
         </template>
         <div v-if="status.finished">
@@ -59,8 +82,13 @@ Provides a UI for a proformajs Enactment.
           </slot>
         </div>
         <div v-else>
-          <pr-task :task="activeTask" :enactment="enactment" @update-enactment="updateEnactment" :options="options"
-            @send-trigger="sendTrigger" />
+          <pr-task
+            :task="activeTask"
+            :enactment="enactment"
+            @update-enactment="updateEnactment"
+            :options="options"
+            @send-trigger="sendTrigger"
+          />
         </div>
       </div>
       <div class="col-md-6 order-md-1">
@@ -68,44 +96,96 @@ Provides a UI for a proformajs Enactment.
         <div>
           <ul class="nav nav-tabs" id="debug-review-tabs" role="tablist">
             <li class="nav-item" role="presentation" v-if="enactment.protocol.tasks">
-              <button class="nav-link active" id="debug-review-map-tab" data-bs-toggle="tab"
-                data-bs-target="#debug-review-map" type="button" role="tab" aria-controls="debug-review-map-tab-pane"
-                aria-selected="true">
+              <button
+                class="nav-link active"
+                id="debug-review-map-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#debug-review-map"
+                type="button"
+                role="tab"
+                aria-controls="debug-review-map-tab-pane"
+                aria-selected="true"
+              >
                 Map <font-awesome-icon icon="directions" />
               </button>
             </li>
-            <li class="nav-item" role="presentation" v-if="enactment.getDataDefinitions().length > 0">
-              <button class="nav-link" id="debug-review-data-tab" data-bs-toggle="tab" data-bs-target="#debug-review-data"
-                type="button" role="tab" aria-controls="debug-review-data-tab-pane" aria-selected="false">
+            <li
+              class="nav-item"
+              role="presentation"
+              v-if="enactment.getDataDefinitions().length > 0"
+            >
+              <button
+                class="nav-link"
+                id="debug-review-data-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#debug-review-data"
+                type="button"
+                role="tab"
+                aria-controls="debug-review-data-tab-pane"
+                aria-selected="false"
+              >
                 Data <font-awesome-icon icon="table" />
               </button>
             </li>
             <li class="nav-item" role="presentation">
-              <button class="nav-link" id="debug-review-select-tab" data-bs-toggle="tab"
-                data-bs-target="#debug-review-select" type="button" role="tab"
-                aria-controls="debug-review-select-tab-pane" aria-selected="false">
+              <button
+                class="nav-link"
+                id="debug-review-select-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#debug-review-select"
+                type="button"
+                role="tab"
+                aria-controls="debug-review-select-tab-pane"
+                aria-selected="false"
+              >
                 Select <font-awesome-icon icon="hand-pointer" />
               </button>
             </li>
             <li class="nav-item" role="presentation">
-              <button class="nav-link" id="debug-review-history-tab" data-bs-toggle="tab"
-                data-bs-target="#debug-review-history" type="button" role="tab"
-                aria-controls="debug-review-history-tab-pane" aria-selected="false">
+              <button
+                class="nav-link"
+                id="debug-review-history-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#debug-review-history"
+                type="button"
+                role="tab"
+                aria-controls="debug-review-history-tab-pane"
+                aria-selected="false"
+              >
                 History <font-awesome-icon icon="history" />
               </button>
             </li>
           </ul>
           <div class="tab-content mt-3">
-            <div id="debug-review-map" class="tab-pane active" role="tabpanel" aria-labelledby="debug-review-map-tab-pane"
-              tabindex="0">
+            <div
+              id="debug-review-map"
+              class="tab-pane active"
+              role="tabpanel"
+              aria-labelledby="debug-review-map-tab-pane"
+              tabindex="0"
+            >
               <pr-map :enactment="enactment" :selectedtask="path" @select-task="updatePath" />
             </div>
-            <div id="debug-review-data" class="tab-pane" role="tabpanel" aria-labelledby="debug-review-data-tab-pane"
-              tabindex="0">
-              <pr-data :enactment="enactment" @update-enactment="updateEnactment" :options="options" />
+            <div
+              id="debug-review-data"
+              class="tab-pane"
+              role="tabpanel"
+              aria-labelledby="debug-review-data-tab-pane"
+              tabindex="0"
+            >
+              <pr-data
+                :enactment="enactment"
+                @update-enactment="updateEnactment"
+                :options="options"
+              />
             </div>
-            <div id="debug-review-select" class="tab-pane" role="tabpanel" aria-labelledby="debug-review-select-tab-pane"
-              tabindex="0">
+            <div
+              id="debug-review-select"
+              class="tab-pane"
+              role="tabpanel"
+              aria-labelledby="debug-review-select-tab-pane"
+              tabindex="0"
+            >
               <div class="row">
                 <div class="col-sm-6">
                   <div>
@@ -116,11 +196,18 @@ Provides a UI for a proformajs Enactment.
                       </div>
                       <div class="card-body">
                         <div class="list-group" v-if="availableTasks.length > 0">
-                          <button type="button" v-for="task in availableTasks" :data-path="path"
-                            :data-taskpath="task.path" :class="
+                          <button
+                            type="button"
+                            v-for="task in availableTasks"
+                            :data-path="path"
+                            :data-taskpath="task.path"
+                            :class="
                               'list-group-item list-group-item-action ' +
                               (task.path == path ? 'active' : '')
-                            " :key="task.name" @click="updatePath({ value: task.path })">
+                            "
+                            :key="task.name"
+                            @click="updatePath({ value: task.path })"
+                          >
                             {{ task.caption || task.name }}
                           </button>
                         </div>
@@ -137,9 +224,17 @@ Provides a UI for a proformajs Enactment.
                         <h5>Triggers</h5>
                       </div>
                       <div class="card-body">
-                        <div class="list-group" v-if="status && status.triggers && status.triggers.length > 0">
-                          <button type="button" class="list-group-item list-group-item-action"
-                            v-for="(trigger, index) in status.triggers" :key="index" @click="sendTrigger(trigger)">
+                        <div
+                          class="list-group"
+                          v-if="status && status.triggers && status.triggers.length > 0"
+                        >
+                          <button
+                            type="button"
+                            class="list-group-item list-group-item-action"
+                            v-for="(trigger, index) in status.triggers"
+                            :key="index"
+                            @click="sendTrigger(trigger)"
+                          >
                             {{ trigger }}
                           </button>
                         </div>
@@ -150,8 +245,13 @@ Provides a UI for a proformajs Enactment.
                 </div>
               </div>
             </div>
-            <div id="debug-review-history" class="tab-pane" role="tabpanel"
-              aria-labelledby="debug-review-history-tab-pane" tabindex="0">
+            <div
+              id="debug-review-history"
+              class="tab-pane"
+              role="tabpanel"
+              aria-labelledby="debug-review-history-tab-pane"
+              tabindex="0"
+            >
               <pr-history :enactment="enactment" />
             </div>
           </div>

@@ -21,29 +21,91 @@ Provides an svg element that can be used to visualise a PROformajs protocol as a
 
 <template>
   <div>
-    <svg ref="svg" width="100%" tabindex="0" :viewBox="viewbox" @mousedown="startDrag" @touchstart="startDrag"
-      @mousemove="drag" @touchmove="drag" @mouseup="endDrag" @mouseleave="endDrag" @touchend="endDrag"
-      @touchleave="endDrag" @touchcancel="endDrag" @focus="handleFocus" @blur="handleBlur">
+    <svg
+      ref="svg"
+      width="100%"
+      tabindex="0"
+      :viewBox="viewbox"
+      @mousedown="startDrag"
+      @touchstart="startDrag"
+      @mousemove="drag"
+      @touchmove="drag"
+      @mouseup="endDrag"
+      @mouseleave="endDrag"
+      @touchend="endDrag"
+      @touchleave="endDrag"
+      @touchcancel="endDrag"
+      @focus="handleFocus"
+      @blur="handleBlur"
+    >
       <template v-if="plan.tasks">
-        <pm-taskbar :height="protocol.meta.svg.height" :width="taskbar.width" :layout="taskbar.layout"
-          :stroke_width="stroke_width" />
-        <pm-breadcrumb :plan="plan" :height="breadcrumb.height" :width="protocol.meta.svg.width" :offset="taskbar.width"
-          @select-task="updatePlan" :selected="selectedplan === selectedtask" :issues="subIssues(selectedplan)" />
-        <pc-maptask v-for="task in plan.tasks" :key="task.path()" :task="task" :x="task.meta.pos.x + taskbar.width"
-          :y="task.meta.pos.y + breadcrumb.height" :stroke_width="stroke_width"
-          :selected="selectedplan + ':' + task.name === selectedtask" :data-path="task.path()"
-          :data-fromx="ports[task.name].from.x" :data-fromy="ports[task.name].from.y" @delete-task="handleDeleteTask"
-          @select-plan="updatePlan" :issues="subIssues(task.path())" />
-        <pm-arrow v-for="dep in deps" :key="dep.target.name + '-' + dep.source.name" :tx="dep.target.x" :ty="dep.target.y"
-          :sx="dep.source.x" :sy="dep.source.y" :source="dep.source.name" :target="dep.target.name"
-          @delete-arrow="handleDeleteArrow" :selected="arrowSelected(dep)" />
+        <pm-taskbar
+          :height="protocol.meta.svg.height"
+          :width="taskbar.width"
+          :layout="taskbar.layout"
+          :stroke_width="stroke_width"
+        />
+        <pm-breadcrumb
+          :plan="plan"
+          :height="breadcrumb.height"
+          :width="protocol.meta.svg.width"
+          :offset="taskbar.width"
+          @select-task="updatePlan"
+          :selected="selectedplan === selectedtask"
+          :issues="subIssues(selectedplan)"
+        />
+        <pc-maptask
+          v-for="task in plan.tasks"
+          :key="task.path()"
+          :task="task"
+          :x="task.meta.pos.x + taskbar.width"
+          :y="task.meta.pos.y + breadcrumb.height"
+          :stroke_width="stroke_width"
+          :selected="selectedplan + ':' + task.name === selectedtask"
+          :data-path="task.path()"
+          :data-fromx="ports[task.name].from.x"
+          :data-fromy="ports[task.name].from.y"
+          @delete-task="handleDeleteTask"
+          @select-plan="updatePlan"
+          :issues="subIssues(task.path())"
+        />
+        <pm-arrow
+          v-for="dep in deps"
+          :key="dep.target.name + '-' + dep.source.name"
+          :tx="dep.target.x"
+          :ty="dep.target.y"
+          :sx="dep.source.x"
+          :sy="dep.source.y"
+          :source="dep.source.name"
+          :target="dep.target.name"
+          @delete-arrow="handleDeleteArrow"
+          :selected="arrowSelected(dep)"
+        />
         <!-- Arrow for drag -->
-        <pm-arrow class="task" v-if="dragArrow.show" :tx="dragArrow.tx" :ty="dragArrow.ty" :sx="dragArrow.sx"
-          :sy="dragArrow.sy" :source="dragArrow.source" />
+        <pm-arrow
+          class="task"
+          v-if="dragArrow.show"
+          :tx="dragArrow.tx"
+          :ty="dragArrow.ty"
+          :sx="dragArrow.sx"
+          :sy="dragArrow.sy"
+          :source="dragArrow.source"
+        />
       </template>
-      <pc-maptask v-else :task="plan" :x="taskPos(protocol).x" :y="taskPos(protocol).y" :stroke_width="stroke_width"
-        :selected="true" :no_handle="true" :data-path="plan.path()" :data-fromx="20 + protocol.meta.svg.width / 2"
-        :data-fromy="protocol.meta.svg.height" @delete-task="handleDeleteTask" :issues="subIssues(plan.path())" />
+      <pc-maptask
+        v-else
+        :task="plan"
+        :x="taskPos(protocol).x"
+        :y="taskPos(protocol).y"
+        :stroke_width="stroke_width"
+        :selected="true"
+        :no_handle="true"
+        :data-path="plan.path()"
+        :data-fromx="20 + protocol.meta.svg.width / 2"
+        :data-fromy="protocol.meta.svg.height"
+        @delete-task="handleDeleteTask"
+        :issues="subIssues(plan.path())"
+      />
     </svg>
   </div>
 </template>

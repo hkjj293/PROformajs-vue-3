@@ -22,24 +22,40 @@ todo:
     <div class="row">
       <div class="col">
         <div class="progress" style="height: 3px">
-          <div class="progress-bar" role="progressbar" aria-label="Progress" :aria-valuenow="progress.toString()"
-            aria-valuemin="0" :aria-valuemax="taskCount.toString()" :style="{
+          <div
+            class="progress-bar"
+            role="progressbar"
+            aria-label="Progress"
+            :aria-valuenow="progress.toString()"
+            aria-valuemin="0"
+            :aria-valuemax="taskCount.toString()"
+            :style="{
               width: ((progress * 100) / taskCount).toString() + '%'
-            }"></div>
+            }"
+          ></div>
         </div>
         <div v-if="status.finished">
           <slot name="finished">
             <div class="d-grid gap-2">
               <h3>Completed</h3>
-              <button type="button" class="btn btn-outline-secondary d-block" @click="restartEnactment">
+              <button
+                type="button"
+                class="btn btn-outline-secondary d-block"
+                @click="restartEnactment"
+              >
                 <font-awesome-icon icon="redo-alt" /> Restart
               </button>
             </div>
           </slot>
         </div>
         <div v-else>
-          <pr-task :task="activeTask" :enactment="enactment" @update-enactment="updateEnactment" :options="options"
-            @send-trigger="sendTrigger" />
+          <pr-task
+            :task="activeTask"
+            :enactment="enactment"
+            @update-enactment="updateEnactment"
+            :options="options"
+            @send-trigger="sendTrigger"
+          />
         </div>
       </div>
     </div>
@@ -60,16 +76,16 @@ export default {
     progress() {
       console.log(
         'finished: ' +
-        (this.enactment
-          ? this.enactment
-            .getTasks()
-            .filter((task) => task.state == 'discarded' || task.state == 'completed').length
-          : 0)
+          (this.enactment
+            ? this.enactment
+                .getTasks()
+                .filter((task) => task.state == 'discarded' || task.state == 'completed').length
+            : 0)
       )
       return this.enactment
         ? this.enactment
-          .getTasks()
-          .filter((task) => task.state == 'discarded' || task.state == 'completed').length
+            .getTasks()
+            .filter((task) => task.state == 'discarded' || task.state == 'completed').length
         : 0
     }
   },

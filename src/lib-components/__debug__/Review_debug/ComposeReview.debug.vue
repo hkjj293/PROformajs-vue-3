@@ -5,11 +5,16 @@
 <template>
   <div>
     <debug title="ComposeReview">
-      <ComposeReview :protocol="protocol" :debug="true" :initialData="startData" :template="
-        protocol && protocol.meta && protocol.meta.enact && protocol.meta.enact.template
-          ? protocol.meta.enact.template
-          : 'compact'
-      " />
+      <ComposeReview
+        :protocol="protocol"
+        :debug="true"
+        :initialData="startData"
+        :template="
+          protocol && protocol.meta && protocol.meta.enact && protocol.meta.enact.template
+            ? protocol.meta.enact.template
+            : 'compact'
+        "
+      />
     </debug>
   </div>
 </template>

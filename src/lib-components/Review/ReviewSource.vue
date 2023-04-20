@@ -39,7 +39,7 @@ Just about works.  Current coverage shown below.
 
         <!-- If showDescriptionInline && source.description-->
         <template v-if="!showDescriptionInline && source.description">
-          <PopoverButton :targetId="'target:source' + source.path" :msg="message" :noTitle="true">
+          <PopoverButton :target="'target:source' + source.path" :content="message">
             <font-awesome-icon icon="info-circle" />
           </PopoverButton>
           <div :id="'target:source' + source.path">
@@ -107,7 +107,9 @@ Just about works.  Current coverage shown below.
                 type="temitext" :value="inputValue(value)" :placeholder="placeholder" @blur="handleBlur"
                 @keyup.enter.prevent="handleBlur" @keyup.esc="clearInput" />
               <datalist :id="source.name + suffix + 'datalist'">
-                <option v-for="(item, idx) in source.range" :key="idx">{{ rangeText(item) }}</option>
+                <option v-for="(item, idx) in source.range" :key="idx">
+                  {{ rangeText(item) }}
+                </option>
               </datalist>
             </template>
             <template v-else>
@@ -245,7 +247,11 @@ export default {
     },
     removeArrayItem(index) {
       let ori = this.value.slice(0)
-      this.$emit('update-source', { action: 'set', source: this.source.name, value: ori.splice(index, 1) })
+      this.$emit('update-source', {
+        action: 'set',
+        source: this.source.name,
+        value: ori.splice(index, 1)
+      })
     },
     getValue(text) {
       let val

@@ -34,7 +34,7 @@ export default {
       testPRProps1: testPRProps1
     }
   },
-  mounted: function () { },
+  mounted: function () {},
   components: { MapIconTask }
 }
 </script>
