@@ -33,34 +33,74 @@ but I cant work out how to position these correctly.  See also MapBreadcrumb.
 <template>
   <g ref="mapTask" class="task draggable" @dblclick="changePath">
     <!-- v-hammer:tap="doubleTapChangePath"-->
-    <component v-bind:is="'pm-icon-' + clazz" :x="x" :y="y" fill="#FFF" :stroke="taskStroke" :animate="false"
-      :stroke_width="stroke_width" />
+    <component
+      v-bind:is="'pm-icon-' + clazz"
+      :x="x"
+      :y="y"
+      fill="#FFF"
+      :stroke="taskStroke"
+      :animate="false"
+      :stroke_width="stroke_width"
+    />
     <pm-task-handle v-if="!no_handle" :x="handleX" :y="y + 20 + 16" />
-    <text text-anchor="middle" :x="x + midline + (no_handle ? 0 : 3)" :y="y + 20 + 16" class="grabbable"
-      v-bind:class="{ selected: selected }" :ref="'caption_' + task.path()">
+    <text
+      text-anchor="middle"
+      :x="x + midline + (no_handle ? 0 : 3)"
+      :y="y + 20 + 16"
+      class="grabbable"
+      v-bind:class="{ selected: selected }"
+      :ref="'caption_' + task.path()"
+    >
       {{ task.name }}
       <tspan v-if="hasError" fill="#E74C3C">[!]</tspan>
       <tspan v-if="hasWarning" fill="#3498DB">(?)</tspan>
     </text>
-    <text v-show="task.dataDefinitions.length > 0" text-anchor="middle" :x="x + midline" :y="y + 36 + 14" class="meta">{{
-      task.dataDefinitions.length }} data definition<template v-if="task.dataDefinitions.length > 1">s</template></text>
+    <text
+      v-show="task.dataDefinitions.length > 0"
+      text-anchor="middle"
+      :x="x + midline"
+      :y="y + 36 + 14"
+      class="meta"
+      >{{ task.dataDefinitions.length }} data definition<template
+        v-if="task.dataDefinitions.length > 1"
+        >s</template
+      ></text
+    >
     <template v-if="clazz == 'plan'">
-      <text v-for="(subtask, idx) in task.tasks" text-anchor="middle" :x="x + midline"
-        :y="task.dataDefinitions.length > 0 ? y + 36 + 28 + idx * 14 : y + 36 + 14 + idx * 14" class="meta" :key="idx">{{
-          subtask.name
-        }}</text>
+      <text
+        v-for="(subtask, idx) in task.tasks"
+        text-anchor="middle"
+        :x="x + midline"
+        :y="task.dataDefinitions.length > 0 ? y + 36 + 28 + idx * 14 : y + 36 + 14 + idx * 14"
+        class="meta"
+        :key="idx"
+        >{{ subtask.name }}</text
+      >
     </template>
     <template v-if="clazz == 'enquiry'">
-      <text v-for="(source, idx) in task.sources" text-anchor="middle" :x="x + midline"
-        :y="task.dataDefinitions.length > 0 ? y + 36 + 28 + idx * 14 : y + 36 + 14 + idx * 14" class="meta" :key="idx">{{
-          source.type
-        }}</text>
+      <text
+        v-for="(source, idx) in task.sources"
+        text-anchor="middle"
+        :x="x + midline"
+        :y="task.dataDefinitions.length > 0 ? y + 36 + 28 + idx * 14 : y + 36 + 14 + idx * 14"
+        class="meta"
+        :key="idx"
+        >{{ source.type }}</text
+      >
     </template>
     <template v-if="clazz == 'decision'">
-      <text v-for="(candidate, idx) in task.candidates" text-anchor="middle" :x="x + midline"
-        :y="task.dataDefinitions.length > 0 ? y + 36 + 28 + idx * 14 : y + 36 + 14 + idx * 14" class="meta" :key="idx">{{
-          candidate.name }} ({{ candidate.arguments.length }} arg<template
-          v-if="candidate.arguments.length != 1">s</template>)</text>
+      <text
+        v-for="(candidate, idx) in task.candidates"
+        text-anchor="middle"
+        :x="x + midline"
+        :y="task.dataDefinitions.length > 0 ? y + 36 + 28 + idx * 14 : y + 36 + 14 + idx * 14"
+        class="meta"
+        :key="idx"
+        >{{ candidate.name }} ({{ candidate.arguments.length }} arg<template
+          v-if="candidate.arguments.length != 1"
+          >s</template
+        >)</text
+      >
     </template>
   </g>
 </template>
@@ -112,22 +152,22 @@ export default {
     argumentCount: function () {
       return this.task.candidates
         ? this.task.candidates.reduce(function (acc, cand) {
-          return (acc = acc + cand.arguments.length)
-        }, 0)
+            return (acc = acc + cand.arguments.length)
+          }, 0)
         : 0
     },
     hasError() {
       return this.issues
         ? this.issues.filter(
-          (issue) => issue.path.startsWith(this.task.path()) && issue.type == 'Error'
-        ).length > 0
+            (issue) => issue.path.startsWith(this.task.path()) && issue.type == 'Error'
+          ).length > 0
         : false
     },
     hasWarning() {
       return this.issues
         ? this.issues.filter(
-          (issue) => issue.path.startsWith(this.task.path()) && issue.type == 'Warning'
-        ).length > 0
+            (issue) => issue.path.startsWith(this.task.path()) && issue.type == 'Warning'
+          ).length > 0
         : false
     }
   },

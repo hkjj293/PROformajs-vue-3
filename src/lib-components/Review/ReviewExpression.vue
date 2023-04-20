@@ -18,8 +18,14 @@ an expression that consists of the name of a data def without a value will be un
   <div>
     <div>
       <label for="expressions">Debug expressions</label>
-      <input type="text" class="form-control" :id="id + 'expression'" :aria-describedby="id + 'expressionHelp'"
-        placeholder="Enter test expression" @change="testExpression" />
+      <input
+        type="text"
+        class="form-control"
+        :id="id + 'expression'"
+        :aria-describedby="id + 'expressionHelp'"
+        placeholder="Enter test expression"
+        @change="testExpression"
+      />
       <small :id="id + 'expressionHelp'" class="form-text text-muted">{{ description }}</small>
       <div class="text-danger">{{ message }}</div>
     </div>
@@ -35,7 +41,11 @@ an expression that consists of the name of a data def without a value will be un
           <td @click="populateControl(item.expression)" class="clickable">{{ item.expression }}</td>
           <td>{{ item.value }}</td>
           <td>
-            <button type="button" class="btn btn-light btn-sm float-sm-end" @click="deleteExpression(idx)">
+            <button
+              type="button"
+              class="btn btn-light btn-sm float-sm-end"
+              @click="deleteExpression(idx)"
+            >
               &times;
             </button>
           </td>

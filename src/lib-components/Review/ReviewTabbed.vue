@@ -21,8 +21,12 @@ Provides a tabbed UI for a proformajs Enactment.
         <div v-if="status.finished">
           <slot name="finished">
             <div class="float-end">
-              <pr-settings :options="options" id="popover-finished" @restart-enactment="$emit('restart-enactment')"
-                @change-option="$emit('change-option', $event)" />
+              <pr-settings
+                :options="options"
+                id="popover-finished"
+                @restart-enactment="$emit('restart-enactment')"
+                @change-option="$emit('change-option', $event)"
+              />
             </div>
             <slot name="finished">
               <h3>All done!</h3>
@@ -36,13 +40,17 @@ Provides a tabbed UI for a proformajs Enactment.
               <div class="col-sm">
                 <h3>Data</h3>
                 <div class="mt-3">
-                  <span :class="
-                    'badge rounded-pill ' +
-                    'bg-' +
-                    variant(dd) +
-                    (variant(dd) == 'light' ? ' text-dark' : '') +
-                    ' m-1 p-1 clickable'
-                  " v-for="dd in enactment.getDataDefinitions()" :key="key(dd)">
+                  <span
+                    :class="
+                      'badge rounded-pill ' +
+                      'bg-' +
+                      variant(dd) +
+                      (variant(dd) == 'light' ? ' text-dark' : '') +
+                      ' m-1 p-1 clickable'
+                    "
+                    v-for="dd in enactment.getDataDefinitions()"
+                    :key="key(dd)"
+                  >
                     {{ dd.name }}<span v-if="value(dd)"> = {{ value(dd) }}</span>
                   </span>
                 </div>
@@ -62,11 +70,20 @@ Provides a tabbed UI for a proformajs Enactment.
             <pr-tabbed-tabs :plan="root" :selected="path" @select-task="updatePath" />
             <div class="card-body">
               <div class="float-end">
-                <pr-settings :options="options" :id="'popover-' + root.path"
-                  @restart-enactment="$emit('restart-enactment')" @change-option="$emit('change-option', $event)" />
+                <pr-settings
+                  :options="options"
+                  :id="'popover-' + root.path"
+                  @restart-enactment="$emit('restart-enactment')"
+                  @change-option="$emit('change-option', $event)"
+                />
               </div>
-              <pr-task :task="activeTask" :enactment="enactment" @update-enactment="updateEnactment" :options="options"
-                @send-trigger="sendTrigger" />
+              <pr-task
+                :task="activeTask"
+                :enactment="enactment"
+                @update-enactment="updateEnactment"
+                :options="options"
+                @send-trigger="sendTrigger"
+              />
             </div>
           </div>
         </template>

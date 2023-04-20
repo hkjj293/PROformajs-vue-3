@@ -5,7 +5,13 @@
 <template>
   <div>
     <debug title="ComposeIcon">
-      <svg v-for="icon in testPRProps1.icons" width="100%" tabindex="0" :viewBox="viewbox" :key="icon">
+      <svg
+        v-for="icon in testPRProps1.icons"
+        width="100%"
+        tabindex="0"
+        :viewBox="viewbox"
+        :key="icon"
+      >
         <ComposeIcon :icon="icon" />
       </svg>
     </debug>

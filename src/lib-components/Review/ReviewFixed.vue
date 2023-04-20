@@ -17,8 +17,13 @@ Provides a UI for a single task  in a proformajs Enactment.
 
 <template>
   <div v-if="indicatedTask">
-    <pr-task :task="indicatedTask" :enactment="enactment" @update-enactment="updateEnactment" :options="options"
-      @send-trigger="sendTrigger" />
+    <pr-task
+      :task="indicatedTask"
+      :enactment="enactment"
+      @update-enactment="updateEnactment"
+      :options="options"
+      @send-trigger="sendTrigger"
+    />
   </div>
 </template>
 

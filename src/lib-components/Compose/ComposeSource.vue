@@ -15,26 +15,51 @@ Provides the means to review and edit a PROformajs source details
   <div>
     <h4>Source: {{ source.type }}</h4>
     <div class="mb-2">
-      <button type="button" class="btn btn-outline-secondary btn-sm" @click="$emit('select-path', { value: '' })">
+      <button
+        type="button"
+        class="btn btn-outline-secondary btn-sm"
+        @click="$emit('select-path', { value: '' })"
+      >
         &lt;&lt; {{ source._parent.constructor.name }}: {{ source._parent.name }}
       </button>
-      <button type="button" class="btn btn-outline-secondary btn-sm" v-if="numSiblings > 1" :disabled="sourceIdx == 0"
-        @click="prevSource">
+      <button
+        type="button"
+        class="btn btn-outline-secondary btn-sm"
+        v-if="numSiblings > 1"
+        :disabled="sourceIdx == 0"
+        @click="prevSource"
+      >
         &lt; Prev
       </button>
-      <button type="button" class="btn btn-outline-secondary btn-sm" v-if="numSiblings > 1"
-        :disabled="sourceIdx == numSiblings - 1" @click="nextSource">
+      <button
+        type="button"
+        class="btn btn-outline-secondary btn-sm"
+        v-if="numSiblings > 1"
+        :disabled="sourceIdx == numSiblings - 1"
+        @click="nextSource"
+      >
         Next &gt;
       </button>
     </div>
-    <ul class="nav nav-tabs small" :id="
-      'pc-source-tabs-' +
-      (this.plan && this.plan.name ? this.plan.name.replaceAll(':', '-') : 'no-name')
-    " role="tablist">
+    <ul
+      class="nav nav-tabs small"
+      :id="
+        'pc-source-tabs-' +
+        (this.plan && this.plan.name ? this.plan.name.replaceAll(':', '-') : 'no-name')
+      "
+      role="tablist"
+    >
       <li class="nav-item" role="presentation">
-        <button :class="'nav-link active'" :id="'pc-source-tabs'" data-bs-toggle="tab"
-          :data-bs-target="'#pc-source-tabs-content'" type="button" role="tab" :aria-controls="'pc-source-tabs-content'"
-          :aria-selected="true">
+        <button
+          :class="'nav-link active'"
+          :id="'pc-source-tabs'"
+          data-bs-toggle="tab"
+          :data-bs-target="'#pc-source-tabs-content'"
+          type="button"
+          role="tab"
+          :aria-controls="'pc-source-tabs-content'"
+          :aria-selected="true"
+        >
           Details
         </button>
       </li>
@@ -46,25 +71,50 @@ Provides the means to review and edit a PROformajs source details
         </div>
         <div class="col">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="required" :disabled="custom" :checked="required"
-              @change="setRequired" />
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="required"
+              :disabled="custom"
+              :checked="required"
+              @change="setRequired"
+            />
             <label class="form-check-label" for="required"> Required? </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="specific-period" :disabled="custom || !required"
-              :checked="timely != null" @change="setTimely" />
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="specific-period"
+              :disabled="custom || !required"
+              :checked="timely != null"
+              @change="setTimely"
+            />
             <label class="form-check-label" for="specific-period">
               ... from within a specified period
             </label>
           </div>
           <div class="row g-3" :disabled="custom || !timely">
             <div class="col-auto">
-              <input class="form-control form-control-sm" type="number" id="timeunits" ref="timeUnits" v-model="timeUnits"
-                :disabled="custom || !required || !timely" @change="setRequestCondition" />
+              <input
+                class="form-control form-control-sm"
+                type="number"
+                id="timeunits"
+                ref="timeUnits"
+                v-model="timeUnits"
+                :disabled="custom || !required || !timely"
+                @change="setRequestCondition"
+              />
             </div>
             <div class="col-auto">
-              <select class="form-control form-control-sm" id="timeunit" ref="timeUnit" v-model="timeUnit"
-                :disabled="custom || !required || !timely" @change="setRequestCondition">
+              <select
+                class="form-control form-control-sm"
+                id="timeunit"
+                ref="timeUnit"
+                v-model="timeUnit"
+                :disabled="custom || !required || !timely"
+                @change="setRequestCondition"
+              >
                 <option value="minutes">Minutes</option>
                 <option value="hours">Hours</option>
                 <option value="days">Days</option>

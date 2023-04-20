@@ -15,33 +15,65 @@ Provides the means to review and edit a PROformajs argument's attributes and chi
   <div>
     <h4>Argument: {{ argument.idx }}</h4>
     <div class="mb-2">
-      <button type="button" class="btn btn-outline-secondary btn-sm" @click="$emit('select-path', { value: '' })">
+      <button
+        type="button"
+        class="btn btn-outline-secondary btn-sm"
+        @click="$emit('select-path', { value: '' })"
+      >
         &lt;&lt; Candidate: {{ parentName }}
       </button>
-      <button type="button" class="btn btn-outline-secondary btn-sm" v-if="numSiblings > 1" :disabled="argument.idx == 0"
-        @click="prevArg">
+      <button
+        type="button"
+        class="btn btn-outline-secondary btn-sm"
+        v-if="numSiblings > 1"
+        :disabled="argument.idx == 0"
+        @click="prevArg"
+      >
         &lt; Prev
       </button>
-      <button type="button" class="btn btn-outline-secondary btn-sm" v-if="numSiblings > 1"
-        :disabled="argument.idx == numSiblings - 1" @click="nextArg">
+      <button
+        type="button"
+        class="btn btn-outline-secondary btn-sm"
+        v-if="numSiblings > 1"
+        :disabled="argument.idx == numSiblings - 1"
+        @click="nextArg"
+      >
         Next &gt;
       </button>
     </div>
-    <ul class="nav nav-tabs" :id="
-      'pc-arg-tabs-' +
-      (this.plan && this.plan.name ? this.plan.name.replaceAll(':', '-') : 'no-name')
-    " role="tablist">
+    <ul
+      class="nav nav-tabs"
+      :id="
+        'pc-arg-tabs-' +
+        (this.plan && this.plan.name ? this.plan.name.replaceAll(':', '-') : 'no-name')
+      "
+      role="tablist"
+    >
       <li class="nav-item" role="presentation">
-        <button :class="'nav-link ' + (tabIndex == 0 ? 'active' : '')" :id="'pc-arg-tabs'" data-bs-toggle="tab"
-          :data-bs-target="'#pc-arg-tabs-details'" type="button" role="tab" :aria-controls="'pc-arg-tabs-details'"
-          :aria-selected="true">
+        <button
+          :class="'nav-link ' + (tabIndex == 0 ? 'active' : '')"
+          :id="'pc-arg-tabs'"
+          data-bs-toggle="tab"
+          :data-bs-target="'#pc-arg-tabs-details'"
+          type="button"
+          role="tab"
+          :aria-controls="'pc-arg-tabs-details'"
+          :aria-selected="true"
+        >
           Details
         </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button :class="'nav-link ' + (tabIndex == 1 ? 'active' : '')" :id="'pc-arg-tabs'" data-bs-toggle="tab"
-          :data-bs-target="'#pc-arg-tabs-condition'" type="button" role="tab" :aria-controls="'pc-arg-tabs-condition'"
-          :aria-selected="true">
+        <button
+          :class="'nav-link ' + (tabIndex == 1 ? 'active' : '')"
+          :id="'pc-arg-tabs'"
+          data-bs-toggle="tab"
+          :data-bs-target="'#pc-arg-tabs-condition'"
+          type="button"
+          role="tab"
+          :aria-controls="'pc-arg-tabs-condition'"
+          :aria-selected="true"
+        >
           Condition
         </button>
       </li>
@@ -54,26 +86,47 @@ Provides the means to review and edit a PROformajs argument's attributes and chi
           <div class="mb-1 row g-3 mt-1">
             <label class="d-block" for="supportType">Support</label>
             <div id="supportType" class="input-group mb-3 col-auto">
-              <template v-for="symbol in [
-                { value: '--', text: '--' },
-                { value: '-', text: '-' },
-                { value: '+', text: '+' },
-                { value: '++', text: '++' }
-              ]" :key="symbol.value">
-                <input type="radio" class="btn-check" name="supportType" :id="symbol.value" :value="symbol.value"
-                  autocomplete="off" @input="supportSymbol = symbol.value" :checked="supportSymbol == symbol.value" />
+              <template
+                v-for="symbol in [
+                  { value: '--', text: '--' },
+                  { value: '-', text: '-' },
+                  { value: '+', text: '+' },
+                  { value: '++', text: '++' }
+                ]"
+                :key="symbol.value"
+              >
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="supportType"
+                  :id="symbol.value"
+                  :value="symbol.value"
+                  autocomplete="off"
+                  @input="supportSymbol = symbol.value"
+                  :checked="supportSymbol == symbol.value"
+                />
                 <label class="btn btn-outline-secondary btn-sm" :for="symbol.value">{{
                   symbol.text
                 }}</label>
               </template>
-              <input type="number" name="supportValue" size="2" :value="Math.abs(argument.support)" />
+              <input
+                type="number"
+                name="supportValue"
+                size="2"
+                :value="Math.abs(argument.support)"
+              />
             </div>
           </div>
         </form>
       </div>
       <div class="tab-pane" id="pc-arg-tabs-condition">
-        <pc-condition att="activeCondition" :comp="argument" :description="activeConditionExample"
-          :issues="attributeIssues('activeCondition')" @change-attribute="updateAttribute" />
+        <pc-condition
+          att="activeCondition"
+          :comp="argument"
+          :description="activeConditionExample"
+          :issues="attributeIssues('activeCondition')"
+          @change-attribute="updateAttribute"
+        />
       </div>
     </div>
   </div>

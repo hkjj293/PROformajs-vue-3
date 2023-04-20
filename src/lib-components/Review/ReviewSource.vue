@@ -43,24 +43,39 @@ Just about works.  Current coverage shown below.
             <font-awesome-icon icon="info-circle" />
           </PopoverButton>
           <div :id="'target:source' + source.path">
-            <pr-markdown :text="source.description" @send-trigger="$emit('send-trigger', $event)" class="markdown" />
+            <pr-markdown
+              :text="source.description"
+              @send-trigger="$emit('send-trigger', $event)"
+              class="markdown"
+            />
           </div>
         </template>
 
         <!-- If source.requested && (!hideCaption || !source.description) -->
-        <font-awesome-icon v-if="source.requested && (!hideCaption || !source.description)" icon="asterisk"
-          class="text-primary align-top ps-2" />
+        <font-awesome-icon
+          v-if="source.requested && (!hideCaption || !source.description)"
+          icon="asterisk"
+          class="text-primary align-top ps-2"
+        />
 
         <!-- v-show="value != null && !hideEraser" -->
-        <button type="button" class="btn btn-link btn-sm float-end py-0" v-show="value != null && !hideEraser"
-          @click.stop="unsetSource">
+        <button
+          type="button"
+          class="btn btn-link btn-sm float-end py-0"
+          v-show="value != null && !hideEraser"
+          @click.stop="unsetSource"
+        >
           <font-awesome-icon icon="eraser" />
         </button>
 
         <!-- If showDescriptionInline && source.description -->
         <template v-if="showDescriptionInline && source.description">
-          <pr-markdown :text="source.description" @send-trigger="$emit('send-trigger', $event)"
-            class="text-muted markdown" :requested="hideCaption && source.description && source.requested" />
+          <pr-markdown
+            :text="source.description"
+            @send-trigger="$emit('send-trigger', $event)"
+            class="text-muted markdown"
+            :requested="hideCaption && source.description && source.requested"
+          />
         </template>
       </label>
       <!-- End of Label -->
@@ -69,15 +84,30 @@ Just about works.  Current coverage shown below.
       <template v-if="source.class == 'Boolean'">
         <div v-if="useButtons" class="row">
           <div v-for="(item, idx) in source.range || [true, false]" :key="idx" class="col">
-            <button type="button" class="btn btn-outline-dark btn-sm"
-              :pressed="value != null && value == rangeValue(item)" @click="updateValue(rangeValue(item).toString())">
+            <button
+              type="button"
+              class="btn btn-outline-dark btn-sm"
+              :pressed="value != null && value == rangeValue(item)"
+              @click="updateValue(rangeValue(item).toString())"
+            >
               {{ booleanSourceRangeText(item) }}
             </button>
           </div>
         </div>
-        <div v-else v-for="(item, idx) in source.range || [true, false]" :key="idx" class="form-check">
-          <input class="form-check-input" type="radio" :id="rangeId(item)" :value="rangeValue(item).toString()"
-            :checked="value != null && value == rangeValue(item)" @change="handleRadioChange" />
+        <div
+          v-else
+          v-for="(item, idx) in source.range || [true, false]"
+          :key="idx"
+          class="form-check"
+        >
+          <input
+            class="form-check-input"
+            type="radio"
+            :id="rangeId(item)"
+            :value="rangeValue(item).toString()"
+            :checked="value != null && value == rangeValue(item)"
+            @change="handleRadioChange"
+          />
           <label class="form-check-label" :for="rangeId(item)">{{
             booleanSourceRangeText(item)
           }}</label>
@@ -87,8 +117,16 @@ Just about works.  Current coverage shown below.
       <template v-else>
         <!-- single un-ranged -->
         <div class="input-group" v-if="!source.multiValued && !source.range">
-          <input :name="source.name + suffix" class="form-control" type="text" :value="inputValue(value)"
-            :placeholder="placeholder" @blur="handleBlur" @keyup.enter.prevent="handleBlur" @keyup.esc="clearInput" />
+          <input
+            :name="source.name + suffix"
+            class="form-control"
+            type="text"
+            :value="inputValue(value)"
+            :placeholder="placeholder"
+            @blur="handleBlur"
+            @keyup.enter.prevent="handleBlur"
+            @keyup.esc="clearInput"
+          />
           <div class="input-group-text" v-if="source.class == 'Date'">
             <font-awesome-icon icon="calendar-alt" />
           </div>
@@ -96,24 +134,47 @@ Just about works.  Current coverage shown below.
         <!-- single range -->
         <template v-if="!source.multiValued && source.range">
           <div class="d-grid gap-2" v-if="useButtons">
-            <button type="button" class="btn btn-outline-dark btn-sm my-1" v-for="(item, idx) in source.range" :key="idx"
-              :pressed="value == rangeValue(item)" @click="updateValue(rangeValue(item).toString())">
+            <button
+              type="button"
+              class="btn btn-outline-dark btn-sm my-1"
+              v-for="(item, idx) in source.range"
+              :key="idx"
+              :pressed="value == rangeValue(item)"
+              @click="updateValue(rangeValue(item).toString())"
+            >
               {{ rangeText(item) }}
             </button>
           </div>
           <template v-else>
             <template v-if="useDatalist">
-              <input :list="source.name + suffix + 'datalist'" :name="source.name + suffix" class="form-control"
-                type="temitext" :value="inputValue(value)" :placeholder="placeholder" @blur="handleBlur"
-                @keyup.enter.prevent="handleBlur" @keyup.esc="clearInput" />
+              <input
+                :list="source.name + suffix + 'datalist'"
+                :name="source.name + suffix"
+                class="form-control"
+                type="temitext"
+                :value="inputValue(value)"
+                :placeholder="placeholder"
+                @blur="handleBlur"
+                @keyup.enter.prevent="handleBlur"
+                @keyup.esc="clearInput"
+              />
               <datalist :id="source.name + suffix + 'datalist'">
-                <option v-for="(item, idx) in source.range" :key="idx">{{ rangeText(item) }}</option>
+                <option v-for="(item, idx) in source.range" :key="idx">
+                  {{ rangeText(item) }}
+                </option>
               </datalist>
             </template>
             <template v-else>
               <div v-for="(item, idx) in source.range" :key="idx" class="form-check">
-                <input class="form-check-input" type="radio" :name="rangeId(item)" :id="rangeId(item)"
-                  :value="rangeValue(item)" :checked="value == rangeValue(item)" @change="handleRadioChange" />
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  :name="rangeId(item)"
+                  :id="rangeId(item)"
+                  :value="rangeValue(item)"
+                  :checked="value == rangeValue(item)"
+                  @change="handleRadioChange"
+                />
                 <label class="form-check-label" :for="rangeId(item)">{{ rangeText(item) }}</label>
               </div>
             </template>
@@ -123,14 +184,24 @@ Just about works.  Current coverage shown below.
         <div class="list-group" v-if="source.multiValued && !source.range && value">
           <div class="list-group-item" v-for="(item, index) in value" :key="index">
             {{ item }}
-            <button type="button" class="btn btn-outline-warning btn-sm float-end" @click="removeArrayItem(index)">
+            <button
+              type="button"
+              class="btn btn-outline-warning btn-sm float-end"
+              @click="removeArrayItem(index)"
+            >
               &times;
             </button>
           </div>
         </div>
         <div class="input-group" v-if="source.multiValued && !source.range">
-          <input class="form-control" :name="source.name + suffix" type="text" @blur="resetInput"
-            @keyup.enter="handleMultiEnter" @keyup.esc="resetInput" />
+          <input
+            class="form-control"
+            :name="source.name + suffix"
+            type="text"
+            @blur="resetInput"
+            @keyup.enter="handleMultiEnter"
+            @keyup.esc="resetInput"
+          />
           <div class="input-group-text">
             <font-awesome-icon icon="list" />
           </div>
@@ -138,9 +209,15 @@ Just about works.  Current coverage shown below.
         <!-- multi ranged -->
         <template v-if="source.multiValued && source.range">
           <div v-for="(item, idx) in source.range" class="form-check" :key="idx">
-            <input class="form-check-input" type="checkbox" :name="rangeId(item)" :id="rangeId(item)"
-              :value="rangeValue(item)" :checked="value && value.includes(rangeValue(item))"
-              @change="handleCheckboxChange" />
+            <input
+              class="form-check-input"
+              type="checkbox"
+              :name="rangeId(item)"
+              :id="rangeId(item)"
+              :value="rangeValue(item)"
+              :checked="value && value.includes(rangeValue(item))"
+              @change="handleCheckboxChange"
+            />
             <label class="form-check-label" :for="rangeId(item)">{{ rangeText(item) }}</label>
           </div>
         </template>
@@ -245,7 +322,11 @@ export default {
     },
     removeArrayItem(index) {
       let ori = this.value.slice(0)
-      this.$emit('update-source', { action: 'set', source: this.source.name, value: ori.splice(index, 1) })
+      this.$emit('update-source', {
+        action: 'set',
+        source: this.source.name,
+        value: ori.splice(index, 1)
+      })
     },
     getValue(text) {
       let val

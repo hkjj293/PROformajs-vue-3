@@ -5,8 +5,12 @@
 <template>
   <div>
     <debug title="Compose">
-      <Compose :protocol="protocol" :selectedtask="selectedtask" @change-protocol="updateProtocol"
-        @select-task="updateSelectedTask" />
+      <Compose
+        :protocol="protocol"
+        :selectedtask="selectedtask"
+        @change-protocol="updateProtocol"
+        @select-task="updateSelectedTask"
+      />
     </debug>
   </div>
 </template>

@@ -16,7 +16,7 @@ Provides a UI settings button that opens a popover form.
 
 <template>
   <div>
-    <button class="btn btn-outline-secondary" type='button' :id="id">
+    <button class="btn btn-outline-secondary" type="button" :id="id">
       <font-awesome-icon icon="cog" />
     </button>
     <PopoverComp :target="id" trigger="click" :title="title" :placement="placement">
@@ -26,33 +26,83 @@ Provides a UI settings button that opens a popover form.
       </label>
       <div class="fw-bold mt-2">Decisions</div>
       <label class="mt-2">
-        <input type="checkbox" :checked="options.Decision.showInactiveArguments"
-          @click="$emit('change-option', { category: 'Decision', option: 'showInactiveArguments', value: !options.Decision.showInactiveArguments })" />
+        <input
+          type="checkbox"
+          :checked="options.Decision.showInactiveArguments"
+          @click="
+            $emit('change-option', {
+              category: 'Decision',
+              option: 'showInactiveArguments',
+              value: !options.Decision.showInactiveArguments
+            })
+          "
+        />
         Show inactive arguments
       </label>
       <label class="mt-2">
-        <input type="checkbox" :checked="options.Decision.showExpressions"
-          @click="$emit('change-option', { category: 'Decision', option: 'showExpressions', value: !options.Decision.showExpressions })" />
+        <input
+          type="checkbox"
+          :checked="options.Decision.showExpressions"
+          @click="
+            $emit('change-option', {
+              category: 'Decision',
+              option: 'showExpressions',
+              value: !options.Decision.showExpressions
+            })
+          "
+        />
         Show expressions
       </label>
       <label class="mt-2">
-        <input type="checkbox" :checked="options.Candidate.autoConfirmRecommended"
-          @click="$emit('change-option', { category: 'Candidate', option: 'autoConfirmRecommended', value: !options.Candidate.autoConfirmRecommended })" />
+        <input
+          type="checkbox"
+          :checked="options.Candidate.autoConfirmRecommended"
+          @click="
+            $emit('change-option', {
+              category: 'Candidate',
+              option: 'autoConfirmRecommended',
+              value: !options.Candidate.autoConfirmRecommended
+            })
+          "
+        />
         Auto-confirm candidates
       </label>
       <label class="mt-2">
-        <input type="checkbox" :checked="options.Decision.allowDownloads"
-          @click="$emit('change-option', { category: 'Decision', option: 'allowDownloads', value: !options.Decision.allowDownloads })" />
+        <input
+          type="checkbox"
+          :checked="options.Decision.allowDownloads"
+          @click="
+            $emit('change-option', {
+              category: 'Decision',
+              option: 'allowDownloads',
+              value: !options.Decision.allowDownloads
+            })
+          "
+        />
         Allow Downloads
       </label>
       <div class="fw-bold mt-2">Enquiries</div>
       <label class="mt-2">
-        <input type="checkbox" :checked="options.Enquiry.useDefaults"
-          @click="$emit('change-option', { category: 'Enquiry', option: 'useDefaults', value: !options.Enquiry.useDefaults })" />
+        <input
+          type="checkbox"
+          :checked="options.Enquiry.useDefaults"
+          @click="
+            $emit('change-option', {
+              category: 'Enquiry',
+              option: 'useDefaults',
+              value: !options.Enquiry.useDefaults
+            })
+          "
+        />
         Use defaults
       </label>
-      <button :name="'target:' + id + ':send:restart'" v-if="restart"
-        class="btn btn-outline-secondary btn-sm d-block mt-2" @click="sendRestart" block>
+      <button
+        :name="'target:' + id + ':send:restart'"
+        v-if="restart"
+        class="btn btn-outline-secondary btn-sm d-block mt-2"
+        @click="sendRestart"
+        block
+      >
         <font-awesome-icon icon="redo-alt" /> Restart
       </button>
     </PopoverComp>
@@ -90,7 +140,7 @@ export default {
   methods: {
     sendRestart() {
       this.$emit('restart-enactment')
-    },
+    }
   }
 }
 </script>
