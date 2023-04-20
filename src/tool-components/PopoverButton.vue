@@ -6,7 +6,7 @@ export default {
   emits: ['shown', 'show', 'click'],
   props: {
     content: {
-      type: String | Element,
+      type: String,
       required: true
     },
     /**
@@ -47,13 +47,13 @@ export default {
   mounted() {
     this.onClick.bind(this)
     this.popover = new Popover(this.$el, { sanitize: false })
-    if (this.content || (this.target && document.getElementById(this.target))) {
+    if (this.renderedContent || (this.target && document.getElementById(this.target))) {
       this.renderedContent = document.getElementById(this.target)
       this.renderedContent.parentElement.removeChild(this.renderedContent)
     }
     let content = {
       '.popover-body': this.renderedContent,
-      '.popover-header': this.title ? null : this.title
+      '.popover-header': this.title ? this.title : null
     }
     this.popover.setContent(content)
     if (this.target) {
@@ -88,17 +88,9 @@ export default {
 </script>
 
 <template>
-  <button
-    type="button"
-    :class="classes"
-    data-bs-container="body"
-    :data-bs-trigger="trigger"
-    data-bs-toggle="popover"
-    :data-bs-placement="placement"
-    :data-bs-html="html"
-    :data-bs-title="title ? null : title"
-    :data-bs-content="renderedContent"
-  >
+  <button type="button" :class="classes" data-bs-container="body" :data-bs-trigger="trigger" data-bs-toggle="popover"
+    :data-bs-placement="placement" :data-bs-html="html" :data-bs-title="title ? title : null"
+    :data-bs-content="renderedContent">
     <slot />
   </button>
 </template>
