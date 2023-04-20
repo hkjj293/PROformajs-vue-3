@@ -5,15 +5,18 @@ export default {
   name: 'PopoverButton',
   emits: ['shown', 'show', 'click'],
   props: {
-    msg: {
-      type: String,
+    content: {
+      type: String | Element,
       required: true
     },
-    targetId: {
+    /**
+     * The id of target element.
+     */
+    target: {
       type: String,
       default: null
     },
-    varient: {
+    variant: {
       type: String,
       default: 'link'
     },
@@ -29,42 +32,32 @@ export default {
       type: String,
       default: 'hover'
     },
-    container: {
-      type: String,
-      default: 'body'
-    },
     title: {
-      type: String,
-      default: 'Title'
-    },
-    noTitle: {
-      type: Boolean,
-      default: false
+      type: String
     }
   },
   computed: {
     classes() {
-      return 'btn' + ' btn-' + this.varient
+      return 'btn' + ' btn-' + this.variant
     }
   },
   data() {
-    return { popover: null, message: this.msg }
+    return { popover: null, renderedContent: this.content }
   },
   mounted() {
     this.onClick.bind(this)
     this.popover = new Popover(this.$el, { sanitize: false })
-    if (this.targetId && document.getElementById(this.targetId)) {
-      this.message = document.getElementById(this.targetId)
-      this.message.parentElement.removeChild(this.message)
+    if (this.content || (this.target && document.getElementById(this.target))) {
+      this.renderedContent = document.getElementById(this.target)
+      this.renderedContent.parentElement.removeChild(this.renderedContent)
     }
-    console.log(this.message)
     let content = {
-      '.popover-body': this.message,
-      '.popover-header': this.noTitle ? null : this.title
+      '.popover-body': this.renderedContent,
+      '.popover-header': this.title ? null : this.title
     }
     this.popover.setContent(content)
-    if (this.targetId) {
-      document.addEventListener('click', this.onClick);
+    if (this.target) {
+      document.addEventListener('click', this.onClick)
     }
     this.$el.addEventListener('shown.bs.popover', this.onShown)
     this.$el.addEventListener('show.bs.popover', this.onShow)
@@ -80,32 +73,32 @@ export default {
       this.$emit('show')
     },
     onClick: function (event) {
-      if (this.targetId &&
+      if (
+        this.target &&
         this.popover.tip &&
-        !(document.getElementById(this.popover.tip.id).contains(event.target))) {
-        this.popover.hide();
+        !document.getElementById(this.popover.tip.id).contains(event.target)
+      ) {
+        this.popover.hide()
       } else {
         this.$emit('click', event)
       }
-    }
-  },
-  watch: {
-    msg(newVal) {
-      this.message = newVal
-      let content = {
-        '.popover-body': this.message,
-        '.popover-header': this.noTitle ? null : this.title
-      }
-      this.popover.setContent(content)
     }
   }
 }
 </script>
 
 <template>
-  <button type="button" :class="classes" :data-bs-container="container" :data-bs-trigger="trigger"
-    data-bs-toggle="popover" :data-bs-placement="placement" :data-bs-html="html" :data-bs-title="noTitle ? ' ' : title"
-    :data-bs-content="msg">
+  <button
+    type="button"
+    :class="classes"
+    data-bs-container="body"
+    :data-bs-trigger="trigger"
+    data-bs-toggle="popover"
+    :data-bs-placement="placement"
+    :data-bs-html="html"
+    :data-bs-title="title ? null : title"
+    :data-bs-content="renderedContent"
+  >
     <slot />
   </button>
 </template>
