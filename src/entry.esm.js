@@ -52,19 +52,18 @@ library.add(
 
 // install function executed by app.use()
 const install = function installProformajsVue(app) {
+  app.component('font-awesome-icon', FontAwesomeIcon)
+  app.directive('focus', {
+    inserted: function (el) {
+      nextTick(function () {
+        el.focus()
+      })
+    }
+  })
   Object.entries(components).forEach(([componentName, component]) => {
     // next line altered from the standard sfc-init to respect component name
     app.component(component.name || componentName, component)
-
-    app.component('font-awesome-icon', FontAwesomeIcon)
     // v-focus directive on dynamic inputs, see https://vuejs.org/v2/guide/custom-directive.html
-    app.directive('focus', {
-      inserted: function (el) {
-        nextTick(function () {
-          el.focus()
-        })
-      }
-    })
   })
 }
 
