@@ -2,6 +2,8 @@
 
 This is a vue-3 version of PROformajs-vue. https://gitlab.com/openclinical/proformajs-vue
 
+The project is now moving to https://gitlab.com/openclinical/proformajs-vue3
+
 # Vue Component Hierarchy
 ![alt text](https://github.com/hkjj293/PROformajs-vue-3/blob/main/DepandencyGraph.png)
 
